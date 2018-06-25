@@ -9,6 +9,7 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "element-ui": "^2.4.1",
     "express": "^4.16.3",
     "vue": "^2.5.16",
     "vue-router": "^3.0.1",
