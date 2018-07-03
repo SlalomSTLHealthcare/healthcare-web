@@ -22,12 +22,7 @@ export default {
   },
   methods: {
     testCall: function() {
-      axios.post(`http://localhost:3000/api/people`, {
-        full_name: 'Post Test',
-        bio: 'this is a test',
-        company: 'testers inc',
-        image_loc: 'aojf'
-      })
+      axios.get(`https://slalom-health-api-staging.herokuapp.com/api/people`)
        .then(response => {
        // JSON responses are automatically parsed.
          this.dataMessage = response.data[0].full_name
