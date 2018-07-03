@@ -1,40 +1,41 @@
 <template>
   <div class="hello">
-    <el-button>HELLO</el-button>
-    <h1>{{ msg }}</h1>
+    <el-button @click="testCall">HELLO</el-button>
+    <h1> here is your data: {{ dataMessage }}</h1>
     <p>
-      For guide and recipes on how to configure / customize this project,<br>
-      check out the
+      whaddup
       <a href="https://cli.vuejs.org" target="_blank">vue-cli documentation</a>.
     </p>
-    <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
-  </div>
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   name: "HelloWorld",
+  data () {
+    return{
+      dataMessage: "Original data message"
+    }
+  },
   props: {
     msg: String
+  },
+  methods: {
+    testCall: function() {
+      axios.post(`http://localhost:3000/api/people`, {
+        full_name: 'Post Test',
+        bio: 'this is a test',
+        company: 'testers inc',
+        image_loc: 'aojf'
+      })
+       .then(response => {
+       // JSON responses are automatically parsed.
+         this.dataMessage = response.data[0].full_name
+       })
+       .catch(e => {
+         console.log("error")
+       })
+    }
   }
 };
 </script>
