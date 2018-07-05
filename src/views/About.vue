@@ -1,7 +1,15 @@
 <template>
-  <div class="about">
-    <h1>List of Panels</h1>
-    <Panels/>
+  <el-carousel indicator-position="outside">
+    <el-carousel-item>
+      <Breakouts/>
+    </el-carousel-item>
+    <el-carousel-item>
+      <Panels/>
+    </el-carousel-item>
+    <el-carousel-item>
+      <Speakers/>
+    </el-carousel-item>
+  </el-carousel>
   </div>
 </template>
 
@@ -9,11 +17,15 @@
 <script>
 // @ is an alias to /src
 import Panels from "@/components/Panels.vue";
+import Breakouts from "@/components/Breakouts.vue";
+import Speakers from "@/components/Speakers.vue";
 
 export default {
   name: "about",
   components: {
-    Panels
+    Panels,
+    Breakouts,
+    Speakers
   }
 };
 </script>

@@ -1,13 +1,13 @@
 <template>
-  <div class="panels">
-    <h1>List of Panels</h1>
+  <div class="breakouts">
+    <h1>List of Breakouts</h1>
     <el-table
       :data="tableData"
       stripe
       border>
       <el-table-column align = "center"
         prop="title"
-        label="Panel Title">
+        label="Breakout Title">
       </el-table-column>
       <el-table-column align = "center"
         prop="time"
@@ -28,7 +28,7 @@
 import axios from 'axios'
 import moment from 'moment'
 export default {
-  name: "Panels",
+  name: "Breakouts",
   mounted: function(){
     this.populateData()
   },
@@ -43,7 +43,7 @@ export default {
       .then(response => {
         // JSON responses are automatically parsed.
         for(var i = 0; i < response.data.length; i++){
-          if(response.data[i].session_type == "Panel"){
+          if(response.data[i].session_type == "Breakout"){
             response.data[i].time = moment(response.data[i].time).format("h:mm A");
             response.data[i].moreInfo = `https://google.com`;
             this.tableData.push(response.data[i]);
