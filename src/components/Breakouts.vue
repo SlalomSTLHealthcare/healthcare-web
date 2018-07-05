@@ -1,6 +1,6 @@
 <template>
   <div class="breakouts">
-    <h1>List of Breakouts</h1>
+    <h1>List of YOUR MOM</h1>
     <el-table
       :data="tableData"
       stripe
