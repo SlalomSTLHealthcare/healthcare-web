@@ -1,4 +1,5 @@
 <template>
+<<<<<<< HEAD
 
 <el-row>
   <!-- <el-row > -->
@@ -8,6 +9,31 @@
   </li>
 <!-- </el-row> -->
 </el-row>
+=======
+  <div class="breakouts">
+    <h1>List of YOUR MOM</h1>
+    <el-table
+      :data="tableData"
+      stripe
+      border>
+      <el-table-column align = "center"
+        prop="title"
+        label="Breakout Title">
+      </el-table-column>
+      <el-table-column align = "center"
+        prop="time"
+        label="Time">
+      </el-table-column>
+      <el-table-column align = "center"
+        prop="room_num"
+        label="Room Number">
+      </el-table-column>
+      <el-table-column align = "center"
+        prop="moreInfo"
+        label="More Information">
+      </el-table-column>
+  </el-table>
+>>>>>>> staging
 </template>
 
 <script>
