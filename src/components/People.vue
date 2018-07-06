@@ -2,8 +2,9 @@
   <div class="people">
     <h1>{{ msg }}</h1>
     <li v-for="item in data" :key="item.id">
-      <!-- <h1>{{item.full_name}} + hello</h1> -->
-      <Person :name="item.full_name" :imgSource="item.image_loc" :company="item.company" :bio="item.bio"/>
+      <div class="person">
+        <Person :name="item.full_name" :imgSource="item.image_loc" :company="item.company" :bio="item.bio"/>
+      </div>
     </li>
   </div>
 </template>
@@ -17,13 +18,14 @@ export default {
   components: {
     'Person': Person
   },
-  data () {
-    return{
+  data() {
+    return {
       data: "Original data message"
-    }
+    };
   },
   mounted: function() {
     axios.get(`https://slalom-health-api-staging.herokuapp.com/api/people`)
+
      .then(response => {
      // JSON responses are automatically parsed.
        this.data = response.data
@@ -42,6 +44,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+.person{
+  margin: 20px;
+  display: block;
+  position: relative;
+}
 h3 {
   margin: 40px 0 0;
 }

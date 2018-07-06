@@ -1,6 +1,6 @@
 <template>
   <div class="people">
-    <People msg="This is the People Page"/>
+    <People msg="People"/>
   </div>
 </template>
 
