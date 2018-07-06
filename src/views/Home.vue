@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-      <NavBar></NavBar>
+      <NavBar activeIndex="1"></NavBar>
         <div>
           <el-container :direction="'vertical'">
             <el-row>
@@ -21,16 +21,17 @@
             <el-row>
                 <h2>Random stuff here about medical what not. Event is free. No cost to attend.</h2>
             </el-row>
-            <el-row>
-              <el-col>
-              <el-card>
+            <el-row class="info" width="40%">
+              <!-- <el-col> -->
+              <!-- <el-col class="info-pt1"> -->
+              <el-card align="left">
                 <p>To unite forward-thinking health practitionersfrom various specialties and industries aroundpatient experience, 
                 data management andevolution in healthcare.</p>
                 <p>HealthSTLx is executed on the foundation that the best ideas are best discussed and shared</p>
               </el-card>
-              </el-col>
-              <el-col>
-              <el-card>
+              <!-- </el-col> -->
+              <!-- <el-col> -->
+              <el-card align="left">
               <ul>
                 <li>Connect with leaders who are shaping the future of healthcare</li>
                 <li>Customize your learning experience</li>
@@ -39,22 +40,27 @@
                 <li>Equip yourself with knowledge you can implement at your institution</li>
               </ul>
               </el-card>
-              </el-col>
             </el-row>
             <el-row>
+              <!-- </el-col> -->
+              <!-- </el-col> -->
+              <el-col  padding-left="10%;">
               <el-table
                 :data="tableData"
                 stripe
                 style="width: 100%">
                 <el-table-column
+                  label="Time"
                   prop="date"
                   width="180">
                 </el-table-column>
                 <el-table-column
+                  label="Event"
                   prop="name"
                   width="210">
                 </el-table-column>
               </el-table>
+              </el-col>
             </el-row>
           </el-container>
         </div>
@@ -135,9 +141,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-.agenda {
-  margin-left: 38%;
-}
 .btn {
   background: #3336ff;
   color: white;
@@ -154,6 +157,9 @@ export default {
 .grid-content {
   border-radius: 2%;
   min-height: 30%;
+}
+.info {
+  width: 100%;
 }
 .row-bg {
   padding: 10% 0;
