@@ -20,7 +20,7 @@
                 <h1>Uncovering answers to major health challenges - both today and tomorrow.</h1>
             </el-row>
             <el-row>
-                <h2>Random stuff here about medical what not.</h2>
+                <h2>Random stuff here about medical what not. Event is free. No cost to attend.</h2>
             </el-row>
             <el-row>
               <el-col>
