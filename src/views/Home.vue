@@ -1,7 +1,6 @@
 <template>
   <div class="home">
       <NavBar></NavBar>
-      <br>
         <div>
           <el-container :direction="'vertical'">
             <el-row>
