@@ -1,15 +1,9 @@
 <template>
-  <el-carousel indicator-position="outside">
-    <el-carousel-item>
+  <div>
+    <h1>General Event Overview</h1>
       <Breakouts/>
-    </el-carousel-item>
-    <el-carousel-item>
       <Panels/>
-    </el-carousel-item>
-    <el-carousel-item>
       <Speakers/>
-    </el-carousel-item>
-  </el-carousel>
   </div>
 </template>
 
@@ -29,3 +23,12 @@ export default {
   }
 };
 </script>
+
+
+<style scoped lang="less">
+h1 {
+  text-align: center;
+  font-weight: bold;
+}
+
+</style>
