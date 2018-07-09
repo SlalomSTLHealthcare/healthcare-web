@@ -4,7 +4,7 @@
           <el-container :direction="'vertical'">
             <el-row class="main">
             <el-row>
-              <el-col :offset="0" :span="12"><h2>October 24, 2018</h2></el-col>
+              <el-col :span="12"><h2>October 24, 2018</h2></el-col>
               <el-col :span="12"><h2>Eric P. Newman Education Center</h2></el-col>
             </el-row>
             <el-row>
@@ -23,8 +23,8 @@
                 <h2>Random stuff here about medical what not. Event is free. No cost to attend.</h2>
             </el-row >
             <el-col class="pageInfo">
-              <el-col >
-              <el-card >
+              <el-col>
+              <el-card>
                 <p>To unite forward-thinking health practitioners from various specialties and industries experience, 
                 data management andevolution in healthcare.</p>
                 <p>HealthSTLx is executed on the foundation that the best ideas are best discussed and shared</p>
