@@ -10,7 +10,6 @@
       <Speakers/>
     </el-carousel-item>
   </el-carousel>
-  </div>
 </template>
 
 

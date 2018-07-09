@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-      <NavBar></NavBar>
-        <div>
+      <NavBar activeIndex="1"></NavBar>
           <el-container :direction="'vertical'">
+            <el-row class="main">
             <el-row>
-              <el-col :offset="8" :span="4">October 24, 2018</el-col>
-              <el-col :span="4">Eric P. Newman Education Center</el-col>
+              <el-col :span="12"><h2>October 24, 2018</h2></el-col>
+              <el-col :span="12"><h2>Eric P. Newman Education Center</h2></el-col>
             </el-row>
             <el-row>
               <h2>INSERT COUNTDOWN HERE</h2>
@@ -15,22 +15,23 @@
                 <el-button class="btn">Register</el-button>
                 <el-button class="btn">Login</el-button>
             </el-row>
+            </el-row>
             <el-row>
                 <h1>Uncovering answers to major health challenges - both today and tomorrow.</h1>
             </el-row>
             <el-row>
                 <h2>Random stuff here about medical what not. Event is free. No cost to attend.</h2>
-            </el-row>
-            <el-row>
+            </el-row >
+            <el-col class="pageInfo">
               <el-col>
               <el-card>
-                <p>To unite forward-thinking health practitionersfrom various specialties and industries aroundpatient experience, 
+                <p>To unite forward-thinking health practitioners from various specialties and industries experience, 
                 data management andevolution in healthcare.</p>
                 <p>HealthSTLx is executed on the foundation that the best ideas are best discussed and shared</p>
               </el-card>
               </el-col>
               <el-col>
-              <el-card>
+              <el-card align="left">
               <ul>
                 <li>Connect with leaders who are shaping the future of healthcare</li>
                 <li>Customize your learning experience</li>
@@ -40,24 +41,25 @@
               </ul>
               </el-card>
               </el-col>
-            </el-row>
-            <el-row>
+            </el-col>
+            <el-row class="table"> 
               <el-table
                 :data="tableData"
                 stripe
-                style="width: 100%">
+                >
                 <el-table-column
+                  label="Time"
                   prop="date"
                   width="180">
                 </el-table-column>
                 <el-table-column
+                  label="Event"
                   prop="name"
                   width="210">
                 </el-table-column>
               </el-table>
-            </el-row>
+              </el-row>
           </el-container>
-        </div>
       </div>
 </template>
 
@@ -135,28 +137,40 @@ export default {
 </script>
 
 <style scoped lang="less">
-.agenda {
-  margin-left: 38%;
-}
 .btn {
   background: #3336ff;
   color: white;
   border: black;
+  width: 12em;
+  height: 4em;
+  box-shadow: 5px 5px 2px lightgrey;
+  // opacity: 0.7;
 }
 .el-row {
-  margin-bottom: 5%;
-  padding-top: 2%;
+  margin-bottom: 2%;
+  padding-top: 1%;
 }
 .el-col {
   border-radius: 20%;
   border: black;
+  width: 100%;
 }
 .grid-content {
   border-radius: 2%;
   min-height: 30%;
 }
+.el-card {
+  width: 100%;
+  height: 100%;
+}
+.main {
+  background-color: #f9fafc;
+}
 .row-bg {
   padding: 10% 0;
   background-color: #f9fafc;
+}
+.pageInfo {
+  width: 100%;
 }
 </style>
