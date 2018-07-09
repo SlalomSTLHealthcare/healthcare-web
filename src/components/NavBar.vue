@@ -1,16 +1,15 @@
 <template>
     <el-menu
-        :default-active="Index2"
+        :default-active="activeIndex"
+        @select="handleSelect"
         class="el-menu-demo"
         mode="horizontal"
-        fixed="top"
-        @select="handleSelect"
         background-color="#FFFFFF"
         text-color="#000000"
         active-text-color="#3336FF">
-        <el-menu-item index="1">Home</el-menu-item>
-        <el-menu-item index="2">Speakers/Panelists</el-menu-item>
-        <el-menu-item index="3">Breakout Sessions</el-menu-item>
+        <el-menu-item index="1"><router-link to="/">Home</router-link></el-menu-item>
+        <el-menu-item index="2"><router-link to="people">Speakers/Panelists</router-link></el-menu-item>
+        <el-menu-item index="3"><router-link to="about">Breakout Sessions</router-link></el-menu-item>
         <el-menu-item index="4">Social Feed</el-menu-item>
     </el-menu>
 </template>
@@ -18,11 +17,8 @@
 <script>
 export default {
   name: "navBar",
-  date() {
-    return {
-      activeIndex: "1",
-      Index2: "2"
-    };
+  props: {
+    activeIndex: String
   },
   methods: {
     handleSelect(key, keyPath) {}
@@ -38,6 +34,13 @@ export default {
   width: 100%;
 }
 </style>
+
+<style lang="less" scoped>
+li a {
+  text-decoration: none;
+}
+</style>
+
 
 
 
