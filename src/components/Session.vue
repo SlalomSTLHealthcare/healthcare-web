@@ -1,5 +1,5 @@
 <template>
-  <el-card class = "Panel" shadow="hover">
+  <el-card class="event" shadow="hover">
     <h2>{{title}}</h2>
     <p>Time: {{computedTime}}</p>
     <p>Room Number: {{roomNumber}}</p>
@@ -10,12 +10,12 @@
 <script>
 import moment from 'moment'
 export default {
-  name: "Panel",
+  name: "Session",
   props: {
-    title:String,
-    time:String,
-    roomNumber:Number,
-    moreInfo:String
+    title: String,
+    time: String,
+    roomNumber: Number,
+    moreInfo: String
   },
   computed:{
     computedTime: function(){
@@ -27,7 +27,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.Panel{
+.event{
  border-radius: 10%;
  padding: 10%;
  height: 200px;

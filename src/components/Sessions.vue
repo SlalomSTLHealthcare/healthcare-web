@@ -2,9 +2,9 @@
 
 <el-row>
   <!-- <el-row > -->
-  <h1>Speakers</h1>
-  <li v-for="speaker in speakerData" :key="speaker.id" v-if="speaker.session_type == 'Speaker'">
-    <Speaker :title="speaker.title" :time="speaker.time" :roomNumber="speaker.room_num" moreInfo="www.google.com"  class = "Speaker"/>
+  <h1>{{sessionType}}</h1>
+  <li v-for="session in sessionData" :key="session.id" v-if="session.session_type == sessionType">
+    <Session :title="session.title" :time="session.time" :roomNumber="session.room_num" moreInfo="www.google.com"  class = "Speaker"/>
   </li>
 <!-- </el-row> -->
 </el-row>
@@ -12,27 +12,29 @@
 
 <script>
 import axios from 'axios'
-import Speaker from "@/components/Speaker.vue";
+import Session from "@/components/Session.vue";
 export default {
-  name: "Speakers",
+  name: "Sessions",
   components: {
-    'Speaker':Speaker
+    'Session': Session
   },
   mounted: function(){
     this.populateData();
-    console.log("mounted")
   },
   data () {
     return{
-      speakerData: []
+      sessionData: []
     }
+  },
+  props: {
+    sessionType: String
   },
   methods: {
     populateData: function() {
       axios.get(`https://slalom-health-api-staging.herokuapp.com/api/sessions`)
       .then(response => {
         // JSON responses are automatically parsed.
-        this.speakerData = response.data;
+        this.sessionData = response.data;
       })
       .catch(e => {
         return e;
@@ -44,7 +46,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.Speaker{
+.Session{
   display: block;
   position: relative;
 }

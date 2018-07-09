@@ -1,25 +1,21 @@
 <template>
   <div>
     <h1>General Event Overview</h1>
-      <Breakouts/>
-      <Panels/>
-      <Speakers/>
+      <Sessions sessionType="Breakout"/>
+      <Sessions sessionType="Panel"/>
+      <Sessions sessionType="Speaker"/>
   </div>
 </template>
 
 
 <script>
 // @ is an alias to /src
-import Panels from "@/components/Panels.vue";
-import Breakouts from "@/components/Breakouts.vue";
-import Speakers from "@/components/Speakers.vue";
+import Sessions from "@/components/Sessions.vue";
 
 export default {
   name: "about",
   components: {
-    Panels,
-    Breakouts,
-    Speakers
+    Sessions
   }
 };
 </script>
