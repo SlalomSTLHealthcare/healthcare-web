@@ -25,7 +25,7 @@
             <el-col class="pageInfo">
               <el-col>
               <el-card>
-                <p>To unite forward-thinking health practitioners from various specialties and industries experience, 
+                <p>To unite forward-thinking health practitioners from various specialties and industries experience,
                 data management andevolution in healthcare.</p>
                 <p>HealthSTLx is executed on the foundation that the best ideas are best discussed and shared</p>
               </el-card>
@@ -42,7 +42,7 @@
               </el-card>
               </el-col>
             </el-col>
-            <el-row class="table"> 
+            <el-row class="table">
               <el-table
                 :data="tableData"
                 stripe

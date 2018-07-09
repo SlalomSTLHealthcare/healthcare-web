@@ -12,7 +12,6 @@
 <script>
 import axios from 'axios'
 import Person from "./Person.vue";
-
 export default {
   name: "People",
   components: {
