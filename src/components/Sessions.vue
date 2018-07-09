@@ -4,7 +4,7 @@
   <!-- <el-row > -->
   <h1>{{sessionType}}</h1>
   <li v-for="session in sessionData" :key="session.id" v-if="session.session_type == sessionType">
-    <Session :title="session.title" :time="session.time" :roomNumber="session.room_num" moreInfo="www.google.com"  class="session"/>
+    <Session :title="session.title" :time="session.time" :roomNumber="session.room_num" :description="session.description"  class="session"/>
   </li>
 <!-- </el-row> -->
 </el-row>
@@ -51,18 +51,15 @@ export default {
   position: relative;
 }
 h1 {
-  text-align: center;
+  text-align: left;
   font-size: 28px;
+  padding-left: 1%;
 }
 ul {
-  list-style-type: none;
   padding: 0;
-  width: 100%%;
-  align-self: center;
 }
 li {
-  display: inline-block;
-  margin: 0 5% 0;
+  list-style-type: none;
 
 }
 a {

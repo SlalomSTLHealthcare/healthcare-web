@@ -1,10 +1,14 @@
 <template>
-  <el-card class="event" shadow="hover">
-    <h2>{{title}}</h2>
-    <p>Time: {{computedTime}}</p>
-    <p>Room Number: {{roomNumber}}</p>
-    <a :href="moreInfo">More Information </a>
-  </el-card>
+    <el-col :span="12">
+
+    <el-card class="about" shadow="hover">
+      <div class="overview">
+        <h2>{{title}}</h2>
+        <p>Time: {{computedTime}}, Room Number: {{roomNumber}}</p>
+      </div>
+      <h2 class="description">{{description}}</h2>
+    </el-card>
+  </el-col>
 </template>
 
 <script>
@@ -15,7 +19,7 @@ export default {
     title: String,
     time: String,
     roomNumber: Number,
-    moreInfo: String
+    description: String,
   },
   computed:{
     computedTime: function(){
@@ -27,12 +31,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.event{
- border-radius: 10%;
- padding: 10%;
- height: 200px;
- width: 200px;
- align-items: center;
+.overview{
+  padding-top: 0px;
+  font-size: 12px;
+  text-align: left;
+  margin-bottom: 15%;
+}
+.about{
+ border-radius: 5%;
+ margin: 2.5%;
+
+}
+.description{
+  text-align: center;
+  margin-bottom: 5%;
 }
 a {
   color: #42b983;
