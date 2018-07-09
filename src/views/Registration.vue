@@ -1,16 +1,8 @@
 <template>
   <div class="registration">
-    <el-container>
-      <el-header class="header">
-        <img class="logo" src="../assets/slalom-logo-blue-RGB.jpg"/>
-      </el-header>
-      <el-main class="main">
-        <el-row>
-          <el-col :span="12"><div class="grid-content bg-purple"><h1 class="title">Welcome to HealthSTLX</h1></div></el-col>
-          <el-col :span="12"><div class="grid-content bg-purple-light"><Registration class="registration-form"/></div></el-col>
-        </el-row>
-      </el-main>
-  </el-container>
+      <h1>Welcome to HealthSTLx</h1>
+      <h2>Fill out this form to register</h2>
+      <Registration class="registration-form"/>
   </div>
 </template>
 
@@ -27,6 +19,10 @@ export default {
 </script>
 
 <style>
+h1, h2{
+  text-align: left;
+  padding-left: 5%;
+}
 .title{
   font-family: Arial;
   font-size: 75px;
@@ -39,8 +35,8 @@ export default {
   float: left;
 }
 .registration-form{
- float: right;
- margin-right: 5%;
- margin-top: 5%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>

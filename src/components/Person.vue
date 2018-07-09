@@ -1,16 +1,22 @@
 <template>
   <div class="person">
-        <el-card shadow="hover" :body-style="{ padding: '0px' }">
-          <div class="image-wrapper">
-            <img :src="imgSource" class="image">
-          </div>
-          <div style="padding: 10px;">
-            <span class="name">{{ name }}</span>
-            <div class="bottom clearfix">
-              <el-button type="text" class="button">{{ company }}</el-button>
+        <el-card shadow="hover">
+          <el-row :gutter="20">
+            <el-col :span="8">
+                <div class="image-wrapper">
+                  <img :src="imgSource" class="image">
+                </div>
+            </el-col>
+            <el-col :span="16">
+              <div style="padding: 10px;">
+                <div class="name">{{ name }}</div>
+                <div class="button">
+                  <el-button type="text">{{ company }}</el-button>
+                </div>
               <p class="bio">{{ bio }}</p>
-            </div>
-          </div>
+              </div>
+            </el-col>
+          </el-row>
         </el-card>
   </div>
 </template>
@@ -29,29 +35,23 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-body {
-  background-color: transparent;
-}
 .el-card{
-  border-radius: 15%;
-  padding: 15%;
-  height: 300px;
-  width: 250px;
+  padding: 2% 2%;
+  height: 20%;
+  border: 0;
+  background-color: transparent
 }
 
 .image-wrapper{
-  width: 200px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
   border-radius: 50%;
   overflow: hidden;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
 }
-img{
-  position: relative;
-  width: 220px;
-}
+
 h3 {
   margin: 40px 0 0;
 }
@@ -68,35 +68,22 @@ a {
 }
 .name {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 40px;
+  text-align: left;
 }
 .bio {
   font-style: italic;
   padding: 3px;
   line-height: 1.4;
-}
-.bottom {
-  margin-top: 13px;
-  line-height: 12px;
-  text-align: center;
+  text-align: left;
 }
 
 .button {
   padding: 0;
+  text-align: left;
 }
-
 .image {
   width: 400px;
   display: block;
-}
-
-.clearfix:before,
-.clearfix:after {
-    display: table;
-    content: "";
-}
-
-.clearfix:after {
-    clear: both
 }
 </style>
