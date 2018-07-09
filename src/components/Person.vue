@@ -38,6 +38,7 @@ body {
   height: 300px;
   width: 250px;
 }
+
 .image-wrapper{
   width: 200px;
   height: 200px;
@@ -79,18 +80,22 @@ a {
   line-height: 12px;
   text-align: center;
 }
+
 .button {
   padding: 0;
 }
+
 .image {
   width: 400px;
   display: block;
 }
+
 .clearfix:before,
 .clearfix:after {
     display: table;
     content: "";
 }
+
 .clearfix:after {
     clear: both
 }

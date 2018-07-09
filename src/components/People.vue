@@ -24,6 +24,7 @@ export default {
   },
   mounted: function() {
     axios.get(`https://slalom-health-api-staging.herokuapp.com/api/people`)
+
      .then(response => {
      // JSON responses are automatically parsed.
        this.data = response.data
