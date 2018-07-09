@@ -4,7 +4,7 @@
   <!-- <el-row > -->
   <h1>{{sessionType}}</h1>
   <li v-for="session in sessionData" :key="session.id" v-if="session.session_type == sessionType">
-    <Session :title="session.title" :time="session.time" :roomNumber="session.room_num" moreInfo="www.google.com"  class = "Speaker"/>
+    <Session :title="session.title" :time="session.time" :roomNumber="session.room_num" moreInfo="www.google.com"  class="session"/>
   </li>
 <!-- </el-row> -->
 </el-row>
@@ -46,7 +46,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.Session{
+.session{
   display: block;
   position: relative;
 }
