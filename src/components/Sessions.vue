@@ -53,6 +53,7 @@ export default {
 h1 {
   text-align: left;
   font-size: 28px;
+  padding-left: 1%;
 }
 ul {
   padding: 0;

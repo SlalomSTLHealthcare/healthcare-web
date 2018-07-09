@@ -23,6 +23,7 @@ export default {
 <style scoped lang="less">
 h1 {
   text-align: left;
+  padding-left: 1%;
   font-weight: bold;
 }
 
