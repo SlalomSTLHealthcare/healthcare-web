@@ -66,12 +66,4 @@ li {
 a {
   color: #42b983;
 }
-.clearfix:before,
-.clearfix:after {
-    display: table;
-    content: "";
-}
-.clearfix:after {
-    clear: both
-}
 </style>
