@@ -1,13 +1,17 @@
 <template>
   <div class="person">
-    <div class="container">
-      <div id="image-wrapper">
-        <img :src="imgSource">
-      </div>
-      <h1>{{ name }}</h1>
-      <p>{{ company }}</p>
-      <p>{{ bio }}</p>
-    </div>
+        <el-card shadow="hover" :body-style="{ padding: '0px' }">
+          <div class="image-wrapper">
+            <img :src="imgSource" class="image">
+          </div>
+          <div style="padding: 10px;">
+            <span class="name">{{ name }}</span>
+            <div class="bottom clearfix">
+              <el-button type="text" class="button">{{ company }}</el-button>
+              <p class="bio">{{ bio }}</p>
+            </div>
+          </div>
+        </el-card>
   </div>
 </template>
 
@@ -25,24 +29,24 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.container {
-  overflow:hidden;
-  border: 1px solid #e8e8e8;
-  border-radius: 30%;
-  display: inline-block;
-  height: 380px;
-  width:300px;
+body {
+  background-color: transparent;
 }
-#image-wrapper{
-  width: 120px;
-  height: 120px;
+.el-card{
+  border-radius: 15%;
+  padding: 15%;
+  height: 300px;
+  width: 250px;
+}
+
+.image-wrapper{
+  width: 200px;
+  height: 200px;
   border-radius: 50%;
   overflow: hidden;
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10%;
-  margin-top: 10%;
 }
 img{
   position: relative;
@@ -61,5 +65,38 @@ li {
 }
 a {
   color: #42b983;
+}
+.name {
+  font-weight: bold;
+  font-size: 18px;
+}
+.bio {
+  font-style: italic;
+  padding: 3px;
+  line-height: 1.4;
+}
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+  text-align: center;
+}
+
+.button {
+  padding: 0;
+}
+
+.image {
+  width: 400px;
+  display: block;
+}
+
+.clearfix:before,
+.clearfix:after {
+    display: table;
+    content: "";
+}
+
+.clearfix:after {
+    clear: both
 }
 </style>

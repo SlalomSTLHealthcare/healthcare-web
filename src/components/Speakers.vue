@@ -22,6 +22,7 @@
         label="More Information">
       </el-table-column>
   </el-table>
+</div>
 </template>
 
 <script>

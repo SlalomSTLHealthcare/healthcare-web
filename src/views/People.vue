@@ -1,7 +1,6 @@
 <template>
   <div class="people">
-    <NavBar activeIndex = "2"></NavBar>
-    <People msg="This is the People Page"/>
+    <People msg="People"/>
   </div>
 </template>
 
