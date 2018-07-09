@@ -1,10 +1,10 @@
 <template>
   <div class="register">
   <el-card class="box-card">
-    <div slot="header" class="clearfix">
-      <span>Register</span>
+    <div slot="header">
+      <span class="header">Register</span>
     </div>
-    <el-form ref="form" :model="form" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" label-width="120px">
+    <el-form ref="form" :model="form" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="120px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item label="Name">
@@ -22,9 +22,6 @@
       </el-form-item>
       <el-form-item label="Twitter">
         <el-input v-model="form.twitter"></el-input>
-      </el-form-item>
-      <el-form-item >
-        <el-checkbox label="Remember Me" v-model="form.checked" name="type"></el-checkbox>
       </el-form-item>
       <el-form-item class="buttons">
         <el-button type="primary" @click="onSubmit">Create</el-button>
@@ -62,6 +59,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+* {
+  font-family: Arial;
+}
+.header{
+  font-size: 30px;
+}
 .logo{
   float: left;
 }
@@ -91,21 +94,18 @@ a {
   margin-bottom: 18px;
 }
 
-.clearfix:before,
-.clearfix:after {
-  display: table;
-  content: "";
-}
-.clearfix:after {
-  clear: both
-}
-
 .box-card {
-  width: 650px;
-  padding: 2%;
-  padding-left: 5px;
+  width: 90%;
+  height: 700px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .buttons {
   text-align: center;
+}
+.form{
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
