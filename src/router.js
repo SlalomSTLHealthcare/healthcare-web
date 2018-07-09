@@ -14,14 +14,14 @@ export default new Router({
       component: Home
     },
     {
-      path: "/events",
-      name: "events",
-      component: About
-    },
-    {
       path: "/people",
       name: "people",
       component: People
+    },
+    {
+      path: "/about",
+      name: "about",
+      component: About
     }
   ]
 });
