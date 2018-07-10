@@ -11,8 +11,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import Session from "@/components/Session.vue";
+import axios from 'axios';
+import Session from '@/components/Session.vue';
 export default {
   name: "Sessions",
   components: {

@@ -16,8 +16,8 @@
         </el-button>
     </el-row>
     <el-row>
-        <Sponsors sponsorLevel="platinum"/>
-        <Sponsors sponsorLevel="low"/>
+        <Sponsors :sponsors="filteredData('platinum')" sponsorLevel="platinum"/>
+        <Sponsors :sponsors="filteredData('low')" sponsorLevel="low"/>
     </el-row>
 </el-col>
 </template>
@@ -25,11 +25,16 @@
 <script>
 // @ is an alias to /src
 import Sponsors from "@/components/Sponsors.vue";
-
+import _ from "underscore";
 export default {
   name: "sponsorPage",
   components: {
     Sponsors
+  },
+  methods: {
+    filteredData(level) {
+      return _.filter(this.sponsorData, s => s.sponsor_level === level);
+    }
   }
 };
 </script>

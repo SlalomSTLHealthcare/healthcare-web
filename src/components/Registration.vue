@@ -39,12 +39,12 @@ export default {
   data() {
     return {
       form: {
-        first_name: "",
-        last_name: "",
-        company: "",
-        title: "",
-        email: "",
-        twitter: "",
+        first_name: '',
+        last_name: '',
+        company: '',
+        title: '',
+        email: '',
+        twitter: '',
         checked: true
       }
     };

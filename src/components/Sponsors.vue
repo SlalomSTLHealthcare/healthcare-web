@@ -3,7 +3,7 @@
     <el-card class="titledesign" shadow="never">
         <h2>{{sponsorLevel}} level</h2>
     </el-card>
-    <li v-for="sponsor in sponsorData" :key="sponsor.id" v-if="sponsor.sponsor_level === sponsorLevel">
+    <li v-for="sponsor in sponsorData" :key="sponsor.id">
         <Sponsor :image="sponsor.image_loc" :title="sponsor.title" :name="sponsor.name" :description="sponsor.description" :sponsorLevel="sponsor.sponsor_level" class="sponsor"/>
     </li>
 </el-row>
