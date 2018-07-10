@@ -1,5 +1,6 @@
 <template>
   <div class="registration">
+    <NavBar activeIndex="2"></NavBar>
       <h1>Welcome to HealthSTLx</h1>
       <h2>Fill out this form to register</h2>
       <Registration class="registration-form"/>
@@ -9,11 +10,13 @@
 <script>
 // @ is an alias to /src
 import Registration from "@/components/Registration.vue";
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   name: "registration",
   components: {
-    Registration
+    Registration,
+    NavBar
   }
 };
 </script>
