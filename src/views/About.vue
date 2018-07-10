@@ -3,7 +3,6 @@
     <h1>General Event Overview</h1>
       <Sessions sessionType="Breakout"/>
       <Sessions sessionType="Panel"/>
-      <Sessions sessionType="Speaker"/>
   </div>
 </template>
 
@@ -23,7 +22,8 @@ export default {
 
 <style scoped lang="less">
 h1 {
-  text-align: center;
+  text-align: left;
+  padding-left: 1%;
   font-weight: bold;
 }
 
