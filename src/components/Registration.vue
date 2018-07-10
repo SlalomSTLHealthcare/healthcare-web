@@ -9,7 +9,7 @@
       <input type=hidden name="retURL" value="http://">
       <el-form-item label="Name">
         <el-input v-model="form.first_name" placeholder="First Name"></el-input>
-        <el-input v-model="form.last_name"placeholder="Last Name"></el-input>
+        <el-input v-model="form.last_name" placeholder="Last Name"></el-input>
       </el-form-item>
       <el-form-item label="Company">
         <el-input v-model="form.company"></el-input>
@@ -37,21 +37,21 @@
 export default {
   name: "Registration",
   data() {
-  return {
-    form: {
-      first_name: '',
-      last_name: '',
-      company: '',
-      title: '',
-      email: '',
-      twitter: '',
-      checked: true
+    return {
+      form: {
+        first_name: "",
+        last_name: "",
+        company: "",
+        title: "",
+        email: "",
+        twitter: "",
+        checked: true
       }
-    }
+    };
   },
   methods: {
     onSubmit() {
-      console.log('submit!');
+      console.log("submit!");
     }
   }
 };
@@ -62,13 +62,13 @@ export default {
 * {
   font-family: Arial;
 }
-.header{
+.header {
   font-size: 30px;
 }
-.logo{
+.logo {
   float: left;
 }
-img{
+img {
   position: relative;
   width: 220px;
 }
@@ -103,7 +103,7 @@ a {
 .buttons {
   text-align: center;
 }
-.form{
+.form {
   width: 75%;
   margin-left: auto;
   margin-right: auto;

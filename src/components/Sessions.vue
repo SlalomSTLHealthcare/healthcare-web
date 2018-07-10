@@ -11,34 +11,35 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 import Session from "@/components/Session.vue";
 export default {
   name: "Sessions",
   components: {
-    'Session': Session
+    Session: Session
   },
-  mounted: function(){
+  mounted: function() {
     this.populateData();
   },
-  data () {
-    return{
+  data() {
+    return {
       sessionData: []
-    }
+    };
   },
   props: {
     sessionType: String
   },
   methods: {
     populateData: function() {
-      axios.get(`https://slalom-health-api-staging.herokuapp.com/api/sessions`)
-      .then(response => {
-        // JSON responses are automatically parsed.
-        this.sessionData = response.data;
-      })
-      .catch(e => {
-        return e;
-      })
+      axios
+        .get(`https://slalom-health-api-staging.herokuapp.com/api/sessions`)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.sessionData = response.data;
+        })
+        .catch(e => {
+          return e;
+        });
     }
   }
 };
@@ -46,7 +47,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.session{
+.session {
   display: block;
   position: relative;
 }
@@ -60,7 +61,6 @@ ul {
 }
 li {
   list-style-type: none;
-
 }
 a {
   color: #42b983;
