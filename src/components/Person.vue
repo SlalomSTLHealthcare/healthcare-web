@@ -2,12 +2,12 @@
   <div class="person">
         <el-card shadow="hover">
           <el-row :gutter="20">
-            <el-col :span="8">
+            <el-col :xs="12" :sm="8" :md="6" :lg="4">
                 <div class="image-wrapper">
                   <img :src="imgSource" class="image">
                 </div>
             </el-col>
-            <el-col :span="16">
+            <el-col :xs="12" :sm="16" :md="18" :lg="20">
               <div style="padding: 10px;">
                 <div class="name">{{ name }}</div>
                 <div class="button">

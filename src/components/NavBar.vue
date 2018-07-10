@@ -10,14 +10,14 @@
         <i class="fas fa-times fa-2x"></i>
 	         <div class="wrap">
 		          <ul class="wrap-nav">
-			                 <ul>
+
                          <li><router-link to="people">Speakers</router-link></li>
 				                 <li><router-link to="about">Breakout Sessions</router-link></li>
                          <li><router-link to="schedule">Schedule</router-link></li>
                          <li><router-link to="registration">Register</router-link></li>
                          <li><router-link to="sponsor">Sponsors</router-link></li>
                          <li><router-link to="/">About</router-link></li>
-			                 </ul>
+
 		              </ul>
 		         </div>
 	      </div>
@@ -51,14 +51,15 @@ export default {
 }
 .menu i:hover {
   color: #e5e5e5;
+  cursor: pointer;
 }
-
 .overlay i{
   color: #e5e5e5;
   position: absolute;
   right: 0;
   padding-right: 50px;
   padding-top: 40px;
+  cursor: pointer;
 }
 .menu {
   position: fixed;
@@ -67,18 +68,6 @@ export default {
   z-index: 10;
   width: 100%;
 }
-.el-menu-vertical-demo:not(.el-menu--collapse) {
-    width: 200px;
-    min-height: 400px;
-    position: absolute;
-    right: 0;
-    border-left: 1px solid #e5e5e5;
-  }
-.el-menu--collapse {
-  position: absolute;
-  right: 0;
-  border-left: 1px solid #e5e5e5;
-}
 .logo {
   float: left;
   width: 30px;
@@ -86,15 +75,9 @@ export default {
 
 }
 ul {
-	margin:0;
-	padding:0;
-	text-decoration:none;
 	list-style:none;
 }
-li {
-	padding:0;
-	margin:0;
-}
+
 nav {
 	text-align:center;
 	width:100%;
@@ -111,45 +94,6 @@ nav ul li {
 }
 
 nav ul li a:hover {
-	color: #34B484;
-}
-</style>
-
-<style lang="less" scoped>
-li a {
-  text-decoration: none;
-}
-
-ul {
-	margin:0;
-	padding:0;
-	text-decoration:none;
-	list-style:none;
-}
-li {
-	padding:0;
-	margin:0;
-}
-nav {
-	text-align:center;
-	width:100%;
-	position:relative;
-	height:auto;
-	overflow:hidden;
-	background:none;
-}
-nav ul {
-	text-align:center;
-}
-nav ul li {
-	display:inline-block;
-}
-
-nav ul li a:hover {
-	color: #34B484;
-}
-
-.btn-close:hover:after {
 	color: #34B484;
 }
 /*overlay*/
@@ -169,43 +113,24 @@ nav ul li a:hover {
 	margin:0 auto;
 }
 .wrap ul.wrap-nav {
-	border-bottom:1px solid #575757;
-	text-transform:capitalize;
-	padding:150px 0px 100px;
-}
-.wrap ul.wrap-nav li {
-	font-size:40px;
-	display:inline-block;
-	vertical-align:top;
-	width:24%;
-	position:relative;
+	padding:15%;
 }
 .wrap ul.wrap-nav li a {
 	color:#34B484;
-	display:block;
 	padding:8px 0;
 	text-decoration:none;
 	transition-property:all .2s linear 0s;
 	-moz-transition:all .2s linear 0s;
 	-webkit-transition:all .2s linear 0s;
 	-o-transition:all .2s linear 0s;
+  font-size:30px;
+  display:inline-block;
+  vertical-align:top;
+  position:relative;
+  color:#f0f0f0;
 }
+
 .wrap ul.wrap-nav li a:hover {
-	color:#f0f0f0;
-}
-.wrap ul.wrap-nav ul {
-	padding:20px 0;
-}
-.wrap ul.wrap-nav ul li {
-	display:block;
-	font-size:30px;
-	width:100%;
-	color:#e9e9e9;
-}
-.wrap ul.wrap-nav ul li a {
-	color:#f0f0f0;
-}
-.wrap ul.wrap-nav ul li a:hover {
 	color:#FFE72C;
 }
 @media screen and (max-width:48em) {
@@ -221,13 +146,6 @@ nav ul li a:hover {
 		opacity:0;
 		visibility:hidden;
 	}
-}
-.content {
-	width:100%;
-	margin-top:200px;
-	font-size:20px;
-	color: #333;
-	text-align: center;
 }
 .fade-enter-active, .fade-leave-active {
   transition: opacity .5s;
