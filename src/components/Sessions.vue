@@ -2,9 +2,9 @@
 
 <el-row>
   <!-- <el-row > -->
-  <h1>{{sessionType}}</h1>
+  <h1>{{sessionType}} Sessions</h1>
   <li v-for="session in sessionData" :key="session.id" v-if="session.session_type == sessionType">
-    <Session :title="session.title" :time="session.time" :roomNumber="session.room_num" :description="session.description"  class="session"/>
+    <Session :title="session.title" :time="session.time" :roomNumber="session.room_num" :description="session.description" :imgSource="session.image_loc" class="session"/>
   </li>
 <!-- </el-row> -->
 </el-row>
@@ -35,6 +35,7 @@ export default {
       .then(response => {
         // JSON responses are automatically parsed.
         this.sessionData = response.data;
+        console.log(this.sessionData[0].image_loc);
       })
       .catch(e => {
         return e;

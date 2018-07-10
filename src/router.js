@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import People from "./views/People.vue";
 import Registration from "./views/Registration.vue";
+import ScheduleView from "./views/ScheduleView.vue";
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: "/about",
       name: "about",
       component: About
+    },
+    {
+      path: "/schedule",
+      name: "scheduleView",
+      component: ScheduleView
     }
   ]
 });
