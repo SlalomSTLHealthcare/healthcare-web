@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-      <NavBar activeIndex="1"></NavBar>
+          <HomeOverlay/>
           <el-container :direction="'vertical'">
             <el-row class="main">
             <el-row>
@@ -42,96 +42,20 @@
               </el-card>
               </el-col>
             </el-col>
-            <el-row class="table">
-              <el-table
-                :data="tableData"
-                stripe
-                >
-                <el-table-column
-                  label="Time"
-                  prop="date"
-                  width="180">
-                </el-table-column>
-                <el-table-column
-                  label="Event"
-                  prop="name"
-                  width="210">
-                </el-table-column>
-              </el-table>
-              </el-row>
           </el-container>
+
       </div>
 </template>
 
 <script>
-import NavBar from "@/components/NavBar.vue";
+
+import HomeOverlay from "@/components/HomeOverlay.vue";
+
 
 export default {
   name: "home",
-  data() {
-    return {
-      tableData: [
-        {
-          date: "7:30 - 8:00",
-          name: "Registration/Breakfast/Arrival"
-        },
-        {
-          date: "8:00 - 8:15",
-          name: "Introduction"
-        },
-        {
-          date: "8:15 - 9:00",
-          name: "Speaker 1"
-        },
-        {
-          date: "9:00 - 10:00",
-          name: "Panel 1"
-        },
-        {
-          date: "10:00 - 10:15",
-          name: "Morning Break"
-        },
-        {
-          date: "10:15 - 12:00",
-          name: "Breakout Session 1"
-        },
-        {
-          date: "12:00 - 1:00",
-          name: "Lunch"
-        },
-        {
-          date: "1:00 - 1:45",
-          name: "Speaker 2"
-        },
-        {
-          date: "1:45 - 2:45",
-          name: "Panel 2"
-        },
-        {
-          date: "2:45 - 3:00",
-          name: "Afternoon Break"
-        },
-        {
-          date: "3:00 - 4:45",
-          name: "Breakout Session 2"
-        },
-        {
-          date: "4:45 - 5:00",
-          name: "Closing Remarks"
-        },
-        {
-          date: "5:00 - 6:00",
-          name: "Happy Hour"
-        },
-        {
-          date: "6:00 - 8:00",
-          name: "Family Event"
-        }
-      ]
-    };
-  },
   components: {
-    NavBar
+    HomeOverlay
   }
 };
 </script>
@@ -155,16 +79,8 @@ export default {
   border: black;
   width: 100%;
 }
-.grid-content {
-  border-radius: 2%;
-  min-height: 30%;
-}
-.el-card {
-  width: 100%;
-  height: 100%;
-}
-.main {
-  background-color: #f9fafc;
+body{
+  padding-left: 0px;
 }
 .row-bg {
   padding: 10% 0;

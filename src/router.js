@@ -5,6 +5,7 @@ import About from "./views/About.vue";
 import People from "./views/People.vue";
 import Registration from "./views/Registration.vue";
 import ScheduleView from "./views/ScheduleView.vue";
+import SessionView from "./views/SessionView";
 
 Vue.use(Router);
 
@@ -29,6 +30,11 @@ export default new Router({
       path: "/about",
       name: "about",
       component: About
+    },
+    {
+      path: "/session",
+      name: "session",
+      component: SessionView
     },
     {
       path: "/schedule",
