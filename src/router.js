@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import People from "./views/People.vue";
 import Registration from "./views/Registration.vue";
+import SponsorPage from "./views/SponsorPage.vue";
 import ScheduleView from "./views/ScheduleView.vue";
 import SessionView from "./views/SessionView";
 
@@ -30,6 +31,11 @@ export default new Router({
       path: "/about",
       name: "about",
       component: About
+    },
+    {
+      path: "/sponsor",
+      name: "sponsorPage",
+      component: SponsorPage
     },
     {
       path: "/session",
