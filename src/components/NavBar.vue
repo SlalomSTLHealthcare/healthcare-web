@@ -10,16 +10,14 @@
         <i class="fas fa-times fa-2x"></i>
 	         <div class="wrap">
 		          <ul class="wrap-nav">
-
-                         <li><router-link to="people">Speakers</router-link></li>
-				                 <li><router-link to="about">Breakout Sessions</router-link></li>
-                         <li><router-link to="schedule">Schedule</router-link></li>
-                         <li><router-link to="registration">Register</router-link></li>
-                         <li><router-link to="sponsor">Sponsors</router-link></li>
-                         <li><router-link to="/">About</router-link></li>
-
-		              </ul>
-		         </div>
+                <li><router-link to="people">Speakers</router-link></li>
+				        <li><router-link to="about">Breakout Sessions</router-link></li>
+                <li><router-link to="schedule">Schedule</router-link></li>
+                <li><router-link to="registration">Register</router-link></li>
+                <li><router-link to="sponsor">Sponsors</router-link></li>
+                <li><router-link to="/">About</router-link></li>
+		          </ul>
+		       </div>
 	      </div>
     </transition>
   </div>
@@ -43,6 +41,13 @@ export default {
 </script>
 
 <style>
+.menu {
+  position: fixed;
+  background-color: #fff;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+}
 .menu i {
   position: absolute;
   right: 0;
@@ -61,12 +66,8 @@ export default {
   padding-top: 40px;
   cursor: pointer;
 }
-.menu {
-  position: fixed;
-  background-color: #fff;
-  top: 0;
-  z-index: 10;
-  width: 100%;
+.overlay i:hover{
+  color:#FFE72C;
 }
 .logo {
   float: left;
@@ -76,25 +77,6 @@ export default {
 }
 ul {
 	list-style:none;
-}
-
-nav {
-	text-align:center;
-	width:100%;
-	position:relative;
-	height:auto;
-	overflow:hidden;
-	background:none;
-}
-nav ul {
-	text-align:center;
-}
-nav ul li {
-	display:inline-block;
-}
-
-nav ul li a:hover {
-	color: #34B484;
 }
 /*overlay*/
 .overlay {
@@ -115,14 +97,11 @@ nav ul li a:hover {
 .wrap ul.wrap-nav {
 	padding:15%;
 }
-.wrap ul.wrap-nav li a {
+li a {
+  list-style:none;
 	color:#34B484;
 	padding:8px 0;
 	text-decoration:none;
-	transition-property:all .2s linear 0s;
-	-moz-transition:all .2s linear 0s;
-	-webkit-transition:all .2s linear 0s;
-	-o-transition:all .2s linear 0s;
   font-size:30px;
   display:inline-block;
   vertical-align:top;
