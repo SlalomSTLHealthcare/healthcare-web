@@ -13,13 +13,15 @@
 import Registration from "@/components/Registration.vue";
 import NavBar from "@/components/NavBar.vue";
 import Login from "@/components/Login.vue";
+import SelectBreakout from "@/components/SelectBreakout.vue";
 
 export default {
   name: "registration",
   components: {
     Registration,
     NavBar,
-    Login
+    Login,
+    SelectBreakout
   },
   data() {
     return {
@@ -40,10 +42,6 @@ h1, h2{
   vertical-align: middle;
   margin-top: 30%;
   color:#818283;
-}
-.logo{
-  width: 200px;
-  float: left;
 }
 .registration-form{
   width: 100%;

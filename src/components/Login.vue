@@ -5,7 +5,7 @@
       <el-button class="btn" v-if="login_type==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
     </div>
     <el-dialog title="Login" :visible.sync="dialogFormVisible">
-      <el-form :model="form" :label-position="right">
+      <el-form :model="form">
          <el-form-item label="Email">
            <el-input v-model="form.email" auto-complete="off"></el-input>
          </el-form-item>

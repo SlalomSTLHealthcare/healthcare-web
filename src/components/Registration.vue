@@ -8,8 +8,8 @@
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item label="Name">
-        <el-input v-model="form.first_name" placeholder="First Name"></el-input>
-        <el-input v-model="form.last_name" label-position="top" placeholder="Last Name"></el-input>
+        <el-input v-model="form.firstName" placeholder="First Name"></el-input>
+        <el-input v-model="form.lastName" label-position="top" placeholder="Last Name"></el-input>
       </el-form-item>
       <el-form-item label="Company">
         <el-input v-model="form.company"></el-input>
@@ -52,7 +52,10 @@
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
-    <el-form-item  label="I would like to opt-in to donating to Union Way as part of my registration.">
+    <el-form-item label="Please rank the breakout sessions you would like to attend.">
+      <SelectBreakout/>
+    </el-form-item>
+    <el-form-item  label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch   v-model="form.donate"></el-switch>
     </el-form-item>
       <el-form-item class="buttons">
@@ -66,6 +69,9 @@
 
 <script>
 import Login from "./Login.vue";
+import SelectBreakout from "./SelectBreakout.vue";
+import axios from 'axios'
+import _ from 'underscore';
 export default {
   name: "Registration",
   data() {
@@ -91,8 +97,8 @@ var validatePass2 = (rule, value, callback) => {
   return {
     login: true,
     form: {
-      first_name: '',
-      last_name: '',
+      firstName: '',
+      lastName: '',
       company: '',
       title: '',
       email: '',
@@ -115,6 +121,9 @@ var validatePass2 = (rule, value, callback) => {
       ],
     }
   }
+},
+components: {
+  SelectBreakout
 },
 methods: {
   handleSubmit() {

@@ -15,12 +15,12 @@
                 </div>
               <p class="bio">{{ bio }}</p>
               <el-popover
-              placement="top-start"
+              placement="bottom-start"
               title="Talk Title"
               width="200"
               trigger="hover"
               content="this is content, this is content, this is content">
-              <el-button slot="reference">Description of Talk</el-button>
+              <el-button class="descript" slot="reference">Description of Talk</el-button>
 </el-popover>
               </div>
             </el-col>
@@ -43,6 +43,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+.descript {
+  float: left;
+}
 .el-card{
   padding: 2% 2%;
   height: 20%;
