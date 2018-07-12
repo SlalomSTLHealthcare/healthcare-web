@@ -1,20 +1,16 @@
 <template>
-  <div>
-    <h1>General Event Overview</h1>
-      <Sessions sessionType="Breakout"/>
-      <Sessions sessionType="Panel"/>
-  </div>
+  <AboutContent/>
 </template>
 
 
 <script>
 // @ is an alias to /src
-import Sessions from "@/components/Sessions.vue";
+import AboutContent from "@/components/AboutContent.vue";
 
 export default {
   name: "about",
   components: {
-    Sessions
+    AboutContent
   }
 };
 </script>

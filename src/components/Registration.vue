@@ -150,10 +150,10 @@ methods: {
 .header{
   font-size: 30px;
 }
-.logo{
+.logo {
   float: left;
 }
-img{
+img {
   position: relative;
   width: 220px;
 }
