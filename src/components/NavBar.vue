@@ -2,7 +2,7 @@
   <div>
     <div class="menu">
       <!-- <img class="logo" src="../assets/slalom-logo-blue-RGB.jpg"/> -->
-      <span class="logo">HealthSTLx <span class="logoLogo"><i class="fas fa-medkit"></i></span></span>
+      <span class="logo">HealthSTLx <span><i class="fas fa-medkit"></i></span></span>
       <span class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></span>
     </div>
 
@@ -49,10 +49,9 @@ export default {
   z-index: 10;
   width: 100%;
   box-shadow: 0px 1px 4px grey;
-  justify-content: space-between; 
+  justify-content: space-between;
 }
 .menu .menuLogo {
-  float: right;
   padding: 20px;
 }
 .menu .menuLogo:hover {
@@ -69,9 +68,6 @@ export default {
 }
 .overlay i:hover{
   color:#FFE72C;
-}
-.logoLogo {
-  display: inline;
 }
 .logo {
   display: flex;
@@ -100,12 +96,6 @@ ul {
   justify-content: center;
   align-items: center;
   height: 100vh;
-	/* text-align:center; */
-	/* max-width:90%; */
-	/* margin:0 auto; */
-}
-.wrap ul.wrap-nav {
-	/* padding:15%; */
 }
 a {
   list-style:none;
