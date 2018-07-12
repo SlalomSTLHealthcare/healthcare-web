@@ -18,7 +18,7 @@
                     </div>
                 </el-col>
             </el-row>
-            <el-row style="padding: 0% 3%;">
+            <el-row class="image">
                 <el-col>
                     <div>
                         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy2T13a1orJ1YBT47YSwCj4IHb-wjQvfQKZV_xhJ4Wtt-icM6S" alt="pic">
@@ -61,8 +61,8 @@
             <el-button >Register</el-button>
         </el-row>
          <el-row>
-            <el-col> 
-                <div class="btmdesc" style="width: 90%">
+            <el-col :span="20"> 
+                <div class="btmdesc">
                     <el-card shadow="never">
                         <h1>Header</h1>
                         <p>Description</p>
@@ -82,7 +82,7 @@ export default {
 <style scoped lang="less">
 .topheader {
   width: 100%;
-  margin-bottom: 1%;
+  margin-bottom: 20px;
 }
 .topdesc {
   width: 100%;
@@ -90,7 +90,7 @@ export default {
 }
 .btmheader {
   width: 25%;
-  margin-bottom: 1%;
+  margin-bottom: 20px;
 }
 .desc {
   word-wrap: break-word;
@@ -104,22 +104,25 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  margin-bottom: 1%;
+  margin-bottom: 20px;
 }
 .section {
   display: flex;
   flex-direction: row;
-  margin-bottom: 1%;
+  margin-bottom: 20px;
 }
 .el-button {
   float: right;
-  margin-right: 1.5%;
+  margin-right: 40px;
   background-color: blue;
   color: white;
 }
 ul {
   list-style-type: none;
   text-align: left;
+}
+.image {
+  padding: 0px 70px;
 }
 </style>
 
