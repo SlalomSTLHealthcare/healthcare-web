@@ -1,84 +1,70 @@
 <template>
     <el-container :direction="'vertical'">
         <div class="section">
-        <el-row class="left">
-            <el-col>
-                <div class="topheader">
-                    <el-card shadow="never">
-                        <h1>About Page</h1>
-                    </el-card>
-                </div>
-            </el-col>
-            <el-col>
-                <div class="topdesc">
-                    <el-card shadow="never">
-                        <h2>Page Description</h2>
-                    </el-card>
-                </div>
-            </el-col>
-        </el-row>
-        <el-row class="right" style="margin-right: 7%">
-            <el-col>
-                <div>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy2T13a1orJ1YBT47YSwCj4IHb-wjQvfQKZV_xhJ4Wtt-icM6S" alt="pic">
-                </div>
-            </el-col>
-        </el-row>
+            <el-row>
+                <el-col class="topheader">
+                    <div>
+                        <el-card style="border: none" shadow="never">
+                            <h1>About Page</h1>
+                        </el-card>
+                    </div>
+                </el-col>
+                <el-col>
+                    <div class="topdesc">
+                        <el-card shadow="never">
+                            <h3>To unite forward-thinking health practitioners from various specialties and industries experience,
+                            data management andevolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared</h3>
+                        </el-card>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row style="padding: 0% 3%;">
+                <el-col>
+                    <div>
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy2T13a1orJ1YBT47YSwCj4IHb-wjQvfQKZV_xhJ4Wtt-icM6S" alt="pic">
+                    </div>
+                </el-col>
+            </el-row>
         </div>
         <div class="midSection">
-        <el-row class="left">
-            <el-col>
-                <div class="header">
-                    <el-card shadow="never">
-                        <h1>header</h1>
-                    </el-card>
-                </div>
-            </el-col>
-            <el-col>
-                <div class="desc">
-                    <el-card shadow="never">
-                        <p>Description Description Description Description Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description Description Description Description Description
-                        </p>
-                    </el-card>
-                </div>
-            </el-col>
-        </el-row>
-        <el-row class="right">
-            <el-col>
-                <div class="header">
-                    <el-card shadow="never">
-                        <h1>header</h1>
-                    </el-card>
-                </div>
-            </el-col>
-            <el-col>
-                <div class="desc">
-                    <el-card shadow="never">
-                        <p>Description Description Description Description Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description Description Description Description Description
-                            Description Description Description Description Description Description Description Description Description Description Description
-                        </p>
-                    </el-card>
-                </div>
-            </el-col>
-        </el-row>        
+            <el-row class="descList">
+                <el-col> 
+                    <div>
+                        <el-card shadow="never">
+                            <h1>Header</h1>
+                            <ul>
+                                <li>Connect with leaders who are shaping the future of healthcare</li>
+                                <li>Customize your learning experience</li>
+                                <li>Influence discussion and evolution of healthcare</li>
+                                <li>Learn innovative ways used to improve patient care</li>
+                                <li>Equip yourself with knowledge you can implement at your institution</li>
+                             </ul>
+                        </el-card>
+                    </div>
+                </el-col>
+            </el-row>
+            <el-row class="desc">
+                <el-col>
+                    <div>
+                        <el-card shadow="never">
+                            <h1>Header</h1>
+                            <p>Description Description Description Description Description Description Description Description Description Description Description
+                                Description Description Description Description Description Description Description Description Description Description Description
+                                Description Description Description Description Description Description Description Description Description Description Description
+                            </p>
+                        </el-card>
+                    </div>
+                </el-col>
+            </el-row>        
         </div>
         <el-row>
             <el-button >Register</el-button>
         </el-row>
          <el-row>
-            <el-col style="width: 50%">
-                <div class="header">
+            <el-col> 
+                <div class="btmdesc" style="width: 90%">
                     <el-card shadow="never">
-                        <h1>header</h1>
-                    </el-card>
-                </div>
-            </el-col>
-            <el-col>
-                <div class="desc" style="width: 90%">
-                    <el-card shadow="never">
+                        <h1>Header</h1>
                         <p>Description</p>
                     </el-card>
                 </div>
@@ -94,37 +80,46 @@ export default {
 </script>
 
 <style scoped lang="less">
-.header {
-  width: 27%;
-  margin-bottom: 1%;
-  float: left;
-}
 .topheader {
-  width: 250px;
-  margin-bottom: 1%;
-}
-.topdesc {
-  width: 1000px;
-  word-wrap: break-word;
-}
-.desc {
-  width: 800px;
-  margin-bottom: 1%;
-  word-wrap: break-word;
-}
-.section {
   width: 100%;
   margin-bottom: 1%;
 }
-.left {
-  float: left;
+.topdesc {
+  width: 100%;
+  word-wrap: break-word;
 }
-.right {
-  float: right;
+.btmheader {
+  width: 25%;
+  margin-bottom: 1%;
+}
+.desc {
+  word-wrap: break-word;
+  flex-basis: 810px;
+}
+.descList {
+  word-wrap: break-word;
+  flex-basis: 810px;
+}
+.midSection {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-bottom: 1%;
+}
+.section {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1%;
 }
 .el-button {
   float: right;
-  margin-right: 6.4%;
+  margin-right: 1.5%;
+  background-color: blue;
+  color: white;
+}
+ul {
+  list-style-type: none;
+  text-align: left;
 }
 </style>
 
