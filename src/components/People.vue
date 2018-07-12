@@ -1,5 +1,6 @@
 <template>
   <div class="people">
+
     <h1>The People Involved</h1>
     <h2>Here's a list of people.</h2>
     <li v-for="item in data" :key="item.id">
