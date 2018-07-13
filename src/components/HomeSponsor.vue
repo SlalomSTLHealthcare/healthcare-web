@@ -57,13 +57,15 @@ export default {
   width: 12em;
   height: 4em;
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 .container{
   text-align: center;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-evenly;
+  justify-content: flex-start;
+  //make footer fixed at the bottom of the page
+  margin-bottom: 80px;
 }
 
 li{
