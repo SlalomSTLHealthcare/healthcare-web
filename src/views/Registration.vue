@@ -1,10 +1,9 @@
 <template>
   <div class="registration">
-    <NavBar activeIndex="2"></NavBar>
-      <h1>Welcome to HealthSTLx</h1>
+      <h1>Welcome to HealthSTLx!</h1>
       <h2>Fill out this form to register</h2>
       <Registration class="registration-form"/>
-      <Login login_type='registration'/>
+      <Login class="login" login_type='registration'/>
   </div>
 </template>
 
@@ -56,5 +55,8 @@ p a:hover{
 }
 .login-link{
   padding: 20px;
+}
+.login {
+  text-align: center;
 }
 </style>

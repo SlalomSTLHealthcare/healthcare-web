@@ -2,7 +2,8 @@
   <div>
     <div class="menu">
       <!-- <img class="logo" src="../assets/slalom-logo-blue-RGB.jpg"/> -->
-      <span class="logo">HealthSTLx <span><i class="fas fa-medkit"></i></span></span>
+      <!-- <span class="logo">HealthSTLx <span><i class="fas fa-medkit"></i></span></span> -->
+        <span class="logo"><img src="../assets/capture1.png"/></span></span>
       <span class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></span>
     </div>
 
@@ -10,12 +11,13 @@
         <div class="overlay" v-if="show" v-on:click="show = !show">
         <i class="fas fa-times fa-2x"></i>
 	         <div class="wrap">
+              <router-link to="/">Home</router-link>
               <router-link to="people">Speakers</router-link>
-			        <router-link to="about">Breakout Sessions</router-link>
+			        <router-link to="session">Breakout Sessions</router-link>
               <router-link to="schedule">Schedule</router-link>
               <router-link to="registration">Register</router-link>
               <router-link to="sponsor">Sponsors</router-link>
-              <router-link to="/">About</router-link>
+              <router-link to="about">About</router-link>
 		       </div>
 	      </div>
     </transition>
@@ -30,9 +32,6 @@ export default {
         show: false
       };
     },
-  props: {
-    activeIndex: String
-  },
   methods: {
     handleSelect(key, keyPath) {}
   }
@@ -40,6 +39,10 @@ export default {
 </script>
 
 <style>
+.logo img {
+  height: 80px;
+  width: 320px;
+}
 .menu {
   display:flex;
   align-items: center;
@@ -88,6 +91,7 @@ ul {
 	background:#333;
 	overflow:auto;
 	z-index:99;
+  opacity: 0.96;
 }
 .wrap {
 	color:#e9e9e9;
@@ -97,7 +101,7 @@ ul {
   align-items: center;
   height: 100vh;
 }
-a {
+.wrap a {
   list-style:none;
 	color:#34B484;
 	padding:8px 0;

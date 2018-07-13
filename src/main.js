@@ -5,9 +5,11 @@ import locale from 'element-ui/lib/locale/lang/en'
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
+import VeeValidate from 'vee-validate';
 
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false;
+Vue.use(VeeValidate);
 
 new Vue({
   router,
