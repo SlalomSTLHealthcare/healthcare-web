@@ -10,12 +10,13 @@
         <div class="overlay" v-if="show" v-on:click="show = !show">
         <i class="fas fa-times fa-2x"></i>
 	         <div class="wrap">
+              <router-link to="/">Home</router-link>
               <router-link to="people">Speakers</router-link>
-			        <router-link to="about">Breakout Sessions</router-link>
+			        <router-link to="session">Breakout Sessions</router-link>
               <router-link to="schedule">Schedule</router-link>
               <router-link to="registration">Register</router-link>
               <router-link to="sponsor">Sponsors</router-link>
-              <router-link to="/">About</router-link>
+              <router-link to="about">About</router-link>
 		       </div>
 	      </div>
     </transition>
@@ -39,7 +40,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="less">
 .menu {
   display:flex;
   align-items: center;

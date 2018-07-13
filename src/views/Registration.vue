@@ -1,6 +1,6 @@
 <template>
   <div class="registration">
-    <NavBar activeIndex="2"></NavBar>
+    <NavBar></NavBar>
       <h1>Welcome to HealthSTLx</h1>
       <h2>Fill out this form to register</h2>
       <Registration class="registration-form"/>
@@ -31,7 +31,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="less">
 h1, h2{
   text-align: left;
   padding-left: 5%;
