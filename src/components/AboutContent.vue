@@ -27,35 +27,18 @@
             </el-row>
         </div>
         <div class="midSection">
-            <el-row class="descList">
-                <el-col> 
-                    <div>
-                        <el-card shadow="never">
-                            <h1>Header</h1>
-                            <ul>
-                                <li>Connect with leaders who are shaping the future of healthcare</li>
-                                <li>Customize your learning experience</li>
-                                <li>Influence discussion and evolution of healthcare</li>
-                                <li>Learn innovative ways used to improve patient care</li>
-                                <li>Equip yourself with knowledge you can implement at your institution</li>
-                             </ul>
-                        </el-card>
-                    </div>
-                </el-col>
-            </el-row>
-            <el-row class="desc">
-                <el-col>
-                    <div>
-                        <el-card shadow="never">
-                            <h1>Header</h1>
-                            <p>Description Description Description Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description Description Description Description
-                                Description Description Description Description Description Description Description Description Description Description Description
-                            </p>
-                        </el-card>
-                    </div>
-                </el-col>
-            </el-row>        
+            <div class="descList">
+                <el-card shadow="never">
+                    <h1>Header</h1>
+                    <ul>
+                        <li>Connect with leaders who are shaping the future of healthcare</li>
+                        <li>Customize your learning experience</li>
+                        <li>Influence discussion and evolution of healthcare</li>
+                        <li>Learn innovative ways used to improve patient care</li>
+                        <li>Equip yourself with knowledge you can implement at your institution</li>
+                    </ul>
+                </el-card>
+            </div>
         </div>
         <el-row>
             <el-button >Register</el-button>
@@ -92,18 +75,10 @@ export default {
   width: 25%;
   margin-bottom: 20px;
 }
-.desc {
-  word-wrap: break-word;
-  flex-basis: 810px;
-}
-.descList {
-  word-wrap: break-word;
-  flex-basis: 810px;
-}
 .midSection {
   display: flex;
-  flex-direction: row;
   justify-content: space-evenly;
+  flex-direction: row;
   margin-bottom: 20px;
 }
 .section {
@@ -118,7 +93,6 @@ export default {
   color: white;
 }
 ul {
-  list-style-type: none;
   text-align: left;
 }
 .image {
