@@ -1,38 +1,52 @@
 <template>
-<el-col>
-    <el-row>
-        <el-card class="header" shadow="never">
-            <h1>Sponsor Page</h1>
-        </el-card>
-    </el-row>
-    <el-row>
-        <el-card class="desc" shadow="never">
-            <h3>Description about the page.</h3>
-        </el-card>
-    </el-row>
-    <el-row class="btn">
-        <el-button>
-            Sponsor Email
-        </el-button>
-    </el-row>
-    <el-row>
-        <Sponsors :sponsors="filteredData('platinum')" sponsorLevel="platinum"/>
-        <Sponsors :sponsors="filteredData('low')" sponsorLevel="low"/>
-    </el-row>
-</el-col>
+<el-row>
+  <NavBar></NavBar>
+    <h1>Sponsors</h1>
+    <h3>Description of Our Sponsors</h3>
+    <div class>
+      <el-button class="btn">Email Us About Becoming A Sponsor</el-button>
+    </div>
+    <el-col >
+        <Sponsors :sponsorData="filteredData('platinum')" sponsorLevel="Platinum"/>
+        <Sponsors :sponsorData="filteredData('low')" class="otherFlex" sponsorLevel="Other"/>
+    </el-col>
+</el-row>
 </template>
 
 <script>
 // @ is an alias to /src
 import Sponsors from "@/components/Sponsors.vue";
+import NavBar from "@/components/NavBar.vue";
+import axios from "axios";
 import _ from "underscore";
 export default {
   name: "sponsorPage",
   components: {
-    Sponsors
+    Sponsors,
+    NavBar
+  },
+  data() {
+    return {
+      sponsorData: []
+    };
+  },
+  mounted: function() {
+    this.populateData();
   },
   methods: {
+    populateData: function() {
+      axios
+        .get(`https://slalom-health-api-staging.herokuapp.com/api/sponsors`)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.sponsorData = response.data;
+        })
+        .catch(e => {
+          return e;
+        });
+    },
     filteredData(level) {
+      console.log(this.sponsorData);
       return _.filter(this.sponsorData, s => s.sponsor_level === level);
     }
   }
@@ -41,24 +55,18 @@ export default {
 
 
 <style scoped lang="less">
-h1 {
-  text-align: left;
-  margin-left: 0%;
-  font-weight: bold;
-  padding-left: 1%;
-}
-h3 {
-  text-align: left;
-  padding-left: 1%;
-}
-.desc {
-  width: 60%;
-  margin: 1% 4%;
-}
-.header {
-  width: 25%;
-}
+
+
+
 .btn {
-  margin-left: 50%;
+  background: #3336ff;
+  color: white;
+  margin-left: 0px;
+  // opacity: 0.7;
 }
+h1, h3 {
+  margin-left: 10px;
+}
+
+
 </style>

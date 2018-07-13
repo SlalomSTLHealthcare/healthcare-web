@@ -1,20 +1,22 @@
 <template>
   <div>
-      <NavBar></NavBar>
-      <Schedule/>
+    <NavBar></NavBar>
+    <h1>General Event Overview</h1>
+      <Sessions sessionType="Breakout"/>
+      <Sessions sessionType="Panel"/>
   </div>
 </template>
 
 
 <script>
 // @ is an alias to /src
-import Schedule from "@/components/Schedule.vue";
+import Sessions from "@/components/Sessions.vue";
 import NavBar from "@/components/NavBar.vue";
 
 export default {
-  name: "scheduleView",
+  name: "sessionView",
   components: {
-    Schedule,
+    Sessions,
     NavBar
   }
 };

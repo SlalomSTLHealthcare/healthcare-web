@@ -1,11 +1,7 @@
 <template>
-    <el-col class="sessionCard">
-
-    <el-card class="about" shadow="hover">
-      <el-col :span="2">
-          <div class="image-wrapper">
+    <el-card shadow="hover" class="sessionCard">
+      <el-col>
             <img :src="imgSource" class="image">
-          </div>
       </el-col>
       <div class="overview">
         <h2 class="boxTitle">{{title}} <span class="timeStyle">Time: {{computedTime}}, Room Number: {{roomNumber}}</span> </h2>
@@ -13,7 +9,6 @@
       </div>
       <h2 class="description">{{description}}</h2>
     </el-card>
-  </el-col>
 </template>
 
 <script>
@@ -37,34 +32,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.sessionCard{
-    width:50%;
-  }
-.overview{
-  padding-top: 0px;
-  text-align: left;
-  margin-bottom: 5%;
-}
-.about{
- border-radius: 5%;
- margin: 2.5%;
- border: 0;
- background-color: transparent
-}
-.boxTitle{
-  font-size: 28px;
-  text-align: left;
-}
-.image-wrapper{
-  width: 50px;
-  height: 50px;
-
-}
 .image {
   height: 50px;
   width: 40px;
   border-radius: 5%;
-  display: block;
+
 }
 .timeStyle{
   font-size: 12px;
@@ -72,7 +44,6 @@ export default {
 }
 .description{
   text-align: center;
-  margin-bottom: 5%;
 }
 
 @media (max-width: 800px) {
@@ -86,6 +57,7 @@ export default {
   }
   .sessionCard{
      width: 100%;
+     height: 200px;
   }
   .image {
     height: 30px;
