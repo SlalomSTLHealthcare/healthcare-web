@@ -5,6 +5,7 @@
         :data="scheduleData"
         border
         stripe
+        class="events"
         :default-sort = "{prop:'start_time', order: 'ascending'}"
         style="width: 100%">
         <el-table-column
@@ -15,7 +16,8 @@
         <el-table-column
           prop="title"
           label="Event"
-          header-align = "center">
+          header-align="center"
+          >
         </el-table-column>
       </el-table>
 </el-row>
@@ -55,18 +57,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+.events{
+  text-align: center;
+}
 .session{
   display: block;
   position: relative;
 }
 label{
-  text-align: right;
   font-weight: normal;
 }
 h1 {
   text-align: center;
-
+  // align with table body
+  margin-left: 75px;
   font-size: 28px;
-  padding-left: 4%;
 }
 </style>

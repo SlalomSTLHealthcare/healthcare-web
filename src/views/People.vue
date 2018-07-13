@@ -1,7 +1,7 @@
 
 <template>
   <div class="people">
-    <NavBar activeIndex="2"></NavBar>
+    <NavBar></NavBar>
     <People msg="People"/>
   </div>
 </template>
