@@ -50,8 +50,8 @@ export default {
   margin-bottom: 10px;
 }
 img{
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
 }
 
 
