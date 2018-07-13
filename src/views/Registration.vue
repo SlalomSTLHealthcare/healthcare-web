@@ -18,7 +18,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped lang="less">
 h1, h2{
   text-align: left;
   padding-left: 5%;
