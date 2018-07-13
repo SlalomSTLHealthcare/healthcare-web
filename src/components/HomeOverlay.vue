@@ -54,7 +54,7 @@ img{
   top: 20%;
   left: 32.5%;
   transition: .5s ease;
-  color: white;
+  color: white
 }
 h1, h2{
   text-align: center;
