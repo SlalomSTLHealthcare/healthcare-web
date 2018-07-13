@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <NavBar></NavBar>
     <HomeOverlay/>
     <HomeSponsor/>
     <el-footer>
@@ -12,13 +13,14 @@
 
 import HomeOverlay from "@/components/HomeOverlay.vue";
 import HomeSponsor from "@/components/HomeSponsor.vue";
-
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   name: "home",
   components: {
     HomeOverlay,
-    HomeSponsor
+    HomeSponsor,
+    NavBar
   },
   methods: {
     about: function(){
@@ -34,13 +36,18 @@ div{
 }
 
 .el-footer {
-  background-color: #444444;
-  color: white;
-  line-height: 60px;
+  padding-left: 12px;
+  padding-bottom: 0px;
+  margin: 0;
+  display:flex;
+  align-items: center;
+  background-color: #fff;
+  bottom: 0;
   z-index: 10;
   width: 100%;
-  bottom: 0;
-  text-align: left;
+  box-shadow: 0px 1px 4px grey;
+  justify-content: space-between;
+
   }
 .btn {
 

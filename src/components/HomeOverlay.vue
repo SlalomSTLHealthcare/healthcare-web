@@ -31,8 +31,7 @@ export default {
 img{
   width: 100vw;
   height: 300px;
-  margin-left: 0;
-  margin-bottom: 0;
+  margin: 0;
 }
 
 .btn {
@@ -55,6 +54,7 @@ img{
   top: 20%;
   left: 32.5%;
   transition: .5s ease;
+  color: white;
 }
 h1, h2{
   text-align: center;

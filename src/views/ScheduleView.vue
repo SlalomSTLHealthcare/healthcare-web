@@ -1,5 +1,6 @@
 <template>
   <div>
+      <NavBar></NavBar>
       <Schedule/>
   </div>
 </template>
@@ -8,11 +9,13 @@
 <script>
 // @ is an alias to /src
 import Schedule from "@/components/Schedule.vue";
+import NavBar from "@/components/NavBar.vue";
 
 export default {
   name: "scheduleView",
   components: {
-    Schedule
+    Schedule,
+    NavBar
   }
 };
 </script>

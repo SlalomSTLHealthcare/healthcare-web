@@ -1,5 +1,6 @@
 <template>
 <el-row>
+  <NavBar></NavBar>
     <h1>Sponsors</h1>
     <h3>Description of Our Sponsors</h3>
     <div class>
@@ -15,12 +16,14 @@
 <script>
 // @ is an alias to /src
 import Sponsors from "@/components/Sponsors.vue";
+import NavBar from "@/components/NavBar.vue";
 import axios from "axios";
 import _ from "underscore";
 export default {
   name: "sponsorPage",
   components: {
-    Sponsors
+    Sponsors,
+    NavBar
   },
   data() {
     return {

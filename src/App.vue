@@ -9,7 +9,7 @@
 
 <style lang="less">
 body {
-  margin: 0px;
+  margin: 0;
 }
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
@@ -18,7 +18,7 @@ body {
   color: #2c3e50;
 }
 #nav {
-  padding: 30px;
+  padding: 32px;
   a {
     font-weight: bold;
     color: #2c3e50;
