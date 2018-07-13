@@ -1,11 +1,7 @@
 <template>
   <div class="registration">
-<<<<<<< HEAD
-      <h1>Welcome to HealthSTLx!</h1>
-=======
     <NavBar></NavBar>
       <h1>Welcome to HealthSTLx</h1>
->>>>>>> staging
       <h2>Fill out this form to register</h2>
       <Registration class="registration-form"/>
       <Login class="login" login_type='registration'/>
