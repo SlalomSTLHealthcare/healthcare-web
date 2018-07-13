@@ -15,7 +15,7 @@
                 </div>
               <p class="bio">{{ bio }}</p>
               <el-popover
-              placement="bottom-start"
+              placement="right-start"
               title="Talk Title"
               width="200"
               trigger="hover"
@@ -94,7 +94,9 @@ a {
   text-align: left;
 }
 .image {
-  width: 400px;
+  width: 300px;
   display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
