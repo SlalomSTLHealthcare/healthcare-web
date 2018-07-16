@@ -9,7 +9,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: "HelloWorld",
   data () {
@@ -22,7 +21,7 @@ export default {
   },
   methods: {
     testCall: function() {
-      axios.get(`https://slalom-health-api-staging.herokuapp.com/api/people`)
+      this.$axiosServer.get(`api/people`)
        .then(response => {
        // JSON responses are automatically parsed.
          this.dataMessage = response.data[0].full_name

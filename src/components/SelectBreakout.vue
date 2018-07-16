@@ -13,7 +13,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import _ from 'underscore';
 export default {
   name: "SelectBreakout",
@@ -24,7 +23,7 @@ export default {
     }
   },
   mounted: function() {
-    axios.get(`https://slalom-health-api-staging.herokuapp.com/api/sessions`)
+    this.$axiosServer.get(`api/sessions`)
      .then(response => {
        this.breakoutData = response.data
     })

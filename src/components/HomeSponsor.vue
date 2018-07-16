@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Sponsor from "@/components/Sponsor.vue";
 export default {
   name: "HomeSponsor",
@@ -29,7 +28,7 @@ export default {
   },
   methods: {
     populateData: function() {
-      axios.get(`https://slalom-health-api-staging.herokuapp.com/api/sponsors`)
+      this.$axiosServer.get(`api/sponsors`)
         .then(response => {
           // JSON responses are automatically parsed.
           this.sponsorData = response.data;

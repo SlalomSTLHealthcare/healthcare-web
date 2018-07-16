@@ -24,7 +24,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import moment from 'moment'
 export default {
   name: "Schedule",
@@ -38,7 +37,7 @@ export default {
   },
   methods: {
     populateData: function() {
-      axios.get(`https://slalom-health-api-staging.herokuapp.com/api/schedules`)
+      this.$axiosServer.get(`api/schedules`)
       .then(response => {
         // JSON responses are automatically parsed.
         this.scheduleData = response.data;

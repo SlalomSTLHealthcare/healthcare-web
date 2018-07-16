@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Person from "./Person.vue";
 export default {
   name: "People",
@@ -25,7 +24,7 @@ export default {
     };
   },
   mounted: function() {
-    axios.get(`https://slalom-health-api-staging.herokuapp.com/api/people`)
+    this.$axiosServer.get(`api/people`)
 
      .then(response => {
      // JSON responses are automatically parsed.
