@@ -50,8 +50,8 @@
       <el-select v-model="form.size" placeholder="Please select shirt size">
         <el-option label="S" value="shanghai"></el-option>
         <el-option label="M" value="beijing"></el-option>
-        <el-option label="L" value="beijing"></el-option>
-        <el-option label="XL" value="beijing"></el-option>
+        <el-option label="L" value="tokyo"></el-option>
+        <el-option label="XL" value="washington"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">

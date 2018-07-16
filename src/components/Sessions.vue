@@ -12,7 +12,6 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Session from '@/components/Session.vue';
 export default {
   name: "Sessions",
@@ -30,10 +29,10 @@ export default {
   props: {
     sessionType: String
   },
-  methods: {
+  methods: { 
     populateData: function() {
-      axios
-        .get(`https://slalom-health-api-staging.herokuapp.com/api/sessions`)
+      this.$axiosServer
+        .get(`api/sessions`)
         .then(response => {
           // JSON responses are automatically parsed.
           this.sessionData = response.data;

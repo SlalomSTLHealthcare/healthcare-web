@@ -17,7 +17,6 @@
 // @ is an alias to /src
 import Sponsors from "@/components/Sponsors.vue";
 import NavBar from "@/components/NavBar.vue";
-import axios from "axios";
 import _ from "underscore";
 export default {
   name: "sponsorPage",
@@ -35,8 +34,8 @@ export default {
   },
   methods: {
     populateData: function() {
-      axios
-        .get(`https://slalom-health-api-staging.herokuapp.com/api/sponsors`)
+      this.$axiosServer
+        .get(`api/sponsors`)
         .then(response => {
           // JSON responses are automatically parsed.
           this.sponsorData = response.data;

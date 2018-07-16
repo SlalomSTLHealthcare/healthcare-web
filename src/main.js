@@ -6,11 +6,14 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import VeeValidate from 'vee-validate';
+import axios from 'axios';
 
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false;
 Vue.use(VeeValidate);
-
+Vue.prototype.$axiosServer = axios.create({
+  baseURL: 'https://slalom-health-api-staging.herokuapp.com/'
+});
 new Vue({
   router,
   store,
