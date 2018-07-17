@@ -14,7 +14,7 @@
          </el-form-item>
       </el-form>
     <el-button @click="dialogFormVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="dialogFormVisible = false">Login</el-button>
+    <el-button type="primary" @click="handleLogin">Login</el-button>
     <p>Forgot Password? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a>.</p>
   </el-dialog>
   </div>
@@ -34,7 +34,35 @@ export default {
 },
 props: {
   login_type: ''
-}
+},
+methods: {
+  handleLogin() {
+    var self = this;
+    this.$axiosServer.post('/auth/login', {
+      email: this.form.email,
+      password: this.form.pass
+    })
+    .then(function (response) {
+      console.log(response);
+      self.successfulLogin();
+
+    })
+    .catch(function (error) {
+      console.log(error);
+      return error;
+    });
+      },
+        successfulLogin() {
+          this.dialogFormVisible = false,
+          this.$alert("Welcome back to HealthSTLx!", "Login Successful", {
+            dangerouslyUseHTMLString: true,
+            confirmButtonText: 'OK',
+            callback: action => {
+              this.$router.push('/');
+            }
+          });
+        }
+    }
 };
 </script>
 

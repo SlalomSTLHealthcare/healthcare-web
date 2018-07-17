@@ -14,8 +14,8 @@
       <el-form-item label="Company">
         <el-input v-model="form.company"></el-input>
       </el-form-item>
-      <el-form-item label="Title">
-        <el-input v-model="form.title"></el-input>
+      <el-form-item label="position">
+        <el-input v-model="form.position"></el-input>
       </el-form-item>
       <el-form-item  required label="Email">
         <el-input v-model="form.email"></el-input>
@@ -48,10 +48,10 @@
     <div></div>
     <el-form-item  required label="T-Shirt Size">
       <el-select v-model="form.size" placeholder="Please select shirt size">
-        <el-option label="S" value="shanghai"></el-option>
-        <el-option label="M" value="beijing"></el-option>
-        <el-option label="L" value="tokyo"></el-option>
-        <el-option label="XL" value="washington"></el-option>
+        <el-option label="S" value="S"></el-option>
+        <el-option label="M" value="M"></el-option>
+        <el-option label="L" value="L"></el-option>
+        <el-option label="XL" value="XL"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
@@ -110,14 +110,14 @@ var validatePass2 = (rule, value, callback) => {
       firstName: '',
       lastName: '',
       company: '',
-      title: '',
+      position: '',
       email: '',
       twitter: '',
-      checked: true,
       pass: '',
       checkPass: '',
       lunch: true,
       diet: [],
+      allergies: '',
       size: '',
       donate: true,
       takeaway: ''
@@ -139,19 +139,34 @@ methods: {
   handleSubmit() {
     this.$axiosServer.post('/auth/register', {
       email: this.form.email,
-      password: this.form.pass
+      password: this.form.pass,
+      firstName: this.form.firstName,
+      lastName: this.form.lastName,
+      company: this.form.company,
+      position: this.form.position,
+      twitter: this.form.twitter,
+      checkPass: this.form.checkPass,
+      lunch: this.form.lunch,
+      diet: this.form.diet,
+      allergies: this.form.allergies,
+      size: this.form.size,
+      donate: this.form.donate,
+      comment: this.form.takeaway
+
     })
     .then(function (response) {
       console.log(response);
-      this.open();
+
     })
     .catch(function (error) {
       console.log(error);
+      return e;
     });
-
+    
+    this.successfulRegister();
 
       },
-      open() {
+      successfulRegister() {
         this.$alert("You have successfully registered for HealthSTLx!", "Registration Successful", {
           dangerouslyUseHTMLString: true,
           confirmButtonText: 'OK',
