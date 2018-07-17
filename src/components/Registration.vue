@@ -137,9 +137,18 @@ components: {
 },
 methods: {
   handleSubmit() {
-        this.open();
-        console.log('submit!');
-        console.log({ firstName: this.form.first_name, lastName: this.form.last_name, company:this.form.company, title: this.form.title, email: this.form.email, twitter:this.form.twitter});
+    this.$axiosServer.post('/auth/register', {
+      email: this.form.email,
+      password: this.form.pass
+    })
+    .then(function (response) {
+      console.log(response);
+      this.open();
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
 
       },
       open() {
