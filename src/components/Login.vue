@@ -49,6 +49,7 @@ methods: {
     })
     .catch(function (error) {
       console.log(error);
+      alert(error);
       return error;
     });
       },
@@ -75,5 +76,11 @@ methods: {
  width: 12em;
  height: 4em;
  // opacity: 0.7;
+}
+ a {
+  color: #71bab0;
+}
+ a:hover {
+  color: #FFE72C;
 }
 </style>
