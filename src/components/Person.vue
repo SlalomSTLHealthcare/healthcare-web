@@ -10,6 +10,10 @@
             <el-col :span="16">
               <div style="padding: 10px;">
                 <div class="name">{{ name }}</div>
+                <div>
+                  <a :href="twitter" target="_blank"><img src="../assets/twitter.png" class="imageLogo"></a>
+                  <a :href="linkedin" target="_blank"><img src="../assets/linkedin.png" class="imageLogo"></a>
+                </div>
                 <div class="button">
                   <el-button type="text">{{ company }}</el-button>
                 </div>
@@ -21,7 +25,7 @@
               trigger="hover"
               content="this is content, this is content, this is content">
               <el-button class="descript" slot="reference">Description of Talk</el-button>
-</el-popover>
+              </el-popover>
               </div>
             </el-col>
           </el-row>
@@ -36,7 +40,9 @@ export default {
     name: String,
     imgSource: String,
     company: String,
-    bio: String
+    bio: String,
+    twitter: String,
+    linkedin: String
   }
 };
 </script>
@@ -46,14 +52,13 @@ export default {
 .descript {
   float: left;
 }
-.el-card{
+.el-card {
   padding: 2% 2%;
   height: 20%;
   border: 0;
-  background-color: transparent
+  background-color: transparent;
 }
-
-.image-wrapper{
+.image-wrapper {
   width: 250px;
   height: 250px;
   border-radius: 50%;
@@ -62,7 +67,6 @@ export default {
   margin-left: auto;
   margin-right: auto;
 }
-
 h3 {
   margin: 40px 0 0;
 }
@@ -98,5 +102,10 @@ a {
   display: block;
   margin-left: auto;
   margin-right: auto;
+}
+.imageLogo {
+  width: 80px;
+  height: 80px;
+  display: inline;
 }
 </style>
