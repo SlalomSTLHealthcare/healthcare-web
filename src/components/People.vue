@@ -5,7 +5,7 @@
     <h2>Here's a list of people.</h2>
     <li v-for="item in data" :key="item.id">
       <div class="person">
-        <Person :name="item.full_name" :imgSource="item.image_loc" :company="item.company" :bio="item.bio"/>
+        <Person :name="item.full_name" :imgSource="item.image_loc" :company="item.company" :bio="item.bio" :twitter="item.twitter" :linkedin="item.linkedin"/>
       </div>
     </li>
   </div>
