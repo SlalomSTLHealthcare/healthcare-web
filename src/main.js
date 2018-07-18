@@ -2,8 +2,8 @@ import Vue from "vue";
 import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 import locale from 'element-ui/lib/locale/lang/en'
-import App from "./App.vue";
-import router from "./router";
+import Landing from "./Landing.vue";
+// import router from "./router";
 import store from "./store";
 import VeeValidate from 'vee-validate';
 import axios from 'axios';
@@ -24,7 +24,7 @@ Vue.prototype.$axiosServer = axios.create({
 
 
 new Vue({
-  router,
+  // router,
   store,
-  render: h => h(App)
+  render: h => h(Landing)
 }).$mount("#app");
