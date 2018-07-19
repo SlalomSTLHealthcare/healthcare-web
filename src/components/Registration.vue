@@ -58,8 +58,8 @@
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
     <el-form-item  label="Rank Breakout Sessions">
-      <p>Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.
-        Place the breakout sessions you would <i>most</i> like to attend towards the top, and place the sessions you would <i>least</i> like to attend towards the bottom. </br> You may or may not choose to not rank all of the sessions.</p>
+      <h1 class="ranking-header-one">Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.</h1>
+        <h2 class="ranking-header-two">Place the breakout sessions you would <i>most</i> like to attend towards the top, and place the sessions you would <i>least</i> like to attend towards the bottom.</h2> <h2 class="ranking-header-three"> You may or may not choose to not rank all of the sessions.</h2>
       <SelectBreakout timeSlot="10:15 am" v-on:selected-data="updateDataOne"/>
       <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
     </el-form-item>
@@ -71,9 +71,23 @@
       </el-form-item>
     </el-form>
   </el-card>
+
+  <el-dialog
+  title="Successful Registration"
+  :visible.sync="dialogVisible"
+  width="30%">
+  <span>Thank you for registering for HealthSTLx!</span>
+  <span slot="footer" class="dialog-footer">
+     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://slalom-health-summit-staging.herokuapp.com/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" round>Share on LinkedIn</el-button></a>
+     <!-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false"><el-button icon="el-icon-share" type="primary" round>Share on Twitter</el-button></a> -->
+     <!-- <a target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-hashtags="#HealthSTLx" data-related="Slalom" data-show-count="false">Tweet</a> -->
+     <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-related="Slalom" data-show-count="false"><el-button plain icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
+    <el-button type="primary" @click="confirm">Confirm</el-button>
+  </span>
+</el-dialog>
   </div>
 </template>
-
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
 import Login from "./Login.vue";
 import SelectBreakout from "./SelectBreakout.vue";
@@ -93,6 +107,7 @@ var confirmPass = (rule, value, callback) => {
 };
   return {
     login: true,
+    dialogVisible: false,
     form: {
       firstName: '',
       lastName: '',
@@ -200,13 +215,14 @@ methods: {
 
       },
       successfulRegister() {
-        this.$alert("You have successfully registered for HealthSTLx!", "Registration Successful", {
-          dangerouslyUseHTMLString: true,
-          confirmButtonText: 'OK',
-          callback: action => {
-            this.$router.push('/');
-          }
-        });
+        // this.$alert(<a target="_blank" title="Share on LinkedIn" href="http://www.linkedin.com/shareArticle?mini=true&url={{https://stackoverflow.com/questions/29744036/how-to-create-a-simple-share-linkedin-link}}"></a>, "Registration Successful", {
+        //   dangerouslyUseHTMLString: true,
+        //   confirmButtonText: 'OK',
+        //   callback: action => {
+        //     this.$router.push('/');
+        //   }
+        // });
+        this.dialogVisible=true;
       },
       emptyFields() {
         this.$alert("Please complete all required fields", "Registration failed", {
@@ -225,6 +241,10 @@ methods: {
       updateDataTwo(updatedData){
         this.form.breakoutsTwo=updatedData;
         // console.log(this.form.breakoutsTwo);
+      },
+      confirm(){
+        this.dialogVisible=false;
+        this.$router.push('/');
       }
     }
 };
@@ -277,5 +297,17 @@ a {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+}
+.ranking-header-one {
+  font-size: 15px;
+  font-weight: normal;
+}
+.ranking-header-two {
+  font-size: 13px;
+  font-weight: lighter;
+}
+.ranking-header-three {
+  font-size: 13px;
+  font-weight: lighter;
 }
 </style>

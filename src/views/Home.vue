@@ -10,7 +10,7 @@
 </template>
 
 <script>
-
+import Login from "@/components//Login.vue";
 import HomeOverlay from "@/components/HomeOverlay.vue";
 import HomeSponsor from "@/components/HomeSponsor.vue";
 import NavBar from "@/components/NavBar.vue";
@@ -20,7 +20,8 @@ export default {
   components: {
     HomeOverlay,
     HomeSponsor,
-    NavBar
+    NavBar,
+    Login
   },
   methods: {
     about: function(){

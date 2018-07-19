@@ -7,13 +7,14 @@
     <h1>HealthSTLx Summit</h1>
     <h2>October 24th, 2018 at the Eric P. Newman Education Center</h2>
     <el-button class="btn" v-on:click="register">Register</el-button>
-    <el-button class="btn">Login</el-button>
+    <Login class="login" login_type='button'/>
   </div>
 
 </el-row>
 </template>
 
 <script>
+import Login from "./Login.vue";
 export default {
   name: "HomeOverlay",
   methods: {
@@ -21,6 +22,9 @@ export default {
       console.log("registered!");
       this.$router.push("/registration");
     }
+  },
+  components: {
+    Login
   }
 };
 </script>
@@ -59,6 +63,10 @@ img{
 h1, h2{
   text-align: center;
   padding: 0;
+}
+.login {
+  display: inline;
+  padding: 20px;
 }
 
 </style>
