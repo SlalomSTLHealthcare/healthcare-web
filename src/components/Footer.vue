@@ -45,8 +45,7 @@ export default {
 <style scoped lang="less">
 .footer {
   padding-left: 12px;
-  padding-bottom: 0px;
-  position: fixed;
+  padding-bottom: 0px; 
   margin: 0;
   display: flex;
   align-items: center;
