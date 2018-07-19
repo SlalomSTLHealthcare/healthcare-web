@@ -6,7 +6,6 @@
         ref="scheduleTable"
         stripe
         :default-sort = "{prop:'start_time', order: 'ascending'}"
-        :row-class-name="tableRowSetter"
         @row-click="changeExpansion"
         @expand-change="setCurrentExpandedRow"
         style="width: 100%"
@@ -14,14 +13,15 @@
         <el-table-column
           prop="start_time"
           width="90"
-          class="test"
+
           :formatter="timeFormatter">
         </el-table-column>
         <el-table-column
           width="50"
+          class-name="expandedCol"
           type="expand">
           <template slot-scope="props">
-            <p v-for="session in getSessions(props.row)" v-if="session.session_type == 'Extra'">{{session.description}}, Room Number: {{session.room_num}}</p>
+            <p v-for="session in getSessions(props.row)" v-if="session.session_type === 'Extra'">{{session.description}}, Room Number: {{session.room_num}}</p>
             <p v-else>{{session.title}}, Room Number: {{session.room_num}}</p>
           </template>
         </el-table-column>
@@ -101,6 +101,12 @@ export default {
   cursor: pointer;
 }
 
+.expandedCol{
+  cursor: default;
+}
+
+
+
 .session{
   display: block;
   position: relative;
@@ -112,9 +118,10 @@ p{
   text-align: left;
 }
 h1 {
+  padding-top: 15px;
   text-align: center;
   // align with table body
-  margin-left: 75px;
+  margin-left: 140px;
   font-size: 28px;
 }
 </style>
