@@ -3,7 +3,7 @@
     <div class="menu">
       <!-- <img class="logo" src="../assets/slalom-logo-blue-RGB.jpg"/> -->
       <!-- <span class="logo">HealthSTLx <span><i class="fas fa-medkit"></i></span></span> -->
-        <span class="logo"><img src="../assets/capture1.png"/></span></span>
+        <span class="logo"><img src="../assets/capture1.png"/></span>
       <span class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></span>
     </div>
 

@@ -36,7 +36,6 @@ export default {
   height: 50px;
   width: 40px;
   border-radius: 5%;
-
 }
 .timeStyle{
   font-size: 12px;
@@ -44,6 +43,13 @@ export default {
 }
 .description{
   text-align: center;
+}
+.sessionCard{
+  width: 100%;
+  height: 300px;
+}
+a {
+  color: #42b983;
 }
 
 @media (max-width: 800px) {
@@ -69,7 +75,5 @@ export default {
     font-size: 15px;
   }
 }
-a {
-  color: #42b983;
-}
+
 </style>

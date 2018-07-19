@@ -7,21 +7,21 @@
     <el-form label-position="left" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
-      <el-form-item required label="Name">
+      <el-form-item required label="Name" >
         <el-input v-model="form.firstName" placeholder="First Name"></el-input>
         <el-input v-model="form.lastName" label-position="top" placeholder="Last Name"></el-input>
       </el-form-item>
       <el-form-item label="Company">
         <el-input v-model="form.company"></el-input>
       </el-form-item>
-      <el-form-item label="position">
+      <el-form-item label="Position">
         <el-input v-model="form.position"></el-input>
       </el-form-item>
-      <el-form-item  required label="Email">
+      <el-form-item required label="Email" prop="email">
         <el-input v-model="form.email"></el-input>
       </el-form-item>
       <el-form-item required label="Password" prop="pass">
-        <el-input v-validate="{ required: true, regex: /\\.(js|ts)$/ }" name="regex" type="password" v-model="form.pass" auto-complete="off"></el-input>
+        <el-input type="password" v-model="form.pass" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item required label="Confirm Password" prop="checkPass">
         <el-input type="password" v-model="form.checkPass" auto-complete="off"></el-input>
@@ -57,22 +57,37 @@
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
-    <el-form-item required label="Please rank the breakout sessions you would like to attend.">
-      <SelectBreakout timeSlot="10:15 am"/>
-      <SelectBreakout timeSlot="3:00 pm"/>
+    <el-form-item  label="Rank Breakout Sessions">
+      <h1 class="ranking-header-one">Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.</h1>
+        <h2 class="ranking-header-two">Place the breakout sessions you would <i>most</i> like to attend towards the top, and place the sessions you would <i>least</i> like to attend towards the bottom.</h2> <h2 class="ranking-header-three"> You may or may not choose to not rank all of the sessions.</h2>
+      <SelectBreakout timeSlot="10:15 am" v-on:selected-data="updateDataOne"/>
+      <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
     </el-form-item>
     <el-form-item required label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch   v-model="form.donate"></el-switch>
     </el-form-item>
       <el-form-item class="buttons">
-        <el-button @click="handleSubmit" type="primary">Register</el-button>
-        <!-- <input type="submit" value="Submit"> -->
+        <el-button @click="handleSubmit('form')" type="primary">Register</el-button>
       </el-form-item>
     </el-form>
   </el-card>
+
+  <el-dialog
+  title="Successful Registration"
+  :visible.sync="dialogVisible"
+  width="30%">
+  <span>Thank you for registering for HealthSTLx!</span>
+  <span slot="footer" class="dialog-footer">
+     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://slalom-health-summit-staging.herokuapp.com/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" round>Share on LinkedIn</el-button></a>
+     <!-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false"><el-button icon="el-icon-share" type="primary" round>Share on Twitter</el-button></a> -->
+     <!-- <a target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-hashtags="#HealthSTLx" data-related="Slalom" data-show-count="false">Tweet</a> -->
+     <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-related="Slalom" data-show-count="false"><el-button plain icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
+    <el-button type="primary" @click="confirm">Confirm</el-button>
+  </span>
+</el-dialog>
   </div>
 </template>
-
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
 import Login from "./Login.vue";
 import SelectBreakout from "./SelectBreakout.vue";
@@ -81,21 +96,7 @@ import _ from 'underscore';
 export default {
   name: "Registration",
   data() {
-    var validatePass = (rule, value, callback) => {
-      console.log(value);
-      if (value === '') {
-        callback(new Error('Please input a password'));
-      } else {
-      if (value.length<8) {
-        callback(new Error('Passwords must be at least 8 characters and contain at least one capital letter, one lowercase letter, and one special character.'));
-      }
-      if (this.form.checkPass !== '') {
-      this.$refs.form.validateField('checkPass');
-      }
-      callback();
-    }
-  };
-var validatePass2 = (rule, value, callback) => {
+var confirmPass = (rule, value, callback) => {
   if (value === '') {
     callback(new Error('Please input the password again'));
   } else if (value !== this.form.pass) {
@@ -106,6 +107,7 @@ var validatePass2 = (rule, value, callback) => {
 };
   return {
     login: true,
+    dialogVisible: false,
     form: {
       firstName: '',
       lastName: '',
@@ -120,15 +122,36 @@ var validatePass2 = (rule, value, callback) => {
       allergies: '',
       size: '',
       donate: true,
-      takeaway: ''
+      takeaway: '',
+      breakoutsOne: [],
+      breakoutsTwo: []
     },
       rules: {
         pass: [
-      { validator: validatePass, trigger: 'blur' }
-      ],
-      checkPass: [
-      { validator: validatePass2, trigger: 'blur' }
-      ],
+            { required: true,
+              message: 'Passwords must be at least 8 characters and contain at least one capital letter, one lowercase letter, and one special character.',
+              pattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})',
+              trigger: 'blur'
+            },
+          ],
+          checkPass: [
+            {
+              required: true, validator: confirmPass, trigger: 'blur'
+            }
+          ],
+          email: [
+              { required: true,
+                message: 'Please enter a valid email address.',
+                pattern:'.+\@.+\..+',
+                trigger: 'blur'
+              },
+            ],
+          name: [
+              { required: true,
+                message: 'Please enter your name.',
+                trigger: 'blur'
+              },
+          ]
     }
   }
 },
@@ -136,44 +159,92 @@ components: {
   SelectBreakout
 },
 methods: {
-  handleSubmit() {
-    this.$axiosServer.post('/auth/register', {
-      email: this.form.email,
-      password: this.form.pass,
-      firstName: this.form.firstName,
-      lastName: this.form.lastName,
-      company: this.form.company,
-      position: this.form.position,
-      twitter: this.form.twitter,
-      checkPass: this.form.checkPass,
-      lunch: this.form.lunch,
-      diet: this.form.diet,
-      allergies: this.form.allergies,
-      size: this.form.size,
-      donate: this.form.donate,
-      comment: this.form.takeaway
+  handleSubmit(form) {
+     console.log(this.form.breakoutsOne);
+      console.log(this.form.breakoutsOne);
+    var self = this;
+    this.$refs[form].validate((valid) => {
+          if (valid) {
+            this.$axiosServer.post('/auth/register', {
+              email: this.form.email,
+              password: this.form.pass,
+              firstName: this.form.firstName,
+              lastName: this.form.lastName,
+              company: this.form.company,
+              position: this.form.position,
+              twitter: this.form.twitter,
+              checkPass: this.form.checkPass,
+              lunch: this.form.lunch,
+              diet: this.form.diet,
+              allergies: this.form.allergies,
+              size: this.form.size,
+              donate: this.form.donate,
+              comment: this.form.takeaway,
+              breakout_one: this.form.breakoutsOne,
+              breakout_two: this.form.breakoutsTwo
 
-    })
-    .then(function (response) {
-      console.log(response);
-
-    })
-    .catch(function (error) {
-      console.log(error);
-      return e;
-    });
-    
-    this.successfulRegister();
+            })
+            .then(function (response) {
+              console.log(response);
+              self.successfulRegister();
+            })
+            .catch(function (error) {
+              console.log(error.response);
+              self.failedRegistration(error.response.statusText);
+              return error;
+            });
+            this.$axiosServer.post('https://doshner-developer-edition.na73.force.com/services/apexrest/HealthSTLxLeads', {
+              firstName: this.form.firstName,
+              lastName: this.form.lastName,
+              company: this.form.company,
+              title: this.form.position,
+              email: this.form.email
+            })
+            .then(function (response) {
+              console.log(response);
+            })
+            .catch(function (error) {
+              console.log(error);
+              return error;
+            });
+          } else {
+            this.emptyFields();
+            return false;
+          }
+        });
 
       },
       successfulRegister() {
-        this.$alert("You have successfully registered for HealthSTLx!", "Registration Successful", {
-          dangerouslyUseHTMLString: true,
-          confirmButtonText: 'OK',
-          callback: action => {
-            this.$router.push('/');
-          }
+        // this.$alert(<a target="_blank" title="Share on LinkedIn" href="http://www.linkedin.com/shareArticle?mini=true&url={{https://stackoverflow.com/questions/29744036/how-to-create-a-simple-share-linkedin-link}}"></a>, "Registration Successful", {
+        //   dangerouslyUseHTMLString: true,
+        //   confirmButtonText: 'OK',
+        //   callback: action => {
+        //     this.$router.push('/');
+        //   }
+        // });
+        this.dialogVisible=true;
+      },
+      emptyFields() {
+        this.$alert("Please complete all required fields", "Registration failed", {
+          confirmButtonText: 'OK'
         });
+      },
+      failedRegistration(message) {
+        this.$alert(message, "Registration Failed", {
+          confirmButtonText: 'OK'
+        });
+      },
+      updateDataOne(updatedData) {
+        this.form.breakoutsOne= updatedData;
+        // console.log(this.form.breakoutsOne);
+      },
+      updateDataTwo(updatedData){
+        this.form.breakoutsTwo=updatedData;
+        // console.log(this.form.breakoutsTwo);
+      },
+      confirm(){
+        this.dialogVisible=false;
+        this.$router.push('/');
       }
     }
 };
@@ -226,5 +297,17 @@ a {
   width: 60%;
   margin-left: auto;
   margin-right: auto;
+}
+.ranking-header-one {
+  font-size: 15px;
+  font-weight: normal;
+}
+.ranking-header-two {
+  font-size: 13px;
+  font-weight: lighter;
+}
+.ranking-header-three {
+  font-size: 13px;
+  font-weight: lighter;
 }
 </style>
