@@ -1,13 +1,16 @@
 <template>
   <el-row class="container">
   <div class="image">
-    <img src="../assets/background.jpg">
+    <img src="../assets/background-1.jpg">
    </div>
    <div class="overlay">
-    <h1>HealthSTLx Summit</h1>
-    <h2>October 24th, 2018 at the Eric P. Newman Education Center</h2>
-    <el-button class="btn" v-on:click="register">Register</el-button>
-    <Login class="login" login_type='button'/>
+    <h1 class="main-header">HealthSTLx Summit</h1>
+    <h2 class="sub-header">Working to understand the challenges facing St. Louis healthcare.</h2>
+    <h3 class="date">October 24th, 2018 at the Eric P. Newman Education Center</h3>
+    <div class="action">
+      <el-button class="btn" type="primary" plain round v-on:click="register">Register</el-button>
+      <Login class="login" login_type='button'/>
+    </div>
   </div>
 
 </el-row>
@@ -31,17 +34,34 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-
+.main-header {
+  font-family: Arial;
+  font-weight: lighter;
+  letter-spacing: 4px;
+  font-size: 70px;
+}
+.sub-header {
+  font-family: Arial;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  font-size: 30px;
+}
+.date {
+  font-family: Arial;
+  font-weight: lighter;
+  letter-spacing: 3px;
+  font-size: 18px;
+}
 img{
   width: 100vw;
-  height: 300px;
+  height: 100vh;
   margin: 0;
 }
 
 .btn {
-  background: #3336ff;
-  color: white;
-  border: black;
+  // background: #3336ff;
+  // color: white;
+  // border: black;
   width: 12em;
   height: 4em;
 }
@@ -55,8 +75,11 @@ img{
 .overlay {
   //overlay text onto background image
   position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24%;
   top: 20%;
-  left: 32.5%;
+  text-align: center;
   transition: .5s ease;
   color: white
 }
@@ -68,5 +91,7 @@ h1, h2{
   display: inline;
   padding: 20px;
 }
-
+.action {
+  padding-top: 100px;
+}
 </style>
