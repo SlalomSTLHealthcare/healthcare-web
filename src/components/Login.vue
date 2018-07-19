@@ -83,4 +83,7 @@ methods: {
  a:hover {
   color: #FFE72C;
 }
+.message {
+  display: inline;
+}
 </style>
