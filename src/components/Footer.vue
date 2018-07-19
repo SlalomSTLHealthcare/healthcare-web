@@ -53,7 +53,7 @@ export default {
   bottom: 0;
   z-index: 10;
   width: 100%;
-  height: 110px;
+  height: 200px;
   box-shadow: 0px 1px 4px grey;
   justify-content: space-between;
 }
