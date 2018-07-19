@@ -37,6 +37,7 @@
 
 <script>
 import moment from 'moment'
+import _ from 'underscore'
 export default {
   name: "Schedule",
   mounted: function(){
@@ -51,20 +52,7 @@ export default {
   },
   methods: {
     changeExpansion(val){
-      console.log(val);
-      var isFound = false;
-      this.currentExpanded.forEach(function(row){
-        if(row === val){
-          console.log("match");
-          isFound = true;
-        }
-      });
-      if(isFound){
-        this.$refs.scheduleTable.toggleRowExpansion(val,false);
-      }else{
-        this.$refs.scheduleTable.toggleRowExpansion(val,true);
-      }
-
+      this.$refs.scheduleTable.toggleRowExpansion(val, !(this.currentExpanded.indexOf(val) > -1));
     },
     setCurrentExpandedRow(val,expandedRows){
       this.currentExpanded = expandedRows;
@@ -99,13 +87,7 @@ export default {
       return moment(row.start_time).format("h:mm A");
     },
     getSessions(schedule){
-      var attachedSessions = [];
-      this.sessions.forEach(function(element){
-        if(element.schedule_id === schedule.id){
-          attachedSessions.push(element);
-        }
-      });
-      return attachedSessions;
+      return _.where(this.sessions, {schedule_id: schedule.id});
     }
   }
 };
