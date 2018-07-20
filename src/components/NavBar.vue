@@ -3,14 +3,16 @@
     <div class="menu">
       <span class="logo"><img src="../assets/capture1.png"/></span>
       <div class="menuR">
-
-        <!-- <el-col v-else class="optiontwo">
-            <el-button class="logBtn" type="primary" plain round @click="registerPush">Register</el-button> -->
-        <!-- </el-col> -->
-        <span class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></span>
+        <el-col v-if="this.$session.exists()">
+          <el-button class="logBtn" type="primary" round plain v-on:click="logout">Logout</el-button>
+        </el-col>
+        <el-col v-else class="optiontwo">
+          <el-button class="logBtn" type="primary" plain round v-on:click="registerPush">Register</el-button>
+          <Login class="logBtn" login_type='button'/>
+        </el-col>
+        <el-col class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></el-col>
       </div>
     </div>
-
     <transition name="fade">
         <div class="overlay" v-if="show" v-on:click="show = !show">
         <i class="fas fa-times fa-2x"></i>
@@ -43,26 +45,36 @@ export default {
   methods: {
     handleSelect(key, keyPath) {},
     logout: function() {
+      this.profileRegister = "Register";
       this.$session.destroy();
-      this.$router.push("/");
+      this.emitLogin();
+      this.$forceUpdate();
     },
     registerPush: function() {
       console.log("register");
       this.$router.push("/registration");
+    },
+    emitLogin() {
+      this.$root.$emit("login");
+    },
+    emitLogout() {
+      this.$root.$emit("logout");
     }
+  },
+  mounted: function() {
+    this.$root.$on("login", () => {
+      this.register = "profile";
+      this.profileRegister = "Profile Page";
+      this.$forceUpdate();
+    }),
+      this.$root.$on("logout", () => {
+        this.register = "profile";
+        this.profileRegister = "Profile Page";
+        this.$forceUpdate();
+      });
   },
   components: {
     Login
-  },
-  mounted: function(){
-    this.$root.$on('login', () =>{
-        this.register = "profile";
-        this.profileRegister = "Profile Page"
-        this.$forceUpdate();
-    })
-  },
-  methods: {
-    handleSelect(key, keyPath) {},
   }
 };
 </script>
@@ -78,7 +90,7 @@ export default {
   position: fixed;
   background-color: #fff;
   top: 0;
-  z-index: 10;
+  z-index: 2;
   width: 100%;
   box-shadow: 0px 1px 1px #ccc;
   justify-content: space-between;
@@ -129,7 +141,7 @@ ul {
   width: 100vw;
   background: #333;
   overflow: auto;
-  z-index: 99;
+  z-index: 3;
   opacity: 0.96;
 }
 .wrap {
