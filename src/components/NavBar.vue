@@ -3,13 +3,10 @@
     <div class="menu">
       <span class="logo"><img src="../assets/capture1.png"/></span>
       <div class="menuR">
-        <div v-if="this.$session.exists()">
-          <el-button class="logBtn" @click="logout" type="primary" round plain>Logout</el-button>
-        </div>
-        <el-col v-else class="optiontwo">
-            <!-- <el-button class="logBtn" type="primary" plain round @click="registerPush">Register</el-button> -->
-            <Login class="logBtn" login_type='button'/>
-        </el-col>
+
+        <!-- <el-col v-else class="optiontwo">
+            <el-button class="logBtn" type="primary" plain round @click="registerPush">Register</el-button> -->
+        <!-- </el-col> -->
         <span class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></span>
       </div>
     </div>
