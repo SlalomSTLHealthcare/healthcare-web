@@ -1,6 +1,6 @@
 <template>
   <div class="register">
-  <el-card class="box-card">
+  <el-card v-if="type==='registration'" class="box-card">
     <div slot="header">
       <span class="header">Register</span>
     </div>
@@ -72,6 +72,75 @@
     </el-form>
   </el-card>
 
+
+
+  <el-card v-if="type==='profile'" class="box-card">
+    <div  slot="header">
+      <span class="header">Profile <i class="fas fa-user-circle"></i></span>
+      <span class="action-buttons">
+        <el-button @click="update=true" type="primary">Update</el-button>
+        <el-button v-if="update" @click="update=false" >Save</el-button>
+      </span>
+    </div>
+      <el-form :disabled="!update" label-position="left" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
+      <input type=hidden name="oid" value="00D1H000000O1eQ">
+      <input type=hidden name="retURL" value="http://">
+      <el-form-item  label="Name" >
+        <el-input  value="Eric"></el-input>
+        <el-input  label-position="top" value="Mason"></el-input>
+      </el-form-item>
+      <el-form-item label="Company">
+        <el-input value="Slalom"></el-input>
+      </el-form-item>
+      <el-form-item label="Position">
+        <el-input  value="Intern"></el-input>
+      </el-form-item>
+      <el-form-item  label="Email" prop="email">
+        <el-input value="test1@slalom.com"></el-input>
+      </el-form-item>
+      <el-form-item label="Twitter">
+        <el-input  value="@eric"></el-input>
+      </el-form-item>
+      <el-form-item  size="mini" label="Attending Lunch">
+        <el-switch v-model="form.lunch"></el-switch>
+      </el-form-item>
+       <el-collapse-transition>
+         <div v-show="form.lunch">
+           <el-form-item v-show="form.lunch" size="mini" label="Dietary Restrictions">
+             <el-checkbox-group v-model="form.diet">
+             <el-checkbox label="Vegetarian" checked name="type"></el-checkbox>
+             <el-checkbox label="Vegan" name="type"></el-checkbox>
+             <el-checkbox label="Kosher" name="type"></el-checkbox>
+             <el-checkbox label="Gluten Free" name="type"></el-checkbox>
+           </el-checkbox-group>
+           <el-input value="Nuts" ></el-input>
+         </el-form-item>
+       </div>
+    </el-collapse-transition>
+    <div></div>
+    <el-form-item   label="T-Shirt Size">
+      <el-select value="M" placeholder="Please select shirt size">
+        <el-option label="S" value="S"></el-option>
+        <el-option label="M" value="M"></el-option>
+        <el-option label="L" value="L"></el-option>
+        <el-option label="XL" value="XL"></el-option>
+      </el-select>
+    </el-form-item>
+    <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
+      <el-input type="textarea" value="I would like to learn about St. Louis healthcare."></el-input>
+    </el-form-item>
+    <el-form-item  label="Rank Breakout Sessions">
+      <h1 class="ranking-header-one">Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.</h1>
+        <h2 class="ranking-header-two">Place the breakout sessions you would <i>most</i> like to attend towards the top, and place the sessions you would <i>least</i> like to attend towards the bottom.</h2> <h2 class="ranking-header-three"> You may or may not choose to not rank all of the sessions.</h2>
+      <SelectBreakout timeSlot="10:15 am" v-on:selected-data="updateDataOne"/>
+      <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
+    </el-form-item>
+    <el-form-item  label="I would like to opt-in to donating to United Way as part of my registration.">
+      <el-switch   v-model="form.donate"></el-switch>
+    </el-form-item>
+    </el-form>
+  </el-card>
+
   <el-dialog
   title="Successful Registration"
   :visible.sync="dialogVisible"
@@ -108,6 +177,7 @@ var confirmPass = (rule, value, callback) => {
   return {
     login: true,
     dialogVisible: false,
+    update: false,
     form: {
       firstName: '',
       lastName: '',
@@ -157,6 +227,9 @@ var confirmPass = (rule, value, callback) => {
 },
 components: {
   SelectBreakout
+},
+props: {
+  type: String
 },
 methods: {
   handleSubmit(form) {
@@ -309,5 +382,8 @@ a {
 .ranking-header-three {
   font-size: 13px;
   font-weight: lighter;
+}
+.action-buttons {
+  float: right;
 }
 </style>

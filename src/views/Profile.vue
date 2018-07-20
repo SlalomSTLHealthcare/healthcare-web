@@ -1,11 +1,9 @@
 <template>
-  <div class="registration">
+  <div class="profile">
     <div id="nav"></div>
     <NavBar></NavBar>
-      <h1>Welcome to HealthSTLx</h1>
-      <h2>Fill out this form to register</h2>
-      <Registration type="registration" class="registration-form"/>
-      <Login class="login" login_type='registration'/>
+      <h1>Welcome, Eric!</h1>
+      <Registration type="profile"/>
   </div>
 </template>
 
@@ -17,7 +15,7 @@ import Login from "@/components/Login.vue";
 import SelectBreakout from "@/components/SelectBreakout.vue";
 
 export default {
-  name: "registration",
+  name: "Profile",
   components: {
     Registration,
     NavBar,
