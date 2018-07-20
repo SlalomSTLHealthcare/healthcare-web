@@ -51,7 +51,7 @@ export default {
   top: 0;
   z-index: 10;
   width: 100%;
-  box-shadow: 0px 1px 4px grey;
+  box-shadow: 0px 1px 1px #ccc;
   justify-content: space-between;
 }
 .menu .menuLogo {
