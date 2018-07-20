@@ -7,6 +7,7 @@ import Registration from "./views/Registration.vue";
 import SponsorPage from "./views/SponsorPage.vue";
 import ScheduleView from "./views/ScheduleView.vue";
 import SessionView from "./views/SessionView";
+import Profile from "./views/Profile";
 
 Vue.use(Router);
 
@@ -46,6 +47,11 @@ export default new Router({
       path: "/schedule",
       name: "scheduleView",
       component: ScheduleView
+    },
+    {
+      path: "/profile",
+      name: "profile",
+      component: Profile
     }
   ]
 });
