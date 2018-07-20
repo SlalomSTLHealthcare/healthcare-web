@@ -7,7 +7,7 @@
           <el-button class="logBtn" @click="logout" type="primary" round plain>Logout</el-button>
         </div>
         <el-col v-else class="optiontwo">
-            <el-button class="logBtn" type="primary" plain round @click="register">Register</el-button>
+            <!-- <el-button class="logBtn" type="primary" plain round @click="registerPush">Register</el-button> -->
             <Login class="logBtn" login_type='button'/>
         </el-col>
         <span class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></span>
@@ -22,7 +22,7 @@
               <router-link to="people">Speakers</router-link>
 			        <router-link to="session">Breakout Sessions</router-link>
               <router-link to="schedule">Schedule</router-link>
-              <router-link to="registration">Register</router-link>
+              <router-link :to="register">{{profileRegister}}</router-link>
               <router-link to="sponsor">Sponsors</router-link>
               <router-link to="about">About</router-link>
 		       </div>
@@ -38,7 +38,9 @@ export default {
   name: "navBar",
   data() {
     return {
-      show: false
+      show: false,
+      register: "registration",
+      profileRegister: "Register"
     };
   },
   methods: {
@@ -47,12 +49,23 @@ export default {
       this.$session.destroy();
       this.$router.push("/");
     },
-    register: function() {
+    registerPush: function() {
+      console.log("register");
       this.$router.push("/registration");
     }
   },
   components: {
     Login
+  },
+  mounted: function(){
+    this.$root.$on('login', () =>{
+        this.register = "profile";
+        this.profileRegister = "Profile Page"
+        this.$forceUpdate();
+    })
+  },
+  methods: {
+    handleSelect(key, keyPath) {},
   }
 };
 </script>

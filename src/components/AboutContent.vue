@@ -40,11 +40,9 @@
                 </el-card>
             </div>
         </div>
-        <el-row>
-            <el-button >Register</el-button>
-        </el-row>
+
          <el-row>
-            <el-col :span="20"> 
+            <el-col :span="20">
                 <div class="btmdesc">
                     <el-card shadow="never">
                         <h1>Header</h1>
@@ -63,6 +61,9 @@ export default {
 </script>
 
 <style scoped lang="less">
+.el-container{
+  padding-top: 100px;
+}
 .topheader {
   width: 100%;
   margin-bottom: 20px;
@@ -99,4 +100,3 @@ ul {
   padding: 0px 70px;
 }
 </style>
-

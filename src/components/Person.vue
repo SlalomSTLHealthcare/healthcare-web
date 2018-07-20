@@ -18,14 +18,7 @@
                   <el-button type="text">{{ company }}</el-button>
                 </div>
               <p class="bio">{{ bio }}</p>
-              <el-popover
-              placement="right-start"
-              title="Talk Title"
-              width="200"
-              trigger="hover"
-              content="this is content, this is content, this is content">
-              <el-button class="descript" slot="reference">Description of Talk</el-button>
-              </el-popover>
+              <p class="descript">This is a description of their talk</p>
               </div>
             </el-col>
           </el-row>

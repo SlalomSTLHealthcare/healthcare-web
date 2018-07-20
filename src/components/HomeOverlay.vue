@@ -7,9 +7,12 @@
     <h1 class="main-header">HealthSTLx Summit</h1>
     <h2 class="sub-header">Working to understand the challenges facing St. Louis healthcare.</h2>
     <h3 class="date">October 24th, 2018 at the Eric P. Newman Education Center</h3>
-    <div class="action">
+    <div class="action" v-if="!this.$session.exists()">
       <el-button class="btn" type="primary" plain round v-on:click="register">Register</el-button>
       <Login class="login" login_type='button'/>
+    </div>
+    <div class="action" v-else>
+      <h2 class="sub-header"> Welcome Back! </h2>
     </div>
   </div>
 
@@ -20,6 +23,11 @@
 import Login from "./Login.vue";
 export default {
   name: "HomeOverlay",
+  mounted: function(){
+    this.$root.$on('login', () =>{
+      this.$forceUpdate();
+    })
+  },
   methods: {
     register: function(){
       console.log("registered!");
