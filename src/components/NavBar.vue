@@ -1,10 +1,14 @@
 <template>
   <div>
     <div class="menu">
-      <!-- <img class="logo" src="../assets/slalom-logo-blue-RGB.jpg"/> -->
-      <!-- <span class="logo">HealthSTLx <span><i class="fas fa-medkit"></i></span></span> -->
-        <span class="logo"><img src="../assets/capture1.png"/></span>
-      <span class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></span>
+      <span class="logo"><img src="../assets/capture1.png"/></span>
+      <div class="menuR">
+
+        <!-- <el-col v-else class="optiontwo">
+            <el-button class="logBtn" type="primary" plain round @click="registerPush">Register</el-button> -->
+        <!-- </el-col> -->
+        <span class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></span>
+      </div>
     </div>
 
     <transition name="fade">
@@ -25,20 +29,36 @@
 </template>
 
 <script>
+import Login from "./Login.vue";
+
 export default {
   name: "navBar",
   data() {
-      return {
-        show: false,
-        register: "registration",
-        profileRegister: "Register"
-      };
+    return {
+      show: false,
+      register: "registration",
+      profileRegister: "Register"
+    };
+  },
+  methods: {
+    handleSelect(key, keyPath) {},
+    logout: function() {
+      this.$session.destroy();
+      this.$router.push("/");
     },
-
+    registerPush: function() {
+      console.log("register");
+      this.$router.push("/registration");
+    }
+  },
+  components: {
+    Login
+  },
   mounted: function(){
     this.$root.$on('login', () =>{
         this.register = "profile";
         this.profileRegister = "Profile Page"
+        this.$forceUpdate();
     })
   },
   methods: {
@@ -53,7 +73,7 @@ export default {
   width: 320px;
 }
 .menu {
-  display:flex;
+  display: flex;
   align-items: center;
   position: fixed;
   background-color: #fff;
@@ -63,6 +83,9 @@ export default {
   box-shadow: 0px 1px 1px #ccc;
   justify-content: space-between;
 }
+.menuR {
+  display: flex;
+}
 .menu .menuLogo {
   padding: 20px;
 }
@@ -70,7 +93,11 @@ export default {
   color: #e5e5e5;
   cursor: pointer;
 }
-.overlay i{
+.optiontwo {
+  display: flex;
+  justify-content: space-around;
+}
+.overlay i {
   color: #e5e5e5;
   position: absolute;
   right: 0;
@@ -78,8 +105,8 @@ export default {
   margin-top: 40px;
   cursor: pointer;
 }
-.overlay i:hover{
-  color:#FFE72C;
+.overlay i:hover {
+  color: #ffe72c;
 }
 .logo {
   display: flex;
@@ -89,21 +116,24 @@ export default {
   color: #0040a8;
 }
 ul {
-	list-style:none;
+  list-style: none;
+}
+.logBtn {
+  margin: 15px 1px;
 }
 /*overlay*/
 .overlay {
-	position:fixed;
-	top:0;
-	height:100vh;
-	width:100vw;
-	background:#333;
-	overflow:auto;
-	z-index:99;
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  background: #333;
+  overflow: auto;
+  z-index: 99;
   opacity: 0.96;
 }
 .wrap {
-	color:#e9e9e9;
+  color: #e9e9e9;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -111,21 +141,21 @@ ul {
   height: 100vh;
 }
 .wrap a {
-  list-style:none;
-	color:#34B484;
-	padding:8px 0;
-	text-decoration:none;
-  font-size:30px;
-  color:#f0f0f0;
+  list-style: none;
+  color: #34b484;
+  padding: 8px 0;
+  text-decoration: none;
+  font-size: 30px;
+  color: #f0f0f0;
 }
- a:hover {
-	color:#FFE72C;
+a:hover {
+  color: #ffe72c;
 }
-.fade-enter-active, .fade-leave-active {
-  transition: opacity .5s;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-
 </style>

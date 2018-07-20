@@ -13,6 +13,7 @@
     </div>
     <div class="action" v-else>
       <h2 class="sub-header"> Welcome Back! </h2>
+      <el-button @click="logout">Logout</el-button>
     </div>
   </div>
 
@@ -23,15 +24,20 @@
 import Login from "./Login.vue";
 export default {
   name: "HomeOverlay",
-  mounted: function(){
-    this.$root.$on('login', () =>{
+  mounted: function() {
+    this.$root.$on("login", () => {
       this.$forceUpdate();
-    })
+    });
   },
   methods: {
-    register: function(){
+    register: function() {
       console.log("registered!");
       this.$router.push("/registration");
+    },
+    logout: function() {
+      console.log("logoout");
+      this.$session.destroy();
+      this.$forceUpdate();
     }
   },
   components: {
@@ -60,7 +66,7 @@ export default {
   letter-spacing: 3px;
   font-size: 18px;
 }
-img{
+img {
   width: 100vw;
   height: 100vh;
   margin: 0;
@@ -74,7 +80,7 @@ img{
   height: 4em;
 }
 
-.container{
+.container {
   padding-bottom: 0px;
   margin-bottom: 0px;
   text-align: center;
@@ -88,10 +94,11 @@ img{
   padding-left: 24%;
   top: 20%;
   text-align: center;
-  transition: .5s ease;
-  color: white
+  transition: 0.5s ease;
+  color: white;
 }
-h1, h2{
+h1,
+h2 {
   text-align: center;
   padding: 0;
 }
