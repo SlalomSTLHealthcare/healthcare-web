@@ -54,12 +54,17 @@ methods: {
     });
       },
         successfulLogin() {
-          this.dialogFormVisible = false,
+          this.dialogFormVisible = false;
+          this.$session.start();
+          this.$session.set('username', this.form.email);
+          this.$session.set('name', this.form.firstName);
           this.$alert("Welcome back to HealthSTLx!", "Login Successful", {
             dangerouslyUseHTMLString: true,
             confirmButtonText: 'OK',
             callback: action => {
               this.$router.push('/');
+
+
             }
           });
         },

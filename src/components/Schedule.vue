@@ -42,6 +42,7 @@ export default {
   name: "Schedule",
   mounted: function(){
     this.populateData();
+    this.logoutTest();
   },
   data () {
     return{
@@ -59,6 +60,13 @@ export default {
     },
     tableRowSetter(){
       return 'tableRow';
+    },
+    logoutTest(){
+      if(this.$session.exists()){
+        console.log(this.$session.get('username'));
+        this.$session.destroy();
+        console.log(this.$session.exists());
+      }
     },
     populateData: function() {
       this.$axiosServer.get(`api/schedules`)
