@@ -46,6 +46,11 @@ export default new Router({
       path: "/schedule",
       name: "scheduleView",
       component: ScheduleView
+    },
+    {
+      path: "/profile",
+      name: "profileView",
+      component: ScheduleView
     }
   ]
 });
