@@ -1,7 +1,7 @@
 <template>
     <el-container class="footer">
         <el-row>
-            <el-button class="btn" v-on:click="about">About</el-button>
+            <el-button type="primary" round plain v-on:click="about">About</el-button>
         </el-row>
         <el-row>
             <a href="https://www.slalom.com/" target="_blank">
@@ -58,9 +58,6 @@ export default {
   justify-content: space-between;
 }
 .el-button {
-  background: #3336ff;
-  color: white;
-  border: black;
   width: 12em;
   height: 4em;
 }
