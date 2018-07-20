@@ -7,10 +7,13 @@ import router from "./router";
 import store from "./store";
 import VeeValidate from 'vee-validate';
 import axios from 'axios';
+import VueSession from 'vue-session';
+
 
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false;
 Vue.use(VeeValidate);
+Vue.use(VueSession);
 Vue.prototype.$axiosServer = axios.create({
   baseURL: 'http://localhost:3000',
   withCredentials: false,
