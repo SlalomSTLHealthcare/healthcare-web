@@ -84,6 +84,7 @@ export default {
       .then(response => {
         // JSON responses are automatically parsed.
         this.sessions = response.data;
+        console.log(this.sessions);
       })
       .catch(e => {
         console.log("error");

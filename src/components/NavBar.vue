@@ -15,7 +15,7 @@
               <router-link to="people">Speakers</router-link>
 			        <router-link to="session">Breakout Sessions</router-link>
               <router-link to="schedule">Schedule</router-link>
-              <router-link to="registration">Register</router-link>
+              <router-link :to="register">{{profileRegister}}</router-link>
               <router-link to="sponsor">Sponsors</router-link>
               <router-link to="about">About</router-link>
 		       </div>
@@ -29,11 +29,20 @@ export default {
   name: "navBar",
   data() {
       return {
-        show: false
+        show: false,
+        register: "registration",
+        profileRegister: "Register"
       };
     },
+
+  mounted: function(){
+    this.$root.$on('login', () =>{
+        this.register = "profile";
+        this.profileRegister = "Profile Page"
+    })
+  },
   methods: {
-    handleSelect(key, keyPath) {}
+    handleSelect(key, keyPath) {},
   }
 };
 </script>
