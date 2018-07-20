@@ -13,7 +13,6 @@
     </div>
     <div class="action" v-else>
       <h2 class="sub-header"> Welcome Back! </h2>
-      <el-button @click="logout">Logout</el-button>
     </div>
   </div>
 
@@ -73,9 +72,6 @@ img {
 }
 
 .btn {
-  // background: #3336ff;
-  // color: white;
-  // border: black;
   width: 12em;
   height: 4em;
 }

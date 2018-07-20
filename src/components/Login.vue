@@ -101,4 +101,10 @@ methods: {
 .message {
   display: inline;
 }
+.login {
+  z-index: 12;
+}
+.el-dialog{
+  z-index: 15;
+}
 </style>
