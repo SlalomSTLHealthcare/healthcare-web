@@ -32,6 +32,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: "footer",
   methods: {
@@ -39,14 +41,14 @@ export default {
       this.$router.push("/about");
     }
   },
-  computed:{
-    computedRegister: function(){
-      return this.$store.state.username === '' ? 'registration' : 'profile';
+  computed: mapState({
+    computedRegister (state){
+      return state.username === '' ? 'registration' : 'profile';
     },
-    computedRegisterDescription: function(){
-      return this.$store.state.username === '' ? 'Register' : 'Profile Page';
+    computedRegisterDescription (state){
+      return state.username === '' ? 'Register' : 'Profile Page';
     }
-  },
+  }),
 };
 </script>
 

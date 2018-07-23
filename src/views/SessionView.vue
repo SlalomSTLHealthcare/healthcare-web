@@ -1,6 +1,5 @@
 <template>
   <div>
-    <NavBar></NavBar>
     <h1>General Event Overview</h1>
       <Sessions sessionType="Breakout"/>
       <Sessions sessionType="Panel"/>

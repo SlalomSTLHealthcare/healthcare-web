@@ -22,13 +22,15 @@
 
 <script>
 import Login from "./Login.vue";
+import { mapState } from 'vuex';
+
 export default {
   name: "HomeOverlay",
-  computed: {
-    isSignedIn: function(){
-      return this.$store.state.username === '' ? false : true;
+  computed: mapState({
+    isSignedIn (state){
+      return !(state.username === '');
     }
-  },
+  }),
   methods: {
     register: function() {
       this.$router.push("/registration");

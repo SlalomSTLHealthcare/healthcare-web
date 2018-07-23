@@ -32,10 +32,11 @@
 
 <script>
 import Login from "./Login.vue";
+import { mapState } from 'vuex';
 
 export default {
   name: "navBar",
-    data() {
+  data() {
     return {
       show: false,
     };
@@ -50,17 +51,17 @@ export default {
       this.$router.push("/registration");
     }
   },
-  computed:{
-    computedRegister: function(){
-      return this.$store.state.username === '' ? 'registration' : 'profile';
+  computed: mapState({
+    computedRegister (state){
+      return state.username === '' ? 'registration' : 'profile';
     },
-    computedRegisterDescription: function(){
-      return this.$store.state.username === '' ? 'Register' : 'Profile Page';
+    computedRegisterDescription (state){
+      return state.username === '' ? 'Register' : 'Profile Page';
     },
-    isSignedIn: function(){
-      return this.$store.state.username === '' ? false : true;
+    isSignedIn (state){
+      return !(state.username === '');
     }
-  },
+  }),
   components: {
     Login
   }

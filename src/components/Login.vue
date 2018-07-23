@@ -62,6 +62,7 @@ methods: {
         this.$router.push('/');
       }
     });
+    console.log(this.$store.state);
     this.$store.dispatch('login', this.form.email);
   },
   failedLogin(errorMessage) {
