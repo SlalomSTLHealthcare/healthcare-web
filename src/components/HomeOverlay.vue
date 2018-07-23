@@ -1,14 +1,15 @@
 <template>
   <el-row class="container">
   <div class="image">
-    <img src="../assets/background-1.jpg">
+    <!-- <img src="../assets/background-1.jpg"> -->
+      <span class="logo"><img src="../assets/healthstlx-mockbg.jpg"/></span>
    </div>
    <div class="overlay">
-    <h1 class="main-header">HealthSTLx Summit</h1>
+    <h1 class="main-header">HealthSTLX Summit</h1>
     <h2 class="sub-header">Working to understand the challenges facing St. Louis healthcare.</h2>
     <h3 class="date">October 24th, 2018 at the Eric P. Newman Education Center</h3>
     <div class="action" v-if="!this.$session.exists()">
-      <el-button class="btn" type="primary" plain round v-on:click="register">Register</el-button>
+      <el-button class="btn" plain round v-on:click="register">Register</el-button>
       <Login class="login" login_type='button'/>
     </div>
     <div class="action" v-else>
@@ -47,11 +48,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+@secondary-dark: #040024;
 .main-header {
-  font-family: Arial;
-  font-weight: lighter;
-  letter-spacing: 4px;
-  font-size: 70px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 5rem;
+  margin-bottom: 12px;
+  text-shadow: .3rem .5rem .5rem fade(@secondary-dark, 20%);
 }
 .sub-header {
   font-family: Arial;
@@ -74,6 +76,8 @@ img {
 .btn {
   width: 12em;
   height: 4em;
+  color: black;
+  height: 40px;
 }
 
 .container {
