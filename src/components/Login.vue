@@ -2,7 +2,7 @@
   <div class="login">
     <div class='message'>
       <p class="login-link" v-if="login_type==='registration'">Already registered? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a> to login.</p>
-      <el-button class="btn" type="primary" round plain v-if="login_type==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
+      <el-button class="btn" round plain v-if="login_type==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
     </div>
     <el-dialog title="Login" :visible.sync="dialogFormVisible">
       <el-form :model="form">
@@ -14,7 +14,7 @@
          </el-form-item>
       </el-form>
     <el-button @click="dialogFormVisible = false">Cancel</el-button>
-    <el-button type="primary" @click="handleLogin">Login</el-button>
+    <el-button @click="handleLogin">Login</el-button>
     <p>Forgot Password? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a>.</p>
   </el-dialog>
   </div>
@@ -82,12 +82,8 @@ methods: {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .btn {
- // background: #3336ff;
- // color: white;
- // border: black;
- width: 12em;
- height: 4em;
- // opacity: 0.7;
+  height: 40px;
+  color: black;
 }
  a {
   color: #71bab0;
@@ -97,5 +93,11 @@ methods: {
 }
 .message {
   display: inline;
+}
+.login {
+  z-index: 12;
+}
+.el-dialog{
+  z-index: 15;
 }
 </style>
