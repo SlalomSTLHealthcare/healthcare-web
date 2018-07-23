@@ -78,8 +78,9 @@
     <div  slot="header">
       <span class="header">Profile <i class="fas fa-user-circle"></i></span>
       <span class="action-buttons">
-        <el-button @click="update=true" type="primary">Update</el-button>
-        <el-button v-if="update" @click="update=false" >Save</el-button>
+        <el-button @click="deleteReg" type="danger" round>Delete Registration</el-button>
+        <el-button @click="update=true" type="primary" round>Update</el-button>
+        <el-button v-if="update" @click="update=false" round>Save</el-button>
       </span>
     </div>
       <el-form :disabled="!update" label-position="left" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
@@ -118,7 +119,7 @@
        </div>
     </el-collapse-transition>
     <div></div>
-    <el-form-item   label="T-Shirt Size">
+    <el-form-item label="T-Shirt Size">
       <el-select value="M" placeholder="Please select shirt size">
         <el-option label="S" value="S"></el-option>
         <el-option label="M" value="M"></el-option>
@@ -135,8 +136,8 @@
       <SelectBreakout timeSlot="10:15 am" v-on:selected-data="updateDataOne"/>
       <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
     </el-form-item>
-    <el-form-item  label="I would like to opt-in to donating to United Way as part of my registration.">
-      <el-switch   v-model="form.donate"></el-switch>
+    <el-form-item label="I would like to opt-in to donating to United Way as part of my registration.">
+      <el-switch v-model="form.donate"></el-switch>
     </el-form-item>
     </el-form>
   </el-card>
@@ -318,6 +319,33 @@ methods: {
       confirm(){
         this.dialogVisible=false;
         this.$router.push('/');
+      },
+      logout(){
+        this.$session.destroy();
+        this.$router.push('/');
+      },
+      deleteReg() {
+        var self = this;
+        this.$alert("Are you sure you want to delete your registration?", {
+          confirmButtonText: 'Delete',
+          callback: action => {
+              this.$axiosServer.delete('/auth/delete', {
+                data: {
+                  email: this.$session.get('username')
+                }
+                
+            })
+              .then(function (response) {
+                console.log(response);
+                self.logout();
+              })
+              .catch(function (error) {
+                console.log(error);
+                  return error;
+              });
+          }
+        });
+
       }
     }
 };
