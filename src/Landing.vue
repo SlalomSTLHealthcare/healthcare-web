@@ -81,6 +81,7 @@
             </div>
             <div class="action">
                 <div class="error" v-show="!sponsorExists">{{sponsorErrorText}}</div>
+                <el-input class="input" placeholder="Name" v-model="sponsorName" v-if="sponsorButtonText === 'Submit'"></el-input>
                 <el-input class="input" placeholder="Email" v-model="sponsorEmail" v-if="sponsorButtonText === 'Submit'"></el-input>
                 <el-input class="input" placeholder="Company" v-model="sponsorCompany" v-if="sponsorButtonText === 'Submit'"></el-input>
                 <el-input style="margin-bottom: 30px;" class="input" placeholder="Anything else you would like us to know?" v-model="sponsorNotes" v-if="sponsorButtonText === 'Submit'"></el-input>
@@ -111,6 +112,7 @@ export default {
             emailButtonLoading: false,
             emailButtonDisabled: false,
             sponsorExists: true,
+            sponsorName: '',
             sponsorEmail: '',
             sponsorCompany: '',
             sponsorNotes: '',
@@ -158,6 +160,7 @@ export default {
                 if (this.sponsorEmail) {
                     this.sponsorButtonLoading = true;
                     this.$axiosServer.post('/api/sponsor_query', {
+                        name: this.sponsorName,
                         email: this.sponsorEmail,
                         company: this.sponsorCompany,
                         notes: this.sponsorNotes
@@ -168,6 +171,9 @@ export default {
                         self.sponsorButtonText = 'Thank you!';
                         self.sponsorButtonDisabled = true;
                         self.sponsorEmail = '';
+                        self.sponsorCompany = '';
+                        self.sponsorNotes = '';
+                        self.sponsorName = '';
                     })
                     .catch(function (error) {
                         self.sponsorButtonLoading = false;
