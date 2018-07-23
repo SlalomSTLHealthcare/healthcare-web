@@ -35,7 +35,6 @@ export default {
       this.$router.push("/registration");
     },
     logout: function() {
-      console.log("logoout");
       this.$session.destroy();
       this.$forceUpdate();
     }

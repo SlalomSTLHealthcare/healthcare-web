@@ -3,8 +3,8 @@
   <NavBar></NavBar>
     <h1>Sponsors</h1>
     <h3>Description of Our Sponsors</h3>
-    <div class>
-      <el-button class="btn">Email Us About Becoming A Sponsor</el-button>
+    <div class="emailLink">
+      <a href="mailto:eric.mason@slalom.com">Email Us About Becoming A Sponsor</a>
     </div>
     <el-col >
         <Sponsors :sponsorData="filteredData('platinum')" sponsorLevel="Platinum"/>
@@ -64,6 +64,10 @@ export default {
   // opacity: 0.7;
 }
 h1, h3 {
+  margin-left: 10px;
+}
+
+.emailLink{
   margin-left: 10px;
 }
 
