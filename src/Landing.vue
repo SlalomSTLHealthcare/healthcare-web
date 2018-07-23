@@ -24,7 +24,9 @@
             </div>
             <div class="floated-content-section">
                 <div class="title">
-                    <span style="font-weight: 100;">health</span><span style="font-weight: 700;">STLX</span>
+                    <span style="font-weight: 100; font-size: 5rem;">health</span><span style="font-weight: 700; font-size: 5rem;">STLX</span>
+                    <br>
+                    <span class="hosted">Hosted by Slalom</span>
                 </div>
                 <div class="bar"></div>
                 <div class="subtitle">
@@ -40,7 +42,7 @@
                     </div>
                     <div class="bar"></div>
                     <div class="text">
-                        HealthSTLX is a one-day conference that explores national healthcare issues and how they impact the local St. Louis community. Thought leaders, influencers, and innovators will come together to discuss foundational themes around some of the industry’s current challenges, like patient experience and big data’s role in healthcare. We’ll create solutions for these challenges as we consider the evolving healthcare landscape.
+                        HealthSTLX is a one-day summit aimed at exploring national healthcare challenges through a local St. Louis lens. Our community is experiencing an evolution in the way we interact with brands and organizations in both the digital and physical space. As a result, every industry is being disrupted and healthcare is no exception. We will bring together thought leaders, influencers, and innovators to foster learning, inspiration, and wonder – and design solutions that matter to our community. Together, we will empower our St. Louis community.
                     </div>
                     <div class="note">
                         Please provide your preferred e-mail address to stay updated with additional event details.
@@ -48,7 +50,7 @@
                     <div class="action">
                         <div class="error" v-show="!emailExists">{{emailErrorText}}</div>
                         <el-input class="input" placeholder="Email" v-model="email" v-if="emailButtonText === 'Submit'"></el-input>
-                        <el-button :loading="emailButtonLoading" type="primary" class="info-button" @click="handleEmailClick" plain round>{{emailButtonText}}</el-button>
+                        <el-button :disabled="emailButtonDisabled" :loading="emailButtonLoading" type="primary" :class="[emailButtonDisabled ? 'disabled-class' : '', 'info-button']" @click="handleEmailClick" plain round>{{emailButtonText}}</el-button>
                     </div>
                 </div>
             </div>
@@ -78,7 +80,11 @@
                 Thank you for your potential interest in becoming a sponsor for HealthSTLX. In our inaugural year, we are looking forward to assembling more than 300+ healthcare executives, directors, managers, practitioners and educators to discuss and create solutions around the evolution of healthcare. We are pleased to provide a space for our community partners and organizations to connect with attendees and exhibit their latest products.
             </div>
             <div class="action">
-                <el-button type="primary" class="sponsor-button" plain round>Become a sponsor</el-button>
+                <div class="error" v-show="!sponsorExists">{{sponsorErrorText}}</div>
+                <el-input class="input" placeholder="Email" v-model="sponsorEmail" v-if="sponsorButtonText === 'Submit'"></el-input>
+                <el-input class="input" placeholder="Company" v-model="sponsorCompany" v-if="sponsorButtonText === 'Submit'"></el-input>
+                <el-input style="margin-bottom: 30px;" class="input" placeholder="Anything else you would like us to know?" v-model="sponsorNotes" v-if="sponsorButtonText === 'Submit'"></el-input>
+                <el-button :disabled="sponsorButtonDisabled" :loading="sponsorButtonLoading" type="primary" :class="[sponsorButtonDisabled ? 'disabled-class' : '', 'sponsor-button']" @click="handleSponsorClick" plain round>{{sponsorButtonText}}</el-button>
             </div>
         </div>
         <div class="footer-section">
@@ -98,11 +104,20 @@ export default {
     name: 'app',
     data() {
         return {
-        email: '',
-        emailExists: true,
-        emailButtonText: 'Email sign up',
-        emailErrorText: 'Please input an email address.',
-        emailButtonLoading: false
+            email: '',
+            emailExists: true,
+            emailButtonText: 'Email sign up',
+            emailErrorText: 'Please input an email address.',
+            emailButtonLoading: false,
+            emailButtonDisabled: false,
+            sponsorExists: true,
+            sponsorEmail: '',
+            sponsorCompany: '',
+            sponsorNotes: '',
+            sponsorButtonText: 'Become a sponsor',
+            sponsorErrorText: 'Please input an email address.',
+            sponsorButtonLoading: false,
+            sponsorButtonDisabled: false
         }
     },
     methods: {
@@ -119,7 +134,8 @@ export default {
                     .then(function () {
                         self.emailButtonLoading = false;
                         self.emailExists = true;
-                        self.emailButtonText = 'Email sign up';
+                        self.emailButtonText = 'Submitted!';
+                        self.emailButtonDisabled = true;
                         self.email = '';
                     })
                     .catch(function (error) {
@@ -131,6 +147,37 @@ export default {
                     });
                 } else {
                     this.emailExists = false;
+                }
+            }
+        },
+        handleSponsorClick() {
+            const self = this;
+            if (this.sponsorButtonText === 'Become a sponsor') {
+                this.sponsorButtonText = 'Submit';
+            } else if (this.sponsorButtonText === 'Submit') {
+                if (this.sponsorEmail) {
+                    this.sponsorButtonLoading = true;
+                    this.$axiosServer.post('/api/sponsor_query', {
+                        email: this.sponsorEmail,
+                        company: this.sponsorCompany,
+                        notes: this.sponsorNotes
+                    })
+                    .then(function () {
+                        self.sponsorButtonLoading = false;
+                        self.sponsorExists = true;
+                        self.sponsorButtonText = 'Thank you!';
+                        self.sponsorButtonDisabled = true;
+                        self.sponsorEmail = '';
+                    })
+                    .catch(function (error) {
+                        self.sponsorButtonLoading = false;
+                        self.sponsorErrorText = error.toString();
+                        self.sponsorExists = false;
+                        console.log(error);
+                        return error;
+                    });
+                } else {
+                    this.sponsorExists = false;
                 }
             }
         }
@@ -221,9 +268,16 @@ export default {
 
                     .input {
                         width: 200px;
-                        margin-right: 10px;
-                        transition: all ease .3s;
                         height: 38px;
+                        margin-right: 10px;
+
+                        input {
+                            border-radius: 20px;
+
+                            &::placeholder {
+                                font-weight: 300;
+                            }
+                        }
                     }
 
                     .info-button {
@@ -237,6 +291,17 @@ export default {
                         &:hover {
                             background-color: #fff;
                             color: @primary;
+                        }
+                    }
+
+                    .disabled-class {
+                        background-color: #256AEB;
+                        opacity: 0.5;
+                        color: #fff;
+
+                        &:hover {
+                            background-color: #256AEB;
+                            color: #fff;
                         }
                     }
                 }
@@ -351,6 +416,28 @@ export default {
         .action {
             margin: 4rem 0 4rem;
 
+            .error {
+                font-size: 0.9rem;
+                font-weight: 300;
+                margin-bottom: 10px;
+            }
+
+            input {
+                background-color: #fff;
+                border-color: #fff;
+                border-radius: 20px;
+                width: 300px;
+                margin-bottom: 10px;
+
+                &::placeholder {
+                    font-weight: 300;
+                }
+            }
+
+            .el-input__inner:focus {
+                border-color: #fff !important;
+            }
+
             .sponsor-button {
                 letter-spacing: 0.6px;
                 font-weight: 400;
@@ -362,6 +449,17 @@ export default {
                 &:hover {
                     background-color: #fff;
                     color: @sponsor-purple;
+                }
+            }
+
+            .disabled-class {
+                background-color: transparent;
+                opacity: 0.7;
+                color: #fff;
+
+                &:hover {
+                    background-color: transparent;
+                    color: #fff;
                 }
             }
         }
@@ -376,14 +474,19 @@ export default {
 
         .floated-content-section {
             position: sticky;
-            top: 11.5vh;
+            top: 10vh;
             padding-bottom: 20px;
             margin-left: 22vw;
 
             .title {
-                font-size: 5rem;
                 margin-bottom: 12px;
                 text-shadow: .3rem .5rem .5rem fade(@secondary-dark, 20%);
+            }
+
+            .hosted {
+                font-size: 0.9rem;
+                font-weight: 300;
+                font-style: italic;
             }
 
             .bar {
