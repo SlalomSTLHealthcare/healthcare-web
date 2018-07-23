@@ -3,7 +3,7 @@
     <div class="menu">
       <el-row class="logo"><img src="../assets/healthstlx-horiz.png"/></el-row>
       <div class="menuR">
-        <el-col v-if="this.$session.exists()">
+        <el-col v-if="isSignedIn">
           <el-button class="logBtn" round plain v-on:click="logout">Logout</el-button>
         </el-col>
         <el-col v-else class="optiontwo">
@@ -21,7 +21,7 @@
               <router-link to="people">Speakers</router-link>
 			        <router-link to="session">Breakout Sessions</router-link>
               <router-link to="schedule">Schedule</router-link>
-              <router-link :to="register">{{profileRegister}}</router-link>
+              <router-link :to="computedRegister">{{computedRegisterDescription}}</router-link>
               <router-link to="sponsor">Sponsors</router-link>
               <router-link to="about">About</router-link>
 		       </div>
@@ -35,43 +35,31 @@ import Login from "./Login.vue";
 
 export default {
   name: "navBar",
-  data() {
+    data() {
     return {
       show: false,
-      register: "registration",
-      profileRegister: "Register"
     };
   },
   methods: {
     handleSelect(key, keyPath) {},
     logout: function() {
-      this.profileRegister = "Register";
-      this.$session.destroy();
-      this.emitLogin();
-      this.$forceUpdate();
+      this.$store.dispatch('logout');
+      this.$router.push("/");
     },
     registerPush: function() {
-      console.log("register");
       this.$router.push("/registration");
-    },
-    emitLogin() {
-      this.$root.$emit("login");
-    },
-    emitLogout() {
-      this.$root.$emit("logout");
     }
   },
-  mounted: function() {
-    this.$root.$on("login", () => {
-      this.register = "profile";
-      this.profileRegister = "Profile Page";
-      this.$forceUpdate();
-    }),
-      this.$root.$on("logout", () => {
-        this.register = "profile";
-        this.profileRegister = "Profile Page";
-        this.$forceUpdate();
-      });
+  computed:{
+    computedRegister: function(){
+      return this.$store.state.username === '' ? 'registration' : 'profile';
+    },
+    computedRegisterDescription: function(){
+      return this.$store.state.username === '' ? 'Register' : 'Profile Page';
+    },
+    isSignedIn: function(){
+      return this.$store.state.username === '' ? false : true;
+    }
   },
   components: {
     Login

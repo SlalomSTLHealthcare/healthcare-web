@@ -25,17 +25,8 @@ export default {
   },
   mounted: function() {
     this.populateData();
-    this.testStuff();
   },
   methods: {
-    testStuff(){
-      if(this.$session.exists()){
-        console.log(this.$session.get('username'));
-        console.log(this.$session.get('name'));
-      }else{
-        console.log("oh no");
-      }
-    },
     populateData: function() {
       this.$axiosServer.get(`api/sponsors`)
         .then(response => {

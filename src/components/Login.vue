@@ -52,30 +52,26 @@ methods: {
       self.failedLogin(error.response.statusText);
       return error;
     });
-      },
-        successfulLogin() {
-          this.dialogFormVisible = false;
-          this.$session.start();
-          this.$session.set('username', this.form.email);
-          this.$alert("Welcome back to HealthSTLx!", "Login Successful", {
-            dangerouslyUseHTMLString: true,
-            confirmButtonText: 'OK',
-            callback: action => {
-              this.$router.push('/');
-
-            }
-
-          });
-          this.$root.$emit('login');
-        },
-        failedLogin(errorMessage) {
-          this.dialogFormVisible = true,
-          this.$alert(errorMessage, "Login failed", {
-            dangerouslyUseHTMLString: true,
-            confirmButtonText: 'OK',
-          });
-        }
-    }
+    },
+  successfulLogin() {
+    this.dialogFormVisible = false;
+    this.$alert("Welcome back to HealthSTLx!", "Login Successful", {
+      dangerouslyUseHTMLString: true,
+      confirmButtonText: 'OK',
+      callback: action => {
+        this.$router.push('/');
+      }
+    });
+    this.$store.dispatch('login', this.form.email);
+  },
+  failedLogin(errorMessage) {
+    this.dialogFormVisible = true,
+    this.$alert(errorMessage, "Login failed", {
+      dangerouslyUseHTMLString: true,
+      confirmButtonText: 'OK',
+    });
+  }
+  }
 };
 </script>
 

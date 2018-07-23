@@ -11,9 +11,9 @@
         <el-row class="routes">
             <router-link to="/" class="link">Home</router-link>
             <router-link to="people" class="link">Speakers</router-link>
-			<router-link to="session" class="link">Breakout Sessions</router-link>
+			      <router-link to="session" class="link">Breakout Sessions</router-link>
             <router-link to="schedule" class="link">Schedule</router-link>
-            <router-link to="registration" class="link">Register</router-link>
+            <router-link :to="computedRegister" class="link">{{computedRegisterDescription}}</router-link>
             <router-link to="sponsor" class="link">Sponsors</router-link>
             <router-link to="about" class="link">About</router-link>
         </el-row>
@@ -38,14 +38,22 @@ export default {
     about: function() {
       this.$router.push("/about");
     }
-  }
+  },
+  computed:{
+    computedRegister: function(){
+      return this.$store.state.username === '' ? 'registration' : 'profile';
+    },
+    computedRegisterDescription: function(){
+      return this.$store.state.username === '' ? 'Register' : 'Profile Page';
+    }
+  },
 };
 </script>
 
 <style scoped lang="less">
 .footer {
   padding-left: 12px;
-  padding-bottom: 0px; 
+  padding-bottom: 0px;
   margin: 0;
   display: flex;
   align-items: center;
@@ -77,4 +85,3 @@ export default {
   color: #3336ff;
 }
 </style>
-
