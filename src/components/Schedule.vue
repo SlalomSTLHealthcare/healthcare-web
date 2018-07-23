@@ -42,7 +42,6 @@ export default {
   name: "Schedule",
   mounted: function(){
     this.populateData();
-    this.logoutTest();
   },
   data () {
     return{
@@ -61,13 +60,6 @@ export default {
     tableRowSetter(){
       return 'tableRow';
     },
-    logoutTest(){
-      if(this.$session.exists()){
-        console.log(this.$session.get('username'));
-        this.$session.destroy();
-        console.log(this.$session.exists());
-      }
-    },
     populateData: function() {
       this.$axiosServer.get(`api/schedules`)
       .then(response => {
@@ -84,7 +76,6 @@ export default {
       .then(response => {
         // JSON responses are automatically parsed.
         this.sessions = response.data;
-        console.log(this.sessions);
       })
       .catch(e => {
         console.log("error");
@@ -127,7 +118,7 @@ p{
   text-align: left;
 }
 h1 {
-  padding-top: 15px;
+  padding-top: 100px;
   text-align: center;
   // align with table body
   margin-left: 140px;

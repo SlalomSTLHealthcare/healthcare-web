@@ -18,7 +18,7 @@
     :target-order="'push'"
     v-model="selected"
     @change="handleChange"
-    :data="computedData">
+    :data="computedDataRanking">
       <!-- v-model="value"
       :data="data"> -->
     </el-transfer>
@@ -50,6 +50,13 @@ export default {
     timeSlot: String
   },
   computed:{
+    computedDataRanking() {
+      return _.map(_.filter(this.breakoutData, s => s.session_type === 'Breakout'), s => ({
+        key: s.id,
+        label: s.max_capacity === s.ppl_signed_up ? s.title + ' (Waitlist)' : s.title,
+        description: s.description
+      }))
+    },
     computedData() {
       return _.map(_.filter(this.breakoutData, s => s.session_type === 'Breakout'), s => ({
         key: s.id,
