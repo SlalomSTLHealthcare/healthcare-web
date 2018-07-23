@@ -53,9 +53,6 @@ methods: {
       return error;
     });
       },
-      emitLogin(){
-        this.$root.$emit('login');
-      },
         successfulLogin() {
           this.dialogFormVisible = false;
           this.$session.start();
@@ -69,7 +66,7 @@ methods: {
             }
 
           });
-          this.emitLogin();
+          this.$root.$emit('login');
         },
         failedLogin(errorMessage) {
           this.dialogFormVisible = true,

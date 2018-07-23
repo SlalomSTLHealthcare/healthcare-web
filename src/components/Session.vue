@@ -8,6 +8,9 @@
         <p></p>
       </div>
       <h2 class="description">{{description}}</h2>
+      <h3 class="description" v-if="computedSpace > 0">Spaces Available: {{computedSpace}}</h3>
+      <h3 class="description" v-else-if="computedSpace == 1">1 Space Available </h3>
+      <h3 class="description" v-else>No Space Available!</h3>
     </el-card>
 </template>
 
@@ -20,11 +23,16 @@ export default {
     time: String,
     roomNumber: Number,
     description: String,
-    imgSource: String
+    imgSource: String,
+    maxCapacity: Number,
+    signedUp: Number
   },
   computed:{
     computedTime: function(){
       return moment(this.time).format("h:mm A");
+    },
+    computedSpace: function(){
+      return this.maxCapacity - this.signedUp;
     }
   }
 };
