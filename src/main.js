@@ -8,16 +8,20 @@ import store from "./store";
 import VeeValidate from 'vee-validate';
 import Vuex from 'vuex'
 import axios from 'axios';
+<<<<<<< HEAD
+=======
+import VueSession from 'vue-session';
+>>>>>>> staging
 
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false;
 Vue.use(VeeValidate);
 Vue.use(Vuex);
 Vue.prototype.$axiosServer = axios.create({
-  baseURL: 'http://localhost:3000',
+  baseURL: 'https://slalom-health-api-staging.herokuapp.com',
   withCredentials: false,
   headers: {
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   }
 });
 
