@@ -32,16 +32,50 @@
                 </div>
             </div>
         </div>
+        <div class="flex-row">
+            <div class="info-section">
+                <div class="info-inner">
+                    <div class="title">
+                        What is HealthSTLX?
+                    </div>
+                    <div class="bar"></div>
+                    <div class="text">
+                        HealthSTLX is a one-day conference that explores national healthcare issues and how they impact the local St. Louis community. Thought leaders, influencers, and innovators will come together to discuss foundational themes around some of the industry’s current challenges, like patient experience and big data’s role in healthcare. We’ll create solutions for these challenges as we consider the evolving healthcare landscape.
+                    </div>
+                    <div class="note">
+                        Please provide your preferred e-mail address to stay updated with additional event details.
+                    </div>
+                    <div class="action">
+                        <div class="error" v-show="!emailExists">{{emailErrorText}}</div>
+                        <el-input class="input" placeholder="Email" v-model="email" v-if="emailButtonText === 'Submit'"></el-input>
+                        <el-button :loading="emailButtonLoading" type="primary" class="info-button" @click="handleEmailClick" plain round>{{emailButtonText}}</el-button>
+                    </div>
+                </div>
+            </div>
+            <div class="quote-section">
+                <div class="stef-pic">
+                    <img src="./assets/stef.jpg">
+                </div>
+                <div class="quote-inner">
+                    <div class="quote">
+                        "HealthSTLX will be<br>an opportunity to<br>engage with our<br>community around<br>data and patient<br>experience."
+                    </div>
+                    <div class="attribution">
+                        &mdash; Stefanie Thelen
+                    </div>
+                    <div class="title">
+                        General Manager, Slalom St. Louis
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="sponsor-section">
             <div class="title">
                 sponsor this event
             </div>
             <div class="bar"></div>
-            <div class="subtitle">
-                How to become a sponsor
-            </div>
             <div class="text">
-                This is some text that will get people to join as a sponsor.
+                Thank you for your potential interest in becoming a sponsor for HealthSTLX. In our inaugural year, we are looking forward to assembling more than 300+ healthcare executives, directors, managers, practitioners and educators to discuss and create solutions around the evolution of healthcare. We are pleased to provide a space for our community partners and organizations to connect with attendees and exhibit their latest products.
             </div>
             <div class="action">
                 <el-button type="primary" class="sponsor-button" plain round>Become a sponsor</el-button>
@@ -49,11 +83,11 @@
         </div>
         <div class="footer-section">
             <div class="pusher"></div>
-            <div class="slalom"><img style="height: 20px;" src="./assets/slalom-white.png"></div>
+            <div class="slalom"><a href="https://www.slalom.com"><img style="height: 20px;" src="./assets/slalom-white.png"></a></div>
             <div class="social">
-                <i class="fab fa-instagram"></i>
-                <i class="fab fa-twitter"></i>
-                <i class="fab fa-linkedin-in"></i>
+                <a href="https://www.instagram.com/slalomconsulting"><i class="fab fa-instagram"></i></a>
+                <a href="https://twitter.com/Slalom"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/slalom-consulting"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
     </div>
@@ -61,12 +95,52 @@
 
 <script>
 export default {
-  name: "app"
+    name: 'app',
+    data() {
+        return {
+        email: '',
+        emailExists: true,
+        emailButtonText: 'Email sign up',
+        emailErrorText: 'Please input an email address.',
+        emailButtonLoading: false
+        }
+    },
+    methods: {
+        handleEmailClick() {
+            const self = this;
+            if (this.emailButtonText === 'Email sign up') {
+                this.emailButtonText = 'Submit';
+            } else if (this.emailButtonText === 'Submit') {
+                if (this.email) {
+                    this.emailButtonLoading = true;
+                    this.$axiosServer.post('/api/email_sign_up', {
+                        email: this.email
+                    })
+                    .then(function () {
+                        self.emailButtonLoading = false;
+                        self.emailExists = true;
+                        self.emailButtonText = 'Email sign up';
+                        self.email = '';
+                    })
+                    .catch(function (error) {
+                        self.emailButtonLoading = false;
+                        self.emailErrorText = error.toString();
+                        self.emailExists = false;
+                        console.log(error);
+                        return error;
+                    });
+                } else {
+                    this.emailExists = false;
+                }
+            }
+        }
+    }
 };
 </script>
 
 <style lang="less">
     body {
+        background-color: #000;
         font-family: 'Roboto', sans-serif;
         margin: 0;
     }
@@ -75,11 +149,147 @@ export default {
     @secondary: #c100d4;
     @secondary-dark: #040024;
     @primary-light: #15a6ff;
-    @primary: #1224ff;
+    @primary-logo: #1224ff;
+    @primary: #256AEB;
     @primary-dark: #000;
 
-    @sponsor-purple: #651986;
-    @sponsor-purple-dark: #420E5D;
+    @quote-purple: #DB00E5;
+    @quote-purple-dark: #8C009A;
+
+    @sponsor-purple: #7E009C;
+    @sponsor-purple-dark: #3C0053;
+
+    .el-input__inner:focus {
+        border-color: @primary !important;
+    }
+
+    .flex-row {
+        display: flex;
+
+        .info-section {
+            width: 45vw;
+            background-color: #fff;
+            letter-spacing: 0.4px;
+            color: #333;
+
+            .info-inner {
+                padding: 0 6vw;
+
+                .title {
+                    margin-top: 3rem;
+                    font-size: 2.5rem;
+                    font-weight: 300;
+                }
+
+                .bar {
+                    margin-top: 2rem;
+                    height: 5px;
+                    width: 100px;
+                    background-color: @primary;
+                }
+
+                .text {
+                    font-size: 0.9rem;
+                    font-weight: 400;
+                    margin-top: 1rem;
+                    line-height: 2rem;
+                }
+
+                .note {
+                    margin-top: 2rem;
+                    font-size: 0.9rem;
+                    font-weight: 300;
+                    font-style: italic;
+                    display: flex;
+                }
+
+                .action {
+                    margin: 3rem 0 3rem;
+                    width: 100%;
+                    display: flex;
+                    justify-content: flex-end;
+
+                    .error {
+                        font-size: 0.9rem;
+                        color: red;
+                        height: 38px;
+                        font-weight: 400;
+                        margin-right: 10px;
+                        display: flex;
+                        align-items: center;
+                    }
+
+                    .input {
+                        width: 200px;
+                        margin-right: 10px;
+                        transition: all ease .3s;
+                        height: 38px;
+                    }
+
+                    .info-button {
+                        letter-spacing: 0.6px;
+                        font-weight: 400;
+                        font-size: 0.8rem;
+                        border-color: @primary;
+                        background-color: @primary;
+                        color: #fff;
+
+                        &:hover {
+                            background-color: #fff;
+                            color: @primary;
+                        }
+                    }
+                }
+            }
+        }
+
+        .quote-section {
+            width: 55vw;
+            background: linear-gradient(@quote-purple, @quote-purple-dark);
+            color: #fff;
+
+            .stef-pic {
+                position: absolute;
+                margin: 2rem 0 0 20vw;
+                z-index: 5;
+                opacity: 0.4;
+
+                img {
+                    width: 300px;
+                    height: 300px;
+                }
+            }
+
+            .quote-inner {
+                position: relative;
+                padding-left: 10vw;
+                z-index: 10;
+                text-shadow: .2rem .2rem .3rem fade(@secondary-dark, 20%);
+
+                .quote {
+                    margin-top: 5rem;
+                    font-size: 2rem;
+                    font-weight: 100;
+                    letter-spacing: 0.5px;
+                }
+
+                .attribution {
+                    margin-top: 2rem;
+                    font-size: 1rem;
+                    font-weight: 400;
+                    letter-spacing: 0.5px;
+                }
+
+                .title {
+                    font-style: italic;
+                    font-size: 0.7rem;
+                    font-weight: 100;
+                    letter-spacing: 1px;
+                    margin: 2px 0 3rem;
+                }
+            }
+        }
+    }
 
     .footer-section {
         display: flex;
@@ -97,6 +307,7 @@ export default {
 
         .social {
             i {
+                color: #fff;
                 cursor: pointer;
                 font-size: 1.5rem;
                 margin: 0 8px;
@@ -105,7 +316,7 @@ export default {
     }
 
     .sponsor-section {
-        padding: 0 20px;
+        padding: 0 6vw;
         text-align: center;
         display: flex;
         flex-direction: column;
@@ -123,28 +334,27 @@ export default {
         }
 
         .bar {
-            margin-top: 2.5rem;
+            margin-top: 2rem;
             height: 5px;
             width: 100px;
             background-color: #fff;
         }
 
-        .subtitle {
-            font-weight: 300;
-            font-size: 2rem;
-            margin-top: 4rem;
-        }
-
         .text {
             font-size: 0.9rem;
             font-weight: 300;
-            margin-top: 2rem;
+            margin-top: 1rem;
+            line-height: 2rem;
+            width: 600px;
         }
 
         .action {
-            margin: 6rem 0 4rem;
+            margin: 4rem 0 4rem;
 
             .sponsor-button {
+                letter-spacing: 0.6px;
+                font-weight: 400;
+                font-size: 0.8rem;
                 border-color: #fff;
                 background-color: transparent;
                 color: #fff;
@@ -279,12 +489,46 @@ export default {
     }
 
     @media (max-width: 968px) {
+        .info-section {
+            .action {
+                flex-direction: column;
+
+                div, button {
+                    align-items: flex-end !important;
+                    margin-bottom: 12px;
+                }
+
+                button {
+                    width: fit-content !important;
+                }
+            }
+        }
+
         .central-box {
             width: 30vw !important;
         }
     }
 
     @media (max-width: 800px) {
+        .info-section {
+            .action {
+                flex-direction: row !important;
+
+                div, button {
+                    align-items: center !important;
+                    margin-bottom: 0 !important;
+                }
+            }
+        }
+
+        .flex-row {
+            flex-direction: column;
+
+            .info-section, .quote-section {
+                width: 100vw;
+            }
+        }
+
         .floated-content-section {
             top: 6vh !important;
             left: 0 !important;
@@ -320,6 +564,10 @@ export default {
     }
 
     @media (max-width: 670px) {
+        .sponsor-section .text {
+            width: 100% !important;
+        }
+
         .central-box {
             width: 42vw !important;
         }
@@ -334,6 +582,17 @@ export default {
     @media (max-width: 500px) {
         .central-box {
             width: 60vw !important;
+        }
+
+        .info-section {
+            .action {
+                flex-direction: column !important;
+
+                div, button {
+                    align-items: flex-end !important;
+                    margin-bottom: 12px !important;
+                }
+            }
         }
     }
 
