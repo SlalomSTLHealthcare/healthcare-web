@@ -646,7 +646,7 @@ export default {
             position: absolute !important;
             margin: 0 !important;
 
-            .title {
+            .title span {
                 font-size: 4rem !important;
             }
 
@@ -707,7 +707,7 @@ export default {
 
     @media (max-width: 400px) {
         .floated-content-section {
-            .title {
+            .title span {
                 font-size: 3rem !important;
             }
 
@@ -730,7 +730,7 @@ export default {
         .floated-content-section {
             top: 4vh !important;
 
-            .title {
+            .title span {
                 margin-bottom: 8px !important;
                 font-size: 3rem !important;
             }
