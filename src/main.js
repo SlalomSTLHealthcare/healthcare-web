@@ -13,7 +13,7 @@ Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false;
 Vue.use(VeeValidate);
 Vue.prototype.$axiosServer = axios.create({
-  baseURL: 'http://slalom-health-api.herokuapp.com',
+  baseURL: 'https://slalom-health-api.herokuapp.com',
   withCredentials: false,
   headers: {
     'X-CSRFToken': Cookies.get('csrftoken'),
