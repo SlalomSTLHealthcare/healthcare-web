@@ -47,8 +47,9 @@
                     <div class="note">
                         Please provide your preferred e-mail address to stay updated with additional event details.
                     </div>
+                    <div class="error" v-show="!emailExists">{{emailErrorText}}</div>
                     <div class="action">
-                        <div class="error" v-show="!emailExists">{{emailErrorText}}</div>
+                        <el-input class="input" placeholder="Name" v-model="emailName" v-if="emailButtonText === 'Submit'"></el-input>
                         <el-input class="input" placeholder="Email" v-model="email" v-if="emailButtonText === 'Submit'"></el-input>
                         <el-button :disabled="emailButtonDisabled" :loading="emailButtonLoading" type="primary" :class="[emailButtonDisabled ? 'disabled-class' : '', 'info-button']" @click="handleEmailClick" plain round>{{emailButtonText}}</el-button>
                     </div>
@@ -60,7 +61,7 @@
                 </div>
                 <div class="quote-inner">
                     <div class="quote">
-                        "Health<span style="font-weight: 700;">STLX</span> will be<br>an opportunity to<br>engage with our<br>community around<br>data and patient<br>experience."
+                        "We have such a<br>conscious and caring<br>community of healthcare<br>leaders in St. Louis.<br>I’m excited for us<br>to come together<br>to learn, connect, and<br>commit to action."
                     </div>
                     <div class="attribution">
                         &mdash; Stefanie Thelen
@@ -106,6 +107,7 @@ export default {
     data() {
         return {
             email: '',
+            emailName: '',
             emailExists: true,
             emailButtonText: 'Email sign up',
             emailErrorText: 'Please input an email address.',
@@ -131,6 +133,7 @@ export default {
                 if (this.email) {
                     this.emailButtonLoading = true;
                     this.$axiosServer.post('/api/email_sign_up', {
+                        name: this.emailName,
                         email: this.email
                     })
                     .then(function () {
@@ -139,6 +142,7 @@ export default {
                         self.emailButtonText = 'Submitted!';
                         self.emailButtonDisabled = true;
                         self.email = '';
+                        self.emailName = '';
                     })
                     .catch(function (error) {
                         self.emailButtonLoading = false;
@@ -249,28 +253,26 @@ export default {
                 }
 
                 .note {
-                    margin-top: 2rem;
+                    margin: 2rem 0 2.5rem;
                     font-size: 0.9rem;
                     font-weight: 300;
                     font-style: italic;
                     display: flex;
                 }
 
+                .error {
+                    font-size: 0.9rem;
+                    color: red;
+                    font-weight: 400;
+                    display: flex;
+                    justify-content: flex-end;
+                }
+
                 .action {
-                    margin: 3rem 0 3rem;
+                    margin: 1rem 0 3rem;
                     width: 100%;
                     display: flex;
                     justify-content: flex-end;
-
-                    .error {
-                        font-size: 0.9rem;
-                        color: red;
-                        height: 38px;
-                        font-weight: 400;
-                        margin-right: 10px;
-                        display: flex;
-                        align-items: center;
-                    }
 
                     .input {
                         width: 200px;
@@ -321,7 +323,7 @@ export default {
 
             .stef-pic {
                 position: absolute;
-                margin: 2rem 0 0 20vw;
+                margin: 2rem 0 0 24vw;
                 z-index: 5;
                 opacity: 0.4;
 
@@ -333,7 +335,7 @@ export default {
 
             .quote-inner {
                 position: relative;
-                padding-left: 10vw;
+                padding: 0 10vw;
                 z-index: 10;
                 text-shadow: .2rem .2rem .3rem fade(@secondary-dark, 20%);
 
@@ -429,11 +431,12 @@ export default {
             }
 
             input {
-                background-color: #fff;
                 border-color: #fff;
                 border-radius: 20px;
                 width: 300px;
                 margin-bottom: 10px;
+                background-color: transparent;
+                color: #fff;
 
                 &::placeholder {
                     font-weight: 300;
@@ -599,6 +602,10 @@ export default {
 
     @media (max-width: 968px) {
         .info-section {
+            .error {
+                justify-content: flex-start !important;
+            }
+
             .action {
                 flex-direction: column;
 
@@ -620,6 +627,10 @@ export default {
 
     @media (max-width: 800px) {
         .info-section {
+            .error {
+                justify-content: flex-end !important;
+            }
+
             .action {
                 flex-direction: row !important;
 
@@ -694,6 +705,10 @@ export default {
         }
 
         .info-section {
+            .error {
+                justify-content: flex-start !important;
+            }
+
             .action {
                 flex-direction: column !important;
 
