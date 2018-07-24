@@ -24,7 +24,7 @@
             </div>
             <div class="floated-content-section">
                 <div class="title">
-                    <span style="font-weight: 100; font-size: 5rem;">health</span><span style="font-weight: 700; font-size: 5rem;">STLX</span>
+                    <span style="font-weight: 100; font-size: 5rem;" class="banner">health</span><span style="font-weight: 700; font-size: 5rem;" class="banner">STLX</span>
                     <br>
                     <span class="hosted">Hosted by Slalom</span>
                 </div>
@@ -646,7 +646,7 @@ export default {
             position: absolute !important;
             margin: 0 !important;
 
-            .title span {
+            .title .banner {
                 font-size: 4rem !important;
             }
 
@@ -707,7 +707,7 @@ export default {
 
     @media (max-width: 400px) {
         .floated-content-section {
-            .title span {
+            .title .banner {
                 font-size: 3rem !important;
             }
 
@@ -730,7 +730,7 @@ export default {
         .floated-content-section {
             top: 4vh !important;
 
-            .title span {
+            .title .banner {
                 margin-bottom: 8px !important;
                 font-size: 3rem !important;
             }
