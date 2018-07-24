@@ -194,8 +194,8 @@ var confirmPass = (rule, value, callback) => {
       size: '',
       donate: true,
       takeaway: '',
-      breakoutsOne: [],
-      breakoutsTwo: []
+      breakoutsOne: 0,
+      breakoutsTwo: 0
     },
       rules: {
         pass: [
@@ -207,7 +207,8 @@ var confirmPass = (rule, value, callback) => {
           ],
           checkPass: [
             {
-              required: true, validator: confirmPass, trigger: 'blur'
+              required: true, validator: confirmPass, trigger: 'blur',
+              message: 'Pleas confirm your password'
             }
           ],
           email: [
@@ -309,15 +310,17 @@ methods: {
         });
       },
       updateDataOne(updatedData) {
-        this.form.breakoutsOne= updatedData;
+        this.form.breakoutsOne= updatedData[0];
         // console.log(this.form.breakoutsOne);
       },
       updateDataTwo(updatedData){
-        this.form.breakoutsTwo=updatedData;
+        this.form.breakoutsTwo=updatedData[0];
         // console.log(this.form.breakoutsTwo);
       },
       confirm(){
         this.dialogVisible=false;
+        console.log(this.form.email);
+        this.$store.dispatch('login', this.form.email);
         this.$router.push('/');
       },
       logout(){
@@ -333,7 +336,7 @@ methods: {
                 data: {
                   email: this.$session.get('username')
                 }
-                
+
             })
               .then(function (response) {
                 console.log(response);
