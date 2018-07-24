@@ -38,7 +38,7 @@
             <div class="info-section">
                 <div class="info-inner">
                     <div class="title">
-                        What is HealthSTLX?
+                        What is Health<span style="font-weight: 700;">STLX</span>?
                     </div>
                     <div class="bar"></div>
                     <div class="text">
@@ -77,7 +77,7 @@
             </div>
             <div class="bar"></div>
             <div class="text">
-                Thank you for your potential interest in becoming a sponsor for HealthSTLX. In our inaugural year, we are looking forward to assembling more than 300+ healthcare executives, directors, managers, practitioners and educators to discuss and create solutions around the evolution of healthcare. We are pleased to provide a space for our community partners and organizations to connect with attendees and exhibit their latest products.
+                Thank you for your potential interest in becoming a sponsor for Health<span style="font-weight: 700;">STLX</span>. In our inaugural year, we are looking forward to assembling more than 300+ healthcare executives, directors, managers, practitioners and educators to discuss and create solutions around the evolution of healthcare. We are pleased to provide a space for our community partners and organizations to connect with attendees and exhibit their latest products.
             </div>
             <div class="action">
                 <div class="error" v-show="!sponsorExists">{{sponsorErrorText}}</div>
