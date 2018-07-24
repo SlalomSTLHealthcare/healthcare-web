@@ -1,7 +1,6 @@
 <template>
   <div class="registration">
     <div id="nav"></div>
-    <NavBar></NavBar>
       <h1>Welcome to HealthSTLx</h1>
       <h2>Fill out this form to register</h2>
       <Registration type="registration" class="registration-form"/>
