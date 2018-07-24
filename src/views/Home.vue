@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <NavBar></NavBar>
     <HomeOverlay/>
     <HomeSponsor/>
     <Footer/>

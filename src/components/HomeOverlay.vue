@@ -8,7 +8,7 @@
     <h1 class="main-header">HealthSTLX Summit</h1>
     <h2 class="sub-header">Working to understand the challenges facing St. Louis healthcare.</h2>
     <h3 class="date">October 24th, 2018 at the Eric P. Newman Education Center</h3>
-    <div class="action" v-if="!this.$session.exists()">
+    <div class="action" v-if="!isSignedIn">
       <el-button class="btn" plain round v-on:click="register">Register</el-button>
       <Login class="login" login_type='button'/>
     </div>
@@ -22,22 +22,19 @@
 
 <script>
 import Login from "./Login.vue";
+import { mapState } from 'vuex';
+
 export default {
   name: "HomeOverlay",
-  mounted: function() {
-    this.$root.$on("login", () => {
-      this.$forceUpdate();
-    });
-  },
+  computed: mapState({
+    isSignedIn (state){
+      return !(state.username === '');
+    }
+  }),
   methods: {
     register: function() {
-      console.log("registered!");
       this.$router.push("/registration");
     },
-    logout: function() {
-      this.$session.destroy();
-      this.$forceUpdate();
-    }
   },
   components: {
     Login

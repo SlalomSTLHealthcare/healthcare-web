@@ -1,6 +1,5 @@
 <template>
 <el-row>
-  <NavBar></NavBar>
     <h1>Sponsors</h1>
     <h3>Description of Our Sponsors</h3>
     <div class="emailLink">
