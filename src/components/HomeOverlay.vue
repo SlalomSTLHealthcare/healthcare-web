@@ -1,7 +1,6 @@
 <template>
   <el-row class="container">
   <div class="image">
-    <!-- <img src="../assets/background-1.jpg"> -->
       <span class="logo"><img src="../assets/healthstlx-mockbg.jpg"/></span>
    </div>
    <div class="overlay">
@@ -10,7 +9,7 @@
     <h3 class="date">October 24th, 2018 at the Eric P. Newman Education Center</h3>
     <div class="action" v-if="!isSignedIn">
       <el-button class="btn" plain round v-on:click="register">Register</el-button>
-      <Login class="login" login_type='button'/>
+      <Login class="login" loginType='button'/>
     </div>
     <div class="action" v-else>
       <h2 class="sub-header"> Welcome Back! </h2>

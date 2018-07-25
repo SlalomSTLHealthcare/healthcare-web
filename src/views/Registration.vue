@@ -4,7 +4,7 @@
       <h1>Welcome to HealthSTLx</h1>
       <h2>Fill out this form to register</h2>
       <Registration type="registration" class="registration-form"/>
-      <Login class="login" login_type='registration'/>
+      <Login class="login" loginType='registration'/>
   </div>
 </template>
 

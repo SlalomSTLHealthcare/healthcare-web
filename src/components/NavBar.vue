@@ -1,14 +1,16 @@
 <template>
   <div>
     <div class="menu">
-      <el-row class="logo"><img src="../assets/healthstlx-horiz.png"/></el-row>
+      <el-row class="logo">
+        <router-link to="/"><img src="../assets/healthstlx-horiz.png"/></router-link>
+      </el-row>
       <div class="menuR">
         <el-col v-if="isSignedIn">
           <el-button class="logBtn" round plain v-on:click="logout">Logout</el-button>
         </el-col>
         <el-col v-else class="optiontwo">
           <el-button class="logBtn" plain round v-on:click="registerPush">Register</el-button>
-          <Login class="logIn" login_type='button'/>
+          <Login class="logIn" loginType='button'/>
         </el-col>
         <el-col class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></el-col>
       </div>
@@ -75,7 +77,7 @@ export default {
   position: fixed;
   background-color: #fff;
   top: 0;
-  z-index: 2;
+  z-index: 15;
   width: 100%;
   justify-content: space-between;
 }
