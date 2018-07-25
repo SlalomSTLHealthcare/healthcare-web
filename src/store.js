@@ -3,9 +3,14 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
+
 export default new Vuex.Store({
   state: {
-    username: ''
+    username: '',
+    breakoutOne: '',
+    breakoutOneWaitlist: '',
+    breakoutTwo: '',
+    breakoutTwoWaitlist: ''
   },
   mutations: {
     setUsername(state, username){
@@ -13,7 +18,19 @@ export default new Vuex.Store({
     },
     resetUsername(state){
       state.username = '';
-    }
+    },
+    setBreakoutOne(state, id){
+      state.breakoutOne = id;
+    },
+    setBreakoutOneWait(state, id){
+      state.breakoutOneWaitlist = id;
+    },
+    setBreakoutTwo(state, id){
+      state.breakoutTwo = id;
+    },
+    setBreakoutTwoWait(state, id){
+      state.breakoutTwoWaitlist = id;
+    },
   },
   actions: {
     login({commit}, username){
@@ -21,6 +38,10 @@ export default new Vuex.Store({
     },
     logout({commit}){
       commit('resetUsername');
+    },
+    setBreakout({commit}, session){
+      commit(session.breakout, session.id);
     }
+
   }
 });

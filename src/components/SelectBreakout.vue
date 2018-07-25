@@ -2,8 +2,8 @@
   <div class="SelectBreakout">
     <p>{{timeSlot}}</p>
     <div class="breakout-button">
-    <el-button plain round @click="show = !show">Click here for breakout info.</el-button>
-  </div>
+      <el-button plain round @click="show = !show">Click here for breakout info.</el-button>
+    </div>
     <el-collapse-transition>
     <div class="breakout-info" v-show="show">
     <el-collapse v-model="activeName" accordion>
@@ -13,15 +13,32 @@
     </el-collapse>
   </div>
 </el-collapse-transition>
-    <el-transfer
-    :titles="['All Breakouts', 'Ranked Breakouts']"
-    :target-order="'push'"
-    v-model="selected"
-    @change="handleChange"
-    :data="computedDataRanking">
-      <!-- v-model="value"
-      :data="data"> -->
-    </el-transfer>
+    <el-select
+    v-model="selected" @change="resetWaitlist">
+      <el-option v-for="item in computedRankingData"
+        :key = "item.key"
+        :label = "item.label"
+        :value = "item.key"
+        :waitlist = "item.waitlist">
+        <span style="float: left">{{ item.label }}</span>
+        <span style="float: right; color: #ff0000" v-if="item.waitlist === true">Waitlist</span>
+      </el-option>
+    </el-select>
+    <div class="SelectBreakout" v-if="computedSelect === true">
+      <h4 style="color: #ff0000" v-if="waitSelected === ''">You have signed up for a waitlisted Breakout, please register for another session as a backup </h4>
+      <h4 v-else>Backup Breakout Session for {{ timeSlot }} </h4>
+    <el-select
+    v-model="waitSelected" @change="updateBreakouts">
+      <el-option v-for="item in computedRankingDataNoWaitlist"
+        :key = "item.key"
+        :label = "item.label"
+        :value = "item.key"
+        :waitlist = "item.waitlist">
+        <span style="float: left">{{ item.label }}</span>
+        <span style="float: right; color: #ff0000" v-if="item.waitlist === true">Waitlist</span>
+      </el-option>
+    </el-select>
+  </div>
   </div>
 </template>
 
@@ -33,7 +50,9 @@ export default {
     return {
       show: false,
       breakoutData: [],
-      selected: [],
+      selected: '',
+      waitSelected: '',
+      sessionAttendeeData: [],
       activeName: '1'
     }
   },
@@ -44,17 +63,31 @@ export default {
     })
      .catch(e => {
        console.log(e)
-     })
+     });
+  this.$axiosServer.get(`api/session_attendees`)
+    .then(response => {
+      this.sessionAttendeeData = response.data
+    })
+    .catch(e => {
+      console.log(e)
+    });
+
   },
   props: {
     timeSlot: String
   },
   computed:{
-    computedDataRanking() {
+    computedRankingData() {
       return _.map(_.filter(this.breakoutData, s => s.session_type === 'Breakout'), s => ({
         key: s.id,
         label: s.max_capacity === s.ppl_signed_up ? s.title + ' (Waitlist)' : s.title,
-        description: s.description
+        waitlist: this.isWaitlist(s.id, s.max_capacity)
+      }))
+    },
+    computedRankingDataNoWaitlist() {
+      return _.map(_.filter(this.breakoutData, s => s.session_type === 'Breakout' && !this.isWaitlist(s.id, s.max_capacity)), s => ({
+        key: s.id,
+        label: s.max_capacity === s.ppl_signed_up ? s.title + ' (Waitlist)' : s.title,
       }))
     },
     computedData() {
@@ -63,11 +96,40 @@ export default {
         label: s.title,
         description: s.description
       }))
+    },
+    computedSelect(){
+      var session = _.find(this.breakoutData, s => s.id === this.selected);
+      return (session != undefined ? (session.max_capacity - _.filter(this.sessionAttendeeData, s => s.session_id === session.id).length <= 0) : false) ;
     }
   },
   methods: {
-  handleChange() {
-    this.$emit('selected-data', this.selected)
+  isWaitlist(id, maxCapacity){
+    return maxCapacity - _.filter(this.sessionAttendeeData, s => s.session_id === id).length <= 0;
+  },
+  resetWaitlist(){
+    this.waitSelected = '';
+    this.updateBreakouts();
+  },
+  updateBreakouts(){
+    if(this.timeSlot == '10:15 am'){
+      this.$store.dispatch('setBreakout', {
+        breakout:'setBreakoutOne',
+        id: this.selected
+      });
+      this.$store.dispatch('setBreakout', {
+        breakout:'setBreakoutOneWait',
+        id: this.waitSelected
+      });
+    }else{
+      this.$store.dispatch('setBreakout', {
+        breakout:'setBreakoutTwo',
+        id: this.selected
+      });
+      this.$store.dispatch('setBreakout', {
+        breakout:'setBreakoutTwoWait',
+        id: this.waitSelected
+      });
+    }
   }
 }
 };
@@ -84,6 +146,7 @@ p {
   padding: 30px;
 }
 .breakout-button{
-  padding: 20px;
+  padding-bottom: 20px;
+  text-align: left;
 }
 </style>

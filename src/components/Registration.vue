@@ -57,11 +57,9 @@
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
-    <el-form-item  label="Rank Breakout Sessions">
-      <h1 class="ranking-header-one">Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.</h1>
-        <h2 class="ranking-header-two">Place the breakout sessions you would <i>most</i> like to attend towards the top, and place the sessions you would <i>least</i> like to attend towards the bottom.</h2> <h2 class="ranking-header-three"> You may or may not choose to not rank all of the sessions.</h2>
-      <SelectBreakout timeSlot="10:15 am" v-on:selected-data="updateDataOne"/>
-      <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
+    <el-form-item required label="Select Breakout Sessions">
+      <SelectBreakout timeSlot="10:15 am"/>
+      <SelectBreakout timeSlot="3:00 pm"/>
     </el-form-item>
     <el-form-item required label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch   v-model="form.donate"></el-switch>
@@ -131,10 +129,9 @@
       <el-input type="textarea" value="I would like to learn about St. Louis healthcare."></el-input>
     </el-form-item>
     <el-form-item  label="Rank Breakout Sessions">
-      <h1 class="ranking-header-one">Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.</h1>
-        <h2 class="ranking-header-two">Place the breakout sessions you would <i>most</i> like to attend towards the top, and place the sessions you would <i>least</i> like to attend towards the bottom.</h2> <h2 class="ranking-header-three"> You may or may not choose to not rank all of the sessions.</h2>
-      <SelectBreakout timeSlot="10:15 am" v-on:selected-data="updateDataOne"/>
-      <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
+
+      <SelectBreakout timeSlot="10:15 am"/>
+      <SelectBreakout timeSlot="3:00 pm"/>
     </el-form-item>
     <el-form-item label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch v-model="form.donate"></el-switch>
@@ -163,6 +160,7 @@ import Login from "./Login.vue";
 import SelectBreakout from "./SelectBreakout.vue";
 import axios from 'axios'
 import _ from 'underscore';
+import { mapState } from 'vuex';
 export default {
   name: "Registration",
   data() {
@@ -194,8 +192,6 @@ var confirmPass = (rule, value, callback) => {
       size: '',
       donate: true,
       takeaway: '',
-      breakoutsOne: 0,
-      breakoutsTwo: 0
     },
       rules: {
         pass: [
@@ -208,7 +204,7 @@ var confirmPass = (rule, value, callback) => {
           checkPass: [
             {
               required: true, validator: confirmPass, trigger: 'blur',
-              message: 'Pleas confirm your password'
+              message: 'Please confirm your password'
             }
           ],
           email: [
@@ -233,6 +229,25 @@ components: {
 props: {
   type: String
 },
+computed: mapState({
+  getBreakoutOne(state){
+    console.log("gb one " + state.breakoutOne);
+    return state.breakoutOne;
+  },
+  getBreakoutOneWait(state){
+    console.log("gb onewait " + state.breakoutOneWaitlist);
+    return state.breakoutOneWaitlist;
+  },
+  getBreakoutTwo(state){
+    console.log("gb two " + state.breakoutTwo);
+    return state.breakoutTwo;
+  },
+  getBreakoutTwoWait(state){
+    console.log("gb two wait " + state.breakoutTwoWaitlist);
+
+    return state.breakoutTwoWaitlist;
+  },
+}),
 methods: {
   handleSubmit(form) {
      console.log(this.form.breakoutsOne);
@@ -255,8 +270,10 @@ methods: {
               size: this.form.size,
               donate: this.form.donate,
               comment: this.form.takeaway,
-              breakout_one: this.form.breakoutsOne,
-              breakout_two: this.form.breakoutsTwo
+              breakout_one: this.getBreakoutOne,
+              breakout_oneWait: this.getBreakoutOneWait,
+              breakout_two: this.getBreakoutTwo,
+              breakout_twoWait: this.getBreakoutTwoWait
 
             })
             .then(function (response) {
@@ -309,22 +326,13 @@ methods: {
           confirmButtonText: 'OK'
         });
       },
-      updateDataOne(updatedData) {
-        this.form.breakoutsOne= updatedData[0];
-        // console.log(this.form.breakoutsOne);
-      },
-      updateDataTwo(updatedData){
-        this.form.breakoutsTwo=updatedData[0];
-        // console.log(this.form.breakoutsTwo);
-      },
       confirm(){
         this.dialogVisible=false;
-        console.log(this.form.email);
         this.$store.dispatch('login', this.form.email);
         this.$router.push('/');
       },
       logout(){
-        this.$session.destroy();
+        this.$store.dispatch('logout');
         this.$router.push('/');
       },
       deleteReg() {

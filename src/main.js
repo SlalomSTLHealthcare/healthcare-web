@@ -9,9 +9,13 @@ import VeeValidate from 'vee-validate';
 import Vuex from 'vuex'
 import axios from 'axios';
 
+const config = {
+  fieldsBagName: 'validateFields'
+}
+
 Vue.use(ElementUI, { locale })
 Vue.config.productionTip = false;
-Vue.use(VeeValidate);
+Vue.use(VeeValidate, config);
 Vue.use(Vuex);
 Vue.prototype.$axiosServer = axios.create({
   baseURL: 'http://localhost:3000',

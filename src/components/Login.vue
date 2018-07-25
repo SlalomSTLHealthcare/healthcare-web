@@ -4,7 +4,7 @@
       <p class="login-link" v-if="login_type==='registration'">Already registered? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a> to login.</p>
       <el-button class="btn" round plain v-if="login_type==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
     </div>
-    <el-dialog title="Login" :visible.sync="dialogFormVisible">
+    <el-dialog title="Login" :append-to-body="true" :visible.sync="dialogFormVisible">
       <el-form :model="form">
          <el-form-item label="Email">
            <el-input v-model="form.email" auto-complete="off"></el-input>
