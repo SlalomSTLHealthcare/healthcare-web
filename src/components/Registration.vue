@@ -73,52 +73,52 @@
 
 
   <el-card v-if="type==='profile'" class="box-card">
-    <div  slot="header">
+    <div slot="header">
       <span class="header">Profile <i class="fas fa-user-circle"></i></span>
       <span class="action-buttons">
         <el-button @click="deleteReg" type="danger" round>Delete Registration</el-button>
         <el-button @click="update=true" type="primary" round>Update</el-button>
-        <el-button v-if="update" @click="update=false" round>Save</el-button>
+        <el-button v-if="update" @click="updateRegistration" round>Save</el-button>
       </span>
     </div>
       <el-form :disabled="!update" label-position="left" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
-      <el-form-item  label="Name" >
-        <el-input  value="Eric"></el-input>
-        <el-input  label-position="top" value="Mason"></el-input>
+      <el-form-item required label="Name" >
+        <el-input v-model="form.firstName" placeholder="First Name"></el-input>
+        <el-input v-model="form.lastName" label-position="top" placeholder="Last Name"></el-input>
       </el-form-item>
       <el-form-item label="Company">
-        <el-input value="Slalom"></el-input>
+        <el-input v-model="form.company"></el-input>
       </el-form-item>
       <el-form-item label="Position">
-        <el-input  value="Intern"></el-input>
+        <el-input v-model="form.position"></el-input>
       </el-form-item>
-      <el-form-item  label="Email" prop="email">
-        <el-input value="test1@slalom.com"></el-input>
+      <el-form-item required label="Email" prop="email">
+        <el-input v-model="form.updatedEmail"></el-input>
       </el-form-item>
       <el-form-item label="Twitter">
-        <el-input  value="@eric"></el-input>
+        <el-input v-model="form.twitter" placeholder="@"></el-input>
       </el-form-item>
-      <el-form-item  size="mini" label="Attending Lunch">
+      <el-form-item required size="mini" label="Attending Lunch">
         <el-switch v-model="form.lunch"></el-switch>
       </el-form-item>
        <el-collapse-transition>
          <div v-show="form.lunch">
            <el-form-item v-show="form.lunch" size="mini" label="Dietary Restrictions">
              <el-checkbox-group v-model="form.diet">
-             <el-checkbox label="Vegetarian" checked name="type"></el-checkbox>
+             <el-checkbox label="Vegetarian" name="type"></el-checkbox>
              <el-checkbox label="Vegan" name="type"></el-checkbox>
              <el-checkbox label="Kosher" name="type"></el-checkbox>
              <el-checkbox label="Gluten Free" name="type"></el-checkbox>
            </el-checkbox-group>
-           <el-input value="Nuts" ></el-input>
+           <el-input v-model="form.allergies" placeholder="Allergies i.e tree nuts, dairy etc." ></el-input>
          </el-form-item>
        </div>
     </el-collapse-transition>
     <div></div>
-    <el-form-item label="T-Shirt Size">
-      <el-select value="M" placeholder="Please select shirt size">
+    <el-form-item  required label="T-Shirt Size">
+      <el-select v-model="form.size" placeholder="Please select shirt size">
         <el-option label="S" value="S"></el-option>
         <el-option label="M" value="M"></el-option>
         <el-option label="L" value="L"></el-option>
@@ -126,15 +126,14 @@
       </el-select>
     </el-form-item>
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
-      <el-input type="textarea" value="I would like to learn about St. Louis healthcare."></el-input>
+      <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
-    <el-form-item  label="Rank Breakout Sessions">
-
+    <el-form-item required label="Select Breakout Sessions">
       <SelectBreakout timeSlot="10:15 am"/>
       <SelectBreakout timeSlot="3:00 pm"/>
     </el-form-item>
-    <el-form-item label="I would like to opt-in to donating to United Way as part of my registration.">
-      <el-switch v-model="form.donate"></el-switch>
+    <el-form-item required label="I would like to opt-in to donating to United Way as part of my registration.">
+      <el-switch   v-model="form.donate"></el-switch>
     </el-form-item>
     </el-form>
   </el-card>
@@ -183,6 +182,7 @@ var confirmPass = (rule, value, callback) => {
       company: '',
       position: '',
       email: '',
+      updatedEmail: '',
       twitter: '',
       pass: '',
       checkPass: '',
@@ -209,19 +209,31 @@ var confirmPass = (rule, value, callback) => {
           ],
           email: [
               { required: true,
-                message: 'Please enter a valid email address.',
-                pattern:'.+\@.+\..+',
+                message: 'Passwords must be at least 8 characters and contain at least one capital letter, one lowercase letter, and one special character.',
+                pattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})',
                 trigger: 'blur'
               },
             ],
-          name: [
-              { required: true,
-                message: 'Please enter your name.',
-                trigger: 'blur'
-              },
-          ]
+            checkPass: [
+              {
+                required: true, validator: confirmPass, trigger: 'blur'
+              }
+            ],
+            email: [
+                { required: true,
+                  message: 'Please enter a valid email address.',
+                  pattern:'.+\@.+\..+',
+                  trigger: 'blur'
+                },
+              ],
+            name: [
+                { required: true,
+                  message: 'Please enter your name.',
+                  trigger: 'blur'
+                },
+            ]
+      }
     }
-  }
 },
 components: {
   SelectBreakout
@@ -247,6 +259,10 @@ computed: mapState({
 
     return state.breakoutTwoWaitlist;
   },
+  getUsername(state){
+    console.log("username " + state.username);
+    return state.username;
+  }
 }),
 methods: {
   handleSubmit(form) {
@@ -342,24 +358,58 @@ methods: {
           callback: action => {
               this.$axiosServer.delete('/auth/delete', {
                 data: {
-                  email: this.$session.get('username')
+                  email: this.getUsername
                 }
 
             })
               .then(function (response) {
                 console.log(response);
-                self.logout();
               })
               .catch(function (error) {
                 console.log(error);
-                  return error;
+                return error;
               });
-          }
-        });
+            }
+          });
 
+        },
+        updateRegistration(form){
+          var self = this;
+          this.$alert("Are you sure you want to make these changes?", {
+            confirmButtonText: 'Confirm',
+            callback: action => {
+              this.$axiosServer.put('/auth/update', {
+                updatedEmail: this.form.updatedEmail,
+                email: this.getUsername,
+                firstName: this.form.firstName,
+                lastName: this.form.lastName,
+                company: this.form.company,
+                position: this.form.position,
+                twitter: this.form.twitter,
+                lunch: this.form.lunch,
+                diet: this.form.diet,
+                allergies: this.form.allergies,
+                size: this.form.size,
+                donate: this.form.donate,
+                comment: this.form.takeaway,
+                breakout_one: this.getBreakoutOne,
+                breakout_oneWait: this.getBreakoutOneWait,
+                breakout_two: this.getBreakoutTwo,
+                breakout_twoWait: this.getBreakoutTwoWait
+            })
+            .then(function (response) {
+              console.log(response);
+              self.update=false;
+            })
+            .catch(function (error) {
+              console.log(error.response);
+              return error;
+            });
+          }
+        })
       }
-    }
-};
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
