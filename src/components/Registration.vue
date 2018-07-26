@@ -78,7 +78,7 @@
     <div  slot="header">
       <span class="header">Profile <i class="fas fa-user-circle"></i></span>
       <span class="action-buttons">
-        <el-button @click="update=true" type="primary">Update</el-button>
+        <el-button v-if ="!update" @click="update=true" type="primary">Update</el-button>
         <el-button v-if="update" @click="update=false" >Save</el-button>
       </span>
     </div>
@@ -86,40 +86,40 @@
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item  label="Name" >
-        <el-input  value="Eric"></el-input>
-        <el-input  label-position="top" value="Mason"></el-input>
+        <el-input  v-model="profForm.firstName"></el-input>
+        <el-input  label-position="top" v-model="profForm.lastName"></el-input>
       </el-form-item>
       <el-form-item label="Company">
-        <el-input value="Slalom"></el-input>
+        <el-input v-model="profForm.company"></el-input>
       </el-form-item>
       <el-form-item label="Position">
-        <el-input  value="Intern"></el-input>
+        <el-input  v-model="profForm.position"></el-input>
       </el-form-item>
       <el-form-item  label="Email" prop="email">
-        <el-input value="test1@slalom.com"></el-input>
+        <el-input v-model="profForm.email"></el-input>
       </el-form-item>
       <el-form-item label="Twitter">
-        <el-input  value="@eric"></el-input>
+        <el-input  v-model="profForm.twitter"></el-input>
       </el-form-item>
       <el-form-item  size="mini" label="Attending Lunch">
-        <el-switch v-model="form.lunch"></el-switch>
+        <el-switch v-model="profForm.lunch"></el-switch>
       </el-form-item>
        <el-collapse-transition>
          <div v-show="form.lunch">
-           <el-form-item v-show="form.lunch" size="mini" label="Dietary Restrictions">
-             <el-checkbox-group v-model="form.diet">
-             <el-checkbox label="Vegetarian" checked name="type"></el-checkbox>
+           <el-form-item v-show="profForm.lunch" size="mini" label="Dietary Restrictions">
+             <el-checkbox-group v-model="profForm.diet">
+             <el-checkbox label="Vegetarian"  name="type"></el-checkbox>
              <el-checkbox label="Vegan" name="type"></el-checkbox>
              <el-checkbox label="Kosher" name="type"></el-checkbox>
              <el-checkbox label="Gluten Free" name="type"></el-checkbox>
            </el-checkbox-group>
-           <el-input value="Nuts" ></el-input>
+           <el-input v-model="profForm.allergies" ></el-input>
          </el-form-item>
        </div>
     </el-collapse-transition>
     <div></div>
     <el-form-item   label="T-Shirt Size">
-      <el-select value="M" placeholder="Please select shirt size">
+      <el-select  v-model="profForm.size" placeholder="Please select shirt size">
         <el-option label="S" value="S"></el-option>
         <el-option label="M" value="M"></el-option>
         <el-option label="L" value="L"></el-option>
@@ -127,7 +127,7 @@
       </el-select>
     </el-form-item>
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
-      <el-input type="textarea" value="I would like to learn about St. Louis healthcare."></el-input>
+      <el-input type="textarea" v-model="profForm.takeaway"></el-input>
     </el-form-item>
     <el-form-item  label="Rank Breakout Sessions">
       <h1 class="ranking-header-one">Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.</h1>
@@ -136,7 +136,7 @@
       <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
     </el-form-item>
     <el-form-item  label="I would like to opt-in to donating to United Way as part of my registration.">
-      <el-switch   v-model="form.donate"></el-switch>
+      <el-switch   v-model="profForm.donate"></el-switch>
     </el-form-item>
     </el-form>
   </el-card>
@@ -187,6 +187,22 @@ var confirmPass = (rule, value, callback) => {
       twitter: '',
       pass: '',
       checkPass: '',
+      lunch: true,
+      diet: [],
+      allergies: '',
+      size: '',
+      donate: true,
+      takeaway: '',
+      breakoutsOne: [],
+      breakoutsTwo: []
+    },
+    profForm: {
+      firstName: '',
+      lastName: '',
+      company: '',
+      position: '',
+      email: '',
+      twitter: '',
       lunch: true,
       diet: [],
       allergies: '',
@@ -318,8 +334,44 @@ methods: {
       confirm(){
         this.dialogVisible=false;
         this.$router.push('/');
+      },
+      updateProfile(response) {
+        this.profForm.firstName= response.data[0].first_name;
+        this.profForm.lastName= response.data[0].last_name;
+        this.profForm.company= response.data[1].company;
+        this.profForm.position= response.data[1].position;
+        this.profForm.email= response.data[0].username;
+        this.profForm.twitter= response.data[0].first_name;
+        this.profForm.position= response.data[1].position;
+        this.profForm.takeaway= response.data[1].comment;
+        this.profForm.lunch= response.data[1].lunch;
+        this.profForm.diet= response.data[1].diet;
+        this.profForm.allergies= response.data[1].diet_allergy;
+        this.profForm.size= response.data[1].tshirt_size;
+        this.profForm.donate= response.data[1].donate;
+        console.log("made it to the method");
+      }
+    },
+  mounted: function () {
+    var self = this;
+    if(this.type==="profile"){
+      if(this.$session.exists()){
+        console.log(this.$session.get('username'));
+        this.$axiosServer.post('/auth/profile', {
+          email: this.$session.get('username')
+        })
+        .then(function (response) {
+          console.log(response);
+          self.updateProfile(response);
+        })
+        .catch(function (error) {
+          console.log(error.response);
+          return error;
+        });
+
       }
     }
+  }
 };
 </script>
 
