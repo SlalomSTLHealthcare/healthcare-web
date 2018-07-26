@@ -58,8 +58,8 @@
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
     <el-form-item required label="Select Breakout Sessions">
-      <SelectBreakout timeSlot="10:15 am"/>
-      <SelectBreakout timeSlot="3:00 pm"/>
+      <SelectBreakout timeSlot="10:15 am" type='register'/>
+      <SelectBreakout timeSlot="3:00 pm" type='register'/>
     </el-form-item>
     <el-form-item required label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch   v-model="form.donate"></el-switch>
@@ -129,8 +129,8 @@
       <el-input type="textarea" v-model="profForm.takeaway"></el-input>
     </el-form-item>
     <el-form-item required label="Select Breakout Sessions">
-      <SelectBreakout timeSlot="10:15 am"/>
-      <SelectBreakout timeSlot="3:00 pm"/>
+      <SelectBreakout timeSlot="10:15 am" type='profile' />
+      <SelectBreakout timeSlot="3:00 pm" type='profile' />
     </el-form-item>
     <el-form-item  label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch   v-model="profForm.donate"></el-switch>
@@ -160,7 +160,6 @@ import { mapState } from 'vuex';
 import SelectBreakout from "./SelectBreakout.vue";
 import axios from 'axios'
 import _ from 'underscore';
-import { mapState } from 'vuex';
 export default {
   name: "Registration",
   data() {
@@ -260,24 +259,19 @@ props: {
 },
 computed: mapState({
   getBreakoutOne(state){
-    console.log("gb one " + state.breakoutOne);
     return state.breakoutOne;
   },
   getBreakoutOneWait(state){
-    console.log("gb onewait " + state.breakoutOneWaitlist);
     return state.breakoutOneWaitlist;
   },
   getBreakoutTwo(state){
-    console.log("gb two " + state.breakoutTwo);
     return state.breakoutTwo;
   },
   getBreakoutTwoWait(state){
-    console.log("gb two wait " + state.breakoutTwoWaitlist);
 
     return state.breakoutTwoWaitlist;
   },
   getUsername(state){
-    console.log("username " + state.username);
     return state.username;
   }
 }),
@@ -418,8 +412,10 @@ methods: {
                     size: this.form.size,
                     donate: this.form.donate,
                     comment: this.form.takeaway,
-                    breakout_one: this.form.breakoutsOne,
-                    breakout_two: this.form.breakoutsTwo
+                    breakout_one: this.getBreakoutOneWait,
+                    breakout_oneWait: this.getBreakoutOne,
+                    breakout_two: this.getBreakoutTwo,
+                    breakout_twoWait: this.getBreakoutTwoWait
                   })
                   .then(function (response) {
                     console.log(response);
@@ -485,77 +481,80 @@ methods: {
             }
           });
         },
-      updateProfile(response) {
-        this.profForm.firstName= response.data[0].first_name;
-        this.profForm.lastName= response.data[0].last_name;
-        this.profForm.company= response.data[1].company;
-        this.profForm.position= response.data[1].position;
-        this.profForm.email= response.data[0].username;
-        this.profForm.twitter= response.data[0].first_name;
-        this.profForm.position= response.data[1].position;
-        this.profForm.takeaway= response.data[1].comment;
-        this.profForm.lunch= response.data[1].lunch;
-        this.profForm.diet= response.data[1].diet;
-        this.profForm.allergies= response.data[1].diet_allergy;
-        this.profForm.size= response.data[1].tshirt_size;
-        this.profForm.donate= response.data[1].donate;
-        console.log("made it to the method");
+      updateProfile(data) {
+        this.profForm.firstName= data.user.first_name;
+        this.profForm.lastName= data.user.last_name;
+        this.profForm.company= data.attendee.company;
+        this.profForm.position= data.attendee.position;
+        this.profForm.email= data.user.username;
+        this.profForm.twitter= data.user.first_name;
+        this.profForm.position= data.attendee.position;
+        this.profForm.takeaway= data.attendee.comment;
+        this.profForm.lunch= data.attendee.lunch;
+        this.profForm.diet= data.attendee.diet;
+        this.profForm.allergies= data.attendee.diet_allergy;
+        this.profForm.size= data.attendee.tshirt_size;
+        this.profForm.donate= data.attendee.donate;
+        var allSessionsAttendees = [];
+        var self = this;
+        this.$axiosServer.get('/api/session_attendees')
+          .then(function (response){
+            allSessionsAttendees = response.data;
+            data.sessions.forEach(function(session){
+              if(_.filter(allSessionsAttendees, s => s.session_id === session.session_id).length > session.session_max_capacity){
+                if(session.session_tag === 1){
+                  self.$store.dispatch('setBreakout', {
+                    breakout:'setBreakoutOneWait',
+                    id: session.session_id
+                  });
+                }
+                else{
+                  self.$store.dispatch('setBreakout', {
+                    breakout:'setBreakoutTwoWait',
+                    id: session.session_id
+                  });
+                }
+              }
+              else{
+                if(session.session_tag === 1){
+                  self.$store.dispatch('setBreakout', {
+                    breakout:'setBreakoutOne',
+                    id: session.session_id
+                  });
+
+                }
+                else{
+                  self.$store.dispatch('setBreakout', {
+                    breakout:'setBreakoutTwo',
+                    id: session.session_id
+                  });
+                }
+              }
+            });
+          })
+          .catch(function (error){
+            return error;
+          });
       }
     },
   mounted: function () {
     var self = this;
     if(this.type==="profile"){
       if(this.getUsername != ''){
-        console.log(this.getUsername);
         this.$axiosServer.post('/auth/profile', {
           email: this.getUsername
         })
         .then(function (response) {
-          console.log(response);
-          self.updateProfile(response);
+          self.updateProfile(response.data);
         })
         .catch(function (error) {
-          console.log(error.response);
+          console.log(error);
           return error;
         });
 
-        },
-        updateRegistration(form){
-          var self = this;
-          this.$alert("Are you sure you want to make these changes?", {
-            confirmButtonText: 'Confirm',
-            callback: action => {
-              this.$axiosServer.put('/auth/update', {
-                updatedEmail: this.form.updatedEmail,
-                email: this.getUsername,
-                firstName: this.form.firstName,
-                lastName: this.form.lastName,
-                company: this.form.company,
-                position: this.form.position,
-                twitter: this.form.twitter,
-                lunch: this.form.lunch,
-                diet: this.form.diet,
-                allergies: this.form.allergies,
-                size: this.form.size,
-                donate: this.form.donate,
-                comment: this.form.takeaway,
-                breakout_one: this.getBreakoutOne,
-                breakout_oneWait: this.getBreakoutOneWait,
-                breakout_two: this.getBreakoutTwo,
-                breakout_twoWait: this.getBreakoutTwoWait
-            })
-            .then(function (response) {
-              console.log(response);
-              self.update=false;
-            })
-            .catch(function (error) {
-              console.log(error.response);
-              return error;
-            });
-          }
-        })
-      }
+        }
   }
+}
 }
 </script>
 

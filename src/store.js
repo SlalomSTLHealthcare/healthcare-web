@@ -31,6 +31,12 @@ export default new Vuex.Store({
     setBreakoutTwoWait(state, id){
       state.breakoutTwoWaitlist = id;
     },
+    resetBreakouts(state){
+      state.breakoutOne = '';
+      state.breakoutOneWaitlist = '';
+      state.breakoutTwo= '';
+      state.breakoutTwoWaitlist = '';
+    }
   },
   actions: {
     login({commit}, username){
@@ -38,6 +44,7 @@ export default new Vuex.Store({
     },
     logout({commit}){
       commit('resetUsername');
+      commit('resetBreakouts');
     },
     setBreakout({commit}, session){
       commit(session.breakout, session.id);

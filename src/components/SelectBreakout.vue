@@ -14,7 +14,7 @@
   </div>
 </el-collapse-transition>
     <el-select
-    v-model="selected" @change="resetWaitlist">
+  :value="getBreakout" @input="resetWaitlist">
       <el-option v-for="item in computedRankingData"
         :key = "item.key"
         :label = "item.label"
@@ -28,7 +28,7 @@
       <h4 style="color: #ff0000" v-if="waitSelected === ''">You have signed up for a waitlisted Breakout, please register for another session as a backup </h4>
       <h4 v-else>Backup Breakout Session for {{ timeSlot }} </h4>
     <el-select
-    v-model="waitSelected" @change="updateBreakouts">
+    :value="getBreakoutWait" @input="updateBreakoutsWaitlist">
       <el-option v-for="item in computedRankingDataNoWaitlist"
         :key = "item.key"
         :label = "item.label"
@@ -39,11 +39,13 @@
       </el-option>
     </el-select>
   </div>
-  </div>
+
+</div>
 </template>
 
 <script>
 import _ from 'underscore';
+import { mapState } from 'vuex';
 export default {
   name: "SelectBreakout",
   data() {
@@ -56,6 +58,9 @@ export default {
       activeName: '1'
     }
   },
+  props: {
+    timeSlot: String,
+  },
   mounted: function() {
     this.$axiosServer.get(`api/sessions`)
      .then(response => {
@@ -64,19 +69,15 @@ export default {
      .catch(e => {
        console.log(e)
      });
-  this.$axiosServer.get(`api/session_attendees`)
-    .then(response => {
-      this.sessionAttendeeData = response.data
-    })
-    .catch(e => {
-      console.log(e)
-    });
-
+    this.$axiosServer.get(`api/session_attendees`)
+      .then(response => {
+        this.sessionAttendeeData = response.data
+      })
+      .catch(e => {
+        console.log(e)
+      });
   },
-  props: {
-    timeSlot: String
-  },
-  computed:{
+  computed: mapState({
     computedRankingData() {
       return _.map(_.filter(this.breakoutData, s => s.session_type === 'Breakout'), s => ({
         key: s.id,
@@ -98,38 +99,55 @@ export default {
       }))
     },
     computedSelect(){
-      var session = _.find(this.breakoutData, s => s.id === this.selected);
+      var session = _.find(this.breakoutData, s => s.id === this.getBreakout);
       return (session != undefined ? (session.max_capacity - _.filter(this.sessionAttendeeData, s => s.session_id === session.id).length <= 0) : false) ;
+    },
+    getBreakout(state){
+      console.log("below is break");
+      console.log(this.timeSlot === '10:15 am' ? state.breakoutOne : state.breakoutTwo);
+      return this.timeSlot === '10:15 am' ? state.breakoutOne : state.breakoutTwo;
+    },
+    getBreakoutWait(state){
+      console.log("below is wait");
+      console.log(this.timeSlot === '10:15 am' ? state.breakoutOneWaitlist : state.breakoutTwoWaitlist);
+      return this.timeSlot === '10:15 am' ? state.breakoutOneWaitlist : state.breakoutTwoWaitlist;
     }
-  },
+  }),
   methods: {
   isWaitlist(id, maxCapacity){
     return maxCapacity - _.filter(this.sessionAttendeeData, s => s.session_id === id).length <= 0;
   },
-  resetWaitlist(){
-    this.waitSelected = '';
-    this.updateBreakouts();
+  resetWaitlist(value){
+    this.updateBreakoutsWaitlist('');
+    this.updateBreakouts(value);
   },
-  updateBreakouts(){
+  updateBreakouts(value){
     if(this.timeSlot == '10:15 am'){
       this.$store.dispatch('setBreakout', {
         breakout:'setBreakoutOne',
-        id: this.selected
-      });
-      this.$store.dispatch('setBreakout', {
-        breakout:'setBreakoutOneWait',
-        id: this.waitSelected
+        id: value
       });
     }else{
       this.$store.dispatch('setBreakout', {
         breakout:'setBreakoutTwo',
-        id: this.selected
-      });
-      this.$store.dispatch('setBreakout', {
-        breakout:'setBreakoutTwoWait',
-        id: this.waitSelected
+        id: value
       });
     }
+    console.log("breakout : " + this.getBreakout);
+  },
+  updateBreakoutsWaitlist(value){
+    if(this.timeSlot == '10:15 am'){
+      this.$store.dispatch('setBreakout', {
+        breakout:'setBreakoutOneWait',
+        id: value
+      });
+    }else{
+      this.$store.dispatch('setBreakout', {
+        breakout:'setBreakoutTwoWait',
+        id: value
+      });
+    }
+    console.log("wait breakout : " + this.getBreakoutWait);
   }
 }
 };
