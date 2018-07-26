@@ -1,6 +1,6 @@
 <template>
     <el-container class="footer">
-        <el-row class="logoPlace">
+        <el-row class="logo">
             <a href="https://www.slalom.com/" target="_blank">
                 <img src="../assets/slalomwhite.png" alt="pic" class="slalomLogo">
             </a>
@@ -17,11 +17,11 @@
         </el-row>
         <el-row class="contact">
           <div class="underline"></div>
-          <p>Questions<i class="far fa-question-circle"></i></p>
+          <p>Information<i class="far fa-question-circle"></i></p>
           <p>emailslalom@slalom.com</p>
           <p>320 S Euclid Ave, St. Louis, MO 63110</p>
         </el-row>
-        <el-row class="socialLinks">
+        <el-row class="logo">
             <a href="https://www.linkedin.com/company/slalom-consulting/" target="_blank">
               <i class="fab fa-linkedin-in"></i>
             </a>
@@ -45,10 +45,10 @@ export default {
   name: "footer",
   computed: mapState({
     computedRegister(state) {
-      return state.username === "" ? "registration" : "profile";
+      return state.username === '' ? 'registration' : 'profile';
     },
     computedRegisterDescription(state) {
-      return state.username === "" ? "Register" : "Profile Page";
+      return state.username === '' ? 'Register' : 'Profile Page';
     }
   })
 };
@@ -58,7 +58,7 @@ export default {
 .footer {
   padding: 12px 12px;
   display: flex;
-  background: linear-gradient(#15a6ff, #1224ff);
+  background: linear-gradient(#1224ff,#c100d4) ;
   bottom: 0;
   z-index: 10;
   width: 100%;
@@ -69,9 +69,8 @@ export default {
 .slalomLogo {
   width: 150px;
 }
-.socialLinks {
-  display: block;
-  margin-top: 230px;
+.logo {
+  align-self: flex-end;
 }
 .contact {
   display: flex;
@@ -94,7 +93,7 @@ export default {
   color: #fff;
 }
 .link:hover {
-  color: #c100d4;
+  color: #040024;
 }
 .aboutBut {
   text-decoration: none;
@@ -104,9 +103,6 @@ export default {
   width: 100px;
   height: 0.25em;
   background-color: #ff00cc;
-}
-.logoPlace {
-  margin-top: 220px;
 }
 .fa-linkedin-in,
 .fa-facebook-f,
