@@ -1,6 +1,5 @@
 <template>
-<div> 
-  <NavBar></NavBar>
+<div>
   <AboutContent/>
 </div>
 </template>
@@ -19,4 +18,3 @@ export default {
   }
 };
 </script>
-

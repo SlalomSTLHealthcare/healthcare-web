@@ -1,7 +1,6 @@
 <template>
   <div>
-      <NavBar></NavBar>
-      <Schedule/>
+    <Schedule/>
   </div>
 </template>
 

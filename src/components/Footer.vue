@@ -11,9 +11,9 @@
         <el-row class="routes">
             <router-link to="/" class="link">Home</router-link>
             <router-link to="people" class="link">Speakers</router-link>
-			<router-link to="session" class="link">Breakout Sessions</router-link>
+			      <router-link to="session" class="link">Breakout Sessions</router-link>
             <router-link to="schedule" class="link">Schedule</router-link>
-            <router-link to="registration" class="link">Register</router-link>
+            <router-link :to="computedRegister" class="link">{{computedRegisterDescription}}</router-link>
             <router-link to="sponsor" class="link">Sponsors</router-link>
             <router-link to="about" class="link">About</router-link>
         </el-row>
@@ -32,20 +32,30 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: "footer",
   methods: {
     about: function() {
       this.$router.push("/about");
     }
-  }
+  },
+  computed: mapState({
+    computedRegister (state){
+      return state.username === '' ? 'registration' : 'profile';
+    },
+    computedRegisterDescription (state){
+      return state.username === '' ? 'Register' : 'Profile Page';
+    }
+  }),
 };
 </script>
 
 <style scoped lang="less">
 .footer {
   padding-left: 12px;
-  padding-bottom: 0px; 
+  padding-bottom: 0px;
   margin: 0;
   display: flex;
   align-items: center;
@@ -77,4 +87,3 @@ export default {
   color: #3336ff;
 }
 </style>
-

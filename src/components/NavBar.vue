@@ -1,14 +1,16 @@
 <template>
   <div>
     <div class="menu">
-      <span class="logo"><img src="../assets/capture1.png"/></span>
+      <el-row class="logo">
+        <router-link to="/"><img src="../assets/healthstlx-horiz.png"/></router-link>
+      </el-row>
       <div class="menuR">
-        <el-col v-if="this.$session.exists()">
-          <el-button class="logBtn" type="primary" round plain v-on:click="logout">Logout</el-button>
+        <el-col v-if="isSignedIn">
+          <el-button class="logBtn" round plain v-on:click="logout">Logout</el-button>
         </el-col>
         <el-col v-else class="optiontwo">
-          <el-button class="logBtn" type="primary" plain round v-on:click="registerPush">Register</el-button>
-          <Login class="logBtn" login_type='button'/>
+          <el-button class="logBtn" plain round v-on:click="registerPush">Register</el-button>
+          <Login class="logIn" loginType='button'/>
         </el-col>
         <el-col class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></el-col>
       </div>
@@ -21,7 +23,7 @@
               <router-link to="people">Speakers</router-link>
 			        <router-link to="session">Breakout Sessions</router-link>
               <router-link to="schedule">Schedule</router-link>
-              <router-link :to="register">{{profileRegister}}</router-link>
+              <router-link :to="computedRegister">{{computedRegisterDescription}}</router-link>
               <router-link to="sponsor">Sponsors</router-link>
               <router-link to="about">About</router-link>
 		       </div>
@@ -32,47 +34,36 @@
 
 <script>
 import Login from "./Login.vue";
+import { mapState } from 'vuex';
 
 export default {
   name: "navBar",
   data() {
     return {
       show: false,
-      register: "registration",
-      profileRegister: "Register"
     };
   },
   methods: {
     handleSelect(key, keyPath) {},
     logout: function() {
-      this.profileRegister = "Register";
-      this.$session.destroy();
-      this.emitLogin();
-      this.$forceUpdate();
+      this.$store.dispatch('logout');
+      this.$router.push("/");
     },
     registerPush: function() {
-      console.log("register");
       this.$router.push("/registration");
-    },
-    emitLogin() {
-      this.$root.$emit("login");
-    },
-    emitLogout() {
-      this.$root.$emit("logout");
     }
   },
-  mounted: function() {
-    this.$root.$on("login", () => {
-      this.register = "profile";
-      this.profileRegister = "Profile Page";
-      this.$forceUpdate();
-    }),
-      this.$root.$on("logout", () => {
-        this.register = "profile";
-        this.profileRegister = "Profile Page";
-        this.$forceUpdate();
-      });
-  },
+  computed: mapState({
+    computedRegister (state){
+      return state.username === '' ? 'registration' : 'profile';
+    },
+    computedRegisterDescription (state){
+      return state.username === '' ? 'Register' : 'Profile Page';
+    },
+    isSignedIn (state){
+      return !(state.username === '');
+    }
+  }),
   components: {
     Login
   }
@@ -80,34 +71,21 @@ export default {
 </script>
 
 <style scoped lang="less">
-.logo img {
-  height: 80px;
-  width: 320px;
-}
 .menu {
   display: flex;
   align-items: center;
   position: fixed;
   background-color: #fff;
   top: 0;
-  z-index: 2;
+  z-index: 15;
   width: 100%;
-  box-shadow: 0px 1px 1px #ccc;
   justify-content: space-between;
 }
 .menuR {
   display: flex;
 }
 .menu .menuLogo {
-  padding: 20px;
-}
-.menu .menuLogo:hover {
-  color: #e5e5e5;
-  cursor: pointer;
-}
-.optiontwo {
-  display: flex;
-  justify-content: space-around;
+  padding: 17px 10px;
 }
 .overlay i {
   color: #e5e5e5;
@@ -118,20 +96,28 @@ export default {
   cursor: pointer;
 }
 .overlay i:hover {
-  color: #ffe72c;
+  color:#15a6ff;
 }
 .logo {
   display: flex;
-  width: 300px;
-  font-weight: bold;
-  font-size: 35px;
-  color: #0040a8;
+}
+.logo img {
+  width: 200px;
+  margin-left: 15px;
+  height: 50px;
 }
 ul {
   list-style: none;
 }
 .logBtn {
-  margin: 15px 1px;
+  margin: 15px 10px;
+  height: 40px;
+  color: black;
+}
+.logIn {
+  margin: 12px 10px;
+  height: 40px;
+  color: black;
 }
 /*overlay*/
 .overlay {
@@ -156,12 +142,21 @@ ul {
   list-style: none;
   color: #34b484;
   padding: 8px 0;
+  padding: 20px;
+}
+.menu .menuLogo:hover {
+  color: #e5e5e5;
+  cursor: pointer;
+}
+.optiontwo {
+  display: flex;
+  justify-content: space-around;
   text-decoration: none;
   font-size: 30px;
   color: #f0f0f0;
 }
 a:hover {
-  color: #ffe72c;
+  color:#15a6ff;
 }
 .fade-enter-active,
 .fade-leave-active {

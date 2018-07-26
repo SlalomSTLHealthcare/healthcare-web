@@ -1,8 +1,7 @@
 <template>
   <div class="profile">
     <div id="nav"></div>
-    <NavBar></NavBar>
-      <h1>Welcome!</h1>
+      <h1>Welcome, Eric!</h1>
       <Registration type="profile"/>
   </div>
 </template>
