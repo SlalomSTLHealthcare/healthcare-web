@@ -1,8 +1,8 @@
 <template>
   <div class="login">
     <div class='message'>
-      <p class="login-link" v-if="login_type==='registration'">Already registered? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a> to login.</p>
-      <el-button class="btn" round plain v-if="login_type==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
+      <p class="login-link" v-if="loginType==='registration'">Already registered? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a> to login.</p>
+      <el-button class="btn" round plain v-if="loginType==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
     </div>
     <el-dialog title="Login" :append-to-body="true" :visible.sync="dialogFormVisible">
       <el-form :model="form">
@@ -33,7 +33,7 @@ export default {
   }
 },
 props: {
-  login_type: ''
+  loginType: ''
 },
 methods: {
   handleLogin() {
@@ -94,7 +94,7 @@ methods: {
 .login {
   z-index: 12;
 }
-.el-dialog{
+.el-dialog .el-form{
   z-index: 15;
 }
 </style>

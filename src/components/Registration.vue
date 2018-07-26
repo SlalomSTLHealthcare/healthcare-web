@@ -76,49 +76,49 @@
     <div slot="header">
       <span class="header">Profile <i class="fas fa-user-circle"></i></span>
       <span class="action-buttons">
+        <el-button v-if ="!update" @click="update=true" type="primary">Update</el-button>
+        <el-button v-if="update" @click="update=false" >Save</el-button>
         <el-button @click="deleteReg" type="danger" round>Delete Registration</el-button>
-        <el-button @click="update=true" type="primary" round>Update</el-button>
-        <el-button v-if="update" @click="updateRegistration" round>Save</el-button>
       </span>
     </div>
       <el-form :disabled="!update" label-position="left" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
-      <el-form-item required label="Name" >
-        <el-input v-model="form.firstName" placeholder="First Name"></el-input>
-        <el-input v-model="form.lastName" label-position="top" placeholder="Last Name"></el-input>
+      <el-form-item  label="Name" >
+        <el-input  v-model="profForm.firstName"></el-input>
+        <el-input  label-position="top" v-model="profForm.lastName"></el-input>
       </el-form-item>
       <el-form-item label="Company">
-        <el-input v-model="form.company"></el-input>
+        <el-input v-model="profForm.company"></el-input>
       </el-form-item>
       <el-form-item label="Position">
-        <el-input v-model="form.position"></el-input>
+        <el-input  v-model="profForm.position"></el-input>
       </el-form-item>
-      <el-form-item required label="Email" prop="email">
-        <el-input v-model="form.updatedEmail"></el-input>
+      <el-form-item  label="Email" prop="email">
+        <el-input v-model="profForm.email"></el-input>
       </el-form-item>
       <el-form-item label="Twitter">
-        <el-input v-model="form.twitter" placeholder="@"></el-input>
+        <el-input  v-model="profForm.twitter"></el-input>
       </el-form-item>
-      <el-form-item required size="mini" label="Attending Lunch">
-        <el-switch v-model="form.lunch"></el-switch>
+      <el-form-item  size="mini" label="Attending Lunch">
+        <el-switch v-model="profForm.lunch"></el-switch>
       </el-form-item>
        <el-collapse-transition>
          <div v-show="form.lunch">
-           <el-form-item v-show="form.lunch" size="mini" label="Dietary Restrictions">
-             <el-checkbox-group v-model="form.diet">
-             <el-checkbox label="Vegetarian" name="type"></el-checkbox>
+           <el-form-item v-show="profForm.lunch" size="mini" label="Dietary Restrictions">
+             <el-checkbox-group v-model="profForm.diet">
+             <el-checkbox label="Vegetarian"  name="type"></el-checkbox>
              <el-checkbox label="Vegan" name="type"></el-checkbox>
              <el-checkbox label="Kosher" name="type"></el-checkbox>
              <el-checkbox label="Gluten Free" name="type"></el-checkbox>
            </el-checkbox-group>
-           <el-input v-model="form.allergies" placeholder="Allergies i.e tree nuts, dairy etc." ></el-input>
+           <el-input v-model="profForm.allergies" ></el-input>
          </el-form-item>
        </div>
     </el-collapse-transition>
     <div></div>
-    <el-form-item  required label="T-Shirt Size">
-      <el-select v-model="form.size" placeholder="Please select shirt size">
+    <el-form-item   label="T-Shirt Size">
+      <el-select  v-model="profForm.size" placeholder="Please select shirt size">
         <el-option label="S" value="S"></el-option>
         <el-option label="M" value="M"></el-option>
         <el-option label="L" value="L"></el-option>
@@ -126,14 +126,14 @@
       </el-select>
     </el-form-item>
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
-      <el-input type="textarea" v-model="form.takeaway"></el-input>
+      <el-input type="textarea" v-model="profForm.takeaway"></el-input>
     </el-form-item>
     <el-form-item required label="Select Breakout Sessions">
       <SelectBreakout timeSlot="10:15 am"/>
       <SelectBreakout timeSlot="3:00 pm"/>
     </el-form-item>
-    <el-form-item required label="I would like to opt-in to donating to United Way as part of my registration.">
-      <el-switch   v-model="form.donate"></el-switch>
+    <el-form-item  label="I would like to opt-in to donating to United Way as part of my registration.">
+      <el-switch   v-model="profForm.donate"></el-switch>
     </el-form-item>
     </el-form>
   </el-card>
@@ -156,6 +156,7 @@
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
 import Login from "./Login.vue";
+import { mapState } from 'vuex';
 import SelectBreakout from "./SelectBreakout.vue";
 import axios from 'axios'
 import _ from 'underscore';
@@ -192,6 +193,22 @@ var confirmPass = (rule, value, callback) => {
       size: '',
       donate: true,
       takeaway: '',
+    },
+    profForm: {
+      firstName: '',
+      lastName: '',
+      company: '',
+      position: '',
+      email: '',
+      twitter: '',
+      lunch: true,
+      diet: [],
+      allergies: '',
+      size: '',
+      donate: true,
+      takeaway: '',
+      breakoutsOne: [],
+      breakoutsTwo: []
     },
       rules: {
         pass: [
@@ -291,36 +308,132 @@ methods: {
               breakout_two: this.getBreakoutTwo,
               breakout_twoWait: this.getBreakoutTwoWait
 
-            })
-            .then(function (response) {
-              console.log(response);
-              self.successfulRegister();
-            })
-            .catch(function (error) {
-              console.log(error.response);
-              self.failedRegistration(error.response.statusText);
-              return error;
-            });
-            this.$axiosServer.post('https://doshner-developer-edition.na73.force.com/services/apexrest/HealthSTLxLeads', {
-              firstName: this.form.firstName,
-              lastName: this.form.lastName,
-              company: this.form.company,
-              title: this.form.position,
-              email: this.form.email
-            })
-            .then(function (response) {
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-              return error;
-            });
-          } else {
-            this.emptyFields();
-            return false;
-          }
-        });
+              })
+              .then(function (response) {
+                console.log(response);
+                self.successfulRegister();
+              })
+              .catch(function (error) {
+                console.log(error.response);
+                self.failedRegistration(error.response.statusText);
+                return error;
+              });
+              this.$axiosServer.post('https://doshner-developer-edition.na73.force.com/services/apexrest/HealthSTLxLeads', {
+                firstName: this.form.firstName,
+                lastName: this.form.lastName,
+                company: this.form.company,
+                title: this.form.position,
+                email: this.form.email
+              })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+                return error;
+              });
+            } else {
+              this.emptyFields();
+              return false;
+            }
+          });
 
+        },
+        successfulRegister() {
+          // this.$alert(<a target="_blank" title="Share on LinkedIn" href="http://www.linkedin.com/shareArticle?mini=true&url={{https://stackoverflow.com/questions/29744036/how-to-create-a-simple-share-linkedin-link}}"></a>, "Registration Successful", {
+          //   dangerouslyUseHTMLString: true,
+          //   confirmButtonText: 'OK',
+          //   callback: action => {
+          //     this.$router.push('/');
+          //   }
+          // });
+          this.dialogVisible=true;
+        },
+        emptyFields() {
+          this.$alert("Please complete all required fields", "Registration failed", {
+            confirmButtonText: 'OK'
+          });
+        },
+        failedRegistration(message) {
+          this.$alert(message, "Registration Failed", {
+            confirmButtonText: 'OK'
+          });
+        },
+        updateDataOne(updatedData) {
+          this.form.breakoutsOne= updatedData;
+          // console.log(this.form.breakoutsOne);
+        },
+        updateDataTwo(updatedData){
+          this.form.breakoutsTwo=updatedData;
+          // console.log(this.form.breakoutsTwo);
+        },
+        confirm(){
+          this.dialogVisible=false;
+          this.$store.dispatch('login', this.form.email);
+          this.$router.push('/');
+        },
+        logout(){
+          this.$store.dispatch('logout');
+          this.$router.push('/');
+        },
+        deleteReg() {
+          var self = this;
+          this.$alert("Are you sure you want to delete your registration?", {
+            confirmButtonText: 'Delete',
+            callback: action => {
+                this.$axiosServer.delete('/auth/delete', {
+                  data: {
+                    email: this.getUsername
+                  }
+              })
+                .then(function (response) {
+                  console.log(response);
+                  self.logout();
+                })
+                .catch(function (error) {
+                  console.log(error);
+                    return error;
+                });
+            }
+          });
+        },
+        updateRegistration(form){
+          var self = this;
+          this.$alert("Are you sure you want to make these changes?", {
+            confirmButtonText: 'Confirm',
+            callback: action => {
+              this.$refs[form].validate((valid) => {
+                if (valid) {
+                  this.$axiosServer.put('/auth/update', {
+                    updatedEmail: this.form.updatedEmail,
+                    email: this.form.email,
+                    firstName: this.form.firstName,
+                    lastName: this.form.lastName,
+                    company: this.form.company,
+                    position: this.form.position,
+                    twitter: this.form.twitter,
+                    lunch: this.form.lunch,
+                    diet: this.form.diet,
+                    allergies: this.form.allergies,
+                    size: this.form.size,
+                    donate: this.form.donate,
+                    comment: this.form.takeaway,
+                    breakout_one: this.form.breakoutsOne,
+                    breakout_two: this.form.breakoutsTwo
+                  })
+                  .then(function (response) {
+                    console.log(response);
+                    self.update=false;
+                  })
+                  .catch(function (error) {
+                    console.log(error.response);
+                    return error;
+                  });
+              }
+
+              })
+            }
+          });
       },
       successfulRegister() {
         // this.$alert(<a target="_blank" title="Share on LinkedIn" href="http://www.linkedin.com/shareArticle?mini=true&url={{https://stackoverflow.com/questions/29744036/how-to-create-a-simple-share-linkedin-link}}"></a>, "Registration Successful", {
@@ -371,6 +484,40 @@ methods: {
               });
             }
           });
+        },
+      updateProfile(response) {
+        this.profForm.firstName= response.data[0].first_name;
+        this.profForm.lastName= response.data[0].last_name;
+        this.profForm.company= response.data[1].company;
+        this.profForm.position= response.data[1].position;
+        this.profForm.email= response.data[0].username;
+        this.profForm.twitter= response.data[0].first_name;
+        this.profForm.position= response.data[1].position;
+        this.profForm.takeaway= response.data[1].comment;
+        this.profForm.lunch= response.data[1].lunch;
+        this.profForm.diet= response.data[1].diet;
+        this.profForm.allergies= response.data[1].diet_allergy;
+        this.profForm.size= response.data[1].tshirt_size;
+        this.profForm.donate= response.data[1].donate;
+        console.log("made it to the method");
+      }
+    },
+  mounted: function () {
+    var self = this;
+    if(this.type==="profile"){
+      if(this.getUsername != ''){
+        console.log(this.getUsername);
+        this.$axiosServer.post('/auth/profile', {
+          email: this.getUsername
+        })
+        .then(function (response) {
+          console.log(response);
+          self.updateProfile(response);
+        })
+        .catch(function (error) {
+          console.log(error.response);
+          return error;
+        });
 
         },
         updateRegistration(form){
