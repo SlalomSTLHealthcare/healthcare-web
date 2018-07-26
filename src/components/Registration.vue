@@ -78,49 +78,49 @@
     <div slot="header">
       <span class="header">Profile <i class="fas fa-user-circle"></i></span>
       <span class="action-buttons">
+        <el-button v-if ="!update" @click="update=true" type="primary">Update</el-button>
+        <el-button v-if="update" @click="update=false" >Save</el-button>
         <el-button @click="deleteReg" type="danger" round>Delete Registration</el-button>
-        <el-button @click="update=true" type="primary" round>Update</el-button>
-        <el-button v-if="update" @click="updateRegistration" round>Save</el-button>
       </span>
     </div>
       <el-form :disabled="!update" label-position="left" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item  label="Name" >
-        <el-input  value="Eric"></el-input>
-        <el-input  label-position="top" value="Mason"></el-input>
+        <el-input  v-model="profForm.firstName"></el-input>
+        <el-input  label-position="top" v-model="profForm.lastName"></el-input>
       </el-form-item>
       <el-form-item label="Company">
-        <el-input value="Slalom"></el-input>
+        <el-input v-model="profForm.company"></el-input>
       </el-form-item>
       <el-form-item label="Position">
-        <el-input  value="Intern"></el-input>
+        <el-input  v-model="profForm.position"></el-input>
       </el-form-item>
       <el-form-item  label="Email" prop="email">
-        <el-input value="test1@slalom.com"></el-input>
+        <el-input v-model="profForm.email"></el-input>
       </el-form-item>
       <el-form-item label="Twitter">
-        <el-input  value="@eric"></el-input>
+        <el-input  v-model="profForm.twitter"></el-input>
       </el-form-item>
       <el-form-item  size="mini" label="Attending Lunch">
-        <el-switch v-model="form.lunch"></el-switch>
+        <el-switch v-model="profForm.lunch"></el-switch>
       </el-form-item>
        <el-collapse-transition>
          <div v-show="form.lunch">
-           <el-form-item v-show="form.lunch" size="mini" label="Dietary Restrictions">
-             <el-checkbox-group v-model="form.diet">
-             <el-checkbox label="Vegetarian" checked name="type"></el-checkbox>
+           <el-form-item v-show="profForm.lunch" size="mini" label="Dietary Restrictions">
+             <el-checkbox-group v-model="profForm.diet">
+             <el-checkbox label="Vegetarian"  name="type"></el-checkbox>
              <el-checkbox label="Vegan" name="type"></el-checkbox>
              <el-checkbox label="Kosher" name="type"></el-checkbox>
              <el-checkbox label="Gluten Free" name="type"></el-checkbox>
            </el-checkbox-group>
-           <el-input value="Nuts" ></el-input>
+           <el-input v-model="profForm.allergies" ></el-input>
          </el-form-item>
        </div>
     </el-collapse-transition>
     <div></div>
-    <el-form-item label="T-Shirt Size">
-      <el-select value="M" placeholder="Please select shirt size">
+    <el-form-item   label="T-Shirt Size">
+      <el-select  v-model="profForm.size" placeholder="Please select shirt size">
         <el-option label="S" value="S"></el-option>
         <el-option label="M" value="M"></el-option>
         <el-option label="L" value="L"></el-option>
@@ -128,7 +128,7 @@
       </el-select>
     </el-form-item>
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
-      <el-input type="textarea" value="I would like to learn about St. Louis healthcare."></el-input>
+      <el-input type="textarea" v-model="profForm.takeaway"></el-input>
     </el-form-item>
     <el-form-item  label="Rank Breakout Sessions">
       <h1 class="ranking-header-one">Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.</h1>
@@ -136,8 +136,8 @@
       <SelectBreakout timeSlot="10:15 am" v-on:selected-data="updateDataOne"/>
       <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
     </el-form-item>
-    <el-form-item label="I would like to opt-in to donating to United Way as part of my registration.">
-      <el-switch v-model="form.donate"></el-switch>
+    <el-form-item  label="I would like to opt-in to donating to United Way as part of my registration.">
+      <el-switch   v-model="profForm.donate"></el-switch>
     </el-form-item>
     </el-form>
   </el-card>
@@ -160,72 +160,86 @@
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 <script>
 import Login from "./Login.vue";
+import { mapState } from 'vuex';
 import SelectBreakout from "./SelectBreakout.vue";
 import axios from 'axios'
 import _ from 'underscore';
 export default {
   name: "Registration",
   data() {
-  var confirmPass = (rule, value, callback) => {
-    if (value === '') {
-      callback(new Error('Please input the password again'));
-    } else if (value !== this.form.pass) {
-      callback(new Error('Two passwords don\'t match'));
-    } else {
-      callback();
-    }
-  };
-    return {
-      login: true,
-      dialogVisible: false,
-      update: false,
-      form: {
-        updatedEmail: '',
-        updatedFirst: '',
-        updatedLast: '',
-        firstName: '',
-        lastName: '',
-        company: '',
-        position: '',
-        email: '',
-        twitter: '',
-        pass: '',
-        checkPass: '',
-        lunch: true,
-        diet: [],
-        allergies: '',
-        size: '',
-        donate: true,
-        takeaway: '',
-        breakoutsOne: [],
-        breakoutsTwo: []
-      },
-        rules: {
-          pass: [
-              { required: true,
-                message: 'Passwords must be at least 8 characters and contain at least one capital letter, one lowercase letter, and one special character.',
-                pattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})',
-                trigger: 'blur'
-              },
-            ],
-            checkPass: [
-              {
-                required: true, validator: confirmPass, trigger: 'blur'
-              }
-            ],
-            email: [
-                { required: true,
-                  message: 'Please enter a valid email address.',
-                  pattern:'.+\@.+\..+',
-                  trigger: 'blur'
-                },
-              ],
-            name: [
-                { required: true,
-                  message: 'Please enter your name.',
-                  trigger: 'blur'
-                },
-            ]
+var confirmPass = (rule, value, callback) => {
+  if (value === '') {
+    callback(new Error('Please input the password again'));
+  } else if (value !== this.form.pass) {
+    callback(new Error('Two passwords don\'t match'));
+  } else {
+    callback();
+  }
+};
+  return {
+    login: true,
+    dialogVisible: false,
+    update: false,
+    form: {
+      firstName: '',
+      lastName: '',
+      company: '',
+      position: '',
+      email: '',
+      twitter: '',
+      pass: '',
+      checkPass: '',
+      lunch: true,
+      diet: [],
+      allergies: '',
+      size: '',
+      donate: true,
+      takeaway: '',
+      breakoutsOne: [],
+      breakoutsTwo: []
+    },
+    profForm: {
+      firstName: '',
+      lastName: '',
+      company: '',
+      position: '',
+      email: '',
+      twitter: '',
+      lunch: true,
+      diet: [],
+      allergies: '',
+      size: '',
+      donate: true,
+      takeaway: '',
+      breakoutsOne: [],
+      breakoutsTwo: []
+    },
+      rules: {
+        pass: [
+            { required: true,
+              message: 'Passwords must be at least 8 characters and contain at least one capital letter, one lowercase letter, and one special character.',
+              pattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})',
+              trigger: 'blur'
+            },
+          ],
+        checkPass: [
+          {
+            required: true, validator: confirmPass, trigger: 'blur'
+          }
+        ],
+        email: [
+            { required: true,
+              message: 'Please enter a valid email address.',
+              pattern:'.+\@.+\..+',
+              trigger: 'blur'
+            },
+          ],
+        name: [
+            { required: true,
+              message: 'Please enter your name.',
+              trigger: 'blur'
+            },
+        ]
       }
     }
   },
@@ -321,10 +335,11 @@ export default {
         },
         confirm(){
           this.dialogVisible=false;
+          this.$store.dispatch('login', this.form.email);
           this.$router.push('/');
         },
         logout(){
-          this.$session.destroy();
+          this.$store.dispatch('logout');
           this.$router.push('/');
         },
         deleteReg() {
@@ -334,7 +349,7 @@ export default {
             callback: action => {
                 this.$axiosServer.delete('/auth/delete', {
                   data: {
-                    email: this.$session.get('username')
+                    email: this.getUsername
                   }
               })
                 .then(function (response) {
@@ -383,11 +398,84 @@ export default {
               }
 
               })
-            } 
+            }
           });
-        }
-  }
-}
+      },
+      successfulRegister() {
+        // this.$alert(<a target="_blank" title="Share on LinkedIn" href="http://www.linkedin.com/shareArticle?mini=true&url={{https://stackoverflow.com/questions/29744036/how-to-create-a-simple-share-linkedin-link}}"></a>, "Registration Successful", {
+        //   dangerouslyUseHTMLString: true,
+        //   confirmButtonText: 'OK',
+        //   callback: action => {
+        //     this.$router.push('/');
+        //   }
+        // });
+        this.dialogVisible=true;
+      },
+      emptyFields() {
+        this.$alert("Please complete all required fields", "Registration failed", {
+          confirmButtonText: 'OK'
+        });
+      },
+      failedRegistration(message) {
+        this.$alert(message, "Registration Failed", {
+          confirmButtonText: 'OK'
+        });
+      },
+      updateDataOne(updatedData) {
+        this.form.breakoutsOne= updatedData;
+        // console.log(this.form.breakoutsOne);
+      },
+      updateDataTwo(updatedData){
+        this.form.breakoutsTwo=updatedData;
+        // console.log(this.form.breakoutsTwo);
+      },
+      confirm(){
+        this.dialogVisible=false;
+        this.$router.push('/');
+      },
+      updateProfile(response) {
+        this.profForm.firstName= response.data[0].first_name;
+        this.profForm.lastName= response.data[0].last_name;
+        this.profForm.company= response.data[1].company;
+        this.profForm.position= response.data[1].position;
+        this.profForm.email= response.data[0].username;
+        this.profForm.twitter= response.data[0].first_name;
+        this.profForm.position= response.data[1].position;
+        this.profForm.takeaway= response.data[1].comment;
+        this.profForm.lunch= response.data[1].lunch;
+        this.profForm.diet= response.data[1].diet;
+        this.profForm.allergies= response.data[1].diet_allergy;
+        this.profForm.size= response.data[1].tshirt_size;
+        this.profForm.donate= response.data[1].donate;
+        console.log("made it to the method");
+      }
+    },
+  mounted: function () {
+    var self = this;
+    if(this.type==="profile"){
+      if(this.getUsername != ''){
+        console.log(this.getUsername);
+        this.$axiosServer.post('/auth/profile', {
+          email: this.getUsername
+        })
+        .then(function (response) {
+          console.log(response);
+          self.updateProfile(response);
+        })
+        .catch(function (error) {
+          console.log(error.response);
+          return error;
+        });
+
+      }
+    }
+  },
+  computed: mapState({
+    getUsername(state){
+      return state.username;
+    }
+  })
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
