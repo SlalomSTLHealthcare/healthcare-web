@@ -22,10 +22,10 @@ export default {
 
 <style lang="less">
 body {
+  font-family: 'Roboto', sans-serif;
   margin: 0;
 }
 #app {
-  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

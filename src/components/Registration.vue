@@ -57,11 +57,9 @@
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
-    <el-form-item  label="Rank Breakout Sessions">
-      <h1 class="ranking-header-one">Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.</h1>
-        <h2 class="ranking-header-two">Place the breakout sessions you would <i>most</i> like to attend towards the top, and place the sessions you would <i>least</i> like to attend towards the bottom.</h2> <h2 class="ranking-header-three"> You may or may not choose to not rank all of the sessions.</h2>
-      <SelectBreakout timeSlot="10:15 am" v-on:selected-data="updateDataOne"/>
-      <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
+    <el-form-item required label="Select Breakout Sessions">
+      <SelectBreakout timeSlot="10:15 am" type='register'/>
+      <SelectBreakout timeSlot="3:00 pm" type='register'/>
     </el-form-item>
     <el-form-item required label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch   v-model="form.donate"></el-switch>
@@ -79,7 +77,7 @@
       <span class="header">Profile <i class="fas fa-user-circle"></i></span>
       <span class="action-buttons">
         <el-button v-if ="!update" @click="update=true" type="primary">Update</el-button>
-        <el-button v-if="update" @click="update=false" >Save</el-button>
+        <el-button v-if="update" @click="updateRegistration" >Save</el-button>
         <el-button @click="deleteReg" type="danger" round>Delete Registration</el-button>
       </span>
     </div>
@@ -130,11 +128,9 @@
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
       <el-input type="textarea" v-model="profForm.takeaway"></el-input>
     </el-form-item>
-    <el-form-item  label="Rank Breakout Sessions">
-      <h1 class="ranking-header-one">Please rank the breakout sessions you would like to attend by selecting a session from the left-hand list, and moving it over to the right-hand list in the order of your choosing.</h1>
-        <h2 class="ranking-header-two">Place the breakout sessions you would <i>most</i> like to attend towards the top, and place the sessions you would <i>least</i> like to attend towards the bottom.</h2> <h2 class="ranking-header-three"> You may or may not choose to not rank all of the sessions.</h2>
-      <SelectBreakout timeSlot="10:15 am" v-on:selected-data="updateDataOne"/>
-      <SelectBreakout timeSlot="3:00 pm" v-on:selected-data="updateDataTwo"/>
+    <el-form-item required label="Select Breakout Sessions">
+      <SelectBreakout timeSlot="10:15 am" type='profile' />
+      <SelectBreakout timeSlot="3:00 pm" type='profile' />
     </el-form-item>
     <el-form-item  label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch   v-model="profForm.donate"></el-switch>
@@ -186,6 +182,7 @@ var confirmPass = (rule, value, callback) => {
       company: '',
       position: '',
       email: '',
+
       twitter: '',
       pass: '',
       checkPass: '',
@@ -195,15 +192,13 @@ var confirmPass = (rule, value, callback) => {
       size: '',
       donate: true,
       takeaway: '',
-      breakoutsOne: [],
-      breakoutsTwo: []
     },
     profForm: {
+      email: '',
       firstName: '',
       lastName: '',
       company: '',
       position: '',
-      email: '',
       twitter: '',
       lunch: true,
       diet: [],
@@ -222,57 +217,90 @@ var confirmPass = (rule, value, callback) => {
               trigger: 'blur'
             },
           ],
-        checkPass: [
-          {
-            required: true, validator: confirmPass, trigger: 'blur'
-          }
-        ],
-        email: [
-            { required: true,
-              message: 'Please enter a valid email address.',
-              pattern:'.+\@.+\..+',
-              trigger: 'blur'
-            },
+          checkPass: [
+            {
+              required: true, validator: confirmPass, trigger: 'blur',
+              message: 'Please confirm your password'
+            }
           ],
-        name: [
-            { required: true,
-              message: 'Please enter your name.',
-              trigger: 'blur'
-            },
-        ]
+          email: [
+              { required: true,
+                message: 'Passwords must be at least 8 characters and contain at least one capital letter, one lowercase letter, and one special character.',
+                pattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})',
+                trigger: 'blur'
+              },
+            ],
+            checkPass: [
+              {
+                required: true, validator: confirmPass, trigger: 'blur'
+              }
+            ],
+            email: [
+                { required: true,
+                  message: 'Please enter a valid email address.',
+                  pattern:'.+\@.+\..+',
+                  trigger: 'blur'
+                },
+              ],
+            name: [
+                { required: true,
+                  message: 'Please enter your name.',
+                  trigger: 'blur'
+                },
+            ]
       }
     }
+},
+components: {
+  SelectBreakout
+},
+props: {
+  type: String
+},
+computed: mapState({
+  getBreakoutOne(state){
+    return state.breakoutOne;
   },
-  components: {
-    SelectBreakout
+  getBreakoutOneWait(state){
+    return state.breakoutOneWaitlist;
   },
-  props: {
-    type: String
+  getBreakoutTwo(state){
+    return state.breakoutTwo;
   },
-  methods: {
-    handleSubmit(form) {
+  getBreakoutTwoWait(state){
+
+    return state.breakoutTwoWaitlist;
+  },
+  getUsername(state){
+    return state.username;
+  }
+}),
+methods: {
+  handleSubmit(form) {
+     console.log(this.form.breakoutsOne);
       console.log(this.form.breakoutsOne);
-      console.log(this.form.breakoutsOne);
-      var self = this;
-      this.$refs[form].validate((valid) => {
-            if (valid) {
-              this.$axiosServer.post('/auth/register', {
-                email: this.form.email,
-                password: this.form.pass,
-                firstName: this.form.firstName,
-                lastName: this.form.lastName,
-                company: this.form.company,
-                position: this.form.position,
-                twitter: this.form.twitter,
-                checkPass: this.form.checkPass,
-                lunch: this.form.lunch,
-                diet: this.form.diet,
-                allergies: this.form.allergies,
-                size: this.form.size,
-                donate: this.form.donate,
-                comment: this.form.takeaway,
-                breakout_one: this.form.breakoutsOne,
-                breakout_two: this.form.breakoutsTwo
+    var self = this;
+    this.$refs[form].validate((valid) => {
+          if (valid) {
+            this.$axiosServer.post('/auth/register', {
+              email: this.form.email,
+              password: this.form.pass,
+              firstName: this.form.firstName,
+              lastName: this.form.lastName,
+              company: this.form.company,
+              position: this.form.position,
+              twitter: this.form.twitter,
+              checkPass: this.form.checkPass,
+              lunch: this.form.lunch,
+              diet: this.form.diet,
+              allergies: this.form.allergies,
+              size: this.form.size,
+              donate: this.form.donate,
+              comment: this.form.takeaway,
+              breakout_one: this.getBreakoutOne,
+              breakout_oneWait: this.getBreakoutOneWait,
+              breakout_two: this.getBreakoutTwo,
+              breakout_twoWait: this.getBreakoutTwoWait
 
               })
               .then(function (response) {
@@ -363,29 +391,29 @@ var confirmPass = (rule, value, callback) => {
             }
           });
         },
-        updateRegistration(form){
+        updateRegistration(){
           var self = this;
           this.$alert("Are you sure you want to make these changes?", {
             confirmButtonText: 'Confirm',
             callback: action => {
-              this.$refs[form].validate((valid) => {
-                if (valid) {
                   this.$axiosServer.put('/auth/update', {
-                    updatedEmail: this.form.updatedEmail,
-                    email: this.form.email,
-                    firstName: this.form.firstName,
-                    lastName: this.form.lastName,
-                    company: this.form.company,
-                    position: this.form.position,
-                    twitter: this.form.twitter,
-                    lunch: this.form.lunch,
-                    diet: this.form.diet,
-                    allergies: this.form.allergies,
-                    size: this.form.size,
-                    donate: this.form.donate,
-                    comment: this.form.takeaway,
-                    breakout_one: this.form.breakoutsOne,
-                    breakout_two: this.form.breakoutsTwo
+                    updatedEmail: this.profForm.email,
+                    email: this.getUsername,
+                    firstName: this.profForm.firstName,
+                    lastName: this.profForm.lastName,
+                    company: this.profForm.company,
+                    position: this.profForm.position,
+                    twitter: this.profForm.twitter,
+                    lunch: this.profForm.lunch,
+                    diet: this.profForm.diet,
+                    allergies: this.profForm.allergies,
+                    size: this.profForm.size,
+                    donate: this.profForm.donate,
+                    comment: this.profForm.takeaway,
+                    breakout_one: this.getBreakoutOne,
+                    breakout_oneWait: this.getBreakoutOneWait,
+                    breakout_two: this.getBreakoutTwo,
+                    breakout_twoWait: this.getBreakoutTwoWait
                   })
                   .then(function (response) {
                     console.log(response);
@@ -395,9 +423,6 @@ var confirmPass = (rule, value, callback) => {
                     console.log(error.response);
                     return error;
                   });
-              }
-
-              })
             }
           });
       },
@@ -421,61 +446,117 @@ var confirmPass = (rule, value, callback) => {
           confirmButtonText: 'OK'
         });
       },
-      updateDataOne(updatedData) {
-        this.form.breakoutsOne= updatedData;
-        // console.log(this.form.breakoutsOne);
-      },
-      updateDataTwo(updatedData){
-        this.form.breakoutsTwo=updatedData;
-        // console.log(this.form.breakoutsTwo);
-      },
       confirm(){
         this.dialogVisible=false;
+        this.$store.dispatch('login', this.form.email);
         this.$router.push('/');
       },
-      updateProfile(response) {
-        this.profForm.firstName= response.data[0].first_name;
-        this.profForm.lastName= response.data[0].last_name;
-        this.profForm.company= response.data[1].company;
-        this.profForm.position= response.data[1].position;
-        this.profForm.email= response.data[0].username;
-        this.profForm.twitter= response.data[0].first_name;
-        this.profForm.position= response.data[1].position;
-        this.profForm.takeaway= response.data[1].comment;
-        this.profForm.lunch= response.data[1].lunch;
-        this.profForm.diet= response.data[1].diet;
-        this.profForm.allergies= response.data[1].diet_allergy;
-        this.profForm.size= response.data[1].tshirt_size;
-        this.profForm.donate= response.data[1].donate;
-        console.log("made it to the method");
+      logout(){
+        this.$store.dispatch('logout');
+        this.$router.push('/');
+      },
+      deleteReg() {
+        var self = this;
+        this.$alert("Are you sure you want to delete your registration?", {
+          confirmButtonText: 'Delete',
+          callback: action => {
+              this.$axiosServer.delete('/auth/delete', {
+                data: {
+                  email: this.getUsername
+                }
+
+            })
+              .then(function (response) {
+                console.log(response);
+              })
+              .catch(function (error) {
+                console.log(error);
+                return error;
+              });
+            }
+          });
+        },
+      updateProfile(data) {
+        this.$store.dispatch('getProfile', data.attendee.id);
+        this.profForm.firstName= data.user.first_name;
+        this.profForm.lastName= data.user.last_name;
+        this.profForm.company= data.attendee.company;
+        this.profForm.position= data.attendee.position;
+        this.profForm.email= this.getUsername;
+        this.profForm.twitter= data.user.first_name;
+        this.profForm.position= data.attendee.position;
+        this.profForm.takeaway= data.attendee.comment;
+        this.profForm.lunch= data.attendee.lunch;
+        this.profForm.diet= data.attendee.diet;
+        this.profForm.allergies= data.attendee.diet_allergy;
+        this.profForm.size= data.attendee.tshirt_size;
+        this.profForm.donate= data.attendee.donate;
+        var allSessionsAttendees = [];
+        var self = this;
+        var oneTagNum = _.filter(data.sessions, s => s.session_tag === 1).length;
+        var twoTagNum = _.filter(data.sessions, s => s.session_tag === 2).length;
+
+        this.$axiosServer.get('/api/session_attendees')
+          .then(function (response){
+            allSessionsAttendees = response.data;
+            data.sessions.forEach(function(session){
+              if(session.session_tag === 1){
+                self.computeAndUpdateSessions(oneTagNum, session, allSessionsAttendees);
+              }
+              else{
+                self.computeAndUpdateSessions(twoTagNum, session, allSessionsAttendees);
+
+              }
+            });
+          })
+          .catch(function (error){
+            return error;
+          });
+      },
+      computeAndUpdateSessions(tagNum, session, allSessions){
+        var breakoutSetting = session.session_tag === 1 ? 'setBreakoutOne' : 'setBreakoutTwo';
+        if(tagNum === 1){
+          this.$store.dispatch('setBreakout', {
+            breakout: breakoutSetting,
+            id: session.session_id
+          });
+        }
+        else{
+          var allSessionsWithId = _.filter(allSessions, s => s.session_id === session.session_id);
+          if(allSessionsWithId.length > session.session_max_capacity){
+              this.$store.dispatch('setBreakout', {
+                breakout: breakoutSetting,
+                id: session.session_id
+              });
+          }
+          else{
+            this.$store.dispatch('setBreakout', {
+              breakout: breakoutSetting + 'Wait',
+              id: session.session_id
+            });
+          }
+        }
       }
     },
   mounted: function () {
     var self = this;
     if(this.type==="profile"){
       if(this.getUsername != ''){
-        console.log(this.getUsername);
         this.$axiosServer.post('/auth/profile', {
           email: this.getUsername
         })
         .then(function (response) {
-          console.log(response);
-          self.updateProfile(response);
+          self.updateProfile(response.data);
         })
         .catch(function (error) {
-          console.log(error.response);
+          console.log(error);
           return error;
         });
 
-      }
-    }
-  },
-  computed: mapState({
-    getUsername(state){
-      return state.username;
-    }
-  })
-};
+        }
+  }
+}
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
