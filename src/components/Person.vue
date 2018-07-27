@@ -11,8 +11,8 @@
               <div style="padding: 10px;">
                 <div class="name">{{ name }}</div>
                 <div>
-                  <a :href="twitter" target="_blank"><img src="../assets/twitter.png" class="imageLogo"></a>
-                  <a :href="linkedin" target="_blank"><img src="../assets/linkedin.png" class="imageLogo"></a>
+                  <a :href="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                  <a :href="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 </div>
                 <div class="button">
                   <el-button type="text">{{ company }}</el-button>
@@ -85,7 +85,6 @@ a {
   line-height: 1.4;
   text-align: left;
 }
-
 .button {
   padding: 0;
   text-align: left;
@@ -96,9 +95,10 @@ a {
   margin-left: auto;
   margin-right: auto;
 }
-.imageLogo {
-  width: 80px;
-  height: 80px;
-  display: inline;
+.fa-linkedin-in,
+.fa-twitter {
+  padding: 5px 10px;
+  color: #490043;
+  font-size: 25px;
 }
 </style>

@@ -2,7 +2,7 @@
   <div class="home">
     <HomeOverlay/>
     <HomeSponsor/>
-    <Footer/>
+    <!-- <Footer/> -->
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
     Login
   },
   methods: {
-    about: function(){
+    about: function() {
       this.$router.push("/about");
     }
   }
@@ -31,7 +31,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-div{
+div {
   margin: 0px;
 }
 </style>
