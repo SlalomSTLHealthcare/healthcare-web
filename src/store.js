@@ -10,7 +10,8 @@ export default new Vuex.Store({
     breakoutOne: '',
     breakoutOneWaitlist: '',
     breakoutTwo: '',
-    breakoutTwoWaitlist: ''
+    breakoutTwoWaitlist: '',
+    attendeeId: ''
   },
   mutations: {
     setUsername(state, username){
@@ -18,6 +19,12 @@ export default new Vuex.Store({
     },
     resetUsername(state){
       state.username = '';
+    },
+    setAttendee(state, id){
+      state.attendeeId = id;
+    },
+    resetAttendee(state){
+      state.attendeeId = '';
     },
     setBreakoutOne(state, id){
       state.breakoutOne = id;
@@ -45,9 +52,13 @@ export default new Vuex.Store({
     logout({commit}){
       commit('resetUsername');
       commit('resetBreakouts');
+      commit('resetAttendee');
     },
     setBreakout({commit}, session){
       commit(session.breakout, session.id);
+    },
+    getProfile({commit}, id){
+      commit('setAttendee', id);
     }
 
   }

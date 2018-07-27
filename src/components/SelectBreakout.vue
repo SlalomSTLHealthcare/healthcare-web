@@ -13,6 +13,7 @@
     </el-collapse>
   </div>
 </el-collapse-transition>
+    <h4 v-if="onWaitlist === true" style="color: #ff0000">Waitlist</h4>
     <el-select
   :value="getBreakout" @input="resetWaitlist">
       <el-option v-for="item in computedRankingData"
@@ -25,7 +26,7 @@
       </el-option>
     </el-select>
     <div class="SelectBreakout" v-if="computedSelect === true">
-      <h4 style="color: #ff0000" v-if="waitSelected === ''">You have signed up for a waitlisted Breakout, please register for another session as a backup </h4>
+      <h4 style="color: #ff0000" v-if="getBreakoutWait === ''">You have signed up for a waitlisted Breakout, please register for another session as a backup </h4>
       <h4 v-else>Backup Breakout Session for {{ timeSlot }} </h4>
     <el-select
     :value="getBreakoutWait" @input="updateBreakoutsWaitlist">
@@ -52,14 +53,16 @@ export default {
     return {
       show: false,
       breakoutData: [],
-      selected: '',
-      waitSelected: '',
       sessionAttendeeData: [],
       activeName: '1'
     }
   },
   props: {
     timeSlot: String,
+    type: {
+      defualt: "register",
+      type: String
+    }
   },
   mounted: function() {
     this.$axiosServer.get(`api/sessions`)
@@ -81,14 +84,14 @@ export default {
     computedRankingData() {
       return _.map(_.filter(this.breakoutData, s => s.session_type === 'Breakout'), s => ({
         key: s.id,
-        label: s.max_capacity === s.ppl_signed_up ? s.title + ' (Waitlist)' : s.title,
+        label: s.title,
         waitlist: this.isWaitlist(s.id, s.max_capacity)
       }))
     },
     computedRankingDataNoWaitlist() {
       return _.map(_.filter(this.breakoutData, s => s.session_type === 'Breakout' && !this.isWaitlist(s.id, s.max_capacity)), s => ({
         key: s.id,
-        label: s.max_capacity === s.ppl_signed_up ? s.title + ' (Waitlist)' : s.title,
+        label: s.title,
       }))
     },
     computedData() {
@@ -103,14 +106,21 @@ export default {
       return (session != undefined ? (session.max_capacity - _.filter(this.sessionAttendeeData, s => s.session_id === session.id).length <= 0) : false) ;
     },
     getBreakout(state){
-      console.log("below is break");
-      console.log(this.timeSlot === '10:15 am' ? state.breakoutOne : state.breakoutTwo);
       return this.timeSlot === '10:15 am' ? state.breakoutOne : state.breakoutTwo;
     },
     getBreakoutWait(state){
-      console.log("below is wait");
-      console.log(this.timeSlot === '10:15 am' ? state.breakoutOneWaitlist : state.breakoutTwoWaitlist);
       return this.timeSlot === '10:15 am' ? state.breakoutOneWaitlist : state.breakoutTwoWaitlist;
+    },
+    getAttendeeId(state){
+      return state.attendeeId;
+    },
+    onWaitlist(){
+      if(this.type === 'profile'){
+        var sortedSessionAttendee = _.sortBy(_.filter(this.sessionAttendeeData, s => s.session_id === this.getBreakout), function(session){return session.date_signedup});
+        var session = _.find(sortedSessionAttendee, s => s.attendee_id === this.getAttendeeId);
+        return (session != undefined ? _.indexOf(sortedSessionAttendee, session) >= session.session_max_capacity : false);
+      }
+      return false;
     }
   }),
   methods: {
@@ -133,7 +143,6 @@ export default {
         id: value
       });
     }
-    console.log("breakout : " + this.getBreakout);
   },
   updateBreakoutsWaitlist(value){
     if(this.timeSlot == '10:15 am'){
@@ -147,8 +156,8 @@ export default {
         id: value
       });
     }
-    console.log("wait breakout : " + this.getBreakoutWait);
-  }
+  },
+
 }
 };
 </script>

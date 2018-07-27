@@ -77,7 +77,7 @@
       <span class="header">Profile <i class="fas fa-user-circle"></i></span>
       <span class="action-buttons">
         <el-button v-if ="!update" @click="update=true" type="primary">Update</el-button>
-        <el-button v-if="update" @click="update=false" >Save</el-button>
+        <el-button v-if="update" @click="updateRegistration" >Save</el-button>
         <el-button @click="deleteReg" type="danger" round>Delete Registration</el-button>
       </span>
     </div>
@@ -182,7 +182,7 @@ var confirmPass = (rule, value, callback) => {
       company: '',
       position: '',
       email: '',
-      updatedEmail: '',
+
       twitter: '',
       pass: '',
       checkPass: '',
@@ -194,11 +194,11 @@ var confirmPass = (rule, value, callback) => {
       takeaway: '',
     },
     profForm: {
+      email: '',
       firstName: '',
       lastName: '',
       company: '',
       position: '',
-      email: '',
       twitter: '',
       lunch: true,
       diet: [],
@@ -391,29 +391,27 @@ methods: {
             }
           });
         },
-        updateRegistration(form){
+        updateRegistration(){
           var self = this;
           this.$alert("Are you sure you want to make these changes?", {
             confirmButtonText: 'Confirm',
             callback: action => {
-              this.$refs[form].validate((valid) => {
-                if (valid) {
                   this.$axiosServer.put('/auth/update', {
-                    updatedEmail: this.form.updatedEmail,
-                    email: this.form.email,
-                    firstName: this.form.firstName,
-                    lastName: this.form.lastName,
-                    company: this.form.company,
-                    position: this.form.position,
-                    twitter: this.form.twitter,
-                    lunch: this.form.lunch,
-                    diet: this.form.diet,
-                    allergies: this.form.allergies,
-                    size: this.form.size,
-                    donate: this.form.donate,
-                    comment: this.form.takeaway,
-                    breakout_one: this.getBreakoutOneWait,
-                    breakout_oneWait: this.getBreakoutOne,
+                    updatedEmail: this.profForm.email,
+                    email: this.getUsername,
+                    firstName: this.profForm.firstName,
+                    lastName: this.profForm.lastName,
+                    company: this.profForm.company,
+                    position: this.profForm.position,
+                    twitter: this.profForm.twitter,
+                    lunch: this.profForm.lunch,
+                    diet: this.profForm.diet,
+                    allergies: this.profForm.allergies,
+                    size: this.profForm.size,
+                    donate: this.profForm.donate,
+                    comment: this.profForm.takeaway,
+                    breakout_one: this.getBreakoutOne,
+                    breakout_oneWait: this.getBreakoutOneWait,
                     breakout_two: this.getBreakoutTwo,
                     breakout_twoWait: this.getBreakoutTwoWait
                   })
@@ -425,9 +423,6 @@ methods: {
                     console.log(error.response);
                     return error;
                   });
-              }
-
-              })
             }
           });
       },
@@ -482,11 +477,12 @@ methods: {
           });
         },
       updateProfile(data) {
+        this.$store.dispatch('getProfile', data.attendee.id);
         this.profForm.firstName= data.user.first_name;
         this.profForm.lastName= data.user.last_name;
         this.profForm.company= data.attendee.company;
         this.profForm.position= data.attendee.position;
-        this.profForm.email= data.user.username;
+        this.profForm.email= this.getUsername;
         this.profForm.twitter= data.user.first_name;
         this.profForm.position= data.attendee.position;
         this.profForm.takeaway= data.attendee.comment;
@@ -497,44 +493,49 @@ methods: {
         this.profForm.donate= data.attendee.donate;
         var allSessionsAttendees = [];
         var self = this;
+        var oneTagNum = _.filter(data.sessions, s => s.session_tag === 1).length;
+        var twoTagNum = _.filter(data.sessions, s => s.session_tag === 2).length;
+
         this.$axiosServer.get('/api/session_attendees')
           .then(function (response){
             allSessionsAttendees = response.data;
             data.sessions.forEach(function(session){
-              if(_.filter(allSessionsAttendees, s => s.session_id === session.session_id).length > session.session_max_capacity){
-                if(session.session_tag === 1){
-                  self.$store.dispatch('setBreakout', {
-                    breakout:'setBreakoutOneWait',
-                    id: session.session_id
-                  });
-                }
-                else{
-                  self.$store.dispatch('setBreakout', {
-                    breakout:'setBreakoutTwoWait',
-                    id: session.session_id
-                  });
-                }
+              if(session.session_tag === 1){
+                self.computeAndUpdateSessions(oneTagNum, session, allSessionsAttendees);
               }
               else{
-                if(session.session_tag === 1){
-                  self.$store.dispatch('setBreakout', {
-                    breakout:'setBreakoutOne',
-                    id: session.session_id
-                  });
+                self.computeAndUpdateSessions(twoTagNum, session, allSessionsAttendees);
 
-                }
-                else{
-                  self.$store.dispatch('setBreakout', {
-                    breakout:'setBreakoutTwo',
-                    id: session.session_id
-                  });
-                }
               }
             });
           })
           .catch(function (error){
             return error;
           });
+      },
+      computeAndUpdateSessions(tagNum, session, allSessions){
+        var breakoutSetting = session.session_tag === 1 ? 'setBreakoutOne' : 'setBreakoutTwo';
+        if(tagNum === 1){
+          this.$store.dispatch('setBreakout', {
+            breakout: breakoutSetting,
+            id: session.session_id
+          });
+        }
+        else{
+          var allSessionsWithId = _.filter(allSessions, s => s.session_id === session.session_id);
+          if(allSessionsWithId.length > session.session_max_capacity){
+              this.$store.dispatch('setBreakout', {
+                breakout: breakoutSetting,
+                id: session.session_id
+              });
+          }
+          else{
+            this.$store.dispatch('setBreakout', {
+              breakout: breakoutSetting + 'Wait',
+              id: session.session_id
+            });
+          }
+        }
       }
     },
   mounted: function () {
