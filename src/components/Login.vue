@@ -52,7 +52,7 @@ methods: {
       self.failedLogin(error.response.statusText);
       return error;
     });
-    },
+  },
   successfulLogin() {
     this.dialogFormVisible = false;
     this.$alert("Welcome back to HealthSTLx!", "Login Successful", {
@@ -64,6 +64,7 @@ methods: {
     });
     console.log(this.$store.state);
     this.$store.dispatch('login', this.form.email);
+    this.$store.dispatch('obtainToken', this.form.email);
   },
   failedLogin(errorMessage) {
     this.dialogFormVisible = true,
@@ -72,7 +73,16 @@ methods: {
       confirmButtonText: 'OK',
     });
   }
-  }
+  },
+  computed: mapState({
+    getUsername(state){
+      return state.username;
+    },
+    updateToken(state, newToken){
+      localStorage.setItem('username', newToken);
+      state.jwt = newToken;
+    }
+  })
 };
 </script>
 
