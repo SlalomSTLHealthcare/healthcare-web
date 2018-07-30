@@ -19,13 +19,13 @@
         <div class="overlay" v-if="show" v-on:click="show = !show">
         <i class="fas fa-times fa-2x"></i>
 	         <div class="wrap">
-              <router-link to="/">Home</router-link>
-              <router-link to="people">Speakers</router-link>
-			        <router-link to="session">Breakout Sessions</router-link>
-              <router-link to="schedule">Schedule</router-link>
-              <router-link :to="computedRegister">{{computedRegisterDescription}}</router-link>
-              <router-link to="sponsor">Sponsors</router-link>
-              <router-link to="about">About</router-link>
+              <router-link class="nav-links" to="/">Home</router-link>
+              <router-link class="nav-links" to="about">About</router-link>
+              <router-link class="nav-links" :to="computedRegister">{{computedRegisterDescription}}</router-link>
+              <router-link class="nav-links" to="people">Speakers</router-link>
+			        <router-link class="nav-links" to="session">Breakout Sessions</router-link>
+              <router-link class="nav-links" to="schedule">Schedule</router-link>
+              <router-link class="nav-links" to="sponsor">Sponsors</router-link>
 		       </div>
 	      </div>
     </transition>
@@ -55,13 +55,13 @@ export default {
   },
   computed: mapState({
     computedRegister (state){
-      return state.username === '' ? 'registration' : 'profile';
+      return state.jwt === null ? 'registration' : 'profile';
     },
     computedRegisterDescription (state){
-      return state.username === '' ? 'Register' : 'Profile Page';
+      return state.jwt === null ? 'Register' : 'Profile Page';
     },
     isSignedIn (state){
-      return !(state.username === '');
+      return !(state.jwt === null);
     }
   }),
   components: {
@@ -140,9 +140,10 @@ ul {
 }
 .wrap a {
   list-style: none;
-  color: #34b484;
-  padding: 8px 0;
-  padding: 20px;
+  color: #fff;
+  padding: 20px 0;
+  text-decoration: none;
+  font-size: 30px;
 }
 .menu .menuLogo:hover {
   color: #e5e5e5;
@@ -164,5 +165,9 @@ a:hover {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
+}
+.nav-links{
+  color: #fff;
+
 }
 </style>

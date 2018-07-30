@@ -11,21 +11,29 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
+import { mapState } from 'vuex';
 export default {
   name: "app",
   components: {
     NavBar,
     Footer
-  }
+  },
+  mounted(){
+  },
+  computed: mapState({
+    getToken(state){
+      return state.jwt;
+    }
+  }),
 };
 </script>
 
 <style lang="less">
 body {
+  font-family: 'Roboto', sans-serif;
   margin: 0;
 }
 #app {
-  font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

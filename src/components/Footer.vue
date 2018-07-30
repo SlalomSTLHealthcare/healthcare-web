@@ -58,7 +58,7 @@ export default {
 .footer {
   padding: 12px 12px;
   display: flex;
-  background: linear-gradient(#1224ff,#c100d4) ;
+  background: black ;
   bottom: 0;
   z-index: 10;
   width: 100%;

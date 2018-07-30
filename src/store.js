@@ -7,41 +7,67 @@ import axios from "axios";
 Vue.use(VueAxios, axios);
 Vue.use(Vuex);
 
+
 export default new Vuex.Store({
   state: {
-    username: '',
-    jwt: localStorage.getItem('username'),
+    breakoutOne: '',
+    breakoutOneWaitlist: '',
+    breakoutTwo: '',
+    breakoutTwoWaitlist: '',
+    attendeeId: '',
+    jwt: localStorage.getItem('t'),
     endpoints: {
       obtainJWT: 'http://localhost:3000/auth/obtain_token',
       refreshJWT: 'http://localhost:3000/auth/refresh_token'
     }
   },
   mutations: {
-    setUsername(state, username){
-      state.username = username;
+    setAttendee(state, id){
+      state.attendeeId = id;
     },
-    resetUsername(state){
-      state.username = '';
+    resetAttendee(state){
+      state.attendeeId = '';
+    },
+    setBreakoutOne(state, id){
+      state.breakoutOne = id;
+    },
+    setBreakoutOneWait(state, id){
+      state.breakoutOneWaitlist = id;
+    },
+    setBreakoutTwo(state, id){
+      state.breakoutTwo = id;
+    },
+    setBreakoutTwoWait(state, id){
+      state.breakoutTwoWaitlist = id;
+    },
+    resetBreakouts(state){
+      state.breakoutOne = '';
+      state.breakoutOneWaitlist = '';
+      state.breakoutTwo= '';
+      state.breakoutTwoWaitlist = '';
     },
     updateToken(state, newToken){
-      localStorage.setItem('username', newToken);
+      localStorage.setItem('t', newToken);
       state.jwt = newToken;
     },
     removeToken(state){
-      localStorage.removeItem('username');
+      localStorage.removeItem('t');
       state.jwt = null;
     }
   },
   actions: {
-    login({commit}, username){
-      commit('setUsername', username);
-    },
     logout({commit}){
-      commit('resetUsername');
+      commit('resetBreakouts');
+      commit('resetAttendee');
+      commit('removeToken');
     },
-    obtainToken(username){
+    loginToken({commit}, token){
+      commit('updateToken', token);
+    },
+    obtainToken({commit}, person){
       const payload = {
-        username: username
+        username: person.username,
+        password: person.password
       }
       axios.post(this.state.endpoints.obtainJWT, payload)
         .then((response)=>{
@@ -63,21 +89,28 @@ export default new Vuex.Store({
             console.log(error)
           })
     },
-    inspectToken(){
+    inspectToken({commit, dispatch}){
       const token = this.state.jwt;
       if(token){
-        const decoded = jwt_decode(token);
         const exp = decoded.exp
-        const orig_iat = decode.orig_iat
+        const orig_iat = decoded.orig_iat
         if(exp - (Date.now()/1000) < 1800 && (Date.now()/1000) - orig_iat < 628200){
-          this.dispatch('refreshToken')
+          dispatch('refreshToken');
         } else if (exp -(Date.now()/1000) < 1800){
-          // DO NOTHING, DO NOT REFRESH          
+          // DO NOTHING, DO NOT REFRESH
         } else {
-          this.dipatch('login')
+
           // PROMPT USER TO RE-LOGIN, THIS ELSE CLAUSE COVERS THE CONDITION WHERE A TOKEN IS EXPIRED AS WELL
         }
       }
+
+    },
+    setBreakout({commit}, session){
+      commit(session.breakout, session.id);
+    },
+    getProfile({commit}, id){
+      commit('setAttendee', id);
     }
+
   }
 });

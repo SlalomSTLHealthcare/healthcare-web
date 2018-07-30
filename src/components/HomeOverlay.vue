@@ -27,7 +27,7 @@ export default {
   name: "HomeOverlay",
   computed: mapState({
     isSignedIn (state){
-      return !(state.username === '');
+      return !(state.jwt === null);
     }
   }),
   methods: {

@@ -6,7 +6,7 @@
   <el-row class="session">
     <li v-for="session in sessionData" :key="session.id" v-if="session.session_type == sessionType" >
       <Session :title="session.title" :time="session.time" :roomNumber="session.room_num" :description="session.description" :imgSource="session.image_loc" :maxCapacity="session.max_capacity"
-      :signedUp="session.ppl_signed_up"/>
+      :signedUp="computeSignedUp(session.id)"/>
     </li>
   </el-row>
 </el-row>
@@ -14,6 +14,7 @@
 
 <script>
 import Session from '@/components/Session.vue';
+import _ from 'underscore';
 export default {
   name: "Sessions",
   components: {
@@ -24,7 +25,8 @@ export default {
   },
   data() {
     return {
-      sessionData: []
+      sessionData: [],
+      sessionAttendeeData: []
     };
   },
   props: {
@@ -37,11 +39,22 @@ export default {
         .then(response => {
           // JSON responses are automatically parsed.
           this.sessionData = response.data;
-          console.log(this.sessionData[0].image_loc);
         })
         .catch(e => {
           return e;
         });
+      this.$axiosServer
+        .get(`api/session_attendees`)
+        .then(response => {
+          // JSON responses are automatically parsed.
+          this.sessionAttendeeData = response.data;
+        })
+        .catch(e => {
+          return e;
+        });
+    },
+    computeSignedUp: function(id){
+      return _.filter(this.sessionAttendeeData, s => s.session_id === id).length;
     }
   }
 };
