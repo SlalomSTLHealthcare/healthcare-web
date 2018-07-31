@@ -17,8 +17,8 @@ export default new Vuex.Store({
     attendeeId: '',
     jwt: localStorage.getItem('t'),
     endpoints: {
-      obtainJWT: 'http://localhost:3000/auth/obtain_token',
-      refreshJWT: 'http://localhost:3000/auth/refresh_token'
+      obtainJWT: 'https://slalom-health-api-staging.herokuapp.com/auth/obtain_token',
+      refreshJWT: 'https://slalom-health-api-staging.herokuapp.com/auth/refresh_token'
     }
   },
   mutations: {
