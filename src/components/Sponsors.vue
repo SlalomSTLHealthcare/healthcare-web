@@ -32,12 +32,14 @@ export default {
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
+  margin-bottom: 55px;
 }
 ul {
   padding: 0;
 }
 li {
   list-style-type: none;
+  padding: 10px;
 
 }
  h2 {

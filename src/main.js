@@ -18,13 +18,12 @@ Vue.config.productionTip = false;
 Vue.use(VeeValidate, config);
 Vue.use(Vuex);
 Vue.prototype.$axiosServer = axios.create({
-  baseURL: 'https://slalom-health-api-staging.herokuapp.com',
+  baseURL: 'https://slalom-health-api-staging.herokuapp.com/',
   withCredentials: false,
   headers: {
     "Content-Type": "application/json"
   }
 });
-
 // Make Axios play nice with Django CSRF
 
 new Vue({

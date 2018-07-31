@@ -70,18 +70,16 @@
     </el-form>
   </el-card>
 
-
-
   <el-card v-if="type==='profile'" class="box-card">
     <div slot="header">
       <span class="header">Profile <i class="fas fa-user-circle"></i></span>
       <span class="action-buttons">
-        <el-button v-if ="!update" @click="update=true" type="primary">Update</el-button>
-        <el-button v-if="update" @click="updateRegistration" >Save</el-button>
+        <el-button v-if ="!update" @click="update=true" type="primary" round>Update</el-button>
+        <el-button v-if="update" @click="updateRegistration" round>Save</el-button>
         <el-button @click="deleteReg" type="danger" round>Delete Registration</el-button>
       </span>
     </div>
-      <el-form :disabled="!update" label-position="left" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
+      <el-form :disabled="!update" label-position="left" ref="form" @submit.prevent="handleSubmit" :model="profForm" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item  label="Name" >
@@ -117,7 +115,7 @@
        </div>
     </el-collapse-transition>
     <div></div>
-    <el-form-item   label="T-Shirt Size">
+    <el-form-item label="T-Shirt Size">
       <el-select  v-model="profForm.size" placeholder="Please select shirt size">
         <el-option label="S" value="S"></el-option>
         <el-option label="M" value="M"></el-option>
@@ -144,10 +142,8 @@
   width="30%">
   <span>Thank you for registering for HealthSTLx!</span>
   <span slot="footer" class="dialog-footer">
-     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://slalom-health-summit-staging.herokuapp.com/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" round>Share on LinkedIn</el-button></a>
-     <!-- <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false"><el-button icon="el-icon-share" type="primary" round>Share on Twitter</el-button></a> -->
-     <!-- <a target="_blank" href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-hashtags="#HealthSTLx" data-related="Slalom" data-show-count="false">Tweet</a> -->
-     <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-related="Slalom" data-show-count="false"><el-button plain icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
+     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://slalom-health-summit-staging.herokuapp.com/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" class="share-button" round>Share on LinkedIn</el-button></a>
+     <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-related="Slalom" data-show-count="false"><el-button plain class="share-button" icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
     <el-button type="primary" @click="confirm">Confirm</el-button>
   </span>
 </el-dialog>
@@ -182,7 +178,6 @@ var confirmPass = (rule, value, callback) => {
       company: '',
       position: '',
       email: '',
-
       twitter: '',
       pass: '',
       checkPass: '',
@@ -206,8 +201,6 @@ var confirmPass = (rule, value, callback) => {
       size: '',
       donate: true,
       takeaway: '',
-      breakoutsOne: [],
-      breakoutsTwo: []
     },
       rules: {
         pass: [
@@ -223,18 +216,6 @@ var confirmPass = (rule, value, callback) => {
               message: 'Please confirm your password'
             }
           ],
-          email: [
-              { required: true,
-                message: 'Passwords must be at least 8 characters and contain at least one capital letter, one lowercase letter, and one special character.',
-                pattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})',
-                trigger: 'blur'
-              },
-            ],
-            checkPass: [
-              {
-                required: true, validator: confirmPass, trigger: 'blur'
-              }
-            ],
             email: [
                 { required: true,
                   message: 'Please enter a valid email address.',
@@ -273,6 +254,9 @@ computed: mapState({
   },
   getUsername(state){
     return state.username;
+  },
+  getToken(state){
+    return state.jwt;
   }
 }),
 methods: {
@@ -334,13 +318,6 @@ methods: {
 
         },
         successfulRegister() {
-          // this.$alert(<a target="_blank" title="Share on LinkedIn" href="http://www.linkedin.com/shareArticle?mini=true&url={{https://stackoverflow.com/questions/29744036/how-to-create-a-simple-share-linkedin-link}}"></a>, "Registration Successful", {
-          //   dangerouslyUseHTMLString: true,
-          //   confirmButtonText: 'OK',
-          //   callback: action => {
-          //     this.$router.push('/');
-          //   }
-          // });
           this.dialogVisible=true;
         },
         emptyFields() {
@@ -353,17 +330,13 @@ methods: {
             confirmButtonText: 'OK'
           });
         },
-        updateDataOne(updatedData) {
-          this.form.breakoutsOne= updatedData;
-          // console.log(this.form.breakoutsOne);
-        },
-        updateDataTwo(updatedData){
-          this.form.breakoutsTwo=updatedData;
-          // console.log(this.form.breakoutsTwo);
-        },
         confirm(){
           this.dialogVisible=false;
           this.$store.dispatch('login', this.form.email);
+          this.$store.dispatch('obtainToken', {
+            username: this.form.email,
+            password: this.form.pass
+          });
           this.$router.push('/');
         },
         logout(){
@@ -375,11 +348,15 @@ methods: {
           this.$alert("Are you sure you want to delete your registration?", {
             confirmButtonText: 'Delete',
             callback: action => {
+              this.$axiosServer.post('auth/verify_token', {
+                "token": this.getToken
+              })
+              .then(response => {
                 this.$axiosServer.delete('/auth/delete', {
                   data: {
-                    email: this.getUsername
+                    token: this.getToken
                   }
-              })
+                })
                 .then(function (response) {
                   console.log(response);
                   self.logout();
@@ -388,6 +365,12 @@ methods: {
                   console.log(error);
                     return error;
                 });
+              })
+              .catch(e => {
+                console.log("error");
+                return e;
+              });
+
             }
           });
         },
@@ -396,9 +379,14 @@ methods: {
           this.$alert("Are you sure you want to make these changes?", {
             confirmButtonText: 'Confirm',
             callback: action => {
-                  this.$axiosServer.put('/auth/update', {
+              var self = this;
+                this.$axiosServer.post('auth/verify_token', {
+                  "token": this.getToken
+                })
+                .then(response => {
+                  self.$axiosServer.put('/auth/update', {
                     updatedEmail: this.profForm.email,
-                    email: this.getUsername,
+                    token: this.getToken,
                     firstName: this.profForm.firstName,
                     lastName: this.profForm.lastName,
                     company: this.profForm.company,
@@ -416,73 +404,39 @@ methods: {
                     breakout_twoWait: this.getBreakoutTwoWait
                   })
                   .then(function (response) {
-                    console.log(response);
+                    console.log(response.data);
+                    console.log(self.profForm.email);
+                    if(response.data.email != self.profForm.email){
+                      self.$alert("Login information changed, please login again to use new credentials", {
+                        confirmButtonText: 'Ok',
+                        callback: action =>{
+                          self.logout();
+                        }
+                    });
+                  }
                     self.update=false;
                   })
                   .catch(function (error) {
                     console.log(error.response);
                     return error;
                   });
-            }
-          });
-      },
-      successfulRegister() {
-        // this.$alert(<a target="_blank" title="Share on LinkedIn" href="http://www.linkedin.com/shareArticle?mini=true&url={{https://stackoverflow.com/questions/29744036/how-to-create-a-simple-share-linkedin-link}}"></a>, "Registration Successful", {
-        //   dangerouslyUseHTMLString: true,
-        //   confirmButtonText: 'OK',
-        //   callback: action => {
-        //     this.$router.push('/');
-        //   }
-        // });
-        this.dialogVisible=true;
-      },
-      emptyFields() {
-        this.$alert("Please complete all required fields", "Registration failed", {
-          confirmButtonText: 'OK'
-        });
-      },
-      failedRegistration(message) {
-        this.$alert(message, "Registration Failed", {
-          confirmButtonText: 'OK'
-        });
-      },
-      confirm(){
-        this.dialogVisible=false;
-        this.$store.dispatch('login', this.form.email);
-        this.$router.push('/');
-      },
-      logout(){
-        this.$store.dispatch('logout');
-        this.$router.push('/');
-      },
-      deleteReg() {
-        var self = this;
-        this.$alert("Are you sure you want to delete your registration?", {
-          confirmButtonText: 'Delete',
-          callback: action => {
-              this.$axiosServer.delete('/auth/delete', {
-                data: {
-                  email: this.getUsername
-                }
+                })
+                .catch(e => {
+                  console.log("error");
+                  return e;
+                });
 
-            })
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-                return error;
-              });
             }
           });
-        },
+      },
+
       updateProfile(data) {
         this.$store.dispatch('getProfile', data.attendee.id);
         this.profForm.firstName= data.user.first_name;
         this.profForm.lastName= data.user.last_name;
         this.profForm.company= data.attendee.company;
         this.profForm.position= data.attendee.position;
-        this.profForm.email= this.getUsername;
+        this.profForm.email= data.user.email;
         this.profForm.twitter= data.user.first_name;
         this.profForm.position= data.attendee.position;
         this.profForm.takeaway= data.attendee.comment;
@@ -541,19 +495,27 @@ methods: {
   mounted: function () {
     var self = this;
     if(this.type==="profile"){
-      if(this.getUsername != ''){
-        this.$axiosServer.post('/auth/profile', {
-          email: this.getUsername
+      var self = this;
+        this.$axiosServer.post('auth/verify_token', {
+          "token": this.getToken
         })
-        .then(function (response) {
-          self.updateProfile(response.data);
+        .then(response => {
+            self.$axiosServer.post('/auth/profile', {
+              token: self.getToken
+            })
+            .then(function (response) {
+              self.updateProfile(response.data);
+            })
+            .catch(function (error) {
+              console.log(error);
+              return error;
+            });
         })
-        .catch(function (error) {
-          console.log(error);
-          return error;
+        .catch(e => {
+          console.log("error");
+          return e;
         });
 
-        }
   }
 }
 }
@@ -621,5 +583,9 @@ a {
 }
 .action-buttons {
   float: right;
+}
+.share-button{
+  width: 190px;
+  margin: 7px;
 }
 </style>

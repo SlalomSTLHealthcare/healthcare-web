@@ -60,7 +60,7 @@ export default {
   props: {
     timeSlot: String,
     type: {
-      defualt: "register",
+      default: "register",
       type: String
     }
   },

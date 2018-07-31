@@ -11,12 +11,20 @@
 <script>
 import NavBar from "@/components/NavBar.vue";
 import Footer from "@/components/Footer.vue";
+import { mapState } from 'vuex';
 export default {
   name: "app",
   components: {
     NavBar,
     Footer
-  }
+  },
+  mounted(){
+  },
+  computed: mapState({
+    getToken(state){
+      return state.jwt;
+    }
+  }),
 };
 </script>
 

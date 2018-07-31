@@ -8,12 +8,13 @@
         <el-row class="routes">
           <div class="underline"></div>
             <router-link to="/" class="link">Home</router-link>
+            <router-link to="about" class="link">About</router-link>
+            <router-link :to="computedRegister" class="link">{{computedRegisterDescription}}</router-link>
             <router-link to="people" class="link">Speakers</router-link>
 			      <router-link to="session" class="link">Breakout Sessions</router-link>
             <router-link to="schedule" class="link">Schedule</router-link>
-            <router-link :to="computedRegister" class="link">{{computedRegisterDescription}}</router-link>
             <router-link to="sponsor" class="link">Sponsors</router-link>
-            <router-link to="about" class="link">About</router-link>
+
         </el-row>
         <el-row class="contact">
           <div class="underline"></div>
@@ -58,7 +59,7 @@ export default {
 .footer {
   padding: 12px 12px;
   display: flex;
-  background: linear-gradient(#1224ff,#c100d4) ;
+  background: black ;
   bottom: 0;
   z-index: 10;
   width: 100%;
@@ -93,7 +94,7 @@ export default {
   color: #fff;
 }
 .link:hover {
-  color: #040024;
+  color: #15a6ff;
 }
 .aboutBut {
   text-decoration: none;

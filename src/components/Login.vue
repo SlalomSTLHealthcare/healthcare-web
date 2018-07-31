@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex';
 export default {
   name: "Login",
   data() {
@@ -38,21 +39,22 @@ props: {
 methods: {
   handleLogin() {
     var self = this;
-    this.$axiosServer.post('/auth/login', {
-      email: this.form.email,
+    this.$axiosServer.post('auth/obtain_token', {
+      username: this.form.email,
       password: this.form.pass
-    })
-    .then(function (response) {
-      console.log(response);
+    }).then(function(response){
+      self.$store.dispatch('loginToken', response.data.token);
       self.successfulLogin();
-
     })
     .catch(function (error) {
-      console.log(error);
-      self.failedLogin(error.response.statusText);
+      console.log("error");
+      self.failedLogin("Invalid Username or Password");
       return error;
     });
-    },
+
+
+
+  },
   successfulLogin() {
     this.dialogFormVisible = false;
     this.$alert("Welcome back to HealthSTLx!", "Login Successful", {
@@ -62,8 +64,7 @@ methods: {
         this.$router.push('/');
       }
     });
-    console.log(this.$store.state);
-    this.$store.dispatch('login', this.form.email);
+
   },
   failedLogin(errorMessage) {
     this.dialogFormVisible = true,
@@ -72,7 +73,12 @@ methods: {
       confirmButtonText: 'OK',
     });
   }
-  }
+  },
+  computed: mapState({
+    getToken(state){
+      return state.jwt;
+    }
+  })
 };
 </script>
 

@@ -21,7 +21,7 @@
             <el-row class="image">
                 <el-col>
                     <div>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSy2T13a1orJ1YBT47YSwCj4IHb-wjQvfQKZV_xhJ4Wtt-icM6S" alt="pic">
+                        <img src="https://sp.slalom.com/ourfirm/studio/Logos/-previous-files/slalom-logo-blue-RGB.jpg" alt="pic">
                     </div>
                 </el-col>
             </el-row>
@@ -68,13 +68,16 @@ export default {
   width: 100%;
   margin-bottom: 20px;
 }
+img{
+
+}
 .topdesc {
   width: 100%;
   word-wrap: break-word;
 }
-.btmheader {
-  width: 25%;
+.btmdesc {
   margin-bottom: 20px;
+  padding-bottom: 15px;
 }
 .midSection {
   display: flex;
