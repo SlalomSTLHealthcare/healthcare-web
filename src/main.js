@@ -18,7 +18,7 @@ Vue.config.productionTip = false;
 Vue.use(VeeValidate, config);
 Vue.use(Vuex);
 Vue.prototype.$axiosServer = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'https://slalom-health-api-staging.herokuapp.com/',
   withCredentials: false,
   headers: {
     "Content-Type": "application/json"

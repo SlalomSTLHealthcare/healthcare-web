@@ -1,15 +1,14 @@
 <template>
+  <div>
+  <div class="nav"></div>
 <el-row>
     <h1>Sponsors</h1>
-    <h3>Description of Our Sponsors</h3>
-    <div class="emailLink">
-      <a href="mailto:eric.mason@slalom.com">Email Us About Becoming A Sponsor</a>
-    </div>
     <el-col >
         <Sponsors :sponsorData="filteredData('platinum')" sponsorLevel="Platinum"/>
         <Sponsors :sponsorData="filteredData('low')" class="otherFlex" sponsorLevel="Other"/>
     </el-col>
 </el-row>
+</div>
 </template>
 
 <script>
@@ -54,7 +53,9 @@ export default {
 
 <style scoped lang="less">
 
-
+.nav{
+  margin-bottom: 75px;
+}
 
 .btn {
   background: #3336ff;

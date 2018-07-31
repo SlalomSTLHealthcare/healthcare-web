@@ -99,6 +99,7 @@ export default {
 .el-table{
   text-align: center;
   cursor: pointer;
+  margin-bottom: 25px;
 }
 
 .expandedCol{

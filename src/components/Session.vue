@@ -8,9 +8,11 @@
         <p></p>
       </div>
       <h2 class="description">{{description}}</h2>
+      <div v-if="sessionType === 'Breakout'">
       <h3 class="description" v-if="computedSpace > 1">Spaces Available: {{computedSpace}}</h3>
       <h3 class="description" v-else-if="computedSpace == 1">Space Available: {{computedSpace}} </h3>
       <h3 class="description" v-else>No Space Available!</h3>
+    </div>
     </el-card>
 </template>
 
@@ -19,6 +21,7 @@ import moment from 'moment'
 export default {
   name: "Session",
   props: {
+    sessionType: String,
     title: String,
     time: String,
     roomNumber: Number,

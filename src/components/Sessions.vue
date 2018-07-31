@@ -5,7 +5,7 @@
   <h1>{{sessionType}} Sessions</h1>
   <el-row class="session">
     <li v-for="session in sessionData" :key="session.id" v-if="session.session_type == sessionType" >
-      <Session :title="session.title" :time="session.time" :roomNumber="session.room_num" :description="session.description" :imgSource="session.image_loc" :maxCapacity="session.max_capacity"
+      <Session :sessionType="sessionType" :title="session.title" :time="session.time" :roomNumber="session.room_num" :description="session.description" :imgSource="session.image_loc" :maxCapacity="session.max_capacity"
       :signedUp="computeSignedUp(session.id)"/>
     </li>
   </el-row>
