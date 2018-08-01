@@ -1,7 +1,7 @@
 <template>
   <div class="profile">
     <div id="nav"></div>
-      <Registration type="profile"/>
+      <Profile type="profile" class="registration-form"/>
   </div>
 </template>
 
@@ -11,14 +11,16 @@ import Registration from "@/components/Registration.vue";
 import NavBar from "@/components/NavBar.vue";
 import Login from "@/components/Login.vue";
 import SelectBreakout from "@/components/SelectBreakout.vue";
+import Profile from "@/components/Profile.vue";
 
 export default {
-  name: "Profile",
+  name: "profile",
   components: {
     Registration,
     NavBar,
     Login,
-    SelectBreakout
+    SelectBreakout,
+    Profile
   },
   data() {
     return {

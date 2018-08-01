@@ -1,9 +1,9 @@
 <template>
   <div class="registration">
     <div id="nav"></div>
-      <h1>Welcome to HealthSTLx</h1>
-      <h2>Fill out this form to register</h2>
-      <Registration type="registration" class="registration-form"/>
+      <h1>Registration</h1>
+      <div class="decoration"></div>
+      <Registration class="registration-form"/>
       <Login class="login" loginType='registration'/>
   </div>
 </template>
@@ -14,6 +14,7 @@ import Registration from "@/components/Registration.vue";
 import NavBar from "@/components/NavBar.vue";
 import Login from "@/components/Login.vue";
 import SelectBreakout from "@/components/SelectBreakout.vue";
+import Profile from "@/components/Profile.vue";
 
 export default {
   name: "registration",
@@ -21,7 +22,8 @@ export default {
     Registration,
     NavBar,
     Login,
-    SelectBreakout
+    SelectBreakout,
+    Profile
   },
   data() {
     return {
@@ -32,12 +34,23 @@ export default {
 </script>
 
 <style scoped lang="less">
+.registration{
+  background-color: #f7f7f7;
+  overflow: scroll;
+}
+h1 {
+  font-size: 40px;
+  font-weight: lighter;
+  margin-left: 6%;
+}
+.decoration {
+  background-color: #005aed;;
+  height: 5px;
+  width: 75px;
+  margin-left: 6%;
+}
 #nav {
   padding: 40px;
-}
-h1, h2{
-  text-align: left;
-  padding-left: 5%;
 }
 .title{
   font-family: Arial;
@@ -47,7 +60,6 @@ h1, h2{
   color:#818283;
 }
 .registration-form{
-  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -63,4 +75,5 @@ p a:hover{
 .login {
   text-align: center;
 }
+
 </style>
