@@ -1,27 +1,29 @@
 <template>
   <div class="person">
-        <el-card shadow="hover">
-          <el-row :gutter="20">
-            <el-col :span="8">
-                <div class="image-wrapper">
-                  <img :src="imgSource" class="image">
-                </div>
-            </el-col>
-            <el-col :span="16">
-              <div style="padding: 10px;">
-                <div class="name">{{ name }}</div>
+        <!-- <el-card shadow="hover" :body-style="{ padding: '0px' }">
+              <img :src="imgSource" class="image">
+              <div style="padding: 14px;">
+                  <span class="name">{{ name }}</span>
                 <div>
                   <a :href="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
                   <a :href="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                </div>
-                <div class="button">
                   <el-button type="text">{{ company }}</el-button>
+                  <p class="bio">{{ bio }}</p>
+                  <p class="descript">This is a description of their talk</p>
                 </div>
-              <p class="bio">{{ bio }}</p>
-              <p class="descript">This is a description of their talk</p>
               </div>
-            </el-col>
-          </el-row>
+        </el-card> -->
+        <el-card class="card" shadow="hover" :body-style="{ padding: '0px' }">
+          <img :src="imgSource" class="image">
+          <div style="padding: 14px;">
+            <span class="name">{{ name }}</span>
+            <a :href="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a :href="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            <div class="info">
+              <div class="bio">{{ bio }}</div>
+              <div class="company">{{ company }}</div>
+            </div>
+          </div>
         </el-card>
   </div>
 </template>
@@ -42,63 +44,50 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+.card {
+  width: 300px;
+}
+.bottom {
+  margin-top: 13px;
+  line-height: 12px;
+}
+
+.button {
+  padding: 0;
+  float: right;
+}
+
+.image {
+  width: 100%;
+  display: block;
+}
 .descript {
   float: left;
 }
 .el-card {
   padding: 2% 2%;
-  height: 20%;
   border: 0;
   background-color: transparent;
 }
-.image-wrapper {
-  width: 250px;
-  height: 250px;
-  border-radius: 50%;
-  overflow: hidden;
-  text-align: center;
-  margin-left: auto;
-  margin-right: auto;
-}
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
 .name {
   font-weight: bold;
-  font-size: 40px;
+  font-size: 18px;
   text-align: left;
+  color:#005aed;
 }
 .bio {
-  font-style: italic;
-  padding: 3px;
-  line-height: 1.4;
   text-align: left;
-}
-.button {
-  padding: 0;
-  text-align: left;
-}
-.image {
-  width: 300px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
 }
 .fa-linkedin-in,
 .fa-twitter {
-  padding: 5px 10px;
-  color: #490043;
-  font-size: 25px;
+  padding: 5px;
+  float: right;
+  color: #9b9b9b;
+  font-size: 15px;
+}
+.info {
+  margin-top: 10px;
+  font-size: 15px;
+  color: #9b9b9b;
 }
 </style>
