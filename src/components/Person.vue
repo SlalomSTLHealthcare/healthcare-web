@@ -1,18 +1,5 @@
 <template>
   <div class="person">
-        <!-- <el-card shadow="hover" :body-style="{ padding: '0px' }">
-              <img :src="imgSource" class="image">
-              <div style="padding: 14px;">
-                  <span class="name">{{ name }}</span>
-                <div>
-                  <a :href="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
-                  <a :href="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-                  <el-button type="text">{{ company }}</el-button>
-                  <p class="bio">{{ bio }}</p>
-                  <p class="descript">This is a description of their talk</p>
-                </div>
-              </div>
-        </el-card> -->
         <el-card class="card" shadow="hover" :body-style="{ padding: '0px' }">
           <img :src="imgSource" class="image">
           <div style="padding: 14px;">
