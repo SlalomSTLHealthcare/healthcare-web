@@ -265,257 +265,222 @@ methods: {
       console.log(this.form.breakoutsOne);
     var self = this;
     this.$refs[form].validate((valid) => {
-          if (valid) {
-            this.$axiosServer.post('/auth/register', {
-              email: this.form.email,
-              password: this.form.pass,
-              firstName: this.form.firstName,
-              lastName: this.form.lastName,
-              company: this.form.company,
-              position: this.form.position,
-              twitter: this.form.twitter,
-              checkPass: this.form.checkPass,
-              lunch: this.form.lunch,
-              diet: this.form.diet,
-              allergies: this.form.allergies,
-              size: this.form.size,
-              donate: this.form.donate,
-              comment: this.form.takeaway,
-              breakout_one: this.getBreakoutOne,
-              breakout_oneWait: this.getBreakoutOneWait,
-              breakout_two: this.getBreakoutTwo,
-              breakout_twoWait: this.getBreakoutTwoWait
-
-              })
-              .then(function (response) {
-                console.log(response);
-                self.successfulRegister();
-              })
-              .catch(function (error) {
-                console.log(error.response);
-                self.failedRegistration(error.response.statusText);
-                return error;
-              });
-              this.$axiosServer.post('https://doshner-developer-edition.na73.force.com/services/apexrest/HealthSTLxLeads', {
-                firstName: this.form.firstName,
-                lastName: this.form.lastName,
-                company: this.form.company,
-                title: this.form.position,
-                email: this.form.email
-              })
-              .then(function (response) {
-                console.log(response);
-              })
-              .catch(function (error) {
-                console.log(error);
-                return error;
-              });
-            } else {
-              this.emptyFields();
-              return false;
-            }
-          });
-
-        },
-        successfulRegister() {
-          this.dialogVisible=true;
-        },
-        emptyFields() {
-          this.$alert("Please complete all required fields", "Registration failed", {
-            confirmButtonText: 'OK'
-          });
-        },
-        failedRegistration(message) {
-          this.$alert(message, "Registration Failed", {
-            confirmButtonText: 'OK'
-          });
-        },
-        confirm(){
-          this.dialogVisible=false;
-          this.$store.dispatch('login', this.form.email);
-          this.$store.dispatch('obtainToken', {
-            username: this.form.email,
-            password: this.form.pass
-          });
-          this.$router.push('/');
-        },
-        logout(){
-          this.$store.dispatch('logout');
-          this.$router.push('/');
-        },
-        deleteReg() {
-          var self = this;
-          this.$alert("Are you sure you want to delete your registration?", {
-            confirmButtonText: 'Delete',
-            callback: action => {
-              this.$axiosServer.post('auth/verify_token', {
-                "token": this.getToken
-              })
-              .then(response => {
-                this.$axiosServer.delete('/auth/delete', {
-                  data: {
-                    token: this.getToken
-                  }
-                })
-                .then(function (response) {
-                  console.log(response);
-                  self.logout();
-                })
-                .catch(function (error) {
-                  console.log(error);
-                    return error;
-                });
-              })
-              .catch(e => {
-                console.log("error");
-                return e;
-              });
-
-            }
-          });
-        },
-        updateRegistration(){
-          var self = this;
-          this.$alert("Are you sure you want to make these changes?", {
-            confirmButtonText: 'Confirm',
-            callback: action => {
-              var self = this;
-                this.$axiosServer.post('auth/verify_token', {
-                  "token": this.getToken
-                })
-                .then(response => {
-                  self.$axiosServer.put('/auth/update', {
-                    updatedEmail: this.profForm.email,
-                    token: this.getToken,
-                    firstName: this.profForm.firstName,
-                    lastName: this.profForm.lastName,
-                    company: this.profForm.company,
-                    position: this.profForm.position,
-                    twitter: this.profForm.twitter,
-                    lunch: this.profForm.lunch,
-                    diet: this.profForm.diet,
-                    allergies: this.profForm.allergies,
-                    size: this.profForm.size,
-                    donate: this.profForm.donate,
-                    comment: this.profForm.takeaway,
-                    breakout_one: this.getBreakoutOne,
-                    breakout_oneWait: this.getBreakoutOneWait,
-                    breakout_two: this.getBreakoutTwo,
-                    breakout_twoWait: this.getBreakoutTwoWait
-                  })
-                  .then(function (response) {
-                    console.log(response.data);
-                    console.log(self.profForm.email);
-                    if(response.data.email != self.profForm.email){
-                      self.$alert("Login information changed, please login again to use new credentials", {
-                        confirmButtonText: 'Ok',
-                        callback: action =>{
-                          self.logout();
-                        }
-                    });
-                  }
-                    self.update=false;
-                  })
-                  .catch(function (error) {
-                    console.log(error.response);
-                    return error;
-                  });
-                })
-                .catch(e => {
-                  console.log("error");
-                  return e;
-                });
-
-            }
-          });
-      },
-
-      updateProfile(data) {
-        this.$store.dispatch('getProfile', data.attendee.id);
-        this.profForm.firstName= data.user.first_name;
-        this.profForm.lastName= data.user.last_name;
-        this.profForm.company= data.attendee.company;
-        this.profForm.position= data.attendee.position;
-        this.profForm.email= data.user.email;
-        this.profForm.twitter= data.user.first_name;
-        this.profForm.position= data.attendee.position;
-        this.profForm.takeaway= data.attendee.comment;
-        this.profForm.lunch= data.attendee.lunch;
-        this.profForm.diet= data.attendee.diet;
-        this.profForm.allergies= data.attendee.diet_allergy;
-        this.profForm.size= data.attendee.tshirt_size;
-        this.profForm.donate= data.attendee.donate;
-        var allSessionsAttendees = [];
-        var self = this;
-        var oneTagNum = _.filter(data.sessions, s => s.session_tag === 1).length;
-        var twoTagNum = _.filter(data.sessions, s => s.session_tag === 2).length;
-
-        this.$axiosServer.get('/api/session_attendees')
-          .then(function (response){
-            allSessionsAttendees = response.data;
-            data.sessions.forEach(function(session){
-              if(session.session_tag === 1){
-                self.computeAndUpdateSessions(oneTagNum, session, allSessionsAttendees);
-              }
-              else{
-                self.computeAndUpdateSessions(twoTagNum, session, allSessionsAttendees);
-
-              }
-            });
-          })
-          .catch(function (error){
+      if (valid) {
+        this.$axiosServer.post('/auth/register', {
+          email: this.form.email,
+          password: this.form.pass,
+          firstName: this.form.firstName,
+          lastName: this.form.lastName,
+          company: this.form.company,
+          position: this.form.position,
+          twitter: this.form.twitter,
+          checkPass: this.form.checkPass,
+          lunch: this.form.lunch,
+          diet: this.form.diet,
+          allergies: this.form.allergies,
+          size: this.form.size,
+          donate: this.form.donate,
+          comment: this.form.takeaway,
+          breakout_one: this.getBreakoutOne,
+          breakout_oneWait: this.getBreakoutOneWait,
+          breakout_two: this.getBreakoutTwo,
+          breakout_twoWait: this.getBreakoutTwoWait
+        })
+        .then(function (response) {
+          console.log(response);
+          self.successfulRegister();
+        })
+        .catch(function (error) {
+          console.log(error.response);
+          self.failedRegistration(error.response.statusText);
+          return error;
+        });
+        this.$axiosServer.post('https://doshner-developer-edition.na73.force.com/services/apexrest/HealthSTLxLeads', {
+          firstName: this.form.firstName,
+          lastName: this.form.lastName,
+          company: this.form.company,
+          title: this.form.position,
+          email: this.form.email
+        })
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+          return error;
+        });
+      } else {
+        this.emptyFields();
+        return false;
+      }
+    });
+  },
+  successfulRegister() {
+    this.dialogVisible=true;
+  },
+  emptyFields() {
+    this.$alert("Please complete all required fields", "Registration failed", {
+      confirmButtonText: 'OK'
+    });
+  },
+  failedRegistration(message) {
+    this.$alert(message, "Registration Failed", {
+      confirmButtonText: 'OK'
+    });
+  },
+  confirm(){
+    this.dialogVisible=false;
+    this.$store.dispatch('login', this.form.email);
+    this.$store.dispatch('obtainToken', {
+      username: this.form.email,
+      password: this.form.pass
+    });
+    this.$router.push('/');
+  },
+  logout(){
+    this.$store.dispatch('logout');
+    this.$router.push('/');
+  },
+  deleteReg() {
+    var self = this;
+    this.$alert("Are you sure you want to delete your registration?", {
+      confirmButtonText: 'Delete',
+      callback: action => {
+        this.$axiosServer.delete('/auth/delete', {
+          data: {
+            token: this.getToken
+          }
+        })
+        .then(function (response) {
+          console.log(response);
+          self.logout();
+        })
+        .catch(function (error) {
+          console.log(error);
             return error;
+        });
+      }
+    });
+  },
+  updateRegistration(){
+    var self = this;
+    this.$alert("Are you sure you want to make these changes?", {
+      confirmButtonText: 'Confirm',
+      callback: action => {
+        var self = this;
+        this.$axiosServer.put('/auth/update', {
+          updatedEmail: this.profForm.email,
+          token: this.getToken,
+          firstName: this.profForm.firstName,
+          lastName: this.profForm.lastName,
+          company: this.profForm.company,
+          position: this.profForm.position,
+          twitter: this.profForm.twitter,
+          lunch: this.profForm.lunch,
+          diet: this.profForm.diet,
+          allergies: this.profForm.allergies,
+          size: this.profForm.size,
+          donate: this.profForm.donate,
+          comment: this.profForm.takeaway,
+          breakout_one: this.getBreakoutOne,
+          breakout_oneWait: this.getBreakoutOneWait,
+          breakout_two: this.getBreakoutTwo,
+          breakout_twoWait: this.getBreakoutTwoWait
+        })
+        .then(function (response) {
+          if(response.data.email != self.profForm.email){
+            self.$alert("Login information changed, please login again to use new credentials", {
+              confirmButtonText: 'Ok',
+              callback: action =>{
+                self.logout();
+              }
           });
-      },
-      computeAndUpdateSessions(tagNum, session, allSessions){
-        var breakoutSetting = session.session_tag === 1 ? 'setBreakoutOne' : 'setBreakoutTwo';
-        if(tagNum === 1){
+        }
+          self.update=false;
+        })
+        .catch(function (error) {
+          console.log(error.response);
+          return error;
+        });
+      }
+    });
+  },
+
+  updateProfile(data) {
+    this.$store.dispatch('getProfile', data.attendee.id);
+    this.profForm.firstName= data.user.first_name;
+    this.profForm.lastName= data.user.last_name;
+    this.profForm.company= data.attendee.company;
+    this.profForm.position= data.attendee.position;
+    this.profForm.email= data.user.email;
+    this.profForm.twitter= data.attendee.twitter;
+    this.profForm.position= data.attendee.position;
+    this.profForm.takeaway= data.attendee.comment;
+    this.profForm.lunch= data.attendee.lunch;
+    this.profForm.diet= data.attendee.diet;
+    this.profForm.allergies= data.attendee.diet_allergy;
+    this.profForm.size= data.attendee.tshirt_size;
+    this.profForm.donate= data.attendee.donate;
+    var allSessionsAttendees = [];
+    var self = this;
+    var oneTagNum = _.filter(data.sessions, s => s.session_tag === 1).length;
+    var twoTagNum = _.filter(data.sessions, s => s.session_tag === 2).length;
+
+    this.$axiosServer.get('/api/session_attendees')
+      .then(function (response){
+        allSessionsAttendees = response.data;
+        data.sessions.forEach(function(session){
+          if(session.session_tag === 1){
+            self.computeAndUpdateSessions(oneTagNum, session, allSessionsAttendees);
+          }
+          else{
+            self.computeAndUpdateSessions(twoTagNum, session, allSessionsAttendees);
+          }
+        });
+      })
+      .catch(function (error){
+        return error;
+      });
+  },
+  computeAndUpdateSessions(tagNum, session, allSessions){
+    var breakoutSetting = session.session_tag === 1 ? 'setBreakoutOne' : 'setBreakoutTwo';
+    if(tagNum === 1){
+      this.$store.dispatch('setBreakout', {
+        breakout: breakoutSetting,
+        id: session.session_id
+      });
+    }
+    else{
+      var allSessionsWithId = _.filter(allSessions, s => s.session_id === session.session_id);
+      if(allSessionsWithId.length > session.session_max_capacity){
           this.$store.dispatch('setBreakout', {
             breakout: breakoutSetting,
             id: session.session_id
           });
-        }
-        else{
-          var allSessionsWithId = _.filter(allSessions, s => s.session_id === session.session_id);
-          if(allSessionsWithId.length > session.session_max_capacity){
-              this.$store.dispatch('setBreakout', {
-                breakout: breakoutSetting,
-                id: session.session_id
-              });
-          }
-          else{
-            this.$store.dispatch('setBreakout', {
-              breakout: breakoutSetting + 'Wait',
-              id: session.session_id
-            });
-          }
-        }
       }
-    },
-  mounted: function () {
-    var self = this;
-    if(this.type==="profile"){
-      var self = this;
-        this.$axiosServer.post('auth/verify_token', {
-          "token": this.getToken
-        })
-        .then(response => {
-            self.$axiosServer.post('/auth/profile', {
-              token: self.getToken
-            })
-            .then(function (response) {
-              self.updateProfile(response.data);
-            })
-            .catch(function (error) {
-              console.log(error);
-              return error;
-            });
-        })
-        .catch(e => {
-          console.log("error");
-          return e;
+      else{
+        this.$store.dispatch('setBreakout', {
+          breakout: breakoutSetting + 'Wait',
+          id: session.session_id
         });
-
+      }
+    }
+  }
+},
+mounted: function () {
+  var self = this;
+  if(this.type==="profile"){
+    var self = this;
+    this.$axiosServer.post('/auth/profile', {
+      token: this.getToken
+    })
+    .then(function (response) {
+      self.updateProfile(response.data);
+    })
+    .catch(function (error) {
+      console.log(error);
+      return error;
+    });
   }
 }
 }
