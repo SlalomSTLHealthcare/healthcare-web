@@ -46,10 +46,10 @@ export default {
   name: "footer",
   computed: mapState({
     computedRegister(state) {
-      return state.username === '' ? 'registration' : 'profile';
+      return state.jwt === null ? 'registration' : 'profile';
     },
     computedRegisterDescription(state) {
-      return state.username === '' ? 'Register' : 'Profile Page';
+      return state.jwt === null ? 'Register' : 'Profile Page';
     }
   })
 };
