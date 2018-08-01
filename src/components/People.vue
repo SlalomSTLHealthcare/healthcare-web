@@ -1,13 +1,14 @@
 <template>
   <div class="people">
 
-    <h1>The People Involved</h1>
-    <h2>Here's a list of people.</h2>
-    <li v-for="item in data" :key="item.id">
-      <div class="person">
+    <h1>Speakers</h1>
+    <div class="decoration"></div>
+
+    <ul class="people-list">
+      <li v-for="item in data" :key="item.id">
         <Person :name="item.full_name" :imgSource="item.image_loc" :company="item.company" :bio="item.bio" :twitter="item.twitter" :linkedin="item.linkedin"/>
-      </div>
-    </li>
+      </li>
+    </ul>
   </div>
 </template>
 
@@ -46,14 +47,26 @@ export default {
 <style scoped lang="less">
 h1 {
   font-size: 40px;
+  font-weight: lighter;
+  margin-left: 10%;
+}
+.decoration {
+  background-color: #005aed;;
+  height: 5px;
+  width: 75px;
+  margin-left: 10%;
 }
 ul {
   list-style-type: none;
   padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 li {
-  margin: 5% 5%;
   list-style-type: none;
+  margin: 2.5%;
 }
 a {
   color: #42b983;
