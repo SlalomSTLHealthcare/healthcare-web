@@ -46,7 +46,7 @@ export default {
 @secondary-dark: #040024;
 .main-header {
   font-family: 'Roboto', sans-serif;
-  font-size: 5rem;
+  // font-size: 5rem;
   margin-bottom: 12px;
   text-shadow: .3rem .5rem .5rem fade(@secondary-dark, 20%);
 }
