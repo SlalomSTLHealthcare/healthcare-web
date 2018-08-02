@@ -182,12 +182,12 @@ h4{
 .fa-instagram:hover {
   color: #c100d4;
 }
-@media (max-width: 800px){
+@media (min-width: 600px) and (max-width: 800px){
 .account{
   padding: 0px 50px;
 }
 }
-@media (max-width: 600px){
+@media (min-width: 400px) and (max-width: 599px){
 .footer{
   width:100%;
   height: 100%;
@@ -207,7 +207,7 @@ h4{
   padding: 0px 70px;
 }
 }
-@media (max-width: 400px){
+@media (max-width: 399px){
 .footer{
   width:100%;
   height: 100%;
