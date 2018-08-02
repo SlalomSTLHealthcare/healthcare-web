@@ -1,5 +1,5 @@
 <template>
-  <div class="bg">
+  <div>
     <h1>Schedule</h1>
     <div class="decoration"></div>
     <table>
