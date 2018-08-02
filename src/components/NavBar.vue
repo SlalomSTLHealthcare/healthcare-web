@@ -170,4 +170,54 @@ a:hover {
   color: #fff;
 
 }
+@media (max-width: 398px){
+  .logo img {
+    width: 100px;
+    margin-left: 15px;
+    height: 25px;
+  }
+  .menu .menuLogo {
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-right: 10px;
+    padding-left: 0px;
+  }
+  .logIn {
+    margin: 15px 6px;
+  }
+  .logBtn {
+    margin: 15px 1px;
+  }
+  .optiontwo {
+    font-size: 25px;
+  }
+  .el-button.is-round{
+    padding: 12px 12px;
+  }
+}
+@media (min-width: 400px) and (max-width: 500px){
+  .logo img {
+    width: 160px;
+    margin-left: 15px;
+    height: 40px;
+  }
+  .menu .menuLogo {
+    padding-top: 17px;
+    padding-bottom: 17px;
+    padding-right: 10px;
+    padding-left: 0px;
+  }
+  .logIn {
+    margin: 15px 6px;
+  }
+  .logBtn {
+    margin: 15px 1px;
+  }
+  .optiontwo {
+    font-size: 25px;
+  }
+  .el-button.is-round{
+    padding: 12px 12px;
+  }
+}
 </style>
