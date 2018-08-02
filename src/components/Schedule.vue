@@ -16,39 +16,6 @@
       </tr>
     </table>
   </div>
-<!-- <el-row>
-  <h1>Schedule</h1>
-  <el-table
-        :data="scheduleData"
-        ref="scheduleTable"
-        :default-sort = "{prop:'start_time', order: 'ascending'}"
-        @row-click="changeExpansion"
-        @expand-change="setCurrentExpandedRow"
-        style="width: 100%"
-        >
-        <el-table-column
-          prop="start_time"
-          width="90"
-
-          :formatter="timeFormatter">
-        </el-table-column>
-        <el-table-column
-          width="50"
-          class-name="expandedCol"
-          type="expand">
-          <template slot-scope="props">
-            <p v-for="session in getSessions(props.row)" v-if="session.session_type === 'Extra'">{{session.description}}, Room Number: {{session.room_num}}</p>
-            <p v-else>{{session.title}}, Room Number: {{session.room_num}}</p>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="title"
-          label="Event"
-          header-align="center"
-          >
-        </el-table-column>
-    </el-table>
-</el-row> -->
 </template>
 
 <script>
