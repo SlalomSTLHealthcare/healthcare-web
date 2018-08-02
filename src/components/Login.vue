@@ -103,4 +103,7 @@ methods: {
 .el-dialog .el-form{
   z-index: 15;
 }
+.login-link{
+  background-color: #f7f7f7;
+}
 </style>

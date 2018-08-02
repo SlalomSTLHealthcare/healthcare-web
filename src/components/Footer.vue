@@ -182,4 +182,48 @@ h4{
 .fa-instagram:hover {
   color: #c100d4;
 }
+@media (min-width: 600px) and (max-width: 800px){
+.account{
+  padding: 0px 50px;
+}
+}
+@media (min-width: 400px) and (max-width: 599px){
+.footer{
+  width:100%;
+  height: 100%;
+}
+.panelOne{
+  display: flex;
+  padding-left: 0%;
+  text-align: center;
+}
+.panelTwo{
+ display: flex;
+ flex-direction: row;
+ flex-wrap: wrap;
+ justify-content: center;
+}
+.account{
+  padding: 0px 70px;
+}
+}
+@media (max-width: 399px){
+.footer{
+  width:100%;
+  height: 100%;
+}
+.panelOne{
+  display: flex;
+  padding-left: 0%;
+  text-align: center;
+}
+.panelTwo{
+ display: flex;
+ flex-direction: column;
+ text-align: center;
+}
+.account{
+  padding: 0;
+}
+}
 </style>
