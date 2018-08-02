@@ -1,38 +1,21 @@
 <template>
-<el-row>
-  <h1>Schedule</h1>
-  <el-table
-        :data="scheduleData"
-        ref="scheduleTable"
-        stripe
-        :default-sort = "{prop:'start_time', order: 'ascending'}"
-        @row-click="changeExpansion"
-        @expand-change="setCurrentExpandedRow"
-        style="width: 100%"
-        >
-        <el-table-column
-          prop="start_time"
-          width="90"
-
-          :formatter="timeFormatter">
-        </el-table-column>
-        <el-table-column
-          width="50"
-          class-name="expandedCol"
-          type="expand">
-          <template slot-scope="props">
-            <p v-for="session in getSessions(props.row)" v-if="session.session_type === 'Extra'">{{session.description}}, Room Number: {{session.room_num}}</p>
-            <p v-else>{{session.title}}, Room Number: {{session.room_num}}</p>
-          </template>
-        </el-table-column>
-        <el-table-column
-          prop="title"
-          label="Event"
-          header-align="center"
-          >
-        </el-table-column>
-      </el-table>
-</el-row>
+  <div>
+    <h1>Schedule</h1>
+    <div class="decoration"></div>
+    <table>
+      <tr v-for="event in scheduleData" valign="top">
+        <td style="" class="time">
+          <h2 class="timeHeader">{{timeFormatter(event)}}</h2>
+          <p class="roomNum" v-for="session in getSessions(event)" >Room #{{session.room_num}}</p>
+        </td>
+        <td class="scheduleEvent">
+          <h2 class="eventHeader">{{event.title}}</h2>
+          <p v-for="session in getSessions(event)" v-if="session.session_type === 'Extra'">{{session.description}}</p>
+          <p v-else>{{session.title}}</p>
+        </td>
+      </tr>
+    </table>
+  </div>
 </template>
 
 <script>
@@ -65,6 +48,8 @@ export default {
       .then(response => {
         // JSON responses are automatically parsed.
         this.scheduleData = response.data;
+        this.scheduleData = _.sortBy(this.scheduleData, function(event){ return event.start_time});
+        console.log(this.scheduleData);
 
       })
       .catch(e => {
@@ -83,8 +68,8 @@ export default {
       });
 
     },
-    timeFormatter: function(row,column) {
-      return moment(row.start_time).format("h:mm A");
+    timeFormatter: function(event) {
+      return moment(event.start_time).format("h:mm A");
     },
     getSessions(schedule){
       return _.where(this.sessions, {schedule_id: schedule.id});
@@ -96,33 +81,99 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 
-.el-table{
-  text-align: center;
-  cursor: pointer;
+div{
   margin-bottom: 25px;
 }
-
-.expandedCol{
-  cursor: default;
+.time {
+    border-right: 1px solid #b5bfbd;
+    color: #b5bfbd;
+    padding-right: 10px;
+    text-align: right
 }
-
-
-
-.session{
-  display: block;
-  position: relative;
+.scheduleEvent{
+  padding-left: 25px;
+  padding-top: 0px;
 }
-label{
-  font-weight: normal;
+table{
+  border-spacing: 0;
+  background-color: white;
+  margin: 0 auto;
 }
-p{
-  text-align: left;
+.eventHeader{
+  color: #002f5e;
+}
+.timeHeader{
+  color: #9a9c9e;
 }
 h1 {
-  padding-top: 100px;
-  text-align: center;
-  // align with table body
-  margin-left: 140px;
-  font-size: 28px;
+  font-size: 40px;
+  font-weight: lighter;
+  margin-left: 10%;
+  margin-top: 100px;
+}
+.decoration {
+  background-color: #005aed;;
+  height: 5px;
+  width: 75px;
+  margin-left: 10%;
+}
+@media only screen and (max-width:349px){
+
+    h2 {
+        font-size: 15px;
+    }
+    .scheduleEvent{
+      padding-top:0;
+      padding-bottom:0;
+      padding-left: 15px;
+      padding-right: 10px;
+      }
+    .time{
+      padding-top:0;
+      padding-bottom: 0;
+      width: 25%;
+    }
+    p{
+      font-size: 13px;
+    }
+}
+@media only screen and (min-width: 350px) and (max-width: 480px){
+    body{
+      padding:0;
+    }
+    h2 {
+        font-size: 18px;
+    }
+    .scheduleEvent{
+      padding-top:0;
+      padding-bottom:0;
+      padding-left: 15px;
+      padding-right: 10px;
+      }
+    .time{
+      padding-top:0;
+      padding-bottom: 0;
+      width: 25%;
+    }
+    p{
+      font-size: 15px;
+    }
+}
+@media only screen and (min-width: 481px) and (max-width: 1024px) {
+  body{
+    padding:0;
+  }
+  h2 {
+      font-size: 25px;
+  }
+
+  .scheduleEvent{
+    padding-top:0;
+    padding-bottom:0;
+    padding-left: 15px;
+  }
+  .time{
+    width: 25%;
+  }
 }
 </style>
