@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <HomeOverlay/>
+    <HomeOverlay class="above-fold"/>
     <HomeSponsor/>
     <!-- <Footer/> -->
   </div>
@@ -33,5 +33,8 @@ export default {
 <style scoped lang="less">
 div {
   margin: 0px;
+}
+.above-fold {
+  margin-top: -70px;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div class="profile">
-    <div id="nav"></div>
       <Profile type="profile" class="registration-form"/>
   </div>
 </template>
@@ -31,9 +30,6 @@ export default {
 </script>
 
 <style scoped lang="less">
-#nav {
-  padding: 40px;
-}
 h1, h2{
   text-align: left;
   padding-left: 5%;
