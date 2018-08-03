@@ -35,7 +35,7 @@ export default {
 <style scoped lang="less">
 .registration{
   background-color: #f7f7f7;
-  overflow: scroll;
+  padding: 50px;
 }
 h1 {
   font-size: 40px;
