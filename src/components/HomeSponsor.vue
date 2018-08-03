@@ -1,13 +1,8 @@
 <template>
   <el-container class="container">
-    <el-col>
-      <h2>Sponsors + Partners</h2>
-      <el-button class="btn" @click="sponsor">Become a Sponsor</el-button>
-    </el-col>
    <li v-for="sponsor in sponsorData" :key="sponsor.id">
        <Sponsor :image="sponsor.image_loc" :title="sponsor.title" :name="sponsor.name" :description="sponsor.description" sponsorLevel="low" link="https://www.slalom.com/locations/st-louis" class="sponsor"/>
    </li>
-
  </el-container>
 </template>
 
@@ -30,7 +25,6 @@ export default {
     populateData: function() {
       this.$axiosServer.get(`api/sponsors`)
         .then(response => {
-          // JSON responses are automatically parsed.
           this.sponsorData = response.data;
           console.log(this.sponsorData);
         })
@@ -47,35 +41,17 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-
-
-.btn {
-  background: #3336ff;
-  color: white;
-  border: black;
-  width: 12em;
-  height: 4em;
-  text-align: center;
-  margin-bottom: 30px;
-}
 .container{
   text-align: center;
   display: flex;
   flex-flow: row wrap;
-  justify-content: flex-start;
-  //make footer fixed at the bottom of the page
-  margin-bottom: 80px;
+  justify-content: center;
+  margin: 30px 0px;
 }
-
 li{
   list-style-type: none;
 }
 .sponsor{
-  margin: 35px;
+  margin: 5px 5px;
 }
-.sponsorHeader{
-  align-self: center;
-  text-align: center;
-}
-
 </style>
