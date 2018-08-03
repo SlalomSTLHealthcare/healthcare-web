@@ -1,6 +1,5 @@
 <template>
   <div class="registration">
-    <div id="nav"></div>
       <h1>Registration</h1>
       <div class="decoration"></div>
       <Registration class="registration-form"/>
@@ -48,9 +47,6 @@ h1 {
   height: 5px;
   width: 75px;
   margin-left: 6%;
-}
-#nav {
-  padding: 40px;
 }
 .title{
   font-family: Arial;

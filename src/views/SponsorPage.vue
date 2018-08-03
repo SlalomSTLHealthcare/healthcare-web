@@ -1,6 +1,5 @@
 <template>
   <div>
-  <div class="nav"></div>
 <el-row>
     <h1>Sponsors</h1>
     <el-col >
@@ -53,9 +52,6 @@ export default {
 
 <style scoped lang="less">
 
-.nav{
-  margin-bottom: 75px;
-}
 
 .btn {
   background: #3336ff;
