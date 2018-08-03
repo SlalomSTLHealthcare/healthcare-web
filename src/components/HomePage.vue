@@ -124,7 +124,7 @@ export default {
         align-items: center;
         justify-content: center;
         .info-section {
-            width: 50vw;
+            width: 30vw;
             padding-top: 20px;
             background-color: #fff;
             letter-spacing: 0.4px;
