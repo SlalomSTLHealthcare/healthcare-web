@@ -2,7 +2,8 @@
   <div class="register">
   <!-- <el-card class="box-card"> -->
   <div class="reg-form">
-    <el-form label-position="left" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
+    <h2 class="form-header">Please complete all required fields.</h2>
+    <el-form label-position="top" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item required label="Name" >
@@ -324,6 +325,8 @@ a {
   margin: 4% 9%;
   padding: 5%;
 }
-
+.form-header{
+  font-weight: 100;
+}
 
 </style>
