@@ -50,8 +50,6 @@
                 <h3 class="parking-header">Transportation</h3>
                 <div class="parking">
                 <h4 class="subheader">How to get there</h4>
-                <!-- <el-row :gutter="20">
-                  <el-col :span="12"> -->
                     <div class="driving-info">
                       <h6 class="from-header">From Forest Park Avenue</h6>
                         <ul class="directions">
@@ -61,8 +59,6 @@
                           <li>Exit garage to the left and walk to EPNEC- it will be on the right side</li>
                         </ul>
                     </div>
-                  <!-- </el-col> -->
-                  <!-- <el-col :span="12"> -->
                     <div class="driving-info">
                       <h6 class="from-header">From the Airport</h6>
                         <ul class="directions">
@@ -77,10 +73,6 @@
                           <li> Exit garage to the left and walk a short block to EPNEC— it will be on the right side.</li>
                         </ul>
                     </div>
-                  <!-- </el-col> -->
-                <!-- </el-row> -->
-                <!-- <el-row :gutter="20"> -->
-                  <!-- <el-col :span="12"> -->
                     <div class="driving-info">
                       <h6 class="from-header">From downtown St. Louis and points east</h6>
                         <ul class="directions">
@@ -93,8 +85,6 @@
                           <li>Exit garage to the left and walk a short block to EPNEC— it will be on the right side.</li>
                         </ul>
                     </div>
-                  <!-- </el-col> -->
-                  <!-- <el-col :span="12"> -->
                     <div class="driving-info">
                       <h6 class="from-header">Via MetroLink</h6>
                         <ul class="directions">
@@ -103,8 +93,6 @@
                           <li>Right on Euclid Avenue to EPNEC</li>
                         </ul>
                     </div>
-                  <!-- </el-col> -->
-                <!-- </el-row> -->
                 </div>
                 <div class="map-container">
                   <iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=38.636768, -90.26275900000002&amp;q=320%20South%20Euclid%20Ave%2C%20St.%20Louis%20MO%2063101+(Eric%20P.%20Newman%20Education%20Center)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/create-google-map/">Embed Google Map</a></iframe>
