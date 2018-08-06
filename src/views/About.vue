@@ -1,5 +1,5 @@
 <template>
-<div>
+<div class="about-content">
   <AboutContent/>
 </div>
 </template>
@@ -18,3 +18,9 @@ export default {
   }
 };
 </script>
+
+<style>
+.about-content {
+  background-color: #f7f7f7;
+}
+</style>
