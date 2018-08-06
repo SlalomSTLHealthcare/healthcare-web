@@ -1,105 +1,127 @@
 <template>
     <el-container :direction="'vertical'">
         <div class="section">
-            <el-row>
-                <el-col class="topheader">
-                    <div>
-                        <el-card style="border: none" shadow="never">
-                            <h1>About Page</h1>
-                        </el-card>
-                    </div>
+            <el-row :gutter="20">
+                <el-col :span="16" class="topheader">
+                    <h1>About</h1>
+                    <div class="decoration"></div>
+                    <h2 class="descriptor">Our goal is to unite forward-thinking health practitioners from various specialties and industries experience,
+                    data management andevolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared.</h2>
                 </el-col>
-                <el-col>
-                    <div class="topdesc">
-                        <el-card shadow="never">
-                            <h3>To unite forward-thinking health practitioners from various specialties and industries experience,
-                            data management andevolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared</h3>
-                        </el-card>
-                    </div>
-                </el-col>
-            </el-row>
-            <el-row class="image">
-                <el-col>
-                    <div>
-                        <img src="https://sp.slalom.com/ourfirm/studio/Logos/-previous-files/slalom-logo-blue-RGB.jpg" alt="pic">
-                    </div>
+                <el-col :span="8">
+                    <img src="https://sp.slalom.com/ourfirm/studio/Logos/-previous-files/slalom-logo-blue-RGB.jpg" alt="pic">
                 </el-col>
             </el-row>
         </div>
-        <div class="midSection">
-            <div class="descList">
-                <el-card shadow="never">
-                    <h1>Header</h1>
-                    <ul>
-                        <li>Connect with leaders who are shaping the future of healthcare</li>
-                        <li>Customize your learning experience</li>
-                        <li>Influence discussion and evolution of healthcare</li>
-                        <li>Learn innovative ways used to improve patient care</li>
-                        <li>Equip yourself with knowledge you can implement at your institution</li>
-                    </ul>
-                </el-card>
-            </div>
+        <div class="infoSection">
+          <el-tabs v-model="activeName" @tab-click="handleClick">
+            <el-tab-pane label="What" name="first">
+              <el-card class="info-box" shadow="never">
+                  <h3 class="goal">General Information</h3>
+                      <ul>
+                          <li>Bring together healthcare practitioners at all levels</li>
+                          <li>Establish a unique and sustainable high-level forum and network</li>
+                          <li>Influence discussion and evolution of healthcare</li>
+                          <li>Learn innovative ways used to improve patient care</li>
+                          <li>Uncover answers to major health challenges – both today and tomorrow</li>
+                      </ul>
+              </el-card>
+            </el-tab-pane>
+            <el-tab-pane label="Where" name="second">
+              <el-card class="info-box" shadow="never">
+                <el-row :gutter="20">
+                  <div class="place">
+                    <!-- <el-col :span="16"> -->
+                      <h3 class="where">Eric P. Newman Education Center</h3>
+                    <!-- </el-col> -->
+                    <!-- <el-col :span="8"> -->
+                      <img src="https://www.uniquevenues.com/sites/uniquevenues.com/files/imagecache/2015_venue_flexslider/venues/slideshow/EricNewmanEduCtr.jpg" alt="pic">
+                    <!-- </el-col> -->
+                  </div>
+                </el-row>
+              </el-card>
+            </el-tab-pane>
+            <el-tab-pane label="When" name="third">
+              <el-card class="info-box" shadow="never">
+                  <h3 class="when">When</h3>
+                    <h4 class="date">October 24th, 2018</h4>
+              </el-card>
+            </el-tab-pane>
+            <el-tab-pane label="Why" name="fourth">
+              <el-card class="info-box" shadow="never">
+                  <h3 class="goal">Our Goal</h3>
+                      <ul>
+                          <li>Bring together healthcare practitioners at all levels</li>
+                          <li>Establish a unique and sustainable high-level forum and network</li>
+                          <li>Influence discussion and evolution of healthcare</li>
+                          <li>Learn innovative ways used to improve patient care</li>
+                          <li>Uncover answers to major health challenges – both today and tomorrow</li>
+                      </ul>
+              </el-card>
+            </el-tab-pane>
+          </el-tabs>
         </div>
-
-         <el-row>
-            <el-col :span="20">
-                <div class="btmdesc">
-                    <el-card shadow="never">
-                        <h1>Header</h1>
-                        <p>Description</p>
-                    </el-card>
-                </div>
-            </el-col>
-        </el-row>
     </el-container>
 </template>
 
 <script>
 export default {
-  name: "AboutContent"
+  name: "AboutContent",
+  data() {
+    return {
+      activeName: 'first'
+    };
+  },
+  methods: {
+  handleClick(tab, event) {
+    console.log(tab, event);
+  }
+}
 };
 </script>
 
 <style scoped lang="less">
-.el-container{
-  padding-top: 100px;
+h1 {
+  font-size: 40px;
+  font-weight: lighter;
+  margin-left: 6%;
 }
-.topheader {
-  width: 100%;
-  margin-bottom: 20px;
+.goal, .when{
+  font-size: 30px;
+  font-weight: normal;
+  letter-spacing: 2px;
 }
-img{
-
+.decoration {
+  background-color: #005aed;;
+  height: 5px;
+  width: 75px;
+  margin-left: 6%;
 }
-.topdesc {
-  width: 100%;
-  word-wrap: break-word;
+.descriptor {
+  font-size: 20px;
+  font-weight: lighter;
+  margin-left: 6%;
+  font-style: italic;
 }
-.btmdesc {
-  margin-bottom: 20px;
-  padding-bottom: 15px;
-}
-.midSection {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-  margin-bottom: 20px;
-}
-.section {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 20px;
-}
-.el-button {
-  float: right;
-  margin-right: 40px;
-  background-color: blue;
-  color: white;
+.info-box {
+  margin: 30px;
+  text-align: center;
 }
 ul {
-  text-align: left;
+  text-align: center;
+  list-style: none;
+  line-height: 30px;
 }
-.image {
-  padding: 0px 70px;
+.infoSection {
+  margin: 30px;
+}
+.where, .date{
+  font-size: 40px;
+  font-weight: normal;
+  letter-spacing: 2px;
+}
+img {
+  width: 300px;
+  float: right;
 }
 </style>
