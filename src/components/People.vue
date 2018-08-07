@@ -66,7 +66,7 @@ ul {
 }
 li {
   list-style-type: none;
-  margin: 2.5%;
+  margin: 1%;
 }
 a {
   color: #42b983;

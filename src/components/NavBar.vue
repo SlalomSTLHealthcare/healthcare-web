@@ -22,10 +22,12 @@
               <router-link class="nav-links" to="/">Home</router-link>
               <router-link class="nav-links" to="about">About</router-link>
               <router-link class="nav-links" :to="computedRegister">{{computedRegisterDescription}}</router-link>
+              <Login class="nav-links" loginType='nav'/>
               <router-link class="nav-links" to="people">Speakers</router-link>
 			        <router-link class="nav-links" to="session">Breakout Sessions</router-link>
               <router-link class="nav-links" to="schedule">Schedule</router-link>
               <router-link class="nav-links" to="sponsor">Sponsors</router-link>
+
 		       </div>
 	      </div>
     </transition>
@@ -143,7 +145,7 @@ ul {
   color: #fff;
   padding: 20px 0;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 25px;
 }
 .menu .menuLogo:hover {
   color: #e5e5e5;
@@ -153,7 +155,7 @@ ul {
   display: flex;
   justify-content: space-around;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 20px;
   color: #f0f0f0;
 }
 a:hover {
@@ -168,7 +170,6 @@ a:hover {
 }
 .nav-links{
   color: #fff;
-
 }
 @media (max-width: 398px){
   .logo img {
@@ -182,8 +183,8 @@ a:hover {
     padding-right: 10px;
     padding-left: 0px;
   }
-  .logIn {
-    margin: 15px 6px;
+  .logIn, .optiontwo {
+    display: none;
   }
   .logBtn {
     margin: 15px 1px;
@@ -194,6 +195,9 @@ a:hover {
   .el-button.is-round{
     padding: 12px 12px;
   }
+}
+.wrap a {
+  padding: 10px 0;
 }
 @media (min-width: 400px) and (max-width: 500px){
   .logo img {
@@ -207,7 +211,7 @@ a:hover {
     padding-right: 10px;
     padding-left: 0px;
   }
-  .logIn {
+  .logIn, .logBtn {
     margin: 15px 6px;
   }
   .logBtn {

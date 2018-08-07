@@ -10,8 +10,9 @@
         </td>
         <td class="scheduleEvent">
           <h2 class="eventHeader">{{event.title}}</h2>
-          <p v-for="session in getSessions(event)" v-if="session.session_type === 'Extra'">{{session.description}}</p>
-          <p v-else>{{session.title}}</p>
+          <p class="event" v-for="session in getSessions(event)" v-if="session.session_type === 'Extra'">{{session.description}}</p>
+          <p class="event" v-else>{{session.title}}</p>
+          <p class="endOfEntry"></p>
         </td>
       </tr>
     </table>
@@ -100,10 +101,10 @@ table{
   margin: 0 auto;
 }
 .eventHeader{
-  color: #002f5e;
+  color: #162565;
 }
 .timeHeader{
-  color: #9a9c9e;
+  color: #706e6b;
 }
 h1 {
   font-size: 40px;
@@ -111,11 +112,19 @@ h1 {
   margin-left: 10%;
   margin-top: 100px;
 }
+
 .decoration {
   background-color: #005aed;;
   height: 5px;
   width: 75px;
   margin-left: 10%;
+}
+
+.roomNum, .timeHeader, .event, .eventHeader {
+  margin: 2px;
+}
+.endOfEntry{
+  padding-bottom: 3px;
 }
 @media only screen and (max-width:349px){
 

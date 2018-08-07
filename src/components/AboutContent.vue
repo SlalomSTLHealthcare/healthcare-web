@@ -9,26 +9,21 @@
                     data management andevolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared.</h2>
                 </el-col>
                 <el-col :span="8">
-                    <img class="slalom-logo" src="../assets/slalom-logo.png" alt="pic">
+                    <!-- <img class="slalom-logo" src="../assets/slalom-logo.png" alt="pic"> -->
                 </el-col>
             </el-row>
         </div>
         <div class="infoSection">
           <el-tabs tab-position=top v-model="activeName" @tab-click="handleClick">
-            <el-tab-pane label="Info" name="first">
-              <el-card :body-style="{ padding: '0px' }" class="info-box" shadow="never">
-                  <h3 class="goal">General Information</h3>
-              </el-card>
-            </el-tab-pane>
-            <el-tab-pane label="Venue" name="second">
+            <el-tab-pane label="Venue" name="first">
               <el-card :body-style="{ padding: '0px' }" class="info-box" shadow="never">
                 <el-row class="where-container" :gutter="20">
                   <div class="place">
-                    <el-col :span="16">
+                    <el-col :span="12">
                       <h3 class="where">Eric P. Newman Education Center</h3>
                       <span>320 South Euclid Ave, St. Louis MO </span>
                     </el-col>
-                    <el-col :span="8">
+                    <el-col class="venue-image":span="12">
                       <img class="venue" src="https://www.uniquevenues.com/sites/uniquevenues.com/files/imagecache/2015_venue_flexslider/venues/slideshow/EricNewmanEduCtr.jpg" alt="pic">
                     </el-col>
                   </div>
@@ -45,7 +40,7 @@
                 </div>
               </el-card>
             </el-tab-pane>
-            <el-tab-pane label="Transportation" name="third">
+            <el-tab-pane label="Transportation" name="second">
               <el-card :body-style="{ padding: '0px' }" class="info-box" shadow="never">
                 <h3 class="parking-header">Transportation</h3>
                 <div class="parking">
@@ -105,12 +100,12 @@
                 </div>
               </el-card>
             </el-tab-pane>
-            <el-tab-pane label="Explore" name="fourth">
+            <el-tab-pane label="Explore" name="third">
               <el-card :body-style="{ padding: '0px' }" class="info-box" shadow="never">
                   <h3 class="goal">Explore the Area</h3>
               </el-card>
             </el-tab-pane>
-            <el-tab-pane label="Vision" name="fifth">
+            <el-tab-pane label="Vision" name="fourth">
               <el-card :body-style="{ padding: '0px' }" class="info-box" shadow="never">
                   <h3 class="goal">Our Vision</h3>
               </el-card>
@@ -147,6 +142,7 @@ h1 {
   font-size: 40px;
   font-weight: lighter;
   margin-left: 6%;
+  margin-bottom: 16px;
 }
 .goal, .when{
   font-size: 30px;
@@ -164,6 +160,7 @@ h1 {
   font-weight: lighter;
   margin-left: 6%;
   font-style: italic;
+  margin-top: 30px;
 }
 .info-box {
   margin: 30px;
@@ -181,9 +178,11 @@ ul {
   background-color: #fff;
 }
 .where, .date, .parking-header, .subsubheader{
-  font-size: 40px;
+  font-size: 30px;
   font-weight: normal;
   letter-spacing: 2px;
+  margin-top: 0px;
+  margin-bottom: 5px;
 }
 .slalom-logo {
   width: 80%;
@@ -191,14 +190,16 @@ ul {
 }
 .place {
   display: flex;
-  align-items: center;
   text-align: left;
+  justify-content: center;
+  align-items: center;
 }
 .el-card {
   border: none;
+  height: 3000px;
 }
 .map-container {
-  margin: 80px;
+  margin: 60px 0px;
 }
 .parking-header {
   font-size: 30px;
@@ -237,5 +238,8 @@ ul {
 }
 .driving-info {
   margin: 50px;
+}
+.venue-image {
+  text-align: center;
 }
 </style>
