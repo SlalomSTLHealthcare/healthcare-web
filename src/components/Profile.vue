@@ -56,7 +56,7 @@
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
       <el-input type="textarea" v-model="profForm.takeaway"></el-input>
     </el-form-item>
-    <el-form-item required label="Select Breakout Sessions">
+    <el-form-item label="Select Breakout Sessions">
       <SelectBreakout timeSlot="10:15 am" type='profile' />
       <SelectBreakout timeSlot="3:00 pm" type='profile' />
     </el-form-item>
