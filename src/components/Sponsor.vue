@@ -42,8 +42,6 @@ export default {
   font-size: 20px;
   font-weight: bold;
 }
-
-
 .platinumCard{
   width: 100vw;
   font-size: 12px;
