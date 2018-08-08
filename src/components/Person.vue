@@ -1,6 +1,6 @@
 <template>
   <div class="person">
-        <el-card class="card" shadow="hover" :body-style="{ padding: '0px' }">
+        <el-card class="card" shadow="never" :body-style="{ padding: '0px' }">
           <img :src="imgSource" class="image">
           <div style="padding: 14px;">
             <span class="name">{{ name }}</span>
@@ -52,15 +52,14 @@ export default {
   float: left;
 }
 .el-card {
-  padding: 2% 2%;
+  padding: 3% 3%;
   border: 0;
-  background-color: transparent;
+  border-radius: 0;
 }
 .name {
   font-weight: bold;
   font-size: 18px;
   text-align: left;
-  color:#005aed;
 }
 .bio {
   text-align: left;
@@ -71,6 +70,10 @@ export default {
   float: right;
   color: #9b9b9b;
   font-size: 15px;
+}
+.fa-linkedin-in:hover,
+.fa-twitter:hover {
+  color: #005aed;
 }
 .info {
   margin-top: 10px;

@@ -2,12 +2,17 @@
   <div class="register">
   <!-- <el-card class="box-card"> -->
   <div class="reg-form">
-    <el-form label-position="left" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
+    <h2 class="form-header">Please complete all required fields.</h2>
+    <el-form label-position="top" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="200px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item required label="Name" >
-        <el-input v-model="form.firstName" placeholder="First Name"></el-input>
-        <el-input v-model="form.lastName" label-position="top" placeholder="Last Name"></el-input>
+        <el-col :span="12">
+        <el-input v-model="form.firstName" class="name" placeholder="First Name" style="width:97%;"></el-input>
+      </el-col>
+      <el-col :span="12">
+        <el-input class="name" v-model="form.lastName" label-position="top" style="width:100%;" placeholder="Last Name"></el-input>
+      </el-col>
       </el-form-item>
       <el-form-item label="Company">
         <el-input v-model="form.company"></el-input>
@@ -286,17 +291,12 @@ ul {
 }
 li {
   display: inline-block;
-  margin: 0 10px;
 }
 a {
   color: #42b983;
 }
 .text {
   font-size: 14px;
-}
-
-.item {
-  margin-bottom: 18px;
 }
 .buttons {
   text-align: center;
@@ -325,6 +325,18 @@ a {
   margin: 4% 9%;
   padding: 5%;
 }
+.form-header{
+  font-weight: 100;
+}
+.el-form-item {
+  margin-bottom: 10px;
+}
 
+.input {
+  padding: 20px;
+}
+@media (min-width: 300px) and (max-width: 500px) {
+  
+}
 
 </style>

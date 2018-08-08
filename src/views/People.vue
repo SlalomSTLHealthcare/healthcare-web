@@ -1,7 +1,6 @@
 
 <template>
   <div class="people">
-    <div id="nav"></div>
     <People msg="People"/>
   </div>
 </template>
@@ -20,7 +19,8 @@ export default {
 </script>
 
 <style>
-#nav {
-  padding: 40px;
+.people {
+  padding: 30px 50px;
+  background-color: #f7f7f7;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div class="registration">
-    <div id="nav"></div>
       <h1>Registration</h1>
       <div class="decoration"></div>
       <Registration class="registration-form"/>
@@ -36,21 +35,19 @@ export default {
 <style scoped lang="less">
 .registration{
   background-color: #f7f7f7;
-  overflow: scroll;
+  padding: 50px;
 }
 h1 {
   font-size: 40px;
   font-weight: lighter;
   margin-left: 6%;
+  margin-bottom: 16px;
 }
 .decoration {
   background-color: #005aed;;
   height: 5px;
   width: 75px;
   margin-left: 6%;
-}
-#nav {
-  padding: 40px;
 }
 .title{
   font-family: Arial;

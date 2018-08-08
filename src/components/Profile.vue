@@ -6,10 +6,10 @@
       <span class="action-buttons">
         <el-button v-if ="!update" @click="update=true" type="primary" round>Update</el-button>
         <el-button v-if="update" @click="updateRegistration" round>Save</el-button>
-        <el-button @click="deleteReg" type="danger" round>Delete Registration</el-button>
+        <el-button @click="deleteReg" type="danger" round>Delete</el-button>
       </span>
     </div>
-      <el-form :disabled="!update" label-position="left" ref="form" @submit.prevent="handleSubmit" :model="profForm" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
+      <el-form :disabled="!update" label-position="top" ref="form" @submit.prevent="handleSubmit" :model="profForm" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item  label="Name" >
@@ -387,5 +387,27 @@ a {
 .share-button{
   width: 190px;
   margin: 7px;
+}
+
+@media (min-width: 430px) and (max-width: 500px) {
+  .action-buttons button{
+    width: 100px;
+    font-size: 12px;
+    text-align: center;
+  }
+}
+
+@media (min-width: 355px) and (max-width: 430px) {
+  .action-buttons button{
+    width: 75px;
+    font-size: 12px;
+  }
+}
+@media (min-width: 200px) and (max-width: 355px) {
+  .action-buttons button{
+    width: 55px;
+    font-size: 12px;
+    padding: 11px;
+  }
 }
 </style>

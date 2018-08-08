@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-    </div> -->
+    <div id="nav"></div>
     <NavBar></NavBar>
     <router-view/>
     <Footer/>
@@ -39,7 +38,7 @@ body {
   color: #2c3e50;
 }
 #nav {
-  padding: 32px;
+  height: 70px;
   a {
     font-weight: bold;
     color: #2c3e50;

@@ -1,6 +1,6 @@
 <template>
   <el-container class="footer">
-    <el-row class="top">
+    <!-- <el-row class="top"> -->
     <div class="panelOne">
       <el-row>
           <a href="https://www.slalom.com/" target="_blank">
@@ -21,12 +21,12 @@
             <i class="fab fa-facebook-f"></i>
           </a>
       </el-row>
-      <el-row class="directions">
+      <!-- <el-row class="directions">
         <p>320 S. Euclid Ave</p>
         <p>St. Louis,MO 63110</p>
-      </el-row>
+      </el-row> -->
     </div>
-    <div class="panelTwo">
+    <!-- <div class="panelTwo">
         <el-row class="home">
           <h4>Home</h4>
           <router-link to="/" class="link">Home</router-link>
@@ -44,19 +44,19 @@
         <h4>Help</h4>
         <router-link to="about" class="link">Contact</router-link>
       </el-row>
-    </div>
+    </div> -->
     <!--This was in the design but not sure if it was needed-->
     <!-- <div class="panelThree">
       <span class="input-label">Sign up for Newsletter</span>
-      <input class="el-input-style" 
-        type="email" 
+      <input class="el-input-style"
+        type="email"
         placeholder="Enter your email address">
         <el-button round class="signUp">Sign Up</el-button>
     </div> -->
-    </el-row>
-    <el-row class="bot">
+    <!-- </el-row> -->
+    <!-- <el-row class="bot">
         <p>2018 Slalom</p>
-    </el-row>
+    </el-row> -->
   </el-container>
 </template>
 
@@ -83,7 +83,7 @@ export default {
   bottom: 0;
   z-index: 10;
   width: 100%;
-  height: 300px;
+  height: 100px;
   display: flex;
   flex-direction: column;
   box-shadow: 0px 1px 4px grey;
