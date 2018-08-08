@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="schedule">
     <Schedule/>
   </div>
 </template>
@@ -21,10 +21,9 @@ export default {
 
 
 <style scoped lang="less">
-h1 {
-  text-align: left;
-  padding-left: 1%;
-  font-weight: bold;
+.schedule {
+  padding: 30px 50px;
+  background-color: #f7f7f7;
 }
 
 </style>

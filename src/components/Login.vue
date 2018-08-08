@@ -3,8 +3,8 @@
     <div class='message'>
       <p class="login-link" v-if="loginType==='registration'">Already registered? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a> to login.</p>
       <el-button class="btn" round plain v-if="loginType==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
+      <a id="login" v-if="loginType==='nav'" class="nav-link" style="cursor: pointer;" @click="dialogFormVisible=true">Login</a>
     </div>
-    <p v-if="loginType==='nav'" class="nav-link" style="cursor: pointer;" @click="dialogFormVisible=true">Login</p>
     <el-dialog title="Login" :append-to-body="true" :visible.sync="dialogFormVisible">
       <el-form :model="form">
          <el-form-item label="Email">
@@ -58,6 +58,7 @@ methods: {
   },
   successfulLogin() {
     this.dialogFormVisible = false;
+    this.$emit('close');
     this.$alert("Welcome back to HealthSTLx!", "Login Successful", {
       dangerouslyUseHTMLString: true,
       confirmButtonText: 'OK',

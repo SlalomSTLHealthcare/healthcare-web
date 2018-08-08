@@ -98,7 +98,8 @@ div{
 table{
   border-spacing: 0;
   background-color: white;
-  margin: 0 auto;
+  margin: 3% auto;
+  padding: 5% 15%;
 }
 .eventHeader{
   color: #162565;
