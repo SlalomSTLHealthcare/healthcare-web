@@ -3,10 +3,11 @@
     <h1>Schedule</h1>
     <div class="decoration"></div>
     <table>
+
       <tr v-for="event in scheduleData" valign="top">
         <td style="" class="time">
           <h2 class="timeHeader">{{timeFormatter(event)}}</h2>
-          <p class="roomNum" v-for="session in getSessions(event)" >Room #{{session.room_num}}</p>
+          <p class="roomNum" v-for="session in event.sessions" >Room #{{session.room_num}}</p>
         </td>
         <td class="scheduleEvent">
           <h2 class="eventHeader">{{event.title}}</h2>
@@ -22,10 +23,24 @@
 <script>
 import moment from 'moment'
 import _ from 'underscore'
+import axios from 'axios';
 export default {
   name: "Schedule",
   mounted: function(){
-    this.populateData();
+    var self = this;
+    axios.all([this.populateData(),this.populateSessions()])
+      .then(axios.spread(function (schedule, sessions){
+        self.scheduleData = schedule.data;
+        self.sessions = sessions.data;
+        self.scheduleData = _.sortBy(self.scheduleData, function(event){ return event.start_time});
+        self.scheduleData.forEach(function(event){
+          event.sessions = self.getSessions(event);
+        });
+      }))
+    .catch(e => {
+      console.log(e);
+      return e;
+    });
   },
   data () {
     return{
@@ -45,36 +60,17 @@ export default {
       return 'tableRow';
     },
     populateData: function() {
-      this.$axiosServer.get(`api/schedules`)
-      .then(response => {
-        // JSON responses are automatically parsed.
-        this.scheduleData = response.data;
-        this.scheduleData = _.sortBy(this.scheduleData, function(event){ return event.start_time});
-        console.log(this.scheduleData);
-
-      })
-      .catch(e => {
-        console.log("error");
-        return e;
-      });
-
-      this.$axiosServer.get(`api/sessions`)
-      .then(response => {
-        // JSON responses are automatically parsed.
-        this.sessions = response.data;
-      })
-      .catch(e => {
-        console.log("error");
-        return e;
-      });
-
+      return this.$axiosServer.get(`api/schedules`)
+    },
+    populateSessions: function(){
+      return this.$axiosServer.get(`api/sessions`);
     },
     timeFormatter: function(event) {
       return moment(event.start_time).format("h:mm A");
     },
     getSessions(schedule){
       return _.where(this.sessions, {schedule_id: schedule.id});
-    }
+    },
   }
 };
 </script>
