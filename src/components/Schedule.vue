@@ -11,14 +11,9 @@
         </td>
         <td class="scheduleEvent">
           <h2 class="eventHeader">{{event.title}}</h2>
-<<<<<<< HEAD
-          <p v-for="session in event.sessions" v-if="session.session_type === 'Extra'">{{session.description}}</p>
-          <p v-else>{{session.title}}</p>
-=======
           <p class="event" v-for="session in getSessions(event)" v-if="session.session_type === 'Extra'">{{session.description}}</p>
           <p class="event" v-else>{{session.title}}</p>
           <p class="endOfEntry"></p>
->>>>>>> staging
         </td>
       </tr>
     </table>
