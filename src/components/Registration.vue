@@ -60,7 +60,7 @@
     <el-form-item label="Tell us a little bit about what you would like to get out of HealthSTLx.">
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
-    <el-form-item required label="Select Breakout Sessions">
+    <el-form-item label="Select Breakout Sessions">
       <SelectBreakout timeSlot="10:15 am" type='register'/>
       <SelectBreakout timeSlot="3:00 pm" type='register'/>
     </el-form-item>
@@ -78,11 +78,11 @@
   title="Successful Registration"
   :visible.sync="dialogVisible"
   width="30%">
-  <span>Thank you for registering for HealthSTLx!</span>
+  <span>Thank you for registering for HealthSTLx! Please Check your email to confirm your email address</span>
   <span slot="footer" class="dialog-footer">
      <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://slalom-health-summit-staging.herokuapp.com/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" class="share-button" round>Share on LinkedIn</el-button></a>
      <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-related="Slalom" data-show-count="false"><el-button plain class="share-button" icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
-    <el-button type="primary" @click="confirm">Confirm</el-button>
+    <el-button type="primary" @click="confirm">Ok</el-button>
   </span>
 </el-dialog>
   </div>
@@ -106,6 +106,14 @@ var confirmPass = (rule, value, callback) => {
     callback();
   }
 };
+var confirmBreakouts = (rule, value, callback) => {
+  console.log(value);
+  if (value === '') {
+    callback(new Error('Please select a breakout'));
+  }else{
+    callback();
+  }
+}
   return {
     login: true,
     dialogVisible: false,
@@ -148,25 +156,25 @@ var confirmPass = (rule, value, callback) => {
               trigger: 'blur'
             },
           ],
-          checkPass: [
-            {
-              required: true, validator: confirmPass, trigger: 'blur',
-              message: 'Please confirm your password'
-            }
+        checkPass: [
+          {
+            required: true, validator: confirmPass, trigger: 'blur',
+            message: 'Please confirm your password'
+          }
+        ],
+        email: [
+            { required: true,
+              message: 'Please enter a valid email address.',
+              pattern:'.+\@.+\..+',
+              trigger: 'blur'
+            },
           ],
-            email: [
-                { required: true,
-                  message: 'Please enter a valid email address.',
-                  pattern:'.+\@.+\..+',
-                  trigger: 'blur'
-                },
-              ],
-            name: [
-                { required: true,
-                  message: 'Please enter your name.',
-                  trigger: 'blur'
-                },
-            ]
+        name: [
+            { required: true,
+              message: 'Please enter your name.',
+              trigger: 'blur'
+            },
+        ]
       }
     }
 },
@@ -189,8 +197,6 @@ computed: mapState({
 }),
 methods: {
   handleSubmit(form) {
-     console.log(this.form.breakoutsOne);
-      console.log(this.form.breakoutsOne);
     var self = this;
     this.$refs[form].validate((valid) => {
       if (valid) {
@@ -258,11 +264,6 @@ methods: {
   },
   confirm(){
     this.dialogVisible=false;
-    this.$store.dispatch('login', this.form.email);
-    this.$store.dispatch('obtainToken', {
-      username: this.form.email,
-      password: this.form.pass
-    });
     this.$router.push('/');
   }
 }
