@@ -16,12 +16,14 @@
       </div>
     </div>
     <transition name="fade">
-        <div class="overlay" v-if="show" v-on:click="show = !show">
+        <div class="overlay" v-if="show" v-on:click="showBox" >
         <i class="fas fa-times fa-2x"></i>
 	         <div class="wrap">
               <router-link class="nav-links" to="/">Home</router-link>
               <router-link class="nav-links" to="about">About</router-link>
               <router-link class="nav-links" :to="computedRegister">{{computedRegisterDescription}}</router-link>
+              <span v-if="isSignedIn" class="nav-links" v-on:click="logout">Logout</span>
+              <Login v-else class="nav-links" v-on:close="closeBox" loginType='nav'/>
               <router-link class="nav-links" to="people">Speakers</router-link>
 			        <router-link class="nav-links" to="session">Breakout Sessions</router-link>
               <router-link class="nav-links" to="schedule">Schedule</router-link>
@@ -44,6 +46,14 @@ export default {
     };
   },
   methods: {
+    showBox: function(event) {
+      if(event.target.id!="login"){
+        this.show=!this.show
+      }
+    },
+    closeBox: function() {
+      this.show=false;
+    },
     handleSelect(key, keyPath) {},
     logout: function() {
       this.$store.dispatch('logout');
@@ -138,12 +148,12 @@ ul {
   align-items: center;
   height: 100vh;
 }
-.wrap a {
+.wrap .nav-links {
   list-style: none;
   color: #fff;
   padding: 20px 0;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 25px;
 }
 .menu .menuLogo:hover {
   color: #e5e5e5;
@@ -153,10 +163,10 @@ ul {
   display: flex;
   justify-content: space-around;
   text-decoration: none;
-  font-size: 30px;
+  font-size: 20px;
   color: #f0f0f0;
 }
-a:hover {
+.nav-links:hover {
   color:#15a6ff;
 }
 .fade-enter-active,
@@ -165,10 +175,6 @@ a:hover {
 }
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
-}
-.nav-links{
-  color: #fff;
-
 }
 @media (max-width: 398px){
   .logo img {
@@ -182,8 +188,8 @@ a:hover {
     padding-right: 10px;
     padding-left: 0px;
   }
-  .logIn {
-    margin: 15px 6px;
+  .logIn, .optiontwo {
+    display: none;
   }
   .logBtn {
     margin: 15px 1px;
@@ -194,6 +200,9 @@ a:hover {
   .el-button.is-round{
     padding: 12px 12px;
   }
+}
+.wrap .nav-links {
+  padding: 10px 0;
 }
 @media (min-width: 400px) and (max-width: 500px){
   .logo img {
@@ -207,7 +216,7 @@ a:hover {
     padding-right: 10px;
     padding-left: 0px;
   }
-  .logIn {
+  .logIn, .logBtn {
     margin: 15px 6px;
   }
   .logBtn {

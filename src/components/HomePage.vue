@@ -44,9 +44,9 @@
                     <div class="text">
                         Health<span style="font-weight: 700;">STLX</span> is a one-day summit aimed at exploring national healthcare challenges through a local St. Louis lens. Our community is experiencing an evolution in the way we interact with brands and organizations in both the digital and physical space. As a result, every industry is being disrupted and healthcare is no exception. We will bring together thought leaders, influencers, and innovators to foster learning, inspiration, and wonder – and design solutions that matter to our community. Together, we will empower our St. Louis community.
                     </div>
-                    <div class="note">
+                    <!-- <div class="note">
                         Please provide your preferred e-mail address to stay updated with additional event details.
-                    </div>
+                    </div> -->
                     <!-- <div class="error" v-show="!emailExists">{{emailErrorText}}</div> -->
                     <!-- <div class="action">
                         <el-input class="input" placeholder="Name" v-model="emailName" v-if="emailButtonText === 'Submit'"></el-input>
@@ -64,17 +64,21 @@
             <div class="text">
                 Thank you for your potential interest in becoming a sponsor for Health<span style="font-weight: 700;">STLX</span>. In our inaugural year, we are looking forward to assembling more than 300+ healthcare executives, directors, managers, practitioners and educators to discuss and create solutions around the evolution of healthcare. We are pleased to provide a space for our community partners and organizations to connect with attendees and exhibit their latest products.
             </div>
-            <HomeSponsor/>
             <!--Keep in case we need later-->
             <div class="action">
-                <!-- <div class="error" v-show="!sponsorExists">{{sponsorErrorText}}</div>
+                <div class="error" v-show="!sponsorExists">{{sponsorErrorText}}</div>
                 <el-input class="input" placeholder="Name" v-model="sponsorName" v-if="sponsorButtonText === 'Submit'"></el-input>
                 <el-input class="input" placeholder="Email" v-model="sponsorEmail" v-if="sponsorButtonText === 'Submit'"></el-input>
                 <el-input class="input" placeholder="Company" v-model="sponsorCompany" v-if="sponsorButtonText === 'Submit'"></el-input>
                 <el-input style="margin-bottom: 30px;" class="input" placeholder="Anything else you would like us to know?" v-model="sponsorNotes" v-if="sponsorButtonText === 'Submit'"></el-input>
-                <el-button :disabled="sponsorButtonDisabled" :loading="sponsorButtonLoading" type="primary" :class="[sponsorButtonDisabled ? 'disabled-class' : '', 'sponsor-button']" @click="handleSponsorClick" plain round>{{sponsorButtonText}}</el-button> -->
+                <el-button :disabled="sponsorButtonDisabled" :loading="sponsorButtonLoading" type="primary" :class="[sponsorButtonDisabled ? 'disabled-class' : '', 'sponsor-button']" @click="handleSponsorClick" plain round>
+                  <!-- {{sponsorButtonText}} -->
+                  Become a Sponsor
+                </el-button>
+                <HomeSponsor/>
             </div>
         </div>
+
     </div>
 </template>
 
@@ -123,10 +127,13 @@ export default {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        background-color: #f5f5f5;
         .info-section {
+            text-align: center;
             width: 30vw;
-            padding-top: 20px;
-            background-color: #fff;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            // background-color: #fff;
             letter-spacing: 0.4px;
             justify-content: center;
             color: #333;
@@ -142,7 +149,8 @@ export default {
                     text-align: center;
                 }
                 .bar {
-                    margin-top: 2rem;
+                    margin-top: 1rem;
+                    margin-bottom: 2rem;
                     height: 5px;
                     width: 100px;
                     background-color: @primary;
@@ -151,6 +159,7 @@ export default {
                     font-size: 0.9rem;
                     font-weight: 400;
                     margin-top: 1rem;
+                    margin-bottom: 1rem;
                     line-height: 2rem;
                 }
                 .note {
@@ -216,8 +225,9 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(@sponsor-purple-dark, @sponsor-purple);
-        color: #fff;
+        // background: linear-gradient(@sponsor-purple-dark, @sponsor-purple);
+        // color: #fff;
+
         letter-spacing: 0.2px;
         .title {
             margin-top: 4rem;
@@ -226,10 +236,11 @@ export default {
             text-transform: uppercase;
         }
         .bar {
-            margin-top: 2rem;
+            margin-top: 1rem;
+            margin-bottom: 2rem;
             height: 5px;
             width: 100px;
-            background-color: #fff;
+            background-color: @primary;
         }
         .text {
             font-size: 0.9rem;
@@ -238,8 +249,11 @@ export default {
             line-height: 2rem;
             width: 600px;
         }
+        .sponsorButton {
+          margin: 50px;
+        }
         .action {
-            margin: 4rem 0 4rem;
+            margin: 2rem 0 2rem;
             .error {
                 font-size: 0.9rem;
                 font-weight: 300;
@@ -263,12 +277,12 @@ export default {
                 letter-spacing: 0.6px;
                 font-weight: 400;
                 font-size: 0.8rem;
-                border-color: #fff;
+                border-color: #000;
                 background-color: transparent;
-                color: #fff;
+                color: #000;
                 &:hover {
-                    background-color: #fff;
-                    color: @sponsor-purple;
+                    background-color: #000;
+                    color: #fff;
                 }
             }
             .disabled-class {

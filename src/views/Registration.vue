@@ -41,6 +41,7 @@ h1 {
   font-size: 40px;
   font-weight: lighter;
   margin-left: 6%;
+  margin-bottom: 16px;
 }
 .decoration {
   background-color: #005aed;;

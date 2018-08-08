@@ -3,6 +3,7 @@
     <div class='message'>
       <p class="login-link" v-if="loginType==='registration'">Already registered? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a> to login.</p>
       <el-button class="btn" round plain v-if="loginType==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
+      <a id="login" v-if="loginType==='nav'" class="nav-link" style="cursor: pointer;" @click="dialogFormVisible=true">Login</a>
     </div>
     <el-dialog title="Login" :append-to-body="true" :visible.sync="dialogFormVisible">
       <el-form :model="form">
@@ -13,8 +14,8 @@
            <el-input type="password" v-model="form.pass" auto-complete="off"></el-input>
          </el-form-item>
       </el-form>
-    <el-button @click="dialogFormVisible = false">Cancel</el-button>
-    <el-button @click="handleLogin">Login</el-button>
+    <el-button class="cancel" round @click="dialogFormVisible = false">Cancel</el-button>
+    <el-button class="loginbut" round @click="handleLogin">Login</el-button>
     <p>Forgot Password? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a>.</p>
   </el-dialog>
   </div>
@@ -57,6 +58,7 @@ methods: {
   },
   successfulLogin() {
     this.dialogFormVisible = false;
+    this.$emit('close');
     this.$alert("Welcome back to HealthSTLx!", "Login Successful", {
       dangerouslyUseHTMLString: true,
       confirmButtonText: 'OK',
@@ -89,10 +91,10 @@ methods: {
   color: black;
 }
  a {
-  color: #71bab0;
+  color: #005aed;
 }
  a:hover {
-  color: #FFE72C;
+  color: #66b1ff;
 }
 .message {
   display: inline;
@@ -105,5 +107,16 @@ methods: {
 }
 .login-link{
   background-color: #f7f7f7;
+}
+.nav-link {
+  list-style: none;
+  color: #fff;
+  text-decoration: none;
+  font-size: 25px;
+}
+.cancel:hover, .loginbut:hover {
+  background-color: #000;
+  color: #fff;
+  border-color: #000;
 }
 </style>
