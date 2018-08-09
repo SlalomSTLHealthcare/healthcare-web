@@ -7,12 +7,14 @@
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item required label="Name" >
-        <el-col :span="12">
-        <el-input v-model="form.firstName" class="name" placeholder="First Name" style="width:97%;"></el-input>
-      </el-col>
-      <el-col :span="12">
-        <el-input class="name" v-model="form.lastName" label-position="top" style="width:100%;" placeholder="Last Name"></el-input>
-      </el-col>
+        <el-row :gutter="20">
+        <el-col :xs="24" :sm="12">
+          <el-input v-model="form.firstName" class="firstName" placeholder="First Name"></el-input>
+        </el-col>
+        <el-col :xs="24" :sm="12">
+          <el-input class="lastName" v-model="form.lastName" label-position="top"  placeholder="Last Name"></el-input>
+        </el-col>
+      </el-row>
       </el-form-item>
       <el-form-item label="Company">
         <el-input v-model="form.company"></el-input>
@@ -61,8 +63,8 @@
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
     <el-form-item label="Select Breakout Sessions">
-      <SelectBreakout timeSlot="10:15 am" type='register'/>
-      <SelectBreakout timeSlot="3:00 pm" type='register'/>
+      <SelectBreakout class="breakout" timeSlot="10:15 am" type='register'/>
+      <SelectBreakout class="breakout" timeSlot="3:00 pm" type='register'/>
     </el-form-item>
     <el-form-item required label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch   v-model="form.donate"></el-switch>
@@ -335,8 +337,21 @@ a {
 .input {
   padding: 20px;
 }
-@media (min-width: 300px) and (max-width: 500px) {
-  
+.name {
+  margin-bottom: 10px;
+}
+@media (max-width: 768px) {
+  .firstName {
+    margin-bottom: 10px;
+  }
+  input {
+    text-align: center;
+    margin: auto;
+  }
+  .reg-form {
+    background-color: #ffffff;
+    padding: 5px;
+  }
 }
 
 </style>
