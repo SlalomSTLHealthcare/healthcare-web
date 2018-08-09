@@ -176,15 +176,7 @@ p {
   padding-bottom: 20px;
   text-align: left;
 }
-@media (min-width: 501px) and (max-width: 750px) {
-  // .breakout-button{
-  //   text-align: center;
-  // }
-}
 @media (min-width: 430px) and (max-width: 500px) {
-  // .breakout-button{
-  //   text-align: center;
-  // }
   .breakout-button button{
     width: 200px;
     font-size: 12px;
@@ -193,18 +185,12 @@ p {
 }
 
 @media (min-width: 355px) and (max-width: 430px) {
-  // .breakout-button{
-  //   text-align: center;
-  // }
   .breakout-button button{
     width: 200px;
     font-size: 12px;
   }
 }
 @media (min-width: 200px) and (max-width: 355px) {
-  // .breakout-button{
-  //   text-align: center;
-  // }
   .breakout-button button{
     width: 200px;
     font-size: 12px;
