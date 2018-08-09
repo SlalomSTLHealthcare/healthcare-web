@@ -35,19 +35,19 @@ export default {
 <style scoped lang="less">
 .registration{
   background-color: #f7f7f7;
-  padding: 50px;
+  padding: 30px 50px;
 }
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 6%;
+  margin-left: 5.3%;
   margin-bottom: 16px;
 }
 .decoration {
   background-color: #005aed;;
   height: 5px;
   width: 75px;
-  margin-left: 6%;
+  margin-left: 5.3%;
 }
 .title{
   font-family: Arial;

@@ -1,8 +1,6 @@
 
 <template>
-  <div class="people">
     <People msg="People"/>
-  </div>
 </template>
 
 <script>

@@ -1,9 +1,7 @@
 <template>
   <div class="people">
-
     <h1>Speakers</h1>
     <div class="decoration"></div>
-
     <ul class="people-list">
       <li v-for="item in data" :key="item.id">
         <Person :name="item.full_name" :imgSource="item.image_loc" :company="item.company" :bio="item.bio" :twitter="item.twitter" :linkedin="item.linkedin"/>
@@ -48,13 +46,13 @@ export default {
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 10%;
+  margin-left: 3%;
 }
 .decoration {
   background-color: #005aed;;
   height: 5px;
   width: 75px;
-  margin-left: 10%;
+  margin-left: 3%;
 }
 ul {
   list-style-type: none;

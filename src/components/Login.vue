@@ -5,7 +5,8 @@
       <el-button class="btn" round plain v-if="loginType==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
       <a id="login" v-if="loginType==='nav'" class="nav-link" style="cursor: pointer;" @click="dialogFormVisible=true">Login</a>
     </div>
-    <el-dialog title="Login" :append-to-body="true" :visible.sync="dialogFormVisible">
+
+    <el-dialog class="dialog" title="Login" width="75vw" center="true" :append-to-body="true" :visible.sync="dialogFormVisible">
       <el-form :model="form">
          <el-form-item label="Email">
            <el-input v-model="form.email" auto-complete="off"></el-input>
@@ -14,9 +15,11 @@
            <el-input type="password" v-model="form.pass" auto-complete="off"></el-input>
          </el-form-item>
       </el-form>
-    <el-button class="cancel" round @click="dialogFormVisible = false">Cancel</el-button>
-    <el-button class="loginbut" round @click="handleLogin">Login</el-button>
-    <p>Forgot Password? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a>.</p>
+    <div class="formDialog">
+      <el-button class="cancel" round @click="dialogFormVisible = false">Cancel</el-button>
+      <el-button class="loginbut" round @click="handleLogin">Login</el-button>
+      <p>Forgot Password? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a>.</p>
+    </div>
   </el-dialog>
   </div>
 </template>
@@ -87,8 +90,13 @@ methods: {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
 .btn {
-  height: 40px;
+  height: 39px;
+  margin-top: 2.5px;
+  padding: 0px 30px;
   color: black;
+}
+.formDialog{
+  text-align: center;
 }
  a {
   color: #005aed;
@@ -118,5 +126,10 @@ methods: {
   background-color: #000;
   color: #fff;
   border-color: #000;
+}
+@media (max-width: 500px) and (min-width: 400px){
+  .btn{
+    padding: 0px 20px; 
+  }
 }
 </style>
