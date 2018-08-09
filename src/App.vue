@@ -2,7 +2,13 @@
   <div id="app">
     <div id="nav"></div>
     <NavBar></NavBar>
-    <router-view/>
+    <div class="page">
+    <transition
+      name="fade"
+      mode="out-in">
+      <router-view/>
+    </transition>
+  </div>
     <Footer/>
   </div>
 </template>
@@ -46,5 +52,20 @@ body {
       color: #42b983;
     }
   }
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition-duration: 1s;
+  transition-property: opacity;
+  transition-timing-function: ease;
+  overflow: hidden;
+}
+
+.fade-enter,
+.fade-leave-active {
+  opacity: 0
+}
+.page {
+  min-height: 1000px;
 }
 </style>

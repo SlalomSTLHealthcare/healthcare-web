@@ -136,20 +136,6 @@ var confirmBreakouts = (rule, value, callback) => {
       donate: true,
       takeaway: '',
     },
-    profForm: {
-      email: '',
-      firstName: '',
-      lastName: '',
-      company: '',
-      position: '',
-      twitter: '',
-      lunch: true,
-      diet: [],
-      allergies: '',
-      size: '',
-      donate: true,
-      takeaway: '',
-    },
       rules: {
         pass: [
             { required: true,
