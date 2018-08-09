@@ -68,16 +68,15 @@ export default {
   justify-content: flex-start;
 }
 h1 {
-  text-align: left;
-  font-size: 28px;
-  padding-left: 10px;
+  font-size: 30px;
+  margin-left: 25px;
+  margin-bottom: 16px;
 }
 ul {
   padding: 0;
 }
 li {
   list-style-type: none;
-
 }
 @media(min-width: 1000px){
   li{

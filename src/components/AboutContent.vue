@@ -141,7 +141,7 @@ export default {
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 6%;
+  margin-left: 5.3%;
   margin-bottom: 16px;
 }
 .goal, .when{
@@ -153,7 +153,7 @@ h1 {
   background-color: #005aed;;
   height: 5px;
   width: 75px;
-  margin-left: 6%;
+  margin-left: 5.3%;
 }
 .descriptor {
   font-size: 20px;
@@ -173,7 +173,7 @@ ul {
   line-height: 30px;
 }
 .infoSection {
-  margin: 0px 70px;
+  margin: 0px 100px;
   padding: 50px;
   background-color: #fff;
 }

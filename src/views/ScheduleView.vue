@@ -6,7 +6,6 @@
 
 
 <script>
-// @ is an alias to /src
 import Schedule from "@/components/Schedule.vue";
 import NavBar from "@/components/NavBar.vue";
 
@@ -24,6 +23,18 @@ export default {
 .schedule {
   padding: 30px 50px;
   background-color: #f7f7f7;
+}
+@media only screen and (max-width:349px){
+  .schedule {
+  padding: 30px 10px;
+  background-color: #f7f7f7;
+  }
+}
+@media only screen and (min-width: 350px) and (max-width: 1024px) {
+  .schedule {
+  padding: 30px 5px;
+  background-color: #f7f7f7;
+  }
 }
 
 </style>

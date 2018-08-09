@@ -322,7 +322,7 @@ a {
 }
 .reg-form {
   background-color: #ffffff;
-  margin: 4% 9%;
+  margin: 4% 5.3%;
   padding: 5%;
 }
 .form-header{

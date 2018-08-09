@@ -1,7 +1,8 @@
 <template>
-  <div>
+  <div class="sponsor">
 <el-row>
     <h1>Sponsors</h1>
+    <div class="decoration"></div>
     <el-col >
         <Sponsors :sponsorData="filteredData('platinum')" sponsorLevel="Platinum"/>
         <Sponsors :sponsorData="filteredData('low')" class="otherFlex" sponsorLevel="Other"/>
@@ -51,16 +52,30 @@ export default {
 
 
 <style scoped lang="less">
-
-
+.sponsor{
+  padding: 30px 50px;
+  background-color: #f7f7f7;
+}
 .btn {
   background: #3336ff;
   color: white;
   margin-left: 0px;
   // opacity: 0.7;
 }
-h1, h3 {
+.decoration {
+  background-color: #005aed;;
+  height: 5px;
+  width: 75px;
+  margin-left: 5.3%;
+}
+h3 {
   margin-left: 10px;
+}
+h1 {
+  font-size: 40px;
+  font-weight: lighter;
+  margin-left: 5.3%;
+  margin-bottom: 16px;
 }
 
 .emailLink{

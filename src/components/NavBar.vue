@@ -216,8 +216,11 @@ ul {
     padding-right: 10px;
     padding-left: 0px;
   }
-  .logIn, .logBtn {
+  .logBtn {
     margin: 15px 6px;
+  }
+  .logIn{
+    margin: 13px 6px;
   }
   .logBtn {
     margin: 15px 1px;
