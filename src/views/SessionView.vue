@@ -40,5 +40,10 @@ h1 {
   padding: 30px 50px;
   background-color: #f7f7f7;
 }
+@media (max-width: 800px) {
+  .sessionView{
+  padding: 30px 0px;
+}
+}
 
 </style>

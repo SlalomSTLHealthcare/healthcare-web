@@ -3,7 +3,6 @@
     <h1>Schedule</h1>
     <div class="decoration"></div>
     <table>
-
       <tr v-for="event in scheduleData" valign="top">
         <td class="time">
           <h2 class="timeHeader">{{timeFormatter(event)}}</h2>
@@ -94,7 +93,7 @@ table{
   border-spacing: 0;
   background-color: white;
   margin: 4% 5.3%;
-  padding: 5% 20%;
+  padding: 5% 10%;
 }
 .eventHeader{
   color: #162565;
@@ -147,7 +146,8 @@ h1 {
       font-size: 13px;
     }
     .event{
-      padding: 15px 0px;
+      // padding: 15px 0px;
+      padding-top: 15px;
     }
 }
 @media only screen and (min-width: 350px) and (max-width: 480px){
@@ -155,7 +155,7 @@ h1 {
       padding:0;
     }
     h2 {
-        font-size: 18px;
+      font-size: 18px;
     }
     .scheduleEvent{
       padding-top:0;
@@ -166,13 +166,16 @@ h1 {
     table{
       border-spacing: 0;
       background-color: white;
-      margin: 4% 5.3%;
+      margin: 40px 2px;
       padding: 5% 0%;
     }
     .time{
       padding-top:0;
       padding-bottom: 0;
       width: 25%;
+    }
+    .event{
+      padding-top: 15px;
     }
     p{
       font-size: 15px;

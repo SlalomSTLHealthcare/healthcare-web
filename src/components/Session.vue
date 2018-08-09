@@ -73,8 +73,8 @@ a {
     font-weight: normal;
   }
   .sessionCard{
-     width: 100%;
-     height: 200px;
+     width: 100vw;
+     height: 250px;
   }
   .image {
     height: 30px;
