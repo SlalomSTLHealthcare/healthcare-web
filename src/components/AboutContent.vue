@@ -1,33 +1,24 @@
 <template>
     <el-container :direction="'vertical'">
         <div class="section">
-            <el-row :gutter="20">
-                <el-col :span="16" class="topheader">
                     <h1>About</h1>
                     <div class="decoration"></div>
                     <h2 class="descriptor">Our goal is to unite forward-thinking health practitioners from various specialties and industries experience,
                     data management andevolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared.</h2>
-                </el-col>
-                <el-col :span="8">
-                    <!-- <img class="slalom-logo" src="../assets/slalom-logo.png" alt="pic"> -->
-                </el-col>
-            </el-row>
         </div>
         <div class="infoSection">
           <el-tabs tab-position=top v-model="activeName" @tab-click="handleClick">
             <el-tab-pane label="Venue" name="first">
               <el-card :body-style="{ padding: '0px' }" class="info-box" shadow="never">
-                <el-row class="where-container" :gutter="20">
-                  <div class="place">
-                    <el-col :span="12">
-                      <h3 class="where">Eric P. Newman Education Center</h3>
-                      <span>320 South Euclid Ave, St. Louis MO </span>
-                    </el-col>
-                    <el-col class="venue-image":span="12">
-                      <img class="venue" src="https://www.uniquevenues.com/sites/uniquevenues.com/files/imagecache/2015_venue_flexslider/venues/slideshow/EricNewmanEduCtr.jpg" alt="pic">
-                    </el-col>
-                  </div>
-                </el-row>
+                <el-row  class="where-container":gutter="20">
+                <el-col :xs="24" :sm="24" :md="12">
+                  <h3 class="where">Eric P. Newman Education Center</h3>
+                  <span>320 South Euclid Ave, St. Louis MO </span>
+                </el-col>
+                <el-col :xs="24" :sm="24" :md="12">
+                  <img class="venue" src="https://www.uniquevenues.com/sites/uniquevenues.com/files/imagecache/2015_venue_flexslider/venues/slideshow/EricNewmanEduCtr.jpg" alt="pic">
+                </el-col>
+              </el-row>
                 <h3 class="parking-header">Parking</h3>
                 <div class="map-container">
                   <iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=38.636768, -90.26275900000002&amp;q=320%20South%20Euclid%20Ave%2C%20St.%20Louis%20MO%2063101+(Eric%20P.%20Newman%20Education%20Center)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/create-google-map/">Embed Google Map</a></iframe>
@@ -103,11 +94,13 @@
             <el-tab-pane label="Explore" name="third">
               <el-card :body-style="{ padding: '0px' }" class="info-box" shadow="never">
                   <h3 class="goal">Explore the Area</h3>
+                  <i>Coming Soon</i>
               </el-card>
             </el-tab-pane>
             <el-tab-pane label="Vision" name="fourth">
               <el-card :body-style="{ padding: '0px' }" class="info-box" shadow="never">
                   <h3 class="goal">Our Vision</h3>
+                  <p>Our goal is to unite forward-thinking health practitioners from various specialties and industries experience, data management andevolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared.</p>
               </el-card>
             </el-tab-pane>
           </el-tabs>
@@ -241,5 +234,31 @@ ul {
 }
 .venue-image {
   text-align: center;
+}
+@media (max-width: 768px) {
+  .infoSection {
+    margin: 0% 3%;
+    padding: 1%;
+    background-color: #fff;
+  }
+    .descriptor {
+      font-size: 17px;
+      font-weight: lighter;
+      font-style: italic;
+      margin-top: 30px;
+  }
+  .parking {
+    font-size: 10px;
+    padding-left: 0%;
+  }
+  .parking-info {
+    padding: 0px 0px;
+    text-align: left;
+    font-size: 13px;
+    line-height: 40px;
+  }
+  .driving-info {
+    margin: 0px;
+  }
 }
 </style>
