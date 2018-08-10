@@ -55,10 +55,9 @@ body {
 }
 .fade-enter-active,
 .fade-leave-active {
-  transition-duration: 1s;
+  transition-duration: .8s;
   transition-property: opacity;
   transition-timing-function: ease;
-  overflow: hidden;
 }
 
 .fade-enter,
