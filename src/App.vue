@@ -67,4 +67,5 @@ body {
 .page {
   min-height: 1000px;
 }
+
 </style>

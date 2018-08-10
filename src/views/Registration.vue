@@ -72,5 +72,9 @@ p a:hover{
 .login {
   text-align: center;
 }
-
+@media (max-width: 768px) {
+  .registration{
+    padding: 1% 1%;
+  }
+}
 </style>

@@ -7,7 +7,7 @@
     <el-collapse-transition>
     <div class="breakout-info" v-show="show">
     <el-collapse v-model="activeName" accordion>
-      <el-collapse-item v-for="(breakout,index) in computedData" :title="breakout.label" :name="index">
+      <el-collapse-item v-for="(breakout,index) in computedData" :title="breakout.label" class="collapse" :name="index">
         <div>{{breakout.description}}</div>
       </el-collapse-item>
     </el-collapse>
@@ -182,6 +182,9 @@ p {
     font-size: 12px;
     text-align: center;
   }
+  .el-collapse-item__header {
+      overflow: hidden;
+  }
 }
 
 @media (min-width: 355px) and (max-width: 430px) {
@@ -189,12 +192,18 @@ p {
     width: 200px;
     font-size: 12px;
   }
+  .el-collapse-item__header {
+    overflow: hidden !important;
+  }
 }
 @media (min-width: 200px) and (max-width: 355px) {
   .breakout-button button{
     width: 200px;
     font-size: 12px;
     padding: 11px;
+  }
+  .el-collapse-item__header {
+    overflow: hidden !important;
   }
 }
 </style>
