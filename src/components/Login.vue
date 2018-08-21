@@ -2,7 +2,7 @@
   <div class="login">
     <div class='message'>
       <p class="login-link" v-if="loginType==='registration'">Already registered? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a> to login.</p>
-      <el-button class="btn" round plain v-if="loginType==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
+      <el-button class="logBtn" round plain v-if="loginType==='button'" style="cursor: pointer;" @click="dialogFormVisible=true">Login</el-button>
       <a id="login" v-if="loginType==='nav'" class="nav-link" style="cursor: pointer;" @click="dialogFormVisible=true">Login</a>
     </div>
 
@@ -18,7 +18,6 @@
     <div class="formDialog">
       <el-button class="cancel" round @click="dialogFormVisible = false">Cancel</el-button>
       <el-button class="loginbut" round @click="handleLogin">Login</el-button>
-      <p>Forgot Password? Click <a style="cursor: pointer;" @click="dialogFormVisible=true">here</a>.</p>
     </div>
   </el-dialog>
   </div>
@@ -89,11 +88,26 @@ methods: {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
-.btn {
-  height: 39px;
-  margin-top: 2.5px;
-  padding: 0px 30px;
-  color: black;
+@import '../global-variables';
+.logBtn {
+    height: 39px;
+    margin-top: 2.5px;
+    padding: 0px 30px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+
+  &:hover {
+      border-color: #fff;
+      background-color: #fff;
+      color: @primary;
+  }
+  &:focus {
+      border-color: #fff;
+      background-color: transparent;
+      color: #fff;
+  }
+  // color: black;
 }
 .formDialog{
   text-align: center;
@@ -114,7 +128,11 @@ methods: {
   z-index: 15;
 }
 .login-link{
-  background-color: #f7f7f7;
+    color: #fff;
+  // background-color: #f7f7f7;
+  a {
+      color: @secondary-light;
+  }
 }
 .nav-link {
   list-style: none;
@@ -129,7 +147,7 @@ methods: {
 }
 @media (max-width: 500px) and (min-width: 400px){
   .btn{
-    padding: 0px 20px; 
+    padding: 0px 20px;
   }
 }
 </style>

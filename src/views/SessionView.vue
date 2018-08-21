@@ -24,21 +24,22 @@ export default {
 
 
 <style scoped lang="less">
+@import '../global-variables';
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 5.3%;
+  margin-left: 6%;
   margin-bottom: 16px;
+  color: #fff;
 }
 .decoration {
-  background-color: #005aed;;
+  background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 5.3%;
+  margin-left: 6%;
 }
 .sessionView{
   padding: 30px 50px;
-  background-color: #f7f7f7;
 }
 @media (max-width: 800px) {
   .sessionView{

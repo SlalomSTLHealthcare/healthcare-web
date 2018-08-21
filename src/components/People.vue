@@ -43,13 +43,16 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+@import '../global-variables';
+
 h1 {
   font-size: 40px;
   font-weight: lighter;
   margin-left: 3%;
+  color: #fff;
 }
 .decoration {
-  background-color: #005aed;;
+  background-color: @secondary;
   height: 5px;
   width: 75px;
   margin-left: 3%;
@@ -64,7 +67,7 @@ ul {
 }
 li {
   list-style-type: none;
-  margin: 1%;
+  margin: 2%;
 }
 a {
   color: #42b983;

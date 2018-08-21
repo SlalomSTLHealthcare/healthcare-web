@@ -2,13 +2,13 @@
   <div class="person">
         <el-card class="card" shadow="never" :body-style="{ padding: '0px' }">
           <img :src="imgSource" class="image">
-          <div style="padding: 14px;">
+          <div class="info-wrapper">
             <span class="name">{{ name }}</span>
             <a :href="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
             <a :href="linkedin" target="_blank"><i class="fab fa-linkedin-in"></i></a>
             <div class="info">
+                <div class="company">{{ company }}</div>
               <div class="bio">{{ bio }}</div>
-              <div class="company">{{ company }}</div>
             </div>
           </div>
         </el-card>
@@ -31,6 +31,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+@import '../global-variables';
 .card {
   width: 300px;
 }
@@ -52,7 +53,7 @@ export default {
   float: left;
 }
 .el-card {
-  padding: 3% 3%;
+  padding: 5%;
   border: 0;
   border-radius: 0;
 }
@@ -62,22 +63,28 @@ export default {
   text-align: left;
 }
 .bio {
+    font-style: italic;
+    min-height: 36px;
   text-align: left;
 }
 .fa-linkedin-in,
 .fa-twitter {
-  padding: 5px;
+  padding-left: 10px;
   float: right;
   color: #9b9b9b;
   font-size: 15px;
 }
 .fa-linkedin-in:hover,
 .fa-twitter:hover {
-  color: #005aed;
+  color: @primary;
 }
 .info {
   margin-top: 10px;
   font-size: 15px;
   color: #9b9b9b;
+}
+
+.info-wrapper {
+    margin-top: 10px;
 }
 </style>

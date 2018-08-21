@@ -4,7 +4,7 @@
                     <h1>About</h1>
                     <div class="decoration"></div>
                     <h2 class="descriptor">Our goal is to unite forward-thinking health practitioners from various specialties and industries experience,
-                    data management andevolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared.</h2>
+                    data management and evolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared.</h2>
         </div>
         <div class="infoSection">
           <el-tabs tab-position=top v-model="activeName" @tab-click="handleClick">
@@ -125,8 +125,9 @@ export default {
 </script>
 
 <style scoped lang="less">
+@import '../global-variables';
 .about-content {
-  border: 100px solid #f7f7f7;
+  // border: 100px solid #f7f7f7;
 }
 .section {
   margin: 40px;
@@ -134,8 +135,9 @@ export default {
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 5.3%;
+  margin-left: 60px;
   margin-bottom: 16px;
+  color: #fff;
 }
 .goal, .when{
   font-size: 30px;
@@ -143,15 +145,17 @@ h1 {
   letter-spacing: 2px;
 }
 .decoration {
-  background-color: #005aed;;
+  background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 5.3%;
+  margin-left: 60px;
 }
 .descriptor {
+    color: #fff;
   font-size: 20px;
   font-weight: lighter;
-  margin-left: 6%;
+  margin-left: 60px;
+  margin-right: 60px;
   font-style: italic;
   margin-top: 30px;
 }
@@ -166,7 +170,7 @@ ul {
   line-height: 30px;
 }
 .infoSection {
-  margin: 0px 100px;
+  margin: 0px 100px 60px;
   padding: 50px;
   background-color: #fff;
 }
@@ -189,7 +193,7 @@ ul {
 }
 .el-card {
   border: none;
-  height: 3000px;
+  // height: 3000px;
 }
 .map-container {
   margin: 60px 0px;
@@ -237,7 +241,7 @@ ul {
 }
 @media (max-width: 768px) {
   .infoSection {
-    margin: 0% 3%;
+    margin: 0% 3% 3%;
     padding: 1%;
     background-color: #fff;
   }

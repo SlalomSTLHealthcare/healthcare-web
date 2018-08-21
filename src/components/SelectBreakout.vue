@@ -2,7 +2,7 @@
   <div class="SelectBreakout">
     <p>{{timeSlot}}</p>
     <div class="breakout-button">
-      <el-button plain round @click="show = !show">Click here for breakout info.</el-button>
+      <el-button plain round @click="show = !show">Click here for breakout info</el-button>
     </div>
     <el-collapse-transition>
     <div class="breakout-info" v-show="show">
@@ -22,7 +22,7 @@
         :value = "item.key"
         :waitlist = "item.waitlist">
         <span style="float: left">{{ item.label }}</span>
-        <span style="float: right; color: #ff0000" v-if="item.waitlist === true">Waitlist</span>
+        <span style="float: right; color: #ff0000; margin-left: 6px;" v-if="item.waitlist === true">Waitlist</span>
       </el-option>
     </el-select>
     <div class="SelectBreakout" v-if="computedSelect === true">
@@ -164,16 +164,21 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+.el-select {
+    width: 300px;
+}
 p {
   font-size: 15px;
-  padding-left: 20px;
-  font-weight: bold;
+  margin: 14px 0 0;
+  // padding-left: 20px;
+  // font-weight: bold;
+  color: #606266;
 }
 .breakout-info{
-  padding: 30px;
+  // padding: 30px;
 }
 .breakout-button{
-  padding-bottom: 20px;
+  padding-bottom: 10px;
   text-align: left;
 }
 @media (min-width: 430px) and (max-width: 500px) {

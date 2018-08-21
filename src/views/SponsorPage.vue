@@ -52,9 +52,10 @@ export default {
 
 
 <style scoped lang="less">
+@import '../global-variables';
 .sponsor{
   padding: 30px 50px;
-  background-color: #f7f7f7;
+  // background-color: #f7f7f7;
 }
 .btn {
   background: #3336ff;
@@ -63,18 +64,19 @@ export default {
   // opacity: 0.7;
 }
 .decoration {
-  background-color: #005aed;;
+  background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 5.3%;
+  margin-left: 60px;
 }
 h3 {
   margin-left: 10px;
 }
 h1 {
+    color: #fff;
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 5.3%;
+  margin-left: 60px;
   margin-bottom: 16px;
 }
 

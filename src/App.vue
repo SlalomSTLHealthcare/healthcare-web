@@ -34,28 +34,37 @@ export default {
 </script>
 
 <style lang="less">
+
+.el-form-item__label {
+    padding-bottom: 0 !important;
+}
+
+.el-form-item {
+    margin-bottom: 14px !important;
+}
+
 body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
+    background: url('./assets/background-landing.jpg') no-repeat center center fixed;
+    background-size: cover;
 }
-#app {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-#nav {
-  height: 70px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+// #app {
+//   -webkit-font-smoothing: antialiased;
+//   -moz-osx-font-smoothing: grayscale;
+//   color: #2c3e50;
+// }
+// #nav {
+//   height: 70px;
+//   a {
+//     font-weight: bold;
+//     color: #2c3e50;
+//     &.router-link-exact-active {
+//       color: #42b983;
+//     }
+//   }
+// }
 .fade-enter-active,
 .fade-leave-active {
-  transition-duration: .8s;
+  transition-duration: .4s;
   transition-property: opacity;
   transition-timing-function: ease;
 }
@@ -65,7 +74,7 @@ body {
   opacity: 0
 }
 .page {
-  min-height: 1000px;
+  min-height: calc(~"100vh - 60px");
 }
 
 </style>

@@ -4,15 +4,15 @@
             <img :src="imgSource" class="image">
       </el-col>
       <div class="overview">
-        <h2 class="boxTitle">{{title}} <span class="timeStyle">Time: {{computedTime}}, Room Number: {{roomNumber}}</span> </h2>
-        <p></p>
+        <h2 class="boxTitle">{{title}}</h2>
+        <span class="timeStyle">Time: {{computedTime}} &mdash; Room Number: {{roomNumber}}</span>
       </div>
-      <h2 class="description">{{description}}</h2>
       <div v-if="sessionType === 'Breakout'">
-      <h3 class="description" v-if="computedSpace > 1">Spaces Available: {{computedSpace}}</h3>
-      <h3 class="description" v-else-if="computedSpace == 1">Space Available: {{computedSpace}} </h3>
-      <h3 class="description" v-else>No Space Available!</h3>
+      <h4 class="space" v-if="computedSpace > 1">Spaces Available: <strong>{{computedSpace}}</strong></h4>
+      <h4 class="space" v-else-if="computedSpace == 1">Space Available: <strong>{{computedSpace}}</strong></h4>
+      <h4 class="space" v-else>No Space Available!</h4>
     </div>
+    <p class="description">{{description}}</p>
     </el-card>
 </template>
 
@@ -43,21 +43,33 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+
+h2 {
+    font-weight: 400;
+    margin-bottom: 6px;
+}
+h4 {
+    font-weight: 300;
+    margin-bottom: 0;
+    margin-top: 10px;
+}
 .image {
   height: 50px;
   width: 40px;
   border-radius: 5%;
 }
 .timeStyle{
-  font-size: 12px;
+  font-size: 14px;
   font-weight: normal;
+  font-style: italic;
 }
 .description{
-  text-align: center;
+    min-height: 76px;
+  // text-align: center;
 }
 .sessionCard{
   width: 100%;
-  height: 300px;
+  // height: 300px;
 }
 a {
   color: #42b983;
@@ -70,10 +82,9 @@ a {
   }
   .timeStyle{
     font-size: 10px;
-    font-weight: normal;
   }
   .sessionCard{
-     width: 100vw;
+     // width: 100vw;
      height: 250px;
   }
   .image {

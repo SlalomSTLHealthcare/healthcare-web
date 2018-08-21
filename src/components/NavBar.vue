@@ -2,7 +2,7 @@
   <div>
     <div class="menu">
       <el-row class="logo">
-        <router-link to="/"><img src="../assets/healthstlx-horiz.png"/></router-link>
+        <!-- <router-link to="/"><img src="../assets/healthstlx-horiz.png"/></router-link> -->
       </el-row>
       <div class="menuR">
         <el-col v-if="isSignedIn">
@@ -12,12 +12,11 @@
           <el-button class="logBtn" plain round v-on:click="registerPush">Register</el-button>
           <Login class="logIn" loginType='button'/>
         </el-col>
-        <el-col class="menuLogo"><i class="fas fa-bars fa-2x" v-on:click="show = !show"></i></el-col>
+        <el-col class="menuLogo"><i :class="['fas', show ? 'fa-times' : 'fa-bars']" v-on:click="show = !show"></i></el-col>
       </div>
     </div>
     <transition name="fade">
         <div class="overlay" v-if="show" v-on:click="showBox" >
-        <i class="fas fa-times fa-2x"></i>
 	         <div class="wrap">
               <router-link class="nav-links" to="/">Home</router-link>
               <router-link class="nav-links" to="about">About</router-link>
@@ -81,11 +80,14 @@ export default {
 </script>
 
 <style scoped lang="less">
+
+@import '../global-variables';
+
 .menu {
   display: flex;
   align-items: center;
   position: fixed;
-  background-color: #fff;
+  // background-color: #fff;
   top: 0;
   z-index: 15;
   width: 100%;
@@ -95,7 +97,12 @@ export default {
   display: flex;
 }
 .menu .menuLogo {
-  padding: 17px 10px;
+    color: #fff;
+  padding: 21px 20px 21px 10px;
+
+  i {
+      font-size: 1.8rem;
+  }
 }
 .overlay i {
   color: #e5e5e5;
@@ -122,7 +129,21 @@ ul {
 .logBtn {
   margin: 15px 10px;
   height: 40px;
-  color: black;
+  background-color: transparent;
+  border: 1px solid #fff;
+  color: #fff;
+
+  &:hover {
+      border-color: #fff;
+      background-color: #fff;
+      color: @primary;
+  }
+  &:focus {
+      border-color: #fff;
+      background-color: transparent;
+      color: #fff;
+  }
+  // color: black;
 }
 .logIn {
   margin: 12px 10px;
@@ -182,12 +203,6 @@ ul {
     margin-left: 15px;
     height: 25px;
   }
-  .menu .menuLogo {
-    padding-top: 17px;
-    padding-bottom: 17px;
-    padding-right: 10px;
-    padding-left: 0px;
-  }
   .logIn, .optiontwo {
     display: none;
   }
@@ -209,12 +224,6 @@ ul {
     width: 160px;
     margin-left: 15px;
     height: 40px;
-  }
-  .menu .menuLogo {
-    padding-top: 17px;
-    padding-bottom: 17px;
-    padding-right: 10px;
-    padding-left: 0px;
   }
   .logBtn {
     margin: 15px 6px;

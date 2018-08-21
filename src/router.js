@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Home from "./views/Home.vue";
+import Landing from "./views/Landing.vue";
+// import Home from "./views/Home.vue";
 import About from "./views/About.vue";
 import People from "./views/People.vue";
 import Registration from "./views/Registration.vue";
@@ -16,7 +17,7 @@ export default new Router({
     {
       path: "/",
       name: "home",
-      component: Home
+      component: Landing
     },
     {
       path: "/people",

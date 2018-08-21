@@ -1,5 +1,5 @@
-<template>
-<el-container v-if="sponsorLevel === 'platinum'">
+ <template>
+<!-- <el-container v-if="sponsorLevel === 'platinum'">
   <el-card shadow="hover" class="platinumCard">
       <el-col :span="1">
         <img :src="image" class="platinumImage" alt="pic">
@@ -11,7 +11,7 @@
         </div>
       </el-col>
   </el-card>
-</el-container>
+</el-container> -->
   <a :href="link" v-else >
     <img :src="image" alt="pic">
   </a>
