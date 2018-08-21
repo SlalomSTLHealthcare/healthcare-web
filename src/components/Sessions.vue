@@ -66,22 +66,27 @@ export default {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
+  padding: 0 6%;
 }
 h1 {
   font-size: 30px;
-  margin-left: 25px;
+  margin-left: 6%;
   margin-bottom: 16px;
+  color: #fff;
+  font-weight: 100;
 }
 ul {
   padding: 0;
 }
 li {
   list-style-type: none;
+  margin: 20px 0;
+  width: 100%;
 }
 @media(min-width: 1000px){
   li{
     width: 45%;
-    margin: 20px;
+    margin: 20px 40px 20px 0;
   }
 }
 a {

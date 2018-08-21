@@ -1,8 +1,9 @@
 <template>
   <div class="profile">
+      <h1>Profile</h1>
+      <div class="decoration"></div>
   <el-card v-if="type==='profile'" class="box-card">
     <div slot="header">
-      <span class="header"> <i class="fas fa-user-circle"></i> Profile</span>
       <span class="action-buttons">
         <el-button v-if ="!update" @click="update=true" type="primary" round>Update</el-button>
         <el-button v-if="update" @click="updateRegistration" round>Save</el-button>
@@ -13,8 +14,15 @@
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item  label="Name" >
-        <el-input  v-model="profForm.firstName"></el-input>
-        <el-input  label-position="top" v-model="profForm.lastName"></el-input>
+
+          <el-row :gutter="20">
+          <el-col :xs="24" :sm="12">
+            <el-input v-model="profForm.firstName" class="firstName" placeholder="First Name"></el-input>
+          </el-col>
+          <el-col :xs="24" :sm="12">
+            <el-input class="lastName" v-model="profForm.lastName" label-position="top"  placeholder="Last Name"></el-input>
+          </el-col>
+        </el-row>
       </el-form-item>
       <el-form-item label="Company">
         <el-input v-model="profForm.company"></el-input>
@@ -321,6 +329,22 @@ mounted: function () {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+@import '../global-variables';
+h1 {
+    margin-top: 80px;
+  font-size: 40px;
+  font-weight: lighter;
+  margin-left: 6%;
+  margin-bottom: 16px;
+  color: #fff;
+}
+.decoration {
+  background-color: @secondary;
+  height: 5px;
+  width: 75px;
+  margin-left: 6%;
+}
+
 .header{
   font-size: 30px;
   font-family: 'Roboto', sans-serif;
@@ -356,10 +380,11 @@ a {
 }
 
 .box-card {
-  width: 90%;
+  width: 88%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 40px;
+  margin-top: 30px;
 }
 .buttons {
   text-align: center;
@@ -382,7 +407,7 @@ a {
   font-weight: lighter;
 }
 .action-buttons {
-  float: right;
+  // float: right;
 }
 .share-button{
   width: 190px;

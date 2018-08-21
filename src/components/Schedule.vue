@@ -5,14 +5,13 @@
     <table>
       <tr v-for="event in scheduleData" valign="top">
         <td class="time">
-          <h2 class="timeHeader">{{timeFormatter(event)}}</h2>
+          <h3 class="timeHeader">{{timeFormatter(event)}}</h3>
           <p class="roomNum" v-for="session in event.sessions" >Room #{{session.room_num}}</p>
         </td>
         <td class="scheduleEvent">
-          <h2 class="eventHeader">{{event.title}}</h2>
+          <h3 class="eventHeader">{{event.title}}</h3>
           <p class="event" v-for="session in getSessions(event)" v-if="session.session_type === 'Extra'">{{session.description}}</p>
           <p class="event" v-else>{{session.title}}</p>
-          <p class="endOfEntry"></p>
         </td>
       </tr>
     </table>
@@ -75,6 +74,7 @@ export default {
 </script>
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+@import '../global-variables';
 
 div{
   margin-bottom: 25px;
@@ -84,6 +84,7 @@ div{
     color: #b5bfbd;
     padding-right: 10px;
     text-align: right;
+    width: 20%;
 }
 .scheduleEvent{
   padding-left: 25px;
@@ -92,38 +93,50 @@ div{
 table{
   border-spacing: 0;
   background-color: white;
-  margin: 4% 5.3%;
-  padding: 5% 10%;
+  margin: 4% 6%;
+  padding: 5% 4%;
 }
 .eventHeader{
-  color: #162565;
+  color: @primary;
 }
 .timeHeader{
   color: #706e6b;
 }
+h3 {
+    font-weight: 400;
+}
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 5.3%;
+  margin-left: 6%;
   margin-bottom: 16px;
+  color: #fff;
+}
+
+p {
+    font-weight: 300;
 }
 
 .decoration {
-  background-color: #005aed;;
+  background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 5.3%;
+  margin-left: 6%;
 }
 
 .roomNum, .timeHeader, .event, .eventHeader {
-  margin: 2px;
+  margin: 3px;
+}
+
+.roomNum:last-child {
+    margin-bottom: 20px;
 }
 .endOfEntry{
   padding-bottom: 3px;
 }
 @media only screen and (max-width:349px){
-    h2 {
-        font-size: 15px;
+    h3 {
+        font-size: 1rem;
     }
     .scheduleEvent{
       padding-top:0;
@@ -154,8 +167,8 @@ h1 {
     body{
       padding:0;
     }
-    h2 {
-      font-size: 18px;
+    h3 {
+        font-size: 1.1rem;
     }
     .scheduleEvent{
       padding-top:0;
@@ -185,14 +198,14 @@ h1 {
   body{
     padding:0;
   }
-  h2 {
-      font-size: 25px;
+  h3 {
+      font-size: 1.2rem;
   }
   table{
     border-spacing: 0;
     background-color: white;
     margin: 4% 5.3%;
-    padding: 5% 10%;
+    padding: 5% 4%;
   }
   .scheduleEvent{
     padding-top:0;

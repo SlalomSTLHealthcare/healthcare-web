@@ -21,6 +21,6 @@ export default {
 
 <style>
 .about-content {
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
 }
 </style>

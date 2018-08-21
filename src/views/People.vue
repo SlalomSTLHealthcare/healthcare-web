@@ -1,4 +1,3 @@
-
 <template>
     <People msg="People"/>
 </template>
@@ -19,6 +18,5 @@ export default {
 <style>
 .people {
   padding: 30px 50px;
-  background-color: #f7f7f7;
 }
 </style>

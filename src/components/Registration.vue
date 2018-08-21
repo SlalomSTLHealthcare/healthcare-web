@@ -28,9 +28,6 @@
       <el-form-item required label="Password" prop="pass">
         <el-input type="password" v-model="form.pass" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item required label="Confirm Password" prop="checkPass">
-        <el-input type="password" v-model="form.checkPass" auto-complete="off"></el-input>
-      </el-form-item>
       <el-form-item label="Twitter">
         <el-input v-model="form.twitter" placeholder="@"></el-input>
       </el-form-item>
@@ -128,7 +125,6 @@ var confirmBreakouts = (rule, value, callback) => {
       email: '',
       twitter: '',
       pass: '',
-      checkPass: '',
       lunch: true,
       diet: [],
       allergies: '',
@@ -139,17 +135,11 @@ var confirmBreakouts = (rule, value, callback) => {
       rules: {
         pass: [
             { required: true,
-              message: 'Passwords must be at least 8 characters and contain at least one capital letter, one lowercase letter, and one special character.',
-              pattern:'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})',
+              message: 'Passwords must be at least 8 characters.',
+              pattern:'^(?=.*)(?=.{8,})',
               trigger: 'blur'
             },
           ],
-        checkPass: [
-          {
-            required: true, validator: confirmPass, trigger: 'blur',
-            message: 'Please confirm your password'
-          }
-        ],
         email: [
             { required: true,
               message: 'Please enter a valid email address.',
@@ -196,7 +186,6 @@ methods: {
           company: this.form.company,
           position: this.form.position,
           twitter: this.form.twitter,
-          checkPass: this.form.checkPass,
           lunch: this.form.lunch,
           diet: this.form.diet,
           allergies: this.form.allergies,
@@ -310,7 +299,7 @@ a {
 }
 .reg-form {
   background-color: #ffffff;
-  margin: 4% 5.3%;
+  margin: 4% 6%;
   padding: 5%;
 }
 .form-header{

@@ -5,7 +5,7 @@
                 <div class="central-box-wrapper">
                     <div class="central-box">
                         <div class="logo-section">
-                            <img class="logo-img" src="./assets/final-logo.png">
+                            <img class="logo-img" src="../assets/final-logo.png">
                         </div>
                         <div class="content-section">
                             <div class="date">
@@ -57,7 +57,7 @@
             </div>
             <div class="quote-section">
                 <div class="stef-pic">
-                    <img src="./assets/stef.jpg">
+                    <img src="../assets/stef.jpg">
                 </div>
                 <div class="quote-inner">
                     <div class="quote">
@@ -87,15 +87,6 @@
                 <el-input class="input" placeholder="Company" v-model="sponsorCompany" v-if="sponsorButtonText === 'Submit'"></el-input>
                 <el-input style="margin-bottom: 30px;" class="input" placeholder="Anything else you would like us to know?" v-model="sponsorNotes" v-if="sponsorButtonText === 'Submit'"></el-input>
                 <el-button :disabled="sponsorButtonDisabled" :loading="sponsorButtonLoading" type="primary" :class="[sponsorButtonDisabled ? 'disabled-class' : '', 'sponsor-button']" @click="handleSponsorClick" plain round>{{sponsorButtonText}}</el-button>
-            </div>
-        </div>
-        <div class="footer-section">
-            <div class="pusher"></div>
-            <div class="slalom"><a href="https://www.slalom.com"><img style="height: 20px;" src="./assets/slalom-white.png"></a></div>
-            <div class="social">
-                <a href="https://www.instagram.com/slalomconsulting"><i class="fab fa-instagram"></i></a>
-                <a href="https://twitter.com/Slalom"><i class="fab fa-twitter"></i></a>
-                <a href="https://www.linkedin.com/company/slalom-consulting"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
     </div>
@@ -196,25 +187,13 @@ export default {
 </script>
 
 <style lang="less">
+    @import '../global-variables';
+
     body {
         background-color: #000;
         font-family: 'Roboto', sans-serif;
         margin: 0;
     }
-
-    @secondary-light: #FB0ECE;
-    @secondary: #c100d4;
-    @secondary-dark: #040024;
-    @primary-light: #15a6ff;
-    @primary-logo: #1224ff;
-    @primary: #256AEB;
-    @primary-dark: #000;
-
-    @quote-purple: #DB00E5;
-    @quote-purple-dark: #8C009A;
-
-    @sponsor-purple: #7E009C;
-    @sponsor-purple-dark: #3C0053;
 
     .el-input__inner:focus {
         border-color: @primary !important;
@@ -364,30 +343,6 @@ export default {
         }
     }
 
-    .footer-section {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        background-color: #000;
-        color: #fff;
-        height: 60px;
-        text-align: center;
-
-        div {
-            width: 150px;
-        }
-
-        .social {
-            i {
-                color: #fff;
-                cursor: pointer;
-                font-size: 1.5rem;
-                margin: 0 8px;
-            }
-        }
-    }
-
     .sponsor-section {
         padding: 0 6vw;
         text-align: center;
@@ -478,7 +433,7 @@ export default {
         min-height: 100vh;
         width: 100vw;
         color: #fff;
-        background: url('./assets/background-landing.jpg') no-repeat center center fixed;
+        background: url('../assets/background-landing.jpg') no-repeat center center fixed;
         background-size: cover;
 
         .floated-content-section {

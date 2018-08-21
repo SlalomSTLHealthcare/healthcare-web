@@ -3,7 +3,7 @@ import ElementUI from "element-ui";
 import "element-ui/lib/theme-chalk/index.css";
 
 import locale from 'element-ui/lib/locale/lang/en'
-import Landing from "./Landing.vue";
+// import Landing from "./Landing.vue";
 import App from "./App.vue";
 import router from "./router";
 

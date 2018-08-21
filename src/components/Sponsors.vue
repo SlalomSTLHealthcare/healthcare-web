@@ -44,7 +44,9 @@ li {
 
 }
  h2 {
-  padding-left:50px;
+     font-weight: 100;
+     color: #fff;
+  padding-left:60px;
   text-align: left;
 }
 </style>
