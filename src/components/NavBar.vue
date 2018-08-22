@@ -19,7 +19,6 @@
         <div class="overlay" v-if="show" v-on:click="showBox" >
 	         <div class="wrap">
               <router-link class="nav-links" to="/">Home</router-link>
-              <router-link class="nav-links" to="about">About</router-link>
               <router-link class="nav-links" :to="computedRegister">{{computedRegisterDescription}}</router-link>
               <span v-if="isSignedIn" class="nav-links" v-on:click="logout">Logout</span>
               <Login v-else class="nav-links" v-on:close="closeBox" loginType='nav'/>
@@ -27,6 +26,7 @@
 			        <router-link class="nav-links" to="session">Breakout Sessions</router-link>
               <router-link class="nav-links" to="schedule">Schedule</router-link>
               <router-link class="nav-links" to="sponsor">Sponsors</router-link>
+              <router-link class="nav-links" to="about">Venue Information</router-link>
 		       </div>
 	      </div>
     </transition>
