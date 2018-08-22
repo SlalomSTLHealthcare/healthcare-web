@@ -54,7 +54,7 @@ export default {
 <style scoped lang="less">
 @import '../global-variables';
 .sponsor{
-  padding: 30px 50px;
+  padding: 80px 80px 30px;
   // background-color: #f7f7f7;
 }
 .btn {
@@ -67,17 +67,17 @@ export default {
   background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 60px;
+  // margin-left: 60px;
 }
 h3 {
-  margin-left: 10px;
+  // margin-left: 10px;
 }
 h1 {
     color: #fff;
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 60px;
-  margin-bottom: 16px;
+  // margin-left: 60px;
+  // margin-bottom: 16px;
 }
 
 .emailLink{

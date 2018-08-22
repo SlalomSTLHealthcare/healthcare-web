@@ -46,7 +46,7 @@ li {
  h2 {
      font-weight: 100;
      color: #fff;
-  padding-left:60px;
+  // padding-left:60px;
   text-align: left;
 }
 </style>

@@ -17,6 +17,6 @@ export default {
 
 <style>
 .people {
-  padding: 30px 50px;
+  padding: 80px 80px 30px;
 }
 </style>

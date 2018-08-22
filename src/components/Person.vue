@@ -55,7 +55,7 @@ export default {
 .el-card {
   padding: 5%;
   border: 0;
-  border-radius: 0;
+  // border-radius: 0;
 }
 .name {
   font-weight: bold;

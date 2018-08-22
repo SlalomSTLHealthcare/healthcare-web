@@ -1,8 +1,5 @@
 <template>
     <el-card shadow="hover" class="sessionCard">
-      <el-col>
-            <img :src="imgSource" class="image">
-      </el-col>
       <div class="overview">
         <h2 class="boxTitle">{{title}}</h2>
         <span class="timeStyle">Time: {{computedTime}} &mdash; Room Number: {{roomNumber}}</span>

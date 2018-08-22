@@ -1,9 +1,9 @@
 <template>
   <div class="sessionView">
-    <h1>General Event Overview</h1>
+    <h1>Sessions</h1>
     <div class="decoration"></div>
-      <Sessions sessionType="Breakout"/>
       <Sessions sessionType="Panel"/>
+      <Sessions sessionType="Breakout"/>
   </div>
 </template>
 
@@ -28,22 +28,22 @@ export default {
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 6%;
-  margin-bottom: 16px;
+  // margin-left: 6%;
+  // margin-bottom: 16px;
   color: #fff;
 }
 .decoration {
   background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 6%;
+  // margin-left: 6%;
 }
 .sessionView{
-  padding: 30px 50px;
+  padding: 80px 80px 30px;
 }
 @media (max-width: 800px) {
   .sessionView{
-  padding: 30px 0px;
+  // padding: 30px 0px;
 }
 }
 

@@ -1,5 +1,5 @@
 <template>
-    <el-container :direction="'vertical'">
+    <el-container style="padding: 80px 80px 30px;" :direction="'vertical'">
         <div class="section">
                     <h1>Venue Information</h1>
                     <div class="decoration"></div>
@@ -23,7 +23,7 @@
                   <h4 class="subheader">Parking</h4>
                   <div class="parking-info">The address of the parking garage is: <em>4560 Children’s Place, St. Louis, MO 63110</em></div>
                   <div class="parking-info">Please use levels 6-7 of the Metro Garage located at the corner of Taylor Avenue and Children’s Place (entrance on Children's Place).</div>
-                  <div class="parking-info" style="font-weight: 500;"> Note: The Metro Garage only accepts cash. Daily rate is $15.00. Keep your parking ticket with you so that you can access the garage.</div>
+                  <!-- <div class="parking-info" style="font-weight: 500;"> Note: Keep your parking ticket with you so that you can access the garage.</div> -->
               </div>
                 <!-- <h3 class="parking-header">Parking</h3> -->
                 <div class="map-container">
@@ -117,13 +117,13 @@ export default {
   // border: 100px solid #f7f7f7;
 }
 .section {
-  margin: 40px;
+  // margin: 40px;
 }
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 60px;
-  margin-bottom: 16px;
+  // margin-left: 60px;
+  // margin-bottom: 16px;
   color: #fff;
 }
 .goal, .when{
@@ -135,7 +135,7 @@ h1 {
   background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 60px;
+  // margin-left: 60px;
 }
 .descriptor {
     color: #fff;
@@ -157,7 +157,7 @@ ul {
   line-height: 30px;
 }
 .infoSection {
-  margin: 0px 100px 60px;
+  margin: 4% 0;
   padding: 50px;
   background-color: #fff;
 }

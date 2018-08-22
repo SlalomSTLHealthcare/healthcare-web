@@ -6,7 +6,7 @@
       <a id="login" v-if="loginType==='nav'" class="nav-link" style="cursor: pointer;" @click="dialogFormVisible=true">Login</a>
     </div>
 
-    <el-dialog class="dialog" title="Login" width="75vw" center="true" :append-to-body="true" :visible.sync="dialogFormVisible">
+    <el-dialog class="dialog" title="Login" width="75vw" :center="true" :append-to-body="true" :visible.sync="dialogFormVisible">
       <el-form :model="form">
          <el-form-item label="Email">
            <el-input v-model="form.email" auto-complete="off"></el-input>

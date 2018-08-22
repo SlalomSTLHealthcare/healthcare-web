@@ -21,16 +21,16 @@ export default {
 
 <style scoped lang="less">
 .schedule {
-  padding: 30px 50px;
+  padding: 80px 80px 30px;
 }
 @media only screen and (max-width:349px){
   .schedule {
-  padding: 30px 10px;
+  // padding: 30px 10px;
   }
 }
 @media only screen and (min-width: 350px) and (max-width: 1024px) {
   .schedule {
-  padding: 30px 5px;
+  // padding: 30px 5px;
   }
 }
 

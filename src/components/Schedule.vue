@@ -93,8 +93,10 @@ div{
 table{
   border-spacing: 0;
   background-color: white;
-  margin: 4% 6%;
+  margin: 4% 0;
   padding: 5% 4%;
+  width: 100%;
+  border-radius: 4px;
 }
 .eventHeader{
   color: @primary;
@@ -108,8 +110,8 @@ h3 {
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 6%;
-  margin-bottom: 16px;
+  // margin-left: 6%;
+  // margin-bottom: 16px;
   color: #fff;
 }
 
@@ -121,7 +123,7 @@ p {
   background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 6%;
+  // margin-left: 6%;
 }
 
 .roomNum, .timeHeader, .event, .eventHeader {

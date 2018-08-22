@@ -48,18 +48,19 @@ export default {
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 3%;
+  // margin-left: 6%;
   color: #fff;
 }
 .decoration {
   background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 3%;
+  // margin-left: 6%;
 }
 ul {
   list-style-type: none;
   padding: 0;
+  // margin-left: 6%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

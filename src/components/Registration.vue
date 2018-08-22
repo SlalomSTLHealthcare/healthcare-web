@@ -298,8 +298,9 @@ a {
   margin: 7px;
 }
 .reg-form {
+        border-radius: 4px;
   background-color: #ffffff;
-  margin: 4% 6%;
+  margin: 4% 0;
   padding: 5%;
 }
 .form-header{
