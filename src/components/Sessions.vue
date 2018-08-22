@@ -66,7 +66,7 @@ export default {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  padding: 0 6%;
+  padding: 0;
 }
 h1 {
   font-size: 30px;

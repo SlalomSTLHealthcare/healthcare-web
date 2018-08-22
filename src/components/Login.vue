@@ -6,7 +6,7 @@
       <a id="login" v-if="loginType==='nav'" class="nav-link" style="cursor: pointer;" @click="dialogFormVisible=true">Login</a>
     </div>
 
-    <el-dialog class="dialog" title="Login" width="75vw" :center="true" :append-to-body="true" :visible.sync="dialogFormVisible">
+    <el-dialog class="dialog" title="Login" width="400px" :center="true" :append-to-body="true" :visible.sync="dialogFormVisible">
       <el-form :model="form">
          <el-form-item label="Email">
            <el-input v-model="form.email" auto-complete="off"></el-input>
@@ -112,12 +112,12 @@ methods: {
 .formDialog{
   text-align: center;
 }
- a {
-  color: #005aed;
-}
- a:hover {
-  color: #66b1ff;
-}
+//  a {
+//   color: #005aed;
+// }
+//  a:hover {
+//   color: #66b1ff;
+// }
 .message {
   display: inline;
 }
@@ -141,9 +141,9 @@ methods: {
   font-size: 25px;
 }
 .cancel:hover, .loginbut:hover {
-  background-color: #000;
+  background-color: @primary;
   color: #fff;
-  border-color: #000;
+  border-color: @primary;
 }
 @media (max-width: 500px) and (min-width: 400px){
   .btn{

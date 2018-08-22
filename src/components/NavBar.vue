@@ -9,13 +9,15 @@
           <el-button class="logBtn" round plain v-on:click="logout">Logout</el-button>
         </el-col>
         <el-col v-else class="optiontwo">
-          <el-button class="logBtn" plain round v-on:click="registerPush">Register</el-button>
+          <el-button v-if="$route.name !== 'registration'" class="logBtn" plain round v-on:click="registerPush">Register</el-button>
           <Login class="logIn" loginType='button'/>
         </el-col>
         <el-col class="menuLogo"><i :class="['fas', show ? 'fa-times' : 'fa-bars']" v-on:click="show = !show"></i></el-col>
       </div>
     </div>
-    <div :class="[$route.name !== 'home' ? 'banner-bar' : '']"></div>
+    <div class="banner-container">
+        <div :class="[$route.name !== 'home' ? 'banner-bar' : '']"></div>
+    </div>
     <transition name="fade">
         <div class="overlay" v-if="show" v-on:click="showBox" >
 	         <div class="wrap">
@@ -85,12 +87,22 @@ export default {
 @import '../global-variables';
 
 .banner-bar {
-    background: rgba(0,0,0,.4);
+    background: rgba(0,0,0,.6);
     filter: blur(10px);
-    height: 70px;
+    height: 90px;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    width: calc(~"100% + 20px");
+}
+
+.banner-container {
     position: fixed;
-    z-index: 14;
     width: 100%;
+    height: 70px;
+    overflow: hidden;
+    z-index: 14;
 }
 
 .menu {
@@ -105,8 +117,8 @@ export default {
 }
 
 .banner-logo {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     margin: 0 10px 0 20px;
 }
 

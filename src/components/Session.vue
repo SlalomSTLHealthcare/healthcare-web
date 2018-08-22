@@ -61,7 +61,7 @@ h4 {
   font-style: italic;
 }
 .description{
-    min-height: 76px;
+    min-height: 57px;
   // text-align: center;
 }
 .sessionCard{
@@ -70,6 +70,10 @@ h4 {
 }
 a {
   color: #42b983;
+}
+
+.boxTitle{
+    margin-top: 0;
 }
 
 @media (max-width: 800px) {
