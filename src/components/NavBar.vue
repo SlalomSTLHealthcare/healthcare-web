@@ -1,32 +1,35 @@
 <template>
   <div>
     <div class="menu">
-      <el-row class="logo">
-        <!-- <router-link to="/"><img src="../assets/healthstlx-horiz.png"/></router-link> -->
-      </el-row>
+      <div class="logo">
+        <router-link v-if="$route.name !== 'home'" class="link-inner" to="/"><img class="banner-logo" src="../assets/final-logo.png"/><span style="font-weight: 100; font-size: 1.8rem;" class="banner-text">health</span><span style="font-weight: 700; font-size: 1.8rem;" class="banner-text">STLX</span></router-link>
+      </div>
       <div class="menuR">
         <el-col v-if="isSignedIn">
           <el-button class="logBtn" round plain v-on:click="logout">Logout</el-button>
         </el-col>
         <el-col v-else class="optiontwo">
-          <el-button class="logBtn" plain round v-on:click="registerPush">Register</el-button>
+          <el-button v-if="$route.name !== 'registration'" class="logBtn" plain round v-on:click="registerPush">Register</el-button>
           <Login class="logIn" loginType='button'/>
         </el-col>
         <el-col class="menuLogo"><i :class="['fas', show ? 'fa-times' : 'fa-bars']" v-on:click="show = !show"></i></el-col>
       </div>
     </div>
+    <div class="banner-container">
+        <div id="banner" :class="[$route.name !== 'home' ? 'banner-bar' : '']"></div>
+    </div>
     <transition name="fade">
         <div class="overlay" v-if="show" v-on:click="showBox" >
 	         <div class="wrap">
               <router-link class="nav-links" to="/">Home</router-link>
-              <router-link class="nav-links" to="about">About</router-link>
               <router-link class="nav-links" :to="computedRegister">{{computedRegisterDescription}}</router-link>
-              <span v-if="isSignedIn" class="nav-links" v-on:click="logout">Logout</span>
-              <Login v-else class="nav-links" v-on:close="closeBox" loginType='nav'/>
+              <span v-if="isSignedIn" class="nav-links logs" v-on:click="logout">Logout</span>
+              <Login v-else class="nav-links logs" v-on:close="closeBox" loginType='nav'/>
               <router-link class="nav-links" to="people">Speakers</router-link>
-			        <router-link class="nav-links" to="session">Breakout Sessions</router-link>
+			        <router-link class="nav-links" to="sessions">Sessions</router-link>
               <router-link class="nav-links" to="schedule">Schedule</router-link>
-              <router-link class="nav-links" to="sponsor">Sponsors</router-link>
+              <router-link class="nav-links" to="sponsors">Sponsors</router-link>
+              <router-link class="nav-links" to="about">Venue Information</router-link>
 		       </div>
 	      </div>
     </transition>
@@ -83,6 +86,25 @@ export default {
 
 @import '../global-variables';
 
+.banner-bar {
+    background: rgba(0,0,0,.6);
+    filter: blur(10px);
+    height: 90px;
+    position: absolute;
+    top: -10px;
+    left: -10px;
+    right: -10px;
+    width: calc(~"100% + 20px");
+}
+
+.banner-container {
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    overflow: hidden;
+    z-index: 14;
+}
+
 .menu {
   display: flex;
   align-items: center;
@@ -93,6 +115,29 @@ export default {
   width: 100%;
   justify-content: space-between;
 }
+
+.banner-logo {
+    width: 40px;
+    height: 40px;
+    margin: 0 10px 0 20px;
+    filter: drop-shadow(0 0 2rem #fff);
+}
+
+.banner-text {
+    text-shadow: .3rem .3rem .3rem fade(@secondary-dark, 20%);
+}
+
+.link-inner {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.menu a {
+    color: #fff;
+    text-decoration: none;
+}
+
 .menuR {
   display: flex;
 }
@@ -101,6 +146,7 @@ export default {
   padding: 21px 20px 21px 10px;
 
   i {
+      width: 26px;
       font-size: 1.8rem;
   }
 }
@@ -117,11 +163,6 @@ export default {
 }
 .logo {
   display: flex;
-}
-.logo img {
-  width: 200px;
-  margin-left: 15px;
-  height: 50px;
 }
 ul {
   list-style: none;
@@ -172,7 +213,7 @@ ul {
 .wrap .nav-links {
   list-style: none;
   color: #fff;
-  padding: 20px 0;
+  padding: 10px 0;
   text-decoration: none;
   font-size: 25px;
 }
@@ -197,48 +238,62 @@ ul {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-@media (max-width: 398px){
-  .logo img {
-    width: 100px;
-    margin-left: 15px;
-    height: 25px;
-  }
-  .logIn, .optiontwo {
-    display: none;
-  }
-  .logBtn {
-    margin: 15px 1px;
-  }
-  .optiontwo {
-    font-size: 25px;
-  }
-  .el-button.is-round{
-    padding: 12px 12px;
-  }
+
+.logs {
+  display: none;
 }
-.wrap .nav-links {
-  padding: 10px 0;
+
+@media (max-width: 600px){
+  .logs {
+    display: block;
+  }
+    .logBtn {
+      display: none;
+    }
+
+    .menu {
+      justify-content: center;
+    }
 }
-@media (min-width: 400px) and (max-width: 500px){
-  .logo img {
-    width: 160px;
-    margin-left: 15px;
-    height: 40px;
-  }
-  .logBtn {
-    margin: 15px 6px;
-  }
-  .logIn{
-    margin: 13px 6px;
-  }
-  .logBtn {
-    margin: 15px 1px;
-  }
-  .optiontwo {
-    font-size: 25px;
-  }
-  .el-button.is-round{
-    padding: 12px 12px;
-  }
-}
+// @media (max-width: 398px){
+//   .logo img {
+//     // width: 100px;
+//     // margin-left: 15px;
+//     // height: 25px;
+//   }
+//   .logIn, .optiontwo {
+//     // display: none;
+//   }
+//   .logBtn {
+//     // margin: 15px 1px;
+//   }
+//   .optiontwo {
+//     // font-size: 25px;
+//   }
+//   .el-button.is-round{
+//     // padding: 12px 12px;
+//   }
+// }
+// @media (min-width: 400px) and (max-width: 500px){
+//   .logo img {
+//     width: 160px;
+//     margin-left: 15px;
+//     height: 40px;
+//   }
+//   .logBtn {
+//     margin: 15px 6px;
+//   }
+//   .logIn{
+//     margin: 13px 6px;
+//   }
+//   .logBtn {
+//     margin: 15px 1px;
+//   }
+//   .optiontwo {
+//     font-size: 25px;
+//   }
+//   .el-button.is-round{
+//     padding: 12px 12px;
+//   }
+// }
 </style>

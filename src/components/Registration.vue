@@ -76,8 +76,9 @@
   <el-dialog
   title="Successful Registration"
   :visible.sync="dialogVisible"
-  width="30%">
-  <span>Thank you for registering for HealthSTLx! Please Check your email to confirm your email address</span>
+  width="50%">
+  <div>Thank you for registering for health<strong>STLX</strong>!  We look forward to seeing you in November.</div>
+  <div style="margin-top: 20px;">If you have any questions, please reach out to our team at <span class="email-support">tara.nesbitt@slalom.com</span>.</div>
   <span slot="footer" class="dialog-footer">
      <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://slalom-health-summit-staging.herokuapp.com/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" class="share-button" round>Share on LinkedIn</el-button></a>
      <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-related="Slalom" data-show-count="false"><el-button plain class="share-button" icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
@@ -249,6 +250,10 @@ methods: {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="less">
+@import '../global-variables';
+.email-support {
+  color: @primary;
+}
 .header{
   font-size: 30px;
 }
@@ -298,8 +303,9 @@ a {
   margin: 7px;
 }
 .reg-form {
+        border-radius: 4px;
   background-color: #ffffff;
-  margin: 4% 6%;
+  margin: 4% 0;
   padding: 5%;
 }
 .form-header{
@@ -318,14 +324,6 @@ a {
 @media (max-width: 768px) {
   .firstName {
     margin-bottom: 10px;
-  }
-  input {
-    text-align: center;
-    margin: auto;
-  }
-  .reg-form {
-    background-color: #ffffff;
-    padding: 5px;
   }
 }
 

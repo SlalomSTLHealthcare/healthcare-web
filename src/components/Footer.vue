@@ -5,7 +5,7 @@
         <div class="social">
             <a href="https://www.instagram.com/slalomconsulting"><i class="fab fa-instagram"></i></a>
             <a href="https://twitter.com/Slalom"><i class="fab fa-twitter"></i></a>
-            <a href="https://www.facebook.com/slalomconsulting/"><i class="fab fa-facebook-f"></i></a>
+            <!-- <a href="https://www.facebook.com/slalomconsulting/"><i class="fab fa-facebook-f"></i></a> -->
             <a href="https://www.linkedin.com/company/slalom-consulting"><i class="fab fa-linkedin-in"></i></a>
         </div>
     </div>

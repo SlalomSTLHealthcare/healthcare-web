@@ -37,20 +37,20 @@ export default {
 
 .registration{
   // background-color: #f7f7f7;
-  padding: 30px 50px;
+  padding: 80px 80px 30px;
 }
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 6%;
-  margin-bottom: 16px;
+  // margin-left: 6%;
+  // margin-bottom: 16px;
   color: #fff;
 }
 .decoration {
   background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 6%;
+  // margin-left: 6%;
 }
 .title{
   font-family: Arial;
@@ -77,7 +77,7 @@ p a:hover{
 }
 @media (max-width: 768px) {
   .registration{
-    padding: 1% 1%;
+    padding: 80px 4% 4%;
   }
 }
 </style>

@@ -33,7 +33,7 @@ export default {
         });
     },
     sponsor: function(){
-      this.$router.push("/sponsor");
+      this.$router.push("/sponsors");
     }
   }
 };

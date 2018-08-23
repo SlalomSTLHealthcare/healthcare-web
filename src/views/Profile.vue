@@ -30,6 +30,10 @@ export default {
 </script>
 
 <style scoped lang="less">
+.profile{
+  // background-color: #f7f7f7;
+  padding: 80px 80px 50px;
+}
 h1, h2{
   text-align: left;
   padding-left: 5%;
@@ -43,8 +47,6 @@ h1, h2{
 }
 .registration-form{
   width: 100%;
-  margin-left: auto;
-  margin-right: auto;
 }
 p a {
   color: #42b983;
@@ -57,5 +59,11 @@ p a:hover{
 }
 .login {
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .profile{
+    padding: 80px 4% 4%;
+  }
 }
 </style>

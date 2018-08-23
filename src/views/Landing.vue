@@ -303,7 +303,7 @@ export default {
             .stef-pic {
                 position: absolute;
                 margin: 2rem 0 0 24vw;
-                z-index: 5;
+                z-index: 1;
                 opacity: 0.4;
 
                 img {
@@ -315,7 +315,7 @@ export default {
             .quote-inner {
                 position: relative;
                 padding: 0 10vw;
-                z-index: 10;
+                z-index: 2;
                 text-shadow: .2rem .2rem .3rem fade(@secondary-dark, 20%);
 
                 .quote {
@@ -605,7 +605,7 @@ export default {
         }
 
         .floated-content-section {
-            top: 6vh !important;
+            top: 8vh !important;
             left: 0 !important;
             width: 100%;
             text-align: center;

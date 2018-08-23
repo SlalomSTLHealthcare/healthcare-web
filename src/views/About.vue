@@ -21,6 +21,11 @@ export default {
 
 <style>
 .about-content {
-  /* background-color: #f7f7f7; */
+  padding: 80px 80px 30px;
+}
+@media (max-width: 768px) {
+  .about-content{
+    padding: 80px 4% 4%;
+  }
 }
 </style>

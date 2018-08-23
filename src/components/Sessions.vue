@@ -66,12 +66,12 @@ export default {
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  padding: 0 6%;
+  padding: 0;
 }
 h1 {
   font-size: 30px;
-  margin-left: 6%;
-  margin-bottom: 16px;
+  // margin-left: 6%;
+  margin: 30px 0 10px;
   color: #fff;
   font-weight: 100;
 }
