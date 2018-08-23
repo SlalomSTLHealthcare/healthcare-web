@@ -54,5 +54,8 @@ export default new Router({
       name: "profile",
       component: Profile
     }
-  ]
+  ],
+  scrollBehavior() {
+    return { x: 0, y: 0 }
+  }
 });

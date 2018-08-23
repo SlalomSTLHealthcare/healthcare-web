@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="">
       <h1>Profile</h1>
       <div class="decoration"></div>
   <el-card v-if="type==='profile'" class="box-card">
@@ -7,7 +7,7 @@
       <span class="action-buttons">
         <el-button v-if ="!update" @click="update=true" type="primary" round>Update</el-button>
         <el-button v-if="update" @click="updateRegistration" round>Save</el-button>
-        <el-button @click="deleteReg" type="danger" round>Delete</el-button>
+        <!-- <el-button @click="deleteReg" type="danger" round>Delete</el-button> -->
       </span>
     </div>
       <el-form :disabled="!update" label-position="top" ref="form" @submit.prevent="handleSubmit" :model="profForm" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="300px">
@@ -331,18 +331,14 @@ mounted: function () {
 <style scoped lang="less">
 @import '../global-variables';
 h1 {
-    margin-top: 80px;
   font-size: 40px;
   font-weight: lighter;
-  margin-left: 6%;
-  margin-bottom: 16px;
   color: #fff;
 }
 .decoration {
   background-color: @secondary;
   height: 5px;
   width: 75px;
-  margin-left: 6%;
 }
 
 .header{
@@ -380,10 +376,6 @@ a {
 }
 
 .box-card {
-  width: 88%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 40px;
   margin-top: 30px;
 }
 .buttons {
