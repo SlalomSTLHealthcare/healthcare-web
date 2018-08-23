@@ -3,7 +3,7 @@
   <!-- <el-card class="box-card"> -->
   <div class="reg-form">
     <h2 class="form-header">Please complete all required fields.</h2>
-    <el-form label-position="top" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8" method="POST" class="form" label-width="200px">
+    <el-form label-position="top" ref="form" @submit.prevent="handleSubmit" :model="form" status-icon :rules="rules" class="form" label-width="200px">
       <input type=hidden name="oid" value="00D1H000000O1eQ">
       <input type=hidden name="retURL" value="http://">
       <el-form-item required label="Name" >
@@ -207,11 +207,11 @@ methods: {
           self.failedRegistration(error.response.statusText);
           return error;
         });
-        this.$axiosServer.post('https://doshner-developer-edition.na73.force.com/services/apexrest/HealthSTLxLeads', {
-          firstName: this.form.firstName,
-          lastName: this.form.lastName,
-          company: this.form.company,
-          title: this.form.position,
+        this.$axiosServer.post('http://go.slalom.com/l/209772/2018-08-22/xd4v2', {
+          "First Name": this.form.firstName,
+          "Last Name": this.form.lastName,
+          Company: this.form.company,
+          "Job Title": this.form.position,
           email: this.form.email
         })
         .then(function (response) {
