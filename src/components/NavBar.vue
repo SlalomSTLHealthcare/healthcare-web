@@ -120,6 +120,7 @@ export default {
     width: 40px;
     height: 40px;
     margin: 0 10px 0 20px;
+    filter: drop-shadow(0 0 2rem #fff);
 }
 
 .banner-text {
