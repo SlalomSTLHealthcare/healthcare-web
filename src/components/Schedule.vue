@@ -6,12 +6,18 @@
       <tr v-for="event in scheduleData" valign="top">
         <td class="time">
           <h3 class="timeHeader">{{timeFormatter(event)}}</h3>
-          <p class="roomNum" v-for="session in event.sessions" >Room #{{session.room_num}}</p>
+          <p :class="['roomNum', session.session_type === 'Extra' ? '' : 'bigger']" v-for="session in event.sessions" >Room #{{session.room_num}}</p>
         </td>
         <td class="scheduleEvent">
           <h3 class="eventHeader">{{event.title}}</h3>
-          <p class="event" v-for="session in getSessions(event)" v-if="session.session_type === 'Extra'">{{session.description}}</p>
-          <p class="event" v-else>{{session.title}}</p>
+          <p class="event" v-if="getExtra(event)">{{getExtra(event).description}}</p>
+          <el-collapse :accordion="true" v-if="event.sessions.length > 0 && event.sessions[0].session_type !== 'Extra'">
+            <el-collapse-item v-if="session.session_type !== 'Extra'" v-for="session in event.sessions" :title="session.title" :name="session.id">
+              {{session.description}}
+            </el-collapse-item>
+          </el-collapse>
+          <!-- <p class="event" v-for="session in getSessions(event)" v-if="session.session_type === 'Extra'">{{session.description}}</p> -->
+          <!-- <p class="event" v-else>{{session.title}}</p> -->
         </td>
       </tr>
     </table>
@@ -69,6 +75,9 @@ export default {
     getSessions(schedule){
       return _.where(this.sessions, {schedule_id: schedule.id});
     },
+    getExtra(schedule){
+      return _.findWhere(this.sessions, {schedule_id: schedule.id, session_type: 'Extra'});
+    },
   }
 };
 </script>
@@ -76,9 +85,6 @@ export default {
 <style scoped lang="less">
 @import '../global-variables';
 
-div{
-  margin-bottom: 25px;
-}
 .time {
     border-right: 1px solid #b5bfbd;
     color: #b5bfbd;
@@ -100,9 +106,11 @@ table{
 }
 .eventHeader{
   color: @primary;
+  margin-bottom: 6px;
 }
 .timeHeader{
   color: #706e6b;
+  margin-bottom: 6px;
 }
 h3 {
     font-weight: 400;
@@ -126,9 +134,18 @@ p {
   // margin-left: 6%;
 }
 
-.roomNum, .timeHeader, .event, .eventHeader {
-  margin: 3px;
+.bigger {
+  line-height: 49px;
+  margin-bottom: 0;
 }
+
+.event, .roomNum {
+  margin-top: 0;
+}
+
+// .roomNum, .timeHeader, .event, {
+//   margin: 3px;
+// }
 
 .roomNum:last-child {
     margin-bottom: 20px;
