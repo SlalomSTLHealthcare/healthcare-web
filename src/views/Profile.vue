@@ -60,4 +60,10 @@ p a:hover{
 .login {
   text-align: center;
 }
+
+@media (max-width: 768px) {
+  .profile{
+    padding: 80px 4% 4%;
+  }
+}
 </style>

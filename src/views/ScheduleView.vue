@@ -23,14 +23,9 @@ export default {
 .schedule {
   padding: 80px 80px 30px;
 }
-@media only screen and (max-width:349px){
-  .schedule {
-  // padding: 30px 10px;
-  }
-}
-@media only screen and (min-width: 350px) and (max-width: 1024px) {
-  .schedule {
-  // padding: 30px 5px;
+@media (max-width: 768px) {
+  .schedule{
+    padding: 80px 4% 4%;
   }
 }
 

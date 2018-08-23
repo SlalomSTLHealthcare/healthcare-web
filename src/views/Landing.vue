@@ -605,7 +605,7 @@ export default {
         }
 
         .floated-content-section {
-            top: 6vh !important;
+            top: 8vh !important;
             left: 0 !important;
             width: 100%;
             text-align: center;

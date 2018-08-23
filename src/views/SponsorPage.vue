@@ -43,7 +43,6 @@ export default {
         });
     },
     filteredData(level) {
-      console.log(this.sponsorData);
       return _.filter(this.sponsorData, s => s.sponsor_level === level);
     }
   }
@@ -56,6 +55,11 @@ export default {
 .sponsor{
   padding: 80px 80px 30px;
   // background-color: #f7f7f7;
+}
+@media (max-width: 768px) {
+  .sponsor{
+    padding: 80px 4% 4%;
+  }
 }
 .btn {
   background: #3336ff;

@@ -3,9 +3,9 @@
     <h2>{{sponsorLevel}} Sponsors</h2>
     <div class="decoration"></div>
     <el-row class="sponsor">
-    <li v-for="sponsor in sponsorData" :key="sponsor.id">
+    <div v-for="sponsor in sponsorData" :key="sponsor.id">
         <Sponsor :image="sponsor.image_loc" :title="sponsor.title" :name="sponsor.name" :description="sponsor.description" :sponsorLevel="sponsor.sponsor_level" link="https://www.slalom.com/locations/st-louis"/>
-    </li>
+    </div>
   </el-row>
 </el-row>
 </template>
@@ -34,14 +34,6 @@ export default {
   flex-flow: row wrap;
   justify-content: space-evenly;
   margin-bottom: 55px;
-}
-ul {
-  padding: 0;
-}
-li {
-  list-style-type: none;
-  padding: 10px;
-
 }
  h2 {
      font-weight: 100;

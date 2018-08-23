@@ -4,20 +4,15 @@
     <div class="decoration"></div>
     <table>
       <tr v-for="event in scheduleData" valign="top">
-        <td class="time">
-          <h3 class="timeHeader">{{timeFormatter(event)}}</h3>
-          <p :class="['roomNum', session.session_type === 'Extra' ? '' : 'bigger']" v-for="session in event.sessions" >Room #{{session.room_num}}</p>
-        </td>
         <td class="scheduleEvent">
+          <h3 class="timeHeader">{{timeFormatter(event)}}</h3>
           <h3 class="eventHeader">{{event.title}}</h3>
-          <p class="event" v-if="getExtra(event)">{{getExtra(event).description}}</p>
-          <el-collapse :accordion="true" v-if="event.sessions.length > 0 && event.sessions[0].session_type !== 'Extra'">
-            <el-collapse-item v-if="session.session_type !== 'Extra'" v-for="session in event.sessions" :title="session.title" :name="session.id">
+          <p class="event" v-if="getExtra(event)">{{getExtra(event).description}}<br><em class="roomNum">Room #{{getExtra(event).room_num}}</em></p>
+          <el-collapse style="margin-top: 10px;" :accordion="true" v-if="event.sessions.length > 0 && event.sessions[0].session_type !== 'Extra'">
+            <el-collapse-item v-if="session.session_type !== 'Extra'" :key="session.id" v-for="session in event.sessions" :title="session.title + ' - Room #' + session.room_num" :name="session.id">
               {{session.description}}
             </el-collapse-item>
           </el-collapse>
-          <!-- <p class="event" v-for="session in getSessions(event)" v-if="session.session_type === 'Extra'">{{session.description}}</p> -->
-          <!-- <p class="event" v-else>{{session.title}}</p> -->
         </td>
       </tr>
     </table>
@@ -106,10 +101,11 @@ table{
 }
 .eventHeader{
   color: @primary;
-  margin-bottom: 6px;
+  margin: 0 0 6px;
 }
 .timeHeader{
-  color: #706e6b;
+  color: #333;
+  font-size: 22px;
   margin-bottom: 6px;
 }
 h3 {
@@ -118,8 +114,6 @@ h3 {
 h1 {
   font-size: 40px;
   font-weight: lighter;
-  // margin-left: 6%;
-  // margin-bottom: 16px;
   color: #fff;
 }
 
@@ -131,7 +125,6 @@ p {
   background-color: @secondary;
   height: 5px;
   width: 75px;
-  // margin-left: 6%;
 }
 
 .bigger {
@@ -139,100 +132,18 @@ p {
   margin-bottom: 0;
 }
 
-.event, .roomNum {
-  margin-top: 0;
+.roomNum {
+  line-height: 36px;
 }
 
-// .roomNum, .timeHeader, .event, {
-//   margin: 3px;
-// }
+.event {
+  margin-top: 2px;
+}
 
 .roomNum:last-child {
     margin-bottom: 20px;
 }
 .endOfEntry{
   padding-bottom: 3px;
-}
-@media only screen and (max-width:349px){
-    h3 {
-        font-size: 1rem;
-    }
-    .scheduleEvent{
-      padding-top:0;
-      padding-bottom:0;
-      padding-left: 15px;
-      padding-right: 10px;
-      }
-    table{
-      border-spacing: 0;
-      background-color: white;
-      margin: 4% 0%;
-      padding: 5% 0%;
-    }
-    .time{
-      padding-top:0;
-      padding-bottom: 0;
-      width: 25%;
-    }
-    p{
-      font-size: 13px;
-    }
-    .event{
-      // padding: 15px 0px;
-      padding-top: 15px;
-    }
-}
-@media only screen and (min-width: 350px) and (max-width: 480px){
-    body{
-      padding:0;
-    }
-    h3 {
-        font-size: 1.1rem;
-    }
-    .scheduleEvent{
-      padding-top:0;
-      padding-bottom:0;
-      padding-left: 15px;
-      padding-right: 10px;
-    }
-    table{
-      border-spacing: 0;
-      background-color: white;
-      margin: 40px 2px;
-      padding: 5% 0%;
-    }
-    .time{
-      padding-top:0;
-      padding-bottom: 0;
-      width: 25%;
-    }
-    .event{
-      padding-top: 15px;
-    }
-    p{
-      font-size: 15px;
-    }
-}
-@media only screen and (min-width: 481px) and (max-width: 1024px) {
-  body{
-    padding:0;
-  }
-  h3 {
-      font-size: 1.2rem;
-  }
-  table{
-    border-spacing: 0;
-    background-color: white;
-    margin: 4% 5.3%;
-    padding: 5% 4%;
-  }
-  .scheduleEvent{
-    padding-top:0;
-    padding-bottom:0;
-    padding-left: 15px;
-  }
-  .time{
-    width: 25%;
-  }
 }
 </style>

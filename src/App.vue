@@ -24,6 +24,13 @@ export default {
     Footer
   },
   mounted(){
+    window.addEventListener('scroll', () => {
+      if (window.scrollY + 70 > window.innerHeight) {
+        document.getElementById('banner').classList.add('banner-bar');
+      } else if (this.$route.name === 'home') {
+        document.getElementById('banner').classList.remove('banner-bar');
+      }
+    });
   },
   computed: mapState({
     getToken(state){
@@ -37,6 +44,10 @@ export default {
 
 .el-form-item__label {
     padding-bottom: 0 !important;
+}
+
+.el-message-box {
+  width: 50vw;
 }
 
 .el-form-item {
@@ -75,6 +86,18 @@ body {
 }
 .page {
   min-height: calc(~"100vh - 60px");
+}
+
+@media (max-width: 768px) {
+  .el-message-box {
+    width: 80vw;
+  }
+}
+
+@media (max-width: 768px) {
+  .el-dialog {
+    width: 80vw !important;
+  }
 }
 
 </style>

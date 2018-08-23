@@ -13,6 +13,7 @@ import Profile from "./views/Profile";
 Vue.use(Router);
 
 export default new Router({
+  mode: 'history',
   routes: [
     {
       path: "/",
@@ -35,12 +36,12 @@ export default new Router({
       component: About
     },
     {
-      path: "/sponsor",
+      path: "/sponsors",
       name: "sponsorPage",
       component: SponsorPage
     },
     {
-      path: "/session",
+      path: "/sessions",
       name: "session",
       component: SessionView
     },

@@ -1,5 +1,5 @@
 <template>
-    <el-container style="padding: 80px 80px 30px;" :direction="'vertical'">
+    <el-container :direction="'vertical'">
         <div class="section">
                     <h1>Venue Information</h1>
                     <div class="decoration"></div>
@@ -113,12 +113,7 @@ export default {
 
 <style scoped lang="less">
 @import '../global-variables';
-.about-content {
-  // border: 100px solid #f7f7f7;
-}
-.section {
-  // margin: 40px;
-}
+
 h1 {
   font-size: 40px;
   font-weight: lighter;
@@ -158,7 +153,8 @@ ul {
 }
 .infoSection {
   margin: 4% 0;
-  padding: 50px;
+  padding: 40px 8%;
+  border-radius: 4px;
   background-color: #fff;
 }
 .where, .date, .parking-header, .subsubheader{
@@ -219,25 +215,7 @@ ul {
 }
 @media (max-width: 768px) {
   .infoSection {
-    margin: 0% 3% 3%;
-    padding: 1%;
-    background-color: #fff;
-  }
-    .descriptor {
-      font-size: 17px;
-      font-weight: lighter;
-      font-style: italic;
-      margin-top: 30px;
-  }
-  .parking {
-    font-size: 10px;
-    padding-left: 0%;
-  }
-  .parking-info {
-    padding: 0px 0px;
-    text-align: left;
-    font-size: 13px;
-    line-height: 40px;
+    padding: 8%;
   }
 }
 </style>

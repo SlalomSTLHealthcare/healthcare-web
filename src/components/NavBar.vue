@@ -16,19 +16,19 @@
       </div>
     </div>
     <div class="banner-container">
-        <div :class="[$route.name !== 'home' ? 'banner-bar' : '']"></div>
+        <div id="banner" :class="[$route.name !== 'home' ? 'banner-bar' : '']"></div>
     </div>
     <transition name="fade">
         <div class="overlay" v-if="show" v-on:click="showBox" >
 	         <div class="wrap">
               <router-link class="nav-links" to="/">Home</router-link>
               <router-link class="nav-links" :to="computedRegister">{{computedRegisterDescription}}</router-link>
-              <!-- <span v-if="isSignedIn" class="nav-links" v-on:click="logout">Logout</span> -->
-              <!-- <Login v-else class="nav-links" v-on:close="closeBox" loginType='nav'/> -->
+              <span v-if="isSignedIn" class="nav-links logs" v-on:click="logout">Logout</span>
+              <Login v-else class="nav-links logs" v-on:close="closeBox" loginType='nav'/>
               <router-link class="nav-links" to="people">Speakers</router-link>
-			        <router-link class="nav-links" to="session">Sessions</router-link>
+			        <router-link class="nav-links" to="sessions">Sessions</router-link>
               <router-link class="nav-links" to="schedule">Schedule</router-link>
-              <router-link class="nav-links" to="sponsor">Sponsors</router-link>
+              <router-link class="nav-links" to="sponsors">Sponsors</router-link>
               <router-link class="nav-links" to="about">Venue Information</router-link>
 		       </div>
 	      </div>
@@ -213,7 +213,7 @@ ul {
 .wrap .nav-links {
   list-style: none;
   color: #fff;
-  padding: 20px 0;
+  padding: 10px 0;
   text-decoration: none;
   font-size: 25px;
 }
@@ -238,48 +238,62 @@ ul {
 .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
   opacity: 0;
 }
-@media (max-width: 398px){
-  .logo img {
-    width: 100px;
-    margin-left: 15px;
-    height: 25px;
-  }
-  .logIn, .optiontwo {
-    display: none;
-  }
-  .logBtn {
-    margin: 15px 1px;
-  }
-  .optiontwo {
-    font-size: 25px;
-  }
-  .el-button.is-round{
-    padding: 12px 12px;
-  }
+
+.logs {
+  display: none;
 }
-.wrap .nav-links {
-  padding: 10px 0;
+
+@media (max-width: 600px){
+  .logs {
+    display: block;
+  }
+    .logBtn {
+      display: none;
+    }
+
+    .menu {
+      justify-content: center;
+    }
 }
-@media (min-width: 400px) and (max-width: 500px){
-  .logo img {
-    width: 160px;
-    margin-left: 15px;
-    height: 40px;
-  }
-  .logBtn {
-    margin: 15px 6px;
-  }
-  .logIn{
-    margin: 13px 6px;
-  }
-  .logBtn {
-    margin: 15px 1px;
-  }
-  .optiontwo {
-    font-size: 25px;
-  }
-  .el-button.is-round{
-    padding: 12px 12px;
-  }
-}
+// @media (max-width: 398px){
+//   .logo img {
+//     // width: 100px;
+//     // margin-left: 15px;
+//     // height: 25px;
+//   }
+//   .logIn, .optiontwo {
+//     // display: none;
+//   }
+//   .logBtn {
+//     // margin: 15px 1px;
+//   }
+//   .optiontwo {
+//     // font-size: 25px;
+//   }
+//   .el-button.is-round{
+//     // padding: 12px 12px;
+//   }
+// }
+// @media (min-width: 400px) and (max-width: 500px){
+//   .logo img {
+//     width: 160px;
+//     margin-left: 15px;
+//     height: 40px;
+//   }
+//   .logBtn {
+//     margin: 15px 6px;
+//   }
+//   .logIn{
+//     margin: 13px 6px;
+//   }
+//   .logBtn {
+//     margin: 15px 1px;
+//   }
+//   .optiontwo {
+//     font-size: 25px;
+//   }
+//   .el-button.is-round{
+//     padding: 12px 12px;
+//   }
+// }
 </style>

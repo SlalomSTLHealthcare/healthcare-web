@@ -19,4 +19,9 @@ export default {
 .people {
   padding: 80px 80px 30px;
 }
+@media (max-width: 768px) {
+  .people{
+    padding: 80px 4% 4%;
+  }
+}
 </style>

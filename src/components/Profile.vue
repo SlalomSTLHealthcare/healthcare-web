@@ -382,7 +382,7 @@ a {
   text-align: center;
 }
 .form{
-  width: 60%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -406,25 +406,31 @@ a {
   margin: 7px;
 }
 
-@media (min-width: 430px) and (max-width: 500px) {
-  .action-buttons button{
-    width: 100px;
-    font-size: 12px;
-    text-align: center;
-  }
-}
+// @media (min-width: 430px) and (max-width: 500px) {
+//   .action-buttons button{
+//     width: 100px;
+//     font-size: 12px;
+//     text-align: center;
+//   }
+// }
+//
+// @media (min-width: 355px) and (max-width: 430px) {
+//   .action-buttons button{
+//     width: 75px;
+//     font-size: 12px;
+//   }
+// }
+// @media (min-width: 200px) and (max-width: 355px) {
+//   .action-buttons button{
+//     width: 55px;
+//     font-size: 12px;
+//     padding: 11px;
+//   }
+// }
 
-@media (min-width: 355px) and (max-width: 430px) {
-  .action-buttons button{
-    width: 75px;
-    font-size: 12px;
-  }
-}
-@media (min-width: 200px) and (max-width: 355px) {
-  .action-buttons button{
-    width: 55px;
-    font-size: 12px;
-    padding: 11px;
+@media (max-width: 768px) {
+  .firstName {
+    margin-bottom: 10px;
   }
 }
 </style>

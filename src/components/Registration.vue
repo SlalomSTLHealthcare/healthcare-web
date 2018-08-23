@@ -325,14 +325,6 @@ a {
   .firstName {
     margin-bottom: 10px;
   }
-  input {
-    text-align: center;
-    margin: auto;
-  }
-  .reg-form {
-    background-color: #ffffff;
-    padding: 5px;
-  }
 }
 
 </style>

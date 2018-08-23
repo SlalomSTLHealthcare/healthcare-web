@@ -1,17 +1,4 @@
  <template>
-<!-- <el-container v-if="sponsorLevel === 'platinum'">
-  <el-card shadow="hover" class="platinumCard">
-      <el-col :span="1">
-        <img :src="image" class="platinumImage" alt="pic">
-      </el-col>
-      <el-col :span="22">
-        <div>
-          <div class="name">Sponsor Name: {{ name }}</div>
-          <div class="description">Description: {{ description }}</div>
-        </div>
-      </el-col>
-  </el-card>
-</el-container> -->
   <a :href="link" v-else >
     <img :src="image" alt="pic">
   </a>

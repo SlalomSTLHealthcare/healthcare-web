@@ -77,7 +77,7 @@ p a:hover{
 }
 @media (max-width: 768px) {
   .registration{
-    padding: 1% 1%;
+    padding: 80px 4% 4%;
   }
 }
 </style>

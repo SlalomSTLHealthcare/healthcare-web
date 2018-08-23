@@ -150,4 +150,10 @@ methods: {
     padding: 0px 20px;
   }
 }
+
+@media (max-width: 600px){
+    .logBtn {
+      display: none;
+    }
+}
 </style>
