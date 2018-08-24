@@ -34,6 +34,15 @@
       <el-form-item required size="mini" label="Attending Lunch">
         <el-switch v-model="form.lunch"></el-switch>
       </el-form-item>
+      <el-form-item label="Industry">
+        <el-select v-model="form.industry" placeholder="Industry">
+          <el-option label="Providers" value="providers"></el-option>
+          <el-option label="Payers" value="payers"></el-option>
+          <el-option label="Life Science" value="life_science"></el-option>
+          <el-option label="Pharma" value="pharma"></el-option>
+          <el-option label="Other" value="other"></el-option>
+        </el-select>
+      </el-form-item>
        <el-collapse-transition>
          <div v-show="form.lunch">
            <el-form-item v-show="form.lunch" size="mini" label="Dietary Restrictions">
@@ -48,7 +57,7 @@
        </div>
     </el-collapse-transition>
     <div></div>
-    <el-form-item  required label="T-Shirt Size">
+    <el-form-item required label="T-Shirt Size">
       <el-select v-model="form.size" placeholder="Please select shirt size">
         <el-option label="S" value="S"></el-option>
         <el-option label="M" value="M"></el-option>
@@ -129,6 +138,7 @@ var confirmBreakouts = (rule, value, callback) => {
       lunch: true,
       diet: [],
       allergies: '',
+      industry: '',
       size: '',
       donate: true,
       takeaway: '',
@@ -187,6 +197,7 @@ methods: {
           company: this.form.company,
           position: this.form.position,
           twitter: this.form.twitter,
+          industry: this.form.industry,
           lunch: this.form.lunch,
           diet: this.form.diet,
           allergies: this.form.allergies,

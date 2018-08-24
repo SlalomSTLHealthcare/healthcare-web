@@ -39,6 +39,15 @@
       <el-form-item  size="mini" label="Attending Lunch">
         <el-switch v-model="profForm.lunch"></el-switch>
       </el-form-item>
+      <el-form-item label="Industry">
+        <el-select v-model="profForm.industry" placeholder="Industry">
+          <el-option label="Providers" value="providers"></el-option>
+          <el-option label="Payers" value="payers"></el-option>
+          <el-option label="Life Science" value="life_science"></el-option>
+          <el-option label="Pharma" value="pharma"></el-option>
+          <el-option label="Other" value="other"></el-option>
+        </el-select>
+      </el-form-item>
        <el-collapse-transition>
          <div v-show="profForm.lunch">
            <el-form-item v-show="profForm.lunch" size="mini" label="Dietary Restrictions">
@@ -117,6 +126,7 @@ var confirmPass = (rule, value, callback) => {
       company: '',
       position: '',
       twitter: '',
+      industry: '',
       lunch: true,
       diet: [],
       allergies: '',
@@ -217,6 +227,7 @@ methods: {
           company: this.profForm.company,
           position: this.profForm.position,
           twitter: this.profForm.twitter,
+          industry: this.profForm.industry,
           lunch: this.profForm.lunch,
           diet: this.profForm.diet,
           allergies: this.profForm.allergies,
@@ -258,6 +269,7 @@ methods: {
     this.profForm.position= data.attendee.position;
     this.profForm.takeaway= data.attendee.comment;
     this.profForm.lunch= data.attendee.lunch;
+    this.profForm.industry= data.attendee.industry;
     this.profForm.diet= data.attendee.diet;
     this.profForm.allergies= data.attendee.diet_allergy;
     this.profForm.size= data.attendee.tshirt_size;
