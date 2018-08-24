@@ -81,9 +81,6 @@ a {
     font-size: 20px;
     text-align: left;
   }
-  .timeStyle{
-    font-size: 10px;
-  }
   .sessionCard{
      // width: 100vw;
      height: 250px;
