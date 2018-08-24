@@ -1,7 +1,7 @@
 <template>
   <div class="person">
-        <el-card :class="['card', name === 'Allison Massari' ? 'wider' : '']" shadow="never" :body-style="{ padding: '0px' }">
-          <img :src="imgSource" :class="['image', name === 'Allison Massari' ? 'allison' : '']">
+        <el-card class="card" shadow="never" :body-style="{ padding: '0px' }">
+          <img :src="imgSource" class="image">
           <div class="info-wrapper">
             <span class="name">{{ name }}</span>
             <a v-if="twitter" :href="twitter" target="_blank"><i class="fab fa-twitter"></i></a>
@@ -59,14 +59,6 @@ export default {
   border: 0;
   // border-radius: 0;
 }
-.wider {
-    // width: 100%;
-}
-.allison {
-    height: 300px;
-    object-fit: cover;
-    object-position: 100% 20%;
-}
 .name {
   font-weight: bold;
   font-size: 18px;
@@ -90,7 +82,7 @@ export default {
 .info {
   margin-top: 10px;
   font-size: 15px;
-  color: #9b9b9b;
+  color: #777;
 }
 .company {
     color: #555;
