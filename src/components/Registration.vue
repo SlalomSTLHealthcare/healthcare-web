@@ -102,6 +102,7 @@ import Login from "./Login.vue";
 import { mapState } from 'vuex';
 import SelectBreakout from "./SelectBreakout.vue";
 import axios from 'axios'
+import qs from 'qs';
 import _ from 'underscore';
 export default {
   name: "Registration",
@@ -218,20 +219,20 @@ methods: {
           self.failedRegistration(error.response.statusText);
           return error;
         });
-        // axios({ method: 'post', url: 'https://go.slalom.com/l/209772/2018-08-22/xd4v2', headers: {'Content-type': 'application/x-www-form-urlencoded'}, data:{
-        //   "First Name": this.form.firstName,
-        //   "Last Name": this.form.lastName,
-        //   Company: this.form.company,
-        //   "Job Title": this.form.position,
-        //   Email: this.form.email
-        // }})
-        // .then(function (response) {
-        //   console.log(response);
-        // })
-        // .catch(function (error) {
-        //   console.log(error);
-        //   return error;
-        // });
+        axios({ method: 'post', url: 'https://go.slalom.com/l/209772/2018-08-24/xfjfj', headers: {'Content-type': 'application/x-www-form-urlencoded'}, data: qs.stringify({
+          first_name: this.form.firstName,
+          last_name: this.form.lastName,
+          company: this.form.company,
+          job_title: this.form.position,
+          email: this.form.email
+        })})
+        .then(function (response) {
+          console.log(response);
+        })
+        .catch(function (error) {
+          console.log(error);
+          return error;
+        });
       } else {
         this.emptyFields();
         return false;
