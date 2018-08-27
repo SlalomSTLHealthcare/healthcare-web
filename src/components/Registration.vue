@@ -86,8 +86,8 @@
   title="Successful Registration"
   :visible.sync="dialogVisible"
   width="50%">
-  <div>Thank you for registering for health<strong>STLX</strong>!  We look forward to seeing you in November.</div>
-  <div style="margin-top: 20px;">If you have any questions, please reach out to our team at <span class="email-support">tara.nesbitt@slalom.com</span>.</div>
+  <div>Thank you for registering for Health<strong>STLX</strong>!  We look forward to seeing you in November.</div>
+  <div style="margin-top: 20px;">If you have any questions, please reach out to our team at <span class="email-support">healthstlx@slalom.com</span>.</div>
   <span slot="footer" class="dialog-footer">
      <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://slalom-health-summit-staging.herokuapp.com/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" class="share-button" round>Share on LinkedIn</el-button></a>
      <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-related="Slalom" data-show-count="false"><el-button plain class="share-button" icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>

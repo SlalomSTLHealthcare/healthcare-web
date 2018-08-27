@@ -44,14 +44,15 @@
                     <div class="text">
                         Health<span style="font-weight: 700;">STLX</span> is a one-day summit aimed at exploring national healthcare challenges through a local St. Louis lens. Our community is experiencing an evolution in the way we interact with brands and organizations in both the digital and physical space. As a result, every industry is being disrupted and healthcare is no exception. We will bring together thought leaders, influencers, and innovators to foster learning, inspiration, and wonder – and design solutions that matter to our community. Together, we will empower our St. Louis community.
                     </div>
-                    <div class="note">
+                    <div class="note" style="color: #fff;">
                         Please provide your preferred e-mail address to stay updated with additional event details.
                     </div>
                     <div class="error" v-show="!emailExists">{{emailErrorText}}</div>
                     <div class="action">
-                        <el-input class="input" placeholder="Name" v-model="emailName" v-if="emailButtonText === 'Submit'"></el-input>
+                        <el-button type="primary" class="info-button" @click="handleRegisterClick" plain round>Register Now</el-button>
+                        <!-- <el-input class="input" placeholder="Name" v-model="emailName" v-if="emailButtonText === 'Submit'"></el-input>
                         <el-input class="input" placeholder="Email" v-model="email" v-if="emailButtonText === 'Submit'"></el-input>
-                        <el-button :disabled="emailButtonDisabled" :loading="emailButtonLoading" type="primary" :class="[emailButtonDisabled ? 'disabled-class' : '', 'info-button']" @click="handleEmailClick" plain round>{{emailButtonText}}</el-button>
+                        <el-button :disabled="emailButtonDisabled" :loading="emailButtonLoading" type="primary" :class="[emailButtonDisabled ? 'disabled-class' : '', 'info-button']" @click="handleEmailClick" plain round>{{emailButtonText}}</el-button> -->
                     </div>
                 </div>
             </div>
@@ -116,6 +117,9 @@ export default {
         }
     },
     methods: {
+        handleRegisterClick() {
+          this.$router.push('/registration');
+        },
         handleEmailClick() {
             const self = this;
             if (this.emailButtonText === 'Email sign up') {
