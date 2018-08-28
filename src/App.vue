@@ -9,19 +9,19 @@
       <router-view/>
     </transition>
   </div>
-    <Footer/>
+    <CustomFooter/>
   </div>
 </template>
 
 <script>
 import NavBar from "@/components/NavBar.vue";
-import Footer from "@/components/Footer.vue";
+import CustomFooter from "@/components/Footer.vue";
 import { mapState } from 'vuex';
 export default {
   name: "app",
   components: {
     NavBar,
-    Footer
+    CustomFooter
   },
   mounted(){
     window.addEventListener('scroll', () => {

@@ -44,8 +44,8 @@
                     <div class="text">
                         Health<span style="font-weight: 700;">STLX</span> is a one-day summit aimed at exploring national healthcare challenges through a local St. Louis lens. Our community is experiencing an evolution in the way we interact with brands and organizations in both the digital and physical space. As a result, every industry is being disrupted and healthcare is no exception. We will bring together thought leaders, influencers, and innovators to foster learning, inspiration, and wonder – and design solutions that matter to our community. Together, we will empower our St. Louis community.
                     </div>
-                    <div class="note" style="color: #fff;">
-                        Please provide your preferred e-mail address to stay updated with additional event details.
+                    <div class="note">
+                        <!-- Please provide your preferred e-mail address to stay updated with additional event details. -->
                     </div>
                     <div class="error" v-show="!emailExists">{{emailErrorText}}</div>
                     <div class="action">
@@ -236,7 +236,8 @@ export default {
                 }
 
                 .note {
-                    margin: 2rem 0 2.5rem;
+                    margin: 0;
+                    height: 20px;
                     font-size: 0.9rem;
                     font-weight: 300;
                     font-style: italic;
@@ -693,10 +694,6 @@ export default {
 
         .central-box {
             width: 70vw !important;
-        }
-
-        .pusher {
-            display: none;
         }
     }
 
