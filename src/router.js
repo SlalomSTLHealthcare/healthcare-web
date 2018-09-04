@@ -35,11 +35,11 @@ export default new Router({
       name: "about",
       component: About
     },
-    {
-      path: "/sponsors",
-      name: "sponsorPage",
-      component: SponsorPage
-    },
+    // {
+    //   path: "/sponsors",
+    //   name: "sponsorPage",
+    //   component: SponsorPage
+    // },
     {
       path: "/sessions",
       name: "session",

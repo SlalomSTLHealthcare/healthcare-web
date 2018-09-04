@@ -28,7 +28,7 @@
               <router-link class="nav-links" to="people">Speakers</router-link>
 			        <router-link class="nav-links" to="sessions">Sessions</router-link>
               <router-link class="nav-links" to="schedule">Schedule</router-link>
-              <router-link class="nav-links" to="sponsors">Sponsors</router-link>
+              <!-- <router-link class="nav-links" to="sponsors">Sponsors</router-link> -->
               <router-link class="nav-links" to="about">Venue Information</router-link>
 		       </div>
 	      </div>

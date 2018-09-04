@@ -2,12 +2,13 @@
   <div>
     <h1>Schedule</h1>
     <div class="decoration"></div>
+    <div class="subheader">Check out the details of our full one-day conference below. The morning will be a mix of our guest keynote speaker, Allison Massari and a host of panelist who are regarded as thought-leaders within the St. Louis healthcare community. As we transition into the afternoon, guest will get a chance to tackle real issues in our community, by working in teams in order to come up with viable solutions for a better St. Louis.</div>
     <table>
       <tr v-for="event in scheduleData" valign="top">
         <td class="scheduleEvent">
           <h3 class="timeHeader">{{timeFormatter(event)}}</h3>
           <h3 class="eventHeader">{{event.title}}</h3>
-          <p class="event" v-if="getExtra(event)">{{getExtra(event).description}}<br><em class="roomNum">Room #{{getExtra(event).room_num}}</em></p>
+          <p class="event" v-if="getExtra(event)">{{getExtra(event).description}}<br><em class="roomNum">{{getExtra(event).room_num}}</em></p>
           <el-collapse style="margin-top: 10px;" :accordion="true" v-if="event.sessions.length > 0 && event.sessions[0].session_type !== 'Extra'">
             <el-collapse-item v-if="session.session_type !== 'Extra'" :key="session.id" v-for="session in event.sessions" :title="session.title + ' - Room #' + session.room_num" :name="session.id">
               {{session.description}}
@@ -80,6 +81,12 @@ export default {
 <style scoped lang="less">
 @import '../global-variables';
 
+.subheader {
+  font-size: 16px;
+  font-weight: 100;
+  color: #fff;
+  margin-top: 1rem;
+}
 .time {
     border-right: 1px solid #b5bfbd;
     color: #b5bfbd;

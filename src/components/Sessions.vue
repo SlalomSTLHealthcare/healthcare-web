@@ -19,6 +19,7 @@
           <span class="timeStyle">Time: {{computedTime(session.time)}} &mdash; Room Number: {{session.room_num}}</span>
         </div>
       <p class="description">{{session.description}}</p>
+      <p class="description">This panel discussion will feature the following St. Louis thought-leaders: Melodie Donatelli, Ashley Williams, Dr. Leslie McIntosh Borrelli, Dr. J. Gavin Helton, Dr. Alexander Garza, and Shea Long.</p>
     </el-card>
   </el-row>
 </el-row>

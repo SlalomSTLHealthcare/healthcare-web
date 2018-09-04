@@ -72,9 +72,6 @@
       <SelectBreakout class="breakout" timeSlot="10:15 am" type='register'/>
       <SelectBreakout class="breakout" timeSlot="3:00 pm" type='register'/>
     </el-form-item>
-    <el-form-item required label="I would like to opt-in to donating to United Way as part of my registration.">
-      <el-switch   v-model="form.donate"></el-switch>
-    </el-form-item>
       <el-form-item class="buttons">
         <el-button @click="handleSubmit('form')" type="primary">Register</el-button>
       </el-form-item>

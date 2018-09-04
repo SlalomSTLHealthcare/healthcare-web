@@ -2,7 +2,7 @@
     <el-card shadow="hover" class="sessionCard">
       <div class="overview">
         <h2 class="boxTitle">{{title}}</h2>
-        <span class="timeStyle">Time: {{computedTime}} &mdash; Room Number: {{roomNumber}}</span>
+        <span class="timeStyle">Time: {{computedTime}} &mdash; Room Numbers: {{roomNumber}}</span>
       </div>
       <div v-if="sessionType === 'Breakout'">
       <h4 class="space" v-if="computedSpace > 1">Spaces Available: <strong>{{computedSpace}}</strong></h4>

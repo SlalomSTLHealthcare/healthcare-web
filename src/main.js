@@ -23,7 +23,7 @@ Vue.use(VeeValidate, config);
 Vue.use(Vuex);
 Vue.use(VueMasonryPlugin)
 Vue.prototype.$axiosServer = axios.create({
-  baseURL: 'https://slalom-health-api-staging.herokuapp.com/',
+  baseURL: 'https://slalom-health-api.herokuapp.com/',
   withCredentials: false,
   headers: {
     "Content-Type": "application/json"

@@ -3,6 +3,7 @@
         <div class="section">
                     <h1>Venue Information</h1>
                     <div class="decoration"></div>
+                    <div class="sub">HealthSTLX will take place at the Eric P. Newman Education Center (EPNEC), part of the Washington University Medical Campus. This venue provides an ideal backdrop within St. Louis as it is part of the larger landscape that is changing how we think about technology and biomedical research within our city. The building exhibits world class architecture set amongst some of our city's greatest healthcare institutions.</div>
                     <!-- <h2 class="descriptor">Our goal is to unite forward-thinking health practitioners from various specialties and industries experience,
                     data management and evolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared.</h2> -->
         </div>
@@ -113,7 +114,12 @@ export default {
 
 <style scoped lang="less">
 @import '../global-variables';
-
+.sub {
+  font-size: 16px;
+  font-weight: 100;
+  color: #fff;
+  margin-top: 1rem;
+}
 h1 {
   font-size: 40px;
   font-weight: lighter;

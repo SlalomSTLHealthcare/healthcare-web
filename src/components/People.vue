@@ -1,7 +1,8 @@
 <template>
   <div class="people">
-    <h1>Keynote Speaker</h1>
+    <h1>Speakers</h1>
     <div class="decoration"></div>
+    <h3>HealthSTLX brings together an exciting panel of St. Louis healthcare thought leaders from diverse backgrounds, as well as keynote speaker Allison Massari, who has been described as "life-changing," "bold," and "motivational." Check out the full list of speakers for HealthSTLX below.</h3>
     <div class="keynote-card" shadow="never">
       <img :src="keynoteImageSource" class="allison">
       <div class="info-wrapper">
@@ -15,8 +16,8 @@
         </div>
       </div>
     </div>
-    <h1>Panelists</h1>
-    <div class="decoration"></div>
+    <!-- <h1>Panelists</h1> -->
+    <div class="decoration" style="margin-top: 40px;"></div>
     <div v-masonry transition-duration="0.3s" item-selector=".item" :gutter="20">
         <div v-masonry-tile class="item" v-for="item in data" style="margin-bottom: 20px;">
             <Person :name="item.full_name" :imgSource="item.image_loc" :company="item.company" :bio="item.bio" :title="item.title" :twitter="item.twitter" :linkedin="item.linkedin"/>
@@ -62,6 +63,11 @@ export default {
 <style scoped lang="less">
 @import '../global-variables';
 
+h3 {
+  font-size: 16px;
+  font-weight: lighter;
+  color: #fff;
+}
 .name {
   font-weight: bold;
   font-size: 18px;
