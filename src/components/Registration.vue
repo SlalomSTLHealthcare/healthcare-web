@@ -31,9 +31,6 @@
       <el-form-item label="Twitter">
         <el-input v-model="form.twitter" placeholder="@"></el-input>
       </el-form-item>
-      <el-form-item required size="mini" label="Attending Lunch">
-        <el-switch v-model="form.lunch"></el-switch>
-      </el-form-item>
       <el-form-item label="Industry">
         <el-select v-model="form.industry" placeholder="Industry">
           <el-option label="Providers" value="providers"></el-option>
@@ -42,6 +39,9 @@
           <el-option label="Pharma" value="pharma"></el-option>
           <el-option label="Other" value="other"></el-option>
         </el-select>
+      </el-form-item>
+      <el-form-item required size="mini" label="Attending Lunch">
+        <el-switch v-model="form.lunch"></el-switch>
       </el-form-item>
        <el-collapse-transition>
          <div v-show="form.lunch">
