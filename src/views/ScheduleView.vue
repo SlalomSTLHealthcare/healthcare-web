@@ -1,31 +1,32 @@
 <template>
-<div class="about-content">
-  <AboutContent/>
-</div>
+  <div class="schedule">
+    <Schedule/>
+  </div>
 </template>
 
 
 <script>
-// @ is an alias to /src
-import AboutContent from "@/components/AboutContent.vue";
+import Schedule from "@/components/Schedule.vue";
 import NavBar from "@/components/NavBar.vue";
 
 export default {
-  name: "about",
+  name: "scheduleView",
   components: {
-    AboutContent,
+    Schedule,
     NavBar
   }
 };
 </script>
 
-<style>
-.about-content {
+
+<style scoped lang="less">
+.schedule {
   padding: 80px 80px 30px;
 }
 @media (max-width: 768px) {
-  .about-content{
+  .schedule{
     padding: 80px 4% 4%;
   }
 }
+
 </style>

@@ -1,30 +1,26 @@
 <template>
-<div class="about-content">
-  <AboutContent/>
-</div>
+    <People msg="People"/>
 </template>
-
 
 <script>
 // @ is an alias to /src
-import AboutContent from "@/components/AboutContent.vue";
+import People from "@/components/People.vue";
 import NavBar from "@/components/NavBar.vue";
-
 export default {
-  name: "about",
+  name: "people",
   components: {
-    AboutContent,
+    People,
     NavBar
   }
 };
 </script>
 
 <style>
-.about-content {
+.people {
   padding: 80px 80px 30px;
 }
 @media (max-width: 768px) {
-  .about-content{
+  .people{
     padding: 80px 4% 4%;
   }
 }

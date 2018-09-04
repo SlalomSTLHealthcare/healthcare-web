@@ -6,13 +6,24 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "start": "node server.js"
+    "start": "node server.js",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
+    "@types/jwt-decode": "^2.2.1",
+    "axios": "^0.18.0",
     "element-ui": "^2.4.1",
     "express": "^4.16.3",
+    "jwt-decode": "^2.2.0",
+    "moment": "^2.22.2",
+    "qs": "^6.5.2",
+    "underscore": "^1.9.1",
+    "vee-validate": "^2.1.0-beta.6",
     "vue": "^2.5.16",
+    "vue-axios": "^2.1.2",
+    "vue-masonry": "^0.11.6",
     "vue-router": "^3.0.1",
+    "vue-session": "^1.0.0",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
