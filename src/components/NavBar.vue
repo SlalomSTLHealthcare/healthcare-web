@@ -25,7 +25,7 @@
               <router-link class="nav-links" :to="computedRegister">{{computedRegisterDescription}}</router-link>
               <span v-if="isSignedIn" class="nav-links logs" v-on:click="logout">Logout</span>
               <Login v-else class="nav-links logs" v-on:close="closeBox" loginType='nav'/>
-              <router-link class="nav-links" to="people">Speakers</router-link>
+              <!-- <router-link class="nav-links" to="people">Speakers</router-link> -->
 			        <router-link class="nav-links" to="sessions">Sessions</router-link>
               <router-link class="nav-links" to="schedule">Schedule</router-link>
               <!-- <router-link class="nav-links" to="sponsors">Sponsors</router-link> -->
