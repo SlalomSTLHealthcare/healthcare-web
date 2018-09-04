@@ -106,10 +106,10 @@ export default {
       return (session != undefined ? (session.max_capacity - _.filter(this.sessionAttendeeData, s => s.session_id === session.id).length <= 0) : false) ;
     },
     getBreakout(state){
-      return this.timeSlot === '10:15 am' ? state.breakoutOne : state.breakoutTwo;
+      return this.timeSlot === '12:30pm' ? state.breakoutOne : state.breakoutTwo;
     },
     getBreakoutWait(state){
-      return this.timeSlot === '10:15 am' ? state.breakoutOneWaitlist : state.breakoutTwoWaitlist;
+      return this.timeSlot === '12:30pm' ? state.breakoutOneWaitlist : state.breakoutTwoWaitlist;
     },
     getAttendeeId(state){
       return state.attendeeId;
@@ -132,7 +132,7 @@ export default {
     this.updateBreakouts(value);
   },
   updateBreakouts(value){
-    if(this.timeSlot == '10:15 am'){
+    if(this.timeSlot == '12:30pm'){
       this.$store.dispatch('setBreakout', {
         breakout:'setBreakoutOne',
         id: value
@@ -145,7 +145,7 @@ export default {
     }
   },
   updateBreakoutsWaitlist(value){
-    if(this.timeSlot == '10:15 am'){
+    if(this.timeSlot == '12:30pm'){
       this.$store.dispatch('setBreakout', {
         breakout:'setBreakoutOneWait',
         id: value

@@ -69,8 +69,8 @@
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
     <el-form-item label="Select Breakout Sessions">
-      <SelectBreakout class="breakout" timeSlot="10:15 am" type='register'/>
-      <SelectBreakout class="breakout" timeSlot="3:00 pm" type='register'/>
+      <SelectBreakout class="breakout" timeSlot="12:30pm" type='register'/>
+      <!-- <SelectBreakout class="breakout" timeSlot="3:00 pm" type='register'/> -->
     </el-form-item>
       <el-form-item class="buttons">
         <el-button @click="handleSubmit('form')" type="primary">Register</el-button>
@@ -86,8 +86,8 @@
   <div>Thank you for registering for Health<strong>STLX</strong>!  We look forward to seeing you in November.</div>
   <div style="margin-top: 20px;">If you have any questions, please reach out to our team at <span class="email-support">healthstlx@slalom.com</span>.</div>
   <span slot="footer" class="dialog-footer">
-     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://slalom-health-summit-staging.herokuapp.com/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" class="share-button" round>Share on LinkedIn</el-button></a>
-     <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-related="Slalom" data-show-count="false"><el-button plain class="share-button" icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
+     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://healthstlx.io/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" class="share-button" round>Share on LinkedIn</el-button></a>
+     <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://healthstlx.io" data-related="Slalom" data-show-count="false"><el-button plain class="share-button" icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
     <el-button type="primary" @click="confirm">Ok</el-button>
   </span>
 </el-dialog>
@@ -175,12 +175,12 @@ computed: mapState({
   getBreakoutOneWait(state){
     return state.breakoutOneWaitlist;
   },
-  getBreakoutTwo(state){
-    return state.breakoutTwo;
-  },
-  getBreakoutTwoWait(state){
-    return state.breakoutTwoWaitlist;
-  }
+  // getBreakoutTwo(state){
+  //   return state.breakoutTwo;
+  // },
+  // getBreakoutTwoWait(state){
+  //   return state.breakoutTwoWaitlist;
+  // }
 }),
 methods: {
   handleSubmit(form) {
@@ -204,8 +204,8 @@ methods: {
           comment: this.form.takeaway,
           breakout_one: this.getBreakoutOne,
           breakout_oneWait: this.getBreakoutOneWait,
-          breakout_two: this.getBreakoutTwo,
-          breakout_twoWait: this.getBreakoutTwoWait
+          // breakout_two: this.getBreakoutTwo,
+          // breakout_twoWait: this.getBreakoutTwoWait
         })
         .then(function (response) {
           console.log(response);

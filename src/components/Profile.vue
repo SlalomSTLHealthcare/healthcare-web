@@ -74,8 +74,8 @@
       <el-input type="textarea" v-model="profForm.takeaway"></el-input>
     </el-form-item>
     <el-form-item label="Select Breakout Sessions">
-      <SelectBreakout timeSlot="10:15 am" type='profile' />
-      <SelectBreakout timeSlot="3:00 pm" type='profile' />
+      <SelectBreakout timeSlot="12:30pm" type='profile' />
+      <!-- <SelectBreakout timeSlot="3:00 pm" type='profile' /> -->
     </el-form-item>
     <el-form-item  label="I would like to opt-in to donating to United Way as part of my registration.">
       <el-switch   v-model="profForm.donate"></el-switch>
@@ -89,8 +89,8 @@
   width="30%">
   <span>Thank you for registering for HealthSTLx!</span>
   <span slot="footer" class="dialog-footer">
-     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://slalom-health-summit-staging.herokuapp.com/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" class="share-button" round>Share on LinkedIn</el-button></a>
-     <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://slalom-health-summit-staging.herokuapp.com/#/" data-related="Slalom" data-show-count="false"><el-button plain class="share-button" icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
+     <a target="_blank" href="https://www.linkedin.com/shareArticle?mini=true&url=https://healthstlx.io/#/registration&title=HealthSTLx&summary=Just%20registered%20for%20HealthSTLx!&source=HealthSTLx"><el-button plain icon="el-icon-share" type="primary" class="share-button" round>Share on LinkedIn</el-button></a>
+     <a target="_blank" href="https://twitter.com/intent/tweet?button_hashtag=HealthSTLx&ref_src=twsrc%5Etfw" class="twitter-hashtag-button" data-text="Just registered for HealthSTLx!" data-url="https://healthstlx.io" data-related="Slalom" data-show-count="false"><el-button plain class="share-button" icon="el-icon-share" type="primary" round>Tweet #HealthSTLx</el-button></a>
     <el-button type="primary" @click="confirm">Confirm</el-button>
   </span>
 </el-dialog>
@@ -164,13 +164,6 @@ computed: mapState({
   getBreakoutOneWait(state){
     return state.breakoutOneWaitlist;
   },
-  getBreakoutTwo(state){
-    return state.breakoutTwo;
-  },
-  getBreakoutTwoWait(state){
-
-    return state.breakoutTwoWaitlist;
-  },
   getUsername(state){
     return state.username;
   },
@@ -236,8 +229,8 @@ methods: {
           comment: this.profForm.takeaway,
           breakout_one: this.getBreakoutOne,
           breakout_oneWait: this.getBreakoutOneWait,
-          breakout_two: this.getBreakoutTwo,
-          breakout_twoWait: this.getBreakoutTwoWait
+          // breakout_two: this.getBreakoutTwo,
+          // breakout_twoWait: this.getBreakoutTwoWait
         })
         .then(function (response) {
           if(response.data.email != self.profForm.email){
@@ -277,18 +270,13 @@ methods: {
     var allSessionsAttendees = [];
     var self = this;
     var oneTagNum = _.filter(data.sessions, s => s.session_tag === 1).length;
-    var twoTagNum = _.filter(data.sessions, s => s.session_tag === 2).length;
+    // var twoTagNum = _.filter(data.sessions, s => s.session_tag === 2).length;
 
     this.$axiosServer.get('/api/session_attendees')
       .then(function (response){
         allSessionsAttendees = response.data;
         data.sessions.forEach(function(session){
-          if(session.session_tag === 1){
-            self.computeAndUpdateSessions(oneTagNum, session, allSessionsAttendees);
-          }
-          else{
-            self.computeAndUpdateSessions(twoTagNum, session, allSessionsAttendees);
-          }
+          self.computeAndUpdateSessions(oneTagNum, session, allSessionsAttendees);
         });
       })
       .catch(function (error){
