@@ -69,8 +69,8 @@
       <el-input type="textarea" v-model="form.takeaway"></el-input>
     </el-form-item>
     <el-form-item label="Select Breakout Sessions">
-      <SelectBreakout class="breakout" timeSlot="10:15 am" type='register'/>
-      <SelectBreakout class="breakout" timeSlot="3:00 pm" type='register'/>
+      <SelectBreakout class="breakout" timeSlot="12:30pm" type='register'/>
+      <!-- <SelectBreakout class="breakout" timeSlot="3:00 pm" type='register'/> -->
     </el-form-item>
       <el-form-item class="buttons">
         <el-button @click="handleSubmit('form')" type="primary">Register</el-button>
@@ -175,12 +175,12 @@ computed: mapState({
   getBreakoutOneWait(state){
     return state.breakoutOneWaitlist;
   },
-  getBreakoutTwo(state){
-    return state.breakoutTwo;
-  },
-  getBreakoutTwoWait(state){
-    return state.breakoutTwoWaitlist;
-  }
+  // getBreakoutTwo(state){
+  //   return state.breakoutTwo;
+  // },
+  // getBreakoutTwoWait(state){
+  //   return state.breakoutTwoWaitlist;
+  // }
 }),
 methods: {
   handleSubmit(form) {
@@ -204,8 +204,8 @@ methods: {
           comment: this.form.takeaway,
           breakout_one: this.getBreakoutOne,
           breakout_oneWait: this.getBreakoutOneWait,
-          breakout_two: this.getBreakoutTwo,
-          breakout_twoWait: this.getBreakoutTwoWait
+          // breakout_two: this.getBreakoutTwo,
+          // breakout_twoWait: this.getBreakoutTwoWait
         })
         .then(function (response) {
           console.log(response);

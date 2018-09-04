@@ -12,8 +12,8 @@ export default new Vuex.Store({
   state: {
     breakoutOne: '',
     breakoutOneWaitlist: '',
-    breakoutTwo: '',
-    breakoutTwoWaitlist: '',
+    // breakoutTwo: '',
+    // breakoutTwoWaitlist: '',
     attendeeId: '',
     jwt: localStorage.getItem('t'),
     endpoints: {
@@ -34,12 +34,12 @@ export default new Vuex.Store({
     setBreakoutOneWait(state, id){
       state.breakoutOneWaitlist = id;
     },
-    setBreakoutTwo(state, id){
-      state.breakoutTwo = id;
-    },
-    setBreakoutTwoWait(state, id){
-      state.breakoutTwoWaitlist = id;
-    },
+    // setBreakoutTwo(state, id){
+    //   state.breakoutTwo = id;
+    // },
+    // setBreakoutTwoWait(state, id){
+    //   state.breakoutTwoWaitlist = id;
+    // },
     resetBreakouts(state){
       state.breakoutOne = '';
       state.breakoutOneWaitlist = '';
