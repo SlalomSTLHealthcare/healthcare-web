@@ -9,7 +9,7 @@
       :signedUp="computeSignedUp(session.id)"/>
     </li>
   </el-row>
-  <el-row class="session"v-else="sessionType === 'Panel'">
+  <el-row class="session"v-else="sessionType === 'Panel'" style="margin-top: 20px;">
     <el-card shadow="hover" class="panelCard" v-for="session in sessionData" v-if="session.session_type == sessionType">
         <div class="overview">
           <h2 class="boxTitle">{{session.title}}</h2>
@@ -124,7 +124,7 @@ h4 {
   font-style: italic;
 }
 .panelCard{
-  width: 45%;
+  width: 100%;
 }
 a {
   color: #42b983;
@@ -134,13 +134,6 @@ a {
     margin-top: 0;
 }
 
-
-@media(min-width: 1000px){
-  li{
-    width: 45%;
-    margin: 20px 40px 20px 0;
-  }
-}
 a {
   color: #42b983;
 }

@@ -16,7 +16,7 @@
         </el-col>
       </el-row>
       </el-form-item>
-      <el-form-item label="Company">
+      <el-form-item required label="Company">
         <el-input v-model="form.company"></el-input>
       </el-form-item>
       <el-form-item label="Position">

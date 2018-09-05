@@ -33,64 +33,6 @@
 
               <!-- </el-card> -->
             </el-tab-pane>
-            <el-tab-pane label="Transportation" name="second">
-                <div class="parking">
-                    <div class="driving-info">
-                      <h6 class="from-header">Driving from Forest Park Avenue</h6>
-                        <ul class="directions">
-                          <li>South on Taylor Avenue</li>
-                          <li>Right on Children's Place</li>
-                          <li>Left into Metro Garage</li>
-                          <li>Exit garage to the northwest, walk the length of the skybridge, the venue will be on your right.</li>
-                        </ul>
-                    </div>
-                    <div class="driving-info">
-                      <h6 class="from-header">Driving from the Airport</h6>
-                        <ul class="directions">
-                          <li>I-70 east to I-170 south</li>
-                          <li>1-170 south to 64/40</li>
-                          <li>East on 64/40 to Kingshighway</li>
-                          <li>North on Kingshighway to Forest Park Ave</li>
-                          <li>Turn Right on Forest Park Ave to Taylor Ave</li>
-                          <li>Turn Right on Taylor Ave to Children’s Place</li>
-                          <li>Turn Right on Children’s Place</li>
-                          <li>Turn Left into Metro garage</li>
-                          <li>Exit garage to the northwest, walk the length of the skybridge, the venue will be on your right.</li>
-                        </ul>
-                    </div>
-                    <div class="driving-info">
-                      <h6 class="from-header">Driving from downtown St. Louis and points east</h6>
-                        <ul class="directions">
-                          <li>West on I-64</li>
-                          <li>Exit onto Forest Park Avenue</li>
-                          <li>Forest Park Avenue west to Taylor Avenue</li>
-                          <li>Left on Taylor Avenue to Children’s Place</li>
-                          <li>Right on Children’s Place</li>
-                          <li>Left into Metro Garage</li>
-                          <li>Exit garage to the northwest, walk the length of the skybridge, the venue will be on your right.</li>
-                        </ul>
-                    </div>
-                    <div class="driving-info">
-                      <h6 class="from-header">Via MetroLink</h6>
-                        <ul class="directions">
-                          <li>Disembark at the Central West End stop</li>
-                          <li>Ascend stairs or use elevator to Euclid Avenue</li>
-                          <li>Right on Euclid Avenue to the venue, it will be on the east side of Euclid Avenue</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="map-container">
-                  <iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;coord=38.636768, -90.26275900000002&amp;q=320%20South%20Euclid%20Ave%2C%20St.%20Louis%20MO%2063101+(Eric%20P.%20Newman%20Education%20Center)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/create-google-map/">Embed Google Map</a></iframe>
-                </div>
-            </el-tab-pane>
-            <!-- <el-tab-pane label="Explore" name="third">
-                  <h3 class="goal">Explore the Area</h3>
-                  <i>Coming Soon</i>
-            </el-tab-pane>
-            <el-tab-pane label="Vision" name="fourth">
-                  <h3 class="goal">Our Vision</h3>
-                  <p>Our goal is to unite forward-thinking health practitioners from various specialties and industries experience, data management andevolution in healthcare. HealthSTLx is executed on the foundation that the best ideas are best discussed and shared.</p>
-            </el-tab-pane> -->
           </el-tabs>
         </div>
   </el-container>
