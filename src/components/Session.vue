@@ -83,7 +83,6 @@ a {
   }
   .sessionCard{
      // width: 100vw;
-     height: 250px;
   }
   .image {
     height: 30px;

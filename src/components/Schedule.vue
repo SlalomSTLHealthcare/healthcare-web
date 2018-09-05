@@ -2,7 +2,7 @@
   <div>
     <h1>Schedule</h1>
     <div class="decoration"></div>
-    <div class="subheader">Check out the details of our full one-day conference below. The morning will be a mix of our guest keynote speaker, Allison Massari and a host of panelist who are regarded as thought-leaders within the St. Louis healthcare community. As we transition into the afternoon, guest will get a chance to tackle real issues in our community, by working in teams in order to come up with viable solutions for a better St. Louis.</div>
+    <div class="subheader">Check out the details of our full one-day conference below. The morning will be a mix of our guest keynote speaker, Allison Massari, and a host of panelists who are regarded as thought-leaders within the St. Louis healthcare community. As we transition into the afternoon, guests will get the chance to tackle real issues in our community by collaborating with other healthcare professionals to come up with viable solutions for a better St. Louis.</div>
     <table>
       <tr v-for="event in scheduleData" valign="top">
         <td class="scheduleEvent">
