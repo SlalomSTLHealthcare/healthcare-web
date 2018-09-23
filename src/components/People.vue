@@ -20,7 +20,7 @@
     <div class="decoration" style="margin-top: 40px;"></div>
     <div v-masonry transition-duration="0.3s" item-selector=".item" :gutter="20">
         <div v-masonry-tile class="item" v-for="item in data" style="margin-bottom: 20px;">
-            <Person v-if="!item.hidden" :name="item.full_name" :imgSource="item.image_loc" :company="item.company" :bio="item.bio" :title="item.title" :twitter="item.twitter" :linkedin="item.linkedin"/>
+            <Person :style="item.hidden ? {height: '0', overflow: 'hidden'} : {}" :name="item.full_name" :imgSource="item.image_loc" :company="item.company" :bio="item.bio" :title="item.title" :twitter="item.twitter" :linkedin="item.linkedin"/>
         </div>
     </div>
   </div>
