@@ -72,6 +72,16 @@
       <SelectBreakout class="breakout" timeSlot="12:30pm" type='register'/>
       <!-- <SelectBreakout class="breakout" timeSlot="3:00 pm" type='register'/> -->
     </el-form-item>
+    <div class="cme-header">
+      Note about Continuing Medical Education:
+    </div>
+    <div class="cme">
+      It is the policy of Washington University School of Medicine in St. Louis, Continuing Medical Education, that planners, faculty and other persons who may influence content of this CME activity disclose all relevant financial relationships with commercial interests in order for CME staff to identify and resolve any potential conflicts of interest prior to the educational activity.  Faculty must also disclose any planned discussion of unlabeled/unapproved uses of drugs or devices during their presentation.  Detailed disclosures will be made in activity handout materials. For further information, please email <span class="email-support">healthstlx@slalom.com</span>.
+    </div>
+    <div class="cme-images">
+      <img class="logo-img" src="../assets/jalogo.png">
+      <img class="logo-img" src="../assets/washu_trans.png">
+    </div>
       <el-form-item class="buttons">
         <el-button @click="handleSubmit('form')" type="primary">Register</el-button>
       </el-form-item>
@@ -269,10 +279,6 @@ methods: {
 .logo {
   float: left;
 }
-img {
-  position: relative;
-  width: 220px;
-}
 h3 {
   margin: 40px 0 0;
 }
@@ -288,6 +294,28 @@ a {
 }
 .text {
   font-size: 14px;
+}
+.cme-header {
+  font-size: 18px;
+  font-weight: 300;
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+.cme {
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.cme-images {
+  display: flex;
+  width: 100%;
+  overflow: scroll;
+  flex-direction: row;
+  img {
+    height: 80px;
+    margin-right: 10px;
+  }
+  margin-bottom: 30px;
 }
 .buttons {
   text-align: center;
