@@ -81,19 +81,22 @@
         </div>
         <div class="sponsor-section">
             <div class="title">
-                sponsor this event
+                sponsors
             </div>
             <div class="bar"></div>
             <div class="text">
-                Thank you for your potential interest in becoming a sponsor for Health<span style="font-weight: 700;">STLX</span>. In our inaugural year, we are looking forward to assembling more than 300+ healthcare executives, directors, managers, practitioners and educators to discuss and create solutions around the evolution of healthcare. We are pleased to provide a space for our community partners and organizations to connect with attendees and exhibit their latest products.
+                A special thank you to all of our sponsors for supporting our efforts to help reimagine healthcare in our community with HealthSTLX.
             </div>
-            <div class="action">
-                <div class="error" v-show="!sponsorExists">{{sponsorErrorText}}</div>
-                <el-input class="input" placeholder="Name" v-model="sponsorName" v-if="sponsorButtonText === 'Submit'"></el-input>
-                <el-input class="input" placeholder="Email" v-model="sponsorEmail" v-if="sponsorButtonText === 'Submit'"></el-input>
-                <el-input class="input" placeholder="Company" v-model="sponsorCompany" v-if="sponsorButtonText === 'Submit'"></el-input>
-                <el-input style="margin-bottom: 30px;" class="input" placeholder="Anything else you would like us to know?" v-model="sponsorNotes" v-if="sponsorButtonText === 'Submit'"></el-input>
-                <el-button :disabled="sponsorButtonDisabled" :loading="sponsorButtonLoading" type="primary" :class="[sponsorButtonDisabled ? 'disabled-class' : '', 'sponsor-button']" @click="handleSponsorClick" plain round>{{sponsorButtonText}}</el-button>
+            <div class="logos">
+              <div class="logo">
+                <img class="aws" src="../assets/aws.png">
+              </div>
+              <div class="logo">
+                <img class="tableau" src="../assets/tableau.png">
+              </div>
+              <div class="logo">
+                <img class="salesforce" src="../assets/salesforce.png">
+              </div>
             </div>
         </div>
     </div>
@@ -203,6 +206,27 @@ export default {
         background-color: #000;
         font-family: 'Roboto', sans-serif;
         margin: 0;
+    }
+
+    .logos {
+      margin: 40px 0;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+
+      .logo {
+        min-width: 220px;
+        padding: 0 20px;
+      }
+
+      img {
+        height: 80px;
+      }
+
+      .tableau {
+        height: 60px;
+      }
     }
 
     .el-input__inner:focus {
@@ -361,7 +385,7 @@ export default {
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: linear-gradient(@sponsor-purple-dark, @sponsor-purple);
+        background: #003367;
         color: #fff;
         letter-spacing: 0.2px;
 
@@ -592,6 +616,10 @@ export default {
     }
 
     @media (max-width: 800px) {
+      .logos {
+        flex-direction: column;
+      }
+
         .info-section {
             .error {
                 justify-content: flex-end !important;
