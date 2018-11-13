@@ -97,6 +97,10 @@
               <div class="logo">
                 <img class="salesforce" src="../assets/salesforce.png">
               </div>
+              <div class="logo">
+                <span class="biooo">Bio</span>
+                <span class="stlll">STL</span>
+              </div>
             </div>
         </div>
     </div>
@@ -218,6 +222,18 @@ export default {
       .logo {
         min-width: 220px;
         padding: 0 20px;
+      }
+
+      span {
+        font-size: 36px;
+      }
+
+      .biooo {
+        font-weight: 200;
+      }
+
+      .stlll {
+        font-weight: 500;
       }
 
       img {
